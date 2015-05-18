@@ -251,7 +251,13 @@
 				rangeCircle.visible = true;
 				rangeCircle.x = mouseX - (mouseX % tileSide) + (tileSide * .5);
 				rangeCircle.y = mouseY - (mouseY % tileSide) + (tileSide * .5);
-
+				
+				if (towerImg.x >= mapArray[0].length * tileSide)
+				{
+					towerImg.visible = false;
+					rangeCircle.visible = false;
+					trace(towerImg.x,mapArray[0].length * tileSide);
+				}
 
 			}
 			else
