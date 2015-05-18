@@ -1,5 +1,6 @@
-﻿package  {
+﻿package towers.laser {
 	
+	import towers.TowerImg
 	
 	public class LaserTowerImg extends TowerImg {
 		

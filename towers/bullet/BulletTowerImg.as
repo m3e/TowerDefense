@@ -1,6 +1,6 @@
-﻿package  {
+﻿package towers.bullet {
 	
-	import flash.display.Sprite;
+	import towers.TowerImg;
 	
 	
 	public class BulletTowerImg extends TowerImg {

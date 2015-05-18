@@ -1,4 +1,6 @@
-﻿package  {
+﻿package towers.laser {
+	
+	import towers.Tower;
 	
 	public class LaserTower extends Tower {
 		

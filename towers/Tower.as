@@ -1,24 +1,25 @@
-﻿package 
+﻿package towers
 {
 
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
+	import towers.*;
 
 	public class Tower extends MovieClip
 	{
 
-		internal var tRange:int;
-		internal var tDmg:Number;
-		internal var tbSpeed:int;
-		internal var tTarget:MovieClip;
-		internal var tAtkSpeed:Number;
+		public var tRange:int;
+		public var tDmg:Number;
+		public var tbSpeed:int;
+		public var tTarget:MovieClip;
+		public var tAtkSpeed:Number;
 
-		internal var tBaseColor:int;
+		public var tBaseColor:int;
 
-		internal var loaded = Boolean;
-		internal var loadedTimer:Number;
+		public var loaded = Boolean;
+		public var loadedTimer:Number;
 
 		public var enemyList:Array;
 		private var _root:*;

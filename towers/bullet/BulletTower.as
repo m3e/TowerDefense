@@ -1,4 +1,6 @@
-﻿package  {
+﻿package towers.bullet {
+	
+	import towers.Tower;
 	
 	public class BulletTower extends Tower{
 

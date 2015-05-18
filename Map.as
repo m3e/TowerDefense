@@ -2,6 +2,7 @@
 {
 	import flash.display.MovieClip;
 	import assets.maptiles.*;
+	import towers.*;
 	import flash.utils.Timer;
 	import flash.events.*;
 	import flash.display.Shape;
@@ -10,6 +11,9 @@
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
+	
+	import controls.mouse.MouseControls;
+	
 
 	public class Map extends MovieClip
 	{
@@ -39,9 +43,10 @@
 		private var rangeCircle:Shape;
 
 		//towers
-		private var bulletTowerImg:BulletTowerImg;
-		private var splashTowerImg:SplashTowerImg;
-		private var laserTowerImg:LaserTowerImg;
+		private var towersInitiate:TowersInitiate;
+		
+		//controls
+		private var mouseControls:MouseControls;
 
 
 		public function Map()
@@ -94,11 +99,44 @@
 		{
 			_root = root;
 			setupMap();
-			setupSideBar();
+			//Sets: mapArray
+			//Sets: tileArray
+			//Displays: maps
+			
 			setupRangeCircle();
+			//Creates: rangeCircle
+			
+			setupSideBar();
+			//Creates: towerSelectedSquare
+			//Creates: sideBar
+			//Displays: sideBar
+			
+			setupTowers();
+			//Creates: towerImgs
+			//Displays: towerImgs
+			
 			setupEnemies();
+			//Creates: EnemySpawner (timer)
+			//Creates: enemy1
+			//Requires: mapArray
+			
 			setupKeyboard();
+			//Requires: TowerSelectedSquare
+			//Requires: RangeCircle
+			//Requires: towerImgs
+			
+			setupTileListeners();
+			
+			setupMouseControls();
 
+		}
+		private function setupMouseControls():void
+		{
+			mouseControls = new MouseControls(towersInitiate.towerList,this);
+		}
+		private function setupTowers():void
+		{
+			towersInitiate = new TowersInitiate(_root);
 		}
 		private function setupKeyboard():void
 		{
@@ -109,23 +147,29 @@
 			switch (e.keyCode)
 			{
 				case Keyboard.NUMBER_1 :
-					selectTower(bulletTowerImg)
+					selectTower(towersInitiate.towerList[0]);
 					break;
 
 				case Keyboard.NUMBER_2 :
-					selectTower(splashTowerImg)
+					selectTower(towersInitiate.towerList[1]);
 					break;
-					
+
 				case Keyboard.NUMBER_3 :
-					selectTower(laserTowerImg)
+					selectTower(towersInitiate.towerList[2]);
 					break;
 			}
 		}
-		private function setupTileListeners(tile:Object):void
+		private function setupTileListeners():void
 		{
-			tile.addEventListener(MouseEvent.CLICK, addTower);
-			tile.addEventListener(MouseEvent.MOUSE_OVER, hoverOver);
-			tile.addEventListener(MouseEvent.MOUSE_OUT, hoverOverOut);
+			for (var i:int=0;i<tileArray.length;i++)
+			{
+				for (var o:int=0; o< tileArray[i].length; o++)
+				{
+					tileArray[i][o].addEventListener(MouseEvent.CLICK, addTower);
+					tileArray[i][o].addEventListener(MouseEvent.MOUSE_OVER, hoverOver);
+					tileArray[i][o].addEventListener(MouseEvent.MOUSE_OUT, hoverOverOut);
+				}
+			}
 		}
 		private function hoverOver(e:MouseEvent):void
 		{
@@ -159,31 +203,6 @@
 			sideBar.x = 640;
 			_root.addChild(sideBar);
 
-
-			//TOWERS
-
-			//bullet
-			bulletTowerImg = new BulletTowerImg();
-			bulletTowerImg.x = 660;
-			bulletTowerImg.y = 40;
-			bulletTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(bulletTowerImg);
-
-			//splash
-			splashTowerImg = new SplashTowerImg();
-			splashTowerImg.x = 710;
-			splashTowerImg.y = 40;
-			splashTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(splashTowerImg);
-
-			//laser
-			laserTowerImg = new LaserTowerImg();
-			laserTowerImg.x = 660;
-			laserTowerImg.y = 90;
-			laserTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(laserTowerImg);
-
-
 			//Selected Square
 			towerSelectedSquare = new Shape ();
 			towerSelectedSquare.graphics.lineStyle(2,0xFF0000);
@@ -193,12 +212,11 @@
 			towerSelectedSquare.visible = false;
 			_root.addChild(towerSelectedSquare);
 
-
 		}
-		private function selectTowerMouse(e:MouseEvent):void
+		public function selectTowerMouse(e:MouseEvent):void
 		{
 			var tower:Sprite = e.currentTarget as Sprite;
-			selectTower(tower)
+			selectTower(tower);
 		}
 		private function selectTower(tower:Object):void
 		{
@@ -216,9 +234,11 @@
 				towerImg = getDefinitionByName(getQualifiedClassName(towerSelected));
 				towerImg = new towerImg();
 				towerImg.mouseEnabled = false;
-				towerImg.x = mouseX - (mouseX % tileSide)
-				towerImg.y = mouseY - (mouseY % tileSide)
+				towerImg.x = mouseX - (mouseX % tileSide);
+				towerImg.y = mouseY - (mouseY % tileSide);
 				_root.addChild(towerImg);
+				
+				
 
 				var mockTower:Tower = new tower.towerReference();
 
@@ -227,10 +247,10 @@
 				towerSelectedSquare.visible = true;
 
 				mockTower.destroyTower();
-				
+
 				rangeCircle.visible = true;
-				rangeCircle.x = mouseX - (mouseX % tileSide) + (tileSide *.5)
-				rangeCircle.y = mouseY - (mouseY % tileSide) + (tileSide *.5)
+				rangeCircle.x = mouseX - (mouseX % tileSide) + (tileSide * .5);
+				rangeCircle.y = mouseY - (mouseY % tileSide) + (tileSide * .5);
 
 
 			}
@@ -285,10 +305,12 @@
 					_root.addChildAt(tile,0);
 					tile.x = o * tileSide;
 					tile.y = i * tileSide;
+					tileArray[i][o] = tile
 
-					setupTileListeners(tile);
+					
 				}
 			}
+			
 		}
 		private function createEnemies(e:TimerEvent):void
 		{
@@ -310,7 +332,7 @@
 		}
 		private function addTower(e:MouseEvent):void
 		{
-			if (e.currentTarget.occupied == false)
+			if (e.currentTarget.occupied == false && towerImg != null)
 			{
 
 				var newTower:Tower = new towerImg.towerReference();
@@ -331,11 +353,9 @@
 			rangeCircle.height = e.currentTarget.tRange * 2;
 			rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 			rangeCircle.y = e.currentTarget.y + (tileSide * .5);
-			trace("mouseOver");
 		}
 		private function onMouseOut(e:Event):void
 		{
-trace("mouseOut");
 			rangeCircle.visible = false;
 		}
 		private function towerRemoved(e:Event):void

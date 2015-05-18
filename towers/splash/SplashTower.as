@@ -1,4 +1,6 @@
-﻿package  {
+﻿package towers.splash {
+	
+	import towers.Tower;
 	
 	public class SplashTower extends Tower{
 

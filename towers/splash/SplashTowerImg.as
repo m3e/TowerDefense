@@ -1,7 +1,6 @@
-﻿package  {
+﻿package towers.splash {
 	
-	import flash.display.Sprite;
-	
+	import towers.TowerImg
 	
 	public class SplashTowerImg extends TowerImg {
 		

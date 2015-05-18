@@ -1,6 +1,7 @@
-﻿package  {
+﻿package towers {
 	
 	import flash.display.Sprite;
+	import towers.*
 	
 	public class TowerImg extends Sprite{
 
