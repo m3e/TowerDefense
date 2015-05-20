@@ -15,6 +15,15 @@
 	import enemies.enemy1.*
 	import enemies.enemy2.*
 	import enemies.enemy3.*
+	import enemies.enemy4.*
+	import enemies.enemy5.*
+	import enemies.enemy6.*
+	import enemies.enemy7.*
+	import enemies.enemy8.*
+	import enemies.enemy9.*
+	import enemies.enemy10.*
+	import enemies.enemy11.*
+	import enemies.enemy12.*
 	
 	import controls.mouse.MouseControls;
 	
@@ -54,12 +63,28 @@
 		
 		//user
 		private var userInfo:UserInfo;
+		
+		//enemies
+		private var enemy:Enemy;
+		private var enemy1:Enemy1;
+		private var enemy2:Enemy2;
+		private var enemy3:Enemy3;
+		private var enemy4:Enemy4;
+		private var enemy5:Enemy5;
+		private var enemy6:Enemy6;
+		private var enemy7:Enemy7;
+		private var enemy8:Enemy8;
+		private var enemy9:Enemy9;
+		private var enemy10:Enemy10;
+		private var enemy11:Enemy11;
+		private var enemy12:Enemy12;
 
 
 		public function Map()
 		{
 			enemyList = new Array  ;
 			tileArray = new Array  ;
+			
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -77,6 +102,7 @@
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+
 			tileArray = [  
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
@@ -93,6 +119,8 @@
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,]];
+			
+			
 
 
 			addEventListener(Event.ADDED_TO_STAGE, added);
@@ -332,9 +360,19 @@
 			}
 			
 		}
+		private function getClass(eName:String):Object
+		{
+			var klasa:Class = getDefinitionByName(eName) as Class
+			var instance:Object = new klasa(mapArray);
+			return(instance)
+		}
 		private function createEnemies(e:TimerEvent):void
 		{
-			var enemy:Enemy3 = new Enemy3(mapArray);
+			
+			var i:int = 1+ Math.floor(Math.random()*11);
+			trace(i);
+			var enemy:Enemy = getClass("enemies.enemy"+i.toString()+".Enemy"+i.toString()) as Enemy
+			
 			_root.addChild(enemy);
 			enemy.x = 0;
 			enemy.y = 3 * tileSide;
