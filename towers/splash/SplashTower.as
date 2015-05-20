@@ -11,6 +11,7 @@
 			tDmg = 6;
 			tAtkSpeed = 60;
 			tbSpeed = 32;
+			tAoe = 50;
 			// constructor code
 		}
 

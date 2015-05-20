@@ -8,8 +8,8 @@
 			super();
 			tBaseColor = 0xD6D6D6
 			tRange = 100
-			tDmg = 2;
-			tAtkSpeed = 20;
+			tDmg = .2;
+			tAtkSpeed = 3;
 			tbSpeed = 50;
 			// constructor code
 		}

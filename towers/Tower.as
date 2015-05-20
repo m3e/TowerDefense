@@ -15,6 +15,7 @@
 		public var tbSpeed:int;
 		public var tTarget:MovieClip;
 		public var tAtkSpeed:Number;
+		public var tAoe:Number;
 
 		public var tBaseColor:int;
 
@@ -28,6 +29,7 @@
 		{
 			loaded = true;
 			loadedTimer = 0;
+			tAoe = 0;
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -79,12 +81,13 @@
 							fireFlash.color = 0xFF0000;
 							this.transform.colorTransform = fireFlash;
 
-							var newBullet:Bullet = new Bullet();
+							var newBullet:Bullet = new Bullet(enemyList);
 							newBullet.x = this.x;
 							newBullet.y = this.y;
 							newBullet.bTarget = tTarget;
 							newBullet.bDmg = tDmg;
 							newBullet.bSpeed = tbSpeed;
+							newBullet.bAoe = tAoe;
 							_root.addChild(newBullet);
 
 

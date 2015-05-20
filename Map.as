@@ -11,6 +11,10 @@
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
+	import enemies.*;
+	import enemies.enemy1.*
+	import enemies.enemy2.*
+	import enemies.enemy3.*
 	
 	import controls.mouse.MouseControls;
 	
@@ -47,6 +51,9 @@
 		
 		//controls
 		private var mouseControls:MouseControls;
+		
+		//user
+		private var userInfo:UserInfo;
 
 
 		public function Map()
@@ -111,6 +118,8 @@
 			//Creates: sideBar
 			//Displays: sideBar
 			
+			setupUser();
+			
 			setupTowers();
 			//Creates: towerImgs
 			//Displays: towerImgs
@@ -129,6 +138,11 @@
 			
 			setupMouseControls();
 
+		}
+		private function setupUser():void
+		{
+			userInfo = new UserInfo();
+			_root.addChild(userInfo);
 		}
 		private function setupMouseControls():void
 		{
@@ -280,8 +294,8 @@
 		}
 		private function setupEnemies():void
 		{
-			var numberOfEnemies:int = 15;
-			var enemySpawner:Timer = new Timer(900,numberOfEnemies);
+			var numberOfEnemies:int = 999;
+			var enemySpawner:Timer = new Timer(550,numberOfEnemies);
 			enemySpawner.addEventListener(TimerEvent.TIMER, createEnemies);
 			enemySpawner.start();
 		}
@@ -320,7 +334,7 @@
 		}
 		private function createEnemies(e:TimerEvent):void
 		{
-			var enemy:Enemy1 = new Enemy1(mapArray);
+			var enemy:Enemy3 = new Enemy3(mapArray);
 			_root.addChild(enemy);
 			enemy.x = 0;
 			enemy.y = 3 * tileSide;
@@ -332,7 +346,7 @@
 		}
 		private function enemyDead(e:Event):void
 		{
-
+			userInfo.changeGold(e.currentTarget.goldValue);
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
 		}

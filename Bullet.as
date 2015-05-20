@@ -1,24 +1,30 @@
 ﻿package 
 {
 	import flash.display.MovieClip;
-	import flash.events.*
+	import flash.events.*;
+	import flash.display.Shape;
 
 	public class Bullet extends MovieClip
 	{
 
 		private var xSpeed:Number;
 		private var ySpeed:Number;
-		
+		private var enemyList:Array;
+
 		public var bSpeed:Number;
 		public var bTarget:MovieClip;
-		public var bDmg:Number;		
-		
+		public var bDmg:Number;
+		public var bAoe:Number;
+
 		private var _root:MovieClip;
-		
-		public function Bullet()
+
+		public function Bullet(EnemyList:Array)
 		{
+			enemyList = new Array  ;
+			enemyList = EnemyList;
 			bTarget = null;
 			bDmg = 0;
+			bAoe = 0;
 
 			addEventListener(Event.ADDED_TO_STAGE,beginClass);//this will run every time this guy is made
 			addEventListener(Event.ENTER_FRAME,eFrame);//this will run every frame
@@ -29,12 +35,18 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
 			_root = MovieClip(root);
-			
+
 			fire();
 		}
 		private function eFrame(e:Event):void
 		{
 			fire();
+		}
+		private function distanceTwoPoints(x1:Number, x2:Number,  y1:Number, y2:Number):Number
+		{
+			var dx:Number = x1 - x2;
+			var dy:Number = y1 - y2;
+			return Math.sqrt(dx * dx + dy * dy);
 		}
 		private function fire():void
 		{
@@ -43,16 +55,16 @@
 			var angle:Number = Math.atan2(yDist,xDist);//the angle that it must move
 			ySpeed = Math.sin(angle) * bSpeed;//calculate how much it should move the enemy vertically
 			xSpeed = Math.cos(angle) * bSpeed;//calculate how much it should move the enemy horizontally
-			
+
 			if (Math.abs(xSpeed) > Math.abs(xDist))
 			{
 				xSpeed = xDist;
-				
+
 			}
 			if (Math.abs(ySpeed) > Math.abs(yDist))
 			{
 				ySpeed = yDist;
-				
+
 			}
 			//move the bullet towards the enemy
 			this.x +=  xSpeed;
@@ -60,8 +72,21 @@
 
 			if (this.hitTestObject(bTarget))
 			{//if it touches the enemy
-				bTarget.eHp -=  bDmg;//make it lose some health
-				trace(bTarget.eHp,bDmg)
+				if (bAoe > 0)
+				{
+					for (var i:int=0; i < enemyList.length; i++)
+					{
+						if (distanceTwoPoints(bTarget.x,enemyList[i].x,bTarget.y,enemyList[i].y) < bAoe)
+						{
+							enemyList[i].eHp -= bDmg;
+						}
+						
+					}
+				}
+				else
+				{
+					bTarget.eHp -=  bDmg;//make it lose some health
+				}
 				destroyThis();//and destroy this guy
 			}
 			else if (bTarget == null)
@@ -73,9 +98,11 @@
 		{
 			//this function will just remove this guy from the stage
 			this.removeEventListener(Event.ENTER_FRAME, eFrame);
+			enemyList = null;
+			bTarget = null;
 			_root.removeChild(this);
 			_root = null;
-			
+
 		}
 
 	}
