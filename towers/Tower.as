@@ -74,7 +74,18 @@
 						if (tTarget != null)
 						{
 
-							loaded = false;
+							fire()
+
+
+
+						}
+					}
+				}
+			}
+		}
+		internal function fire():void
+		{
+			loaded = false;
 							loadedTimer = 0;
 
 							var fireFlash:ColorTransform = new ColorTransform();
@@ -88,14 +99,11 @@
 							newBullet.bDmg = tDmg;
 							newBullet.bSpeed = tbSpeed;
 							newBullet.bAoe = tAoe;
-							_root.addChild(newBullet);
-
-
-
-						}
-					}
-				}
-			}
+							rootAddChild(newBullet)
+		}
+		internal function rootAddChild(newBullet:Bullet)
+		{
+			_root.addChild(newBullet);
 		}
 		public function destroyTower():void
 		{

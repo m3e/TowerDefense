@@ -7,16 +7,16 @@
 	public class Bullet extends MovieClip
 	{
 
-		private var xSpeed:Number;
-		private var ySpeed:Number;
-		private var enemyList:Array;
+		internal var xSpeed:Number;
+		internal var ySpeed:Number;
+		internal var enemyList:Array;
 
 		public var bSpeed:Number;
 		public var bTarget:MovieClip;
 		public var bDmg:Number;
 		public var bAoe:Number;
 
-		private var _root:MovieClip;
+		internal var _root:MovieClip;
 
 		public function Bullet(EnemyList:Array)
 		{
@@ -34,6 +34,7 @@
 		private function beginClass(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
+			trace("yup");
 			_root = MovieClip(root);
 
 			fire();
