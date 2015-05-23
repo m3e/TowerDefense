@@ -90,15 +90,15 @@
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[1,1,1,1,1,1,2,0,0,0,0,1,1,1,1,1,1,1,1,1],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0,0,0,0],
+			[1,1,1,1,1,1,2,0,0,0,1,1,1,1,2,0,0,0,1,1],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
+			[0,0,0,0,0,0,1,1,1,1,4,0,0,0,1,1,1,1,4,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
@@ -298,7 +298,6 @@
 				{
 					towerImg.visible = false;
 					rangeCircle.visible = false;
-					trace(towerImg.x,mapArray[0].length * tileSide);
 				}
 
 			}
@@ -323,7 +322,7 @@
 		private function setupEnemies():void
 		{
 			var numberOfEnemies:int = 999;
-			var enemySpawner:Timer = new Timer(550,numberOfEnemies);
+			var enemySpawner:Timer = new Timer(350,numberOfEnemies);
 			enemySpawner.addEventListener(TimerEvent.TIMER, createEnemies);
 			enemySpawner.start();
 		}
@@ -370,9 +369,10 @@
 		{
 			
 			var i:int = 1+ Math.floor(Math.random()*11);
-			trace(i);
-			var enemy:Enemy = getClass("enemies.enemy"+i.toString()+".Enemy"+i.toString()) as Enemy
 			
+			//var enemy:Enemy = getClass("enemies.enemy"+i.toString()+".Enemy"+i.toString()) as Enemy
+			
+			var enemy:Enemy = new Enemy4(mapArray);
 			_root.addChild(enemy);
 			enemy.x = 0;
 			enemy.y = 3 * tileSide;
@@ -406,6 +406,11 @@
 		}
 		private function onMouseOver(e:Event):void
 		{
+			if(towerImg != null)
+			{
+			towerImg.visible = false;
+			}
+			
 			rangeCircle.visible = true;
 			rangeCircle.width = e.currentTarget.tRange * 2;
 			rangeCircle.height = e.currentTarget.tRange * 2;
@@ -414,6 +419,15 @@
 		}
 		private function onMouseOut(e:Event):void
 		{
+			if (towerSelected != null)
+			{
+				var mockTower:Tower = new towerSelected.towerReference();
+
+				rangeCircle.width = mockTower.tRange * 2;
+				rangeCircle.height = mockTower.tRange * 2;
+
+				mockTower.destroyTower();
+			}
 			rangeCircle.visible = false;
 		}
 		private function towerRemoved(e:Event):void

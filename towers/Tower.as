@@ -5,7 +5,6 @@
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
-	import towers.*;
 
 	public class Tower extends MovieClip
 	{
@@ -37,6 +36,7 @@
 		private function added(e:Event):void
 		{
 			_root = MovieClip(root);
+			removeEventListener(Event.ADDED_TO_STAGE, added);
 			var colorMe:ColorTransform = new ColorTransform();
 			colorMe.color = tBaseColor;
 			this.transform.colorTransform = colorMe;

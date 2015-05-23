@@ -9,10 +9,11 @@
 
 		public function Enemy1(Map:Array)
 		{
+			//t1, med hp, med speed
 			super(Map);
-			eHp = 4;
+			eHp = 100;
 			moveSpeed = 3;
-			goldValue = 8;
+			goldValue = 10;
 		}
 	}
 }

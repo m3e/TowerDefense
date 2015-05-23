@@ -8,9 +8,9 @@
 		
 		public function Enemy10(Map:Array) {
 			super(Map);
-			eHp = 12;
+			eHp = 400;
 			moveSpeed = 3;
-			goldValue = 25;
+			goldValue = 40;
 			// constructor code
 		}
 	}

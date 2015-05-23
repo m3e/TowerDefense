@@ -5,9 +5,7 @@
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	import towers.*
-	import towers.bullet.*
-	import towers.laser.*
-	import towers.splash.*
+	import towerimg.*
 	
 	public class TowersInitiate extends MovieClip {
 		
@@ -16,6 +14,7 @@
 		public var bulletTowerImg:BulletTowerImg;
 		public var splashTowerImg:SplashTowerImg;
 		public var laserTowerImg:LaserTowerImg;
+		public var flameGroundImg:FlameGroundImg;
 		
 		public var towerList:Array;
 		
@@ -24,8 +23,9 @@
 			
 			bulletTowerImg = new BulletTowerImg();
 			splashTowerImg = new SplashTowerImg();
-			laserTowerImg = new LaserTowerImg();			
-			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg)
+			laserTowerImg = new LaserTowerImg();	
+			flameGroundImg = new FlameGroundImg();
+			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg)
 			
 			_root = _Root
 			initiateTowers();

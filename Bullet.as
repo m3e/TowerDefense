@@ -86,6 +86,7 @@
 				else
 				{
 					bTarget.eHp -=  bDmg;//make it lose some health
+					trace("My HP:",bTarget.eHp);
 				}
 				destroyThis();//and destroy this guy
 			}
