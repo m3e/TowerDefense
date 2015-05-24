@@ -203,6 +203,7 @@
 				case Keyboard.E :
 					stage.frameRate = 96;
 					break;
+					
 			}
 		}
 		private function setupTileListeners():void
