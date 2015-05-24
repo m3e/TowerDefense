@@ -1,4 +1,4 @@
-﻿package enemies.enemy3 {
+﻿package enemies {
 	
 	import enemies.Enemy;
 	

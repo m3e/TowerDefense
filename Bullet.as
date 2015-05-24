@@ -1,6 +1,7 @@
 ﻿package 
 {
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.*;
 	import flash.display.Shape;
 
@@ -12,7 +13,7 @@
 		internal var enemyList:Array;
 
 		public var bSpeed:Number;
-		public var bTarget:MovieClip;
+		public var bTarget:*;
 		public var bDmg:Number;
 		public var bAoe:Number;
 
@@ -34,7 +35,7 @@
 		private function beginClass(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
-			trace("yup");
+			
 			_root = MovieClip(root);
 
 			fire();
@@ -87,7 +88,7 @@
 				else
 				{
 					bTarget.eHp -=  bDmg;//make it lose some health
-					trace("My HP:",bTarget.eHp);
+
 				}
 				destroyThis();//and destroy this guy
 			}

@@ -25,6 +25,7 @@
 			splashTowerImg = new SplashTowerImg();
 			laserTowerImg = new LaserTowerImg();	
 			flameGroundImg = new FlameGroundImg();
+			
 			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg)
 			
 			_root = _Root
@@ -56,31 +57,7 @@
 				_root.addChild(towerList[i]);
 			}
 		}
-		/*private function asdf():void
-		{
-			//TOWERS
 
-			//bullet
-			bulletTowerImg = new BulletTowerImg();
-			bulletTowerImg.x = 660;
-			bulletTowerImg.y = 40;
-			bulletTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(bulletTowerImg);
-
-			//splash
-			splashTowerImg = new SplashTowerImg();
-			splashTowerImg.x = 710;
-			splashTowerImg.y = 40;
-			splashTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(splashTowerImg);
-
-			//laser
-			laserTowerImg = new LaserTowerImg();
-			laserTowerImg.x = 660;
-			laserTowerImg.y = 90;
-			laserTowerImg.addEventListener(MouseEvent.CLICK, selectTowerMouse);
-			_root.addChild(laserTowerImg);
-		}*/
 	}
 	
 }

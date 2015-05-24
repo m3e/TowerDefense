@@ -2,17 +2,22 @@
 {
 
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
+	
+	import flash.utils.getQualifiedClassName
 
 	public class Tower extends MovieClip
 	{
 
+		public var cost:int;
+
 		public var tRange:int;
 		public var tDmg:Number;
 		public var tbSpeed:int;
-		public var tTarget:MovieClip;
+		public var tTarget:Sprite;
 		public var tAtkSpeed:Number;
 		public var tAoe:Number;
 
@@ -21,8 +26,9 @@
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
 
+		//enemyList is given in Map().. don't ask why
 		public var enemyList:Array;
-		private var _root:*;
+		internal var _root:*;
 
 		public function Tower()
 		{
@@ -41,7 +47,7 @@
 			colorMe.color = tBaseColor;
 			this.transform.colorTransform = colorMe;
 		}
-		private function eFrame(e:Event):void
+		internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
@@ -74,7 +80,7 @@
 						if (tTarget != null)
 						{
 
-							fire()
+							fire();
 
 
 
@@ -86,23 +92,19 @@
 		internal function fire():void
 		{
 			loaded = false;
-							loadedTimer = 0;
+			loadedTimer = 0;
 
-							var fireFlash:ColorTransform = new ColorTransform();
-							fireFlash.color = 0xFF0000;
-							this.transform.colorTransform = fireFlash;
+			var fireFlash:ColorTransform = new ColorTransform();
+			fireFlash.color = 0xFF0000;
+			this.transform.colorTransform = fireFlash;
 
-							var newBullet:Bullet = new Bullet(enemyList);
-							newBullet.x = this.x;
-							newBullet.y = this.y;
-							newBullet.bTarget = tTarget;
-							newBullet.bDmg = tDmg;
-							newBullet.bSpeed = tbSpeed;
-							newBullet.bAoe = tAoe;
-							rootAddChild(newBullet)
-		}
-		internal function rootAddChild(newBullet:Bullet)
-		{
+			var newBullet:Bullet = new Bullet(enemyList);
+			newBullet.x = this.x;
+			newBullet.y = this.y;
+			newBullet.bTarget = tTarget;
+			newBullet.bDmg = tDmg;
+			newBullet.bSpeed = tbSpeed;
+			newBullet.bAoe = tAoe;
 			_root.addChild(newBullet);
 		}
 		public function destroyTower():void

@@ -11,19 +11,9 @@
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
-	import enemies.*;
-	import enemies.enemy1.*
-	import enemies.enemy2.*
-	import enemies.enemy3.*
-	import enemies.enemy4.*
-	import enemies.enemy5.*
-	import enemies.enemy6.*
-	import enemies.enemy7.*
-	import enemies.enemy8.*
-	import enemies.enemy9.*
-	import enemies.enemy10.*
-	import enemies.enemy11.*
-	import enemies.enemy12.*
+	
+	import enemies.*
+	
 	
 	import controls.mouse.MouseControls;
 	
@@ -64,21 +54,11 @@
 		//user
 		private var userInfo:UserInfo;
 		
+		//initEnemy
+		private var initEnemies:InitiateEnemies;
+		
 		//enemies
-		private var enemy:Enemy;
-		private var enemy1:Enemy1;
-		private var enemy2:Enemy2;
-		private var enemy3:Enemy3;
-		private var enemy4:Enemy4;
-		private var enemy5:Enemy5;
-		private var enemy6:Enemy6;
-		private var enemy7:Enemy7;
-		private var enemy8:Enemy8;
-		private var enemy9:Enemy9;
-		private var enemy10:Enemy10;
-		private var enemy11:Enemy11;
-		private var enemy12:Enemy12;
-
+		
 
 		public function Map()
 		{
@@ -87,21 +67,21 @@
 			
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[1,1,1,1,1,1,2,0,0,0,1,1,1,1,2,0,0,0,1,1],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,2,0,0,0,4,0,0,0,2,0,0,0,4,0],
-			[0,0,0,0,0,0,1,1,1,1,4,0,0,0,1,1,1,1,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+			[1,1,1,1,1,1,2,0,0,1,1,1,1,1,1,1,1,1,1,1],
+			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,4,3,3,3,3,3,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[2,3,3,3,3,3,3,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[2,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0],
+			[2,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[1,1,1,1,1,1,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,4,3,3,3,3,3,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[2,3,3,3,3,3,3,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,0,0,0,0]];
 
 			tileArray = [  
 			[,,,,,,,,,,,,,,,,,,,],
@@ -141,12 +121,14 @@
 			setupRangeCircle();
 			//Creates: rangeCircle
 			
+			
 			setupSideBar();
 			//Creates: towerSelectedSquare
 			//Creates: sideBar
 			//Displays: sideBar
 			
 			setupUser();
+			//Creates: userInfo
 			
 			setupTowers();
 			//Creates: towerImgs
@@ -155,7 +137,7 @@
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
 			//Creates: enemy1
-			//Requires: mapArray
+			//Requires: mapArray,userInfo
 			
 			setupKeyboard();
 			//Requires: TowerSelectedSquare
@@ -198,6 +180,10 @@
 
 				case Keyboard.NUMBER_3 :
 					selectTower(towersInitiate.towerList[2]);
+					break;
+					
+				case Keyboard.NUMBER_4 :
+					selectTower(towersInitiate.towerList[3]);
 					break;
 			}
 		}
@@ -321,10 +307,7 @@
 		}
 		private function setupEnemies():void
 		{
-			var numberOfEnemies:int = 999;
-			var enemySpawner:Timer = new Timer(350,numberOfEnemies);
-			enemySpawner.addEventListener(TimerEvent.TIMER, createEnemies);
-			enemySpawner.start();
+			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide)
 		}
 		private function setupMap():void
 		{
@@ -365,29 +348,7 @@
 			var instance:Object = new klasa(mapArray);
 			return(instance)
 		}
-		private function createEnemies(e:TimerEvent):void
-		{
-			
-			var i:int = 1+ Math.floor(Math.random()*11);
-			
-			//var enemy:Enemy = getClass("enemies.enemy"+i.toString()+".Enemy"+i.toString()) as Enemy
-			
-			var enemy:Enemy = new Enemy4(mapArray);
-			_root.addChild(enemy);
-			enemy.x = 0;
-			enemy.y = 3 * tileSide;
-			enemy.pt.x = 0;
-			enemy.pt.y = 3;
-			enemy.id = Math.random() * 1000;
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			enemyList.push(enemy);
-		}
-		private function enemyDead(e:Event):void
-		{
-			userInfo.changeGold(e.currentTarget.goldValue);
-			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
-			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
-		}
+		
 		private function addTower(e:MouseEvent):void
 		{
 			if (e.currentTarget.occupied == false && towerImg != null)

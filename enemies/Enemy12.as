@@ -1,4 +1,4 @@
-﻿package enemies.enemy12 {
+﻿package enemies {
 	
 	import enemies.Enemy
 	

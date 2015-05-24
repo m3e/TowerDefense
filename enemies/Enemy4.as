@@ -1,14 +1,14 @@
-﻿package enemies.enemy10 {
+﻿package enemies {
 	
 	import enemies.Enemy
 	
 	
-	public class Enemy10 extends Enemy {
+	public class Enemy4 extends Enemy {
 		
 		
-		public function Enemy10(Map:Array) {
+		public function Enemy4(Map:Array) {
 			super(Map);
-			eHp = 400;
+			eHp = 250;
 			moveSpeed = 3;
 			goldValue = 40;
 			// constructor code

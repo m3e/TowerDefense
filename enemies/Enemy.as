@@ -1,12 +1,13 @@
 ﻿package enemies
 {
 
-	import flash.display.MovieClip;
+	import flash.display.MovieClip
+	import flash.display.Sprite;
 	import flash.events.*;
 	import flash.geom.Point;
 
 
-	public class Enemy extends MovieClip
+	public class Enemy extends Sprite
 	{
 		public var eHp:Number;
 		public var pt:Point = new Point();
@@ -19,7 +20,7 @@
 		public function Enemy(Map:Array)
 		{
 			mapArray = Map;
-			stop();
+			//stop();
 			eHp = 1;
 			moveSpeed = 1;
 			goldValue = 1;
