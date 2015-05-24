@@ -1,6 +1,5 @@
-﻿package enemies 
+﻿package enemies
 {
-
 	import enemies.Enemy;
 
 
@@ -9,10 +8,10 @@
 
 		public function Enemy1(Map:Array)
 		{
-			//t1, med hp, med speed
 			super(Map);
 			eHp = 100;
-			moveSpeed = 3;
+			maxMoveSpeed = 3;
+			moveSpeed = maxMoveSpeed;
 			goldValue = 10;
 		}
 	}

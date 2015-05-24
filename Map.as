@@ -11,12 +11,10 @@
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
-	
-	import enemies.*
-	
-	
+
+	import enemies.*;
 	import controls.mouse.MouseControls;
-	
+
 
 	public class Map extends MovieClip
 	{
@@ -47,24 +45,24 @@
 
 		//towers
 		private var towersInitiate:TowersInitiate;
-		
+
 		//controls
 		private var mouseControls:MouseControls;
-		
+
 		//user
 		private var userInfo:UserInfo;
-		
+
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
-		
+
 		//enemies
-		
+
 
 		public function Map()
 		{
 			enemyList = new Array  ;
 			tileArray = new Array  ;
-			
+
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
 			[1,1,1,1,1,1,2,0,0,1,1,1,1,1,1,1,1,1,1,1],
@@ -99,8 +97,8 @@
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,]];
-			
-			
+
+
 
 
 			addEventListener(Event.ADDED_TO_STAGE, added);
@@ -117,35 +115,38 @@
 			//Sets: mapArray
 			//Sets: tileArray
 			//Displays: maps
-			
+
 			setupRangeCircle();
 			//Creates: rangeCircle
-			
-			
+
+
 			setupSideBar();
 			//Creates: towerSelectedSquare
 			//Creates: sideBar
 			//Displays: sideBar
-			
+
 			setupUser();
 			//Creates: userInfo
-			
-			setupTowers();
-			//Creates: towerImgs
-			//Displays: towerImgs
-			
+
+
+
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
 			//Creates: enemy1
 			//Requires: mapArray,userInfo
-			
+
+			setupTowers();
+			//Creates: towerImgs
+			//Displays: towerImgs
+			//Requires: enemyList
+
 			setupKeyboard();
 			//Requires: TowerSelectedSquare
 			//Requires: RangeCircle
 			//Requires: towerImgs
-			
+
 			setupTileListeners();
-			
+
 			setupMouseControls();
 
 		}
@@ -160,7 +161,8 @@
 		}
 		private function setupTowers():void
 		{
-			towersInitiate = new TowersInitiate(_root);
+			towersInitiate = new TowersInitiate(_root,enemyList);
+
 		}
 		private function setupKeyboard():void
 		{
@@ -181,15 +183,31 @@
 				case Keyboard.NUMBER_3 :
 					selectTower(towersInitiate.towerList[2]);
 					break;
-					
+
 				case Keyboard.NUMBER_4 :
 					selectTower(towersInitiate.towerList[3]);
+					break;
+
+				case Keyboard.NUMBER_5 :
+					selectTower(towersInitiate.towerList[4]);
+					break;
+
+				case Keyboard.Q :
+					stage.frameRate = 24;
+					break;
+					
+					case Keyboard.W :
+					stage.frameRate = 48;
+					break;
+				
+				case Keyboard.E :
+					stage.frameRate = 96;
 					break;
 			}
 		}
 		private function setupTileListeners():void
 		{
-			for (var i:int=0;i<tileArray.length;i++)
+			for (var i:int=0; i<tileArray.length; i++)
 			{
 				for (var o:int=0; o< tileArray[i].length; o++)
 				{
@@ -265,8 +283,8 @@
 				towerImg.x = mouseX - (mouseX % tileSide);
 				towerImg.y = mouseY - (mouseY % tileSide);
 				_root.addChild(towerImg);
-				
-				
+
+
 
 				var mockTower:Tower = new tower.towerReference();
 
@@ -279,7 +297,7 @@
 				rangeCircle.visible = true;
 				rangeCircle.x = mouseX - (mouseX % tileSide) + (tileSide * .5);
 				rangeCircle.y = mouseY - (mouseY % tileSide) + (tileSide * .5);
-				
+
 				if (towerImg.x >= mapArray[0].length * tileSide)
 				{
 					towerImg.visible = false;
@@ -307,7 +325,7 @@
 		}
 		private function setupEnemies():void
 		{
-			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide)
+			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide);
 		}
 		private function setupMap():void
 		{
@@ -336,19 +354,14 @@
 					tile.x = o * tileSide;
 					tile.y = i * tileSide;
 					tileArray[i][o] = tile
-
 					
+					;
 				}
 			}
-			
-		}
-		private function getClass(eName:String):Object
-		{
-			var klasa:Class = getDefinitionByName(eName) as Class
-			var instance:Object = new klasa(mapArray);
-			return(instance)
+
 		}
 		
+
 		private function addTower(e:MouseEvent):void
 		{
 			if (e.currentTarget.occupied == false && towerImg != null)
@@ -367,11 +380,11 @@
 		}
 		private function onMouseOver(e:Event):void
 		{
-			if(towerImg != null)
+			if (towerImg != null)
 			{
-			towerImg.visible = false;
+				towerImg.visible = false;
 			}
-			
+
 			rangeCircle.visible = true;
 			rangeCircle.width = e.currentTarget.tRange * 2;
 			rangeCircle.height = e.currentTarget.tRange * 2;

@@ -2,7 +2,8 @@
 {
 
 	import flash.display.Sprite;
-	import flash.utils.Timer;
+	import flash.utils.getQualifiedClassName;
+	import flash.utils.getDefinitionByName;
 	import flash.events.*;
 	import enemies.*;
 
@@ -29,6 +30,8 @@
 		private var enemy11:Enemy11;
 		private var enemy12:Enemy12;
 
+		private var enemyTimer:int;
+
 
 		public function InitiateEnemies(MapArray:Array, EnemyList:Array,_Root:Object,_userInfo:UserInfo,TileSide:int)
 		{
@@ -37,24 +40,77 @@
 			mapArray = MapArray;
 			enemyList = EnemyList;
 			_root = _Root;
-			startEnemies();
+			addEventListener(Event.ENTER_FRAME, startEnemies);
 			// constructor code
 		}
-		private function startEnemies():void
+		private function startEnemies(e:Event):void
 		{
-			var numberOfEnemies:int = 99999;
-			var enemySpawner:Timer = new Timer(50,numberOfEnemies);
-			enemySpawner.addEventListener(TimerEvent.TIMER, createEnemies);
-			enemySpawner.start();
+
+			if (enemyTimer % 24 == 0)
+			{
+				var i:int;
+				switch (true)
+				{
+
+					case enemyTimer >= 3960:
+						i = 12;
+						break;
+					
+					case enemyTimer >= 3600:
+						i = 11;
+						break;
+					
+					case enemyTimer >= 3240:
+						i = 10;
+						break;
+					
+					case enemyTimer >= 2880:
+						i = 9;
+						break;
+					
+					case enemyTimer >= 2520:
+						i = 8;
+						break;
+					
+					case enemyTimer >= 2160:
+						i = 7;
+						break;
+					
+					case enemyTimer >= 1800:
+						i = 6;
+						break;
+					
+					case enemyTimer >= 1440:
+						i = 5;
+						break;
+					
+					case enemyTimer >= 1080:
+						i = 4;
+						break;
+					
+					case enemyTimer >= 720:
+						i = 3;
+						break;
+					
+					case enemyTimer >= 360:
+						i = 2;
+						break;
+					
+					case enemyTimer >= 0:
+						i = 1;
+						break;
+				}
+				
+				createEnemy(i);
+			}
+			enemyTimer++;
 		}
-		private function createEnemies(e:TimerEvent):void
+		private function createEnemy(i):void
 		{
+			var enemy:Enemy = getClass("enemies.Enemy"+i.toString()) as Enemy;
+			
 
-			var i:int = 1 + Math.floor(Math.random() * 11);
-
-			//var enemy:Enemy = getClass("enemies.enemy"+i.toString()+".Enemy"+i.toString()) as Enemy
-
-			var enemy:Enemy = new Enemy8(mapArray);
+			//var enemy:Enemy = new Enemy1(mapArray);
 			_root.addChild(enemy);
 			enemy.x = 0;
 			enemy.y = 0 * tileSide;
@@ -68,6 +124,12 @@
 			userInfo.changeGold(e.currentTarget.goldValue);
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
+		}
+		private function getClass(eName:String):Object
+		{
+			var klasa:Class = getDefinitionByName(eName) as Class;
+			var instance:Object = new klasa(mapArray);
+			return (instance);
 		}
 	}
 

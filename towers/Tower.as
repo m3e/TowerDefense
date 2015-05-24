@@ -6,8 +6,8 @@
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
-	
-	import flash.utils.getQualifiedClassName
+
+	import flash.utils.getQualifiedClassName;
 
 	public class Tower extends MovieClip
 	{
@@ -80,6 +80,12 @@
 						if (tTarget != null)
 						{
 
+							loaded = false;
+							loadedTimer = 0;
+
+							var fireFlash:ColorTransform = new ColorTransform();
+							fireFlash.color = 0xFF0000;
+							this.transform.colorTransform = fireFlash;
 							fire();
 
 
@@ -91,13 +97,6 @@
 		}
 		internal function fire():void
 		{
-			loaded = false;
-			loadedTimer = 0;
-
-			var fireFlash:ColorTransform = new ColorTransform();
-			fireFlash.color = 0xFF0000;
-			this.transform.colorTransform = fireFlash;
-
 			var newBullet:Bullet = new Bullet(enemyList);
 			newBullet.x = this.x;
 			newBullet.y = this.y;

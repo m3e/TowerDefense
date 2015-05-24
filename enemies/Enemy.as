@@ -11,7 +11,8 @@
 	{
 		public var eHp:Number;
 		public var pt:Point = new Point();
-		public var moveSpeed:int;
+		public var maxMoveSpeed:Number;
+		public var moveSpeed:Number;
 		public var mapArray:Array;
 		public var _root:MovieClip;
 		public var goldValue:int;
@@ -20,10 +21,6 @@
 		public function Enemy(Map:Array)
 		{
 			mapArray = Map;
-			//stop();
-			eHp = 1;
-			moveSpeed = 1;
-			goldValue = 1;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			addEventListener(Event.ENTER_FRAME, startMovement);
 			// constructor code

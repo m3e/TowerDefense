@@ -7,6 +7,8 @@
 	import towers.*
 	import towerimg.*
 	
+	import debuffs.*;
+	
 	public class TowersInitiate extends MovieClip {
 		
 		private var _root:Object;
@@ -15,20 +17,28 @@
 		public var splashTowerImg:SplashTowerImg;
 		public var laserTowerImg:LaserTowerImg;
 		public var flameGroundImg:FlameGroundImg;
+		public var iceTowerImg:IceTowerImg;
 		
 		public var towerList:Array;
 		
-		public function TowersInitiate(_Root:Object) {
+		private var enemyList:Array;
+		
+		public function TowersInitiate(_Root:Object,EnemyList:Array) {
+			enemyList = EnemyList
+			_root = _Root
+			
 			towerList = new Array;
 			
 			bulletTowerImg = new BulletTowerImg();
 			splashTowerImg = new SplashTowerImg();
 			laserTowerImg = new LaserTowerImg();	
 			flameGroundImg = new FlameGroundImg();
+			iceTowerImg = new IceTowerImg();
 			
-			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg)
+			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg,iceTowerImg)
 			
-			_root = _Root
+			
+			
 			initiateTowers();
 			// constructor code
 		}
@@ -56,6 +66,10 @@
 				
 				_root.addChild(towerList[i]);
 			}
+		}
+		private function addTower(addedTower:Tower):void
+		{
+			
 		}
 
 	}

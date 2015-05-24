@@ -44,7 +44,7 @@
 		{
 			fire();
 		}
-		private function distanceTwoPoints(x1:Number, x2:Number,  y1:Number, y2:Number):Number
+		internal function distanceTwoPoints(x1:Number, x2:Number,  y1:Number, y2:Number):Number
 		{
 			var dx:Number = x1 - x2;
 			var dy:Number = y1 - y2;
@@ -76,14 +76,7 @@
 			{//if it touches the enemy
 				if (bAoe > 0)
 				{
-					for (var i:int=0; i < enemyList.length; i++)
-					{
-						if (distanceTwoPoints(bTarget.x,enemyList[i].x,bTarget.y,enemyList[i].y) < bAoe)
-						{
-							enemyList[i].eHp -= bDmg;
-						}
-						
-					}
+					hitAoe()
 				}
 				else
 				{
@@ -96,6 +89,17 @@
 			{
 				destroyThis();
 			}
+		}
+		internal function hitAoe():void
+		{
+			for (var i:int=0; i < enemyList.length; i++)
+					{
+						if (distanceTwoPoints(bTarget.x,enemyList[i].x,bTarget.y,enemyList[i].y) < bAoe)
+						{
+							enemyList[i].eHp -= bDmg;
+						}
+						
+					}
 		}
 		public function destroyThis():void
 		{
