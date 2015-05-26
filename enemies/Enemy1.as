@@ -9,10 +9,10 @@
 		public function Enemy1(Map:Array)
 		{
 			super(Map);
-			eHp = 100;
-			maxMoveSpeed = 3;
+			eHp = 45;
+			maxMoveSpeed = 4;
 			moveSpeed = maxMoveSpeed;
-			goldValue = 10;
+			goldValue = 13;
 		}
 	}
 }

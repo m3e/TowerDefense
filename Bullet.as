@@ -21,6 +21,7 @@
 
 		public function Bullet(EnemyList:Array)
 		{
+			stop();
 			enemyList = new Array  ;
 			enemyList = EnemyList;
 			bTarget = null;

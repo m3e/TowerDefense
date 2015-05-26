@@ -68,6 +68,7 @@
 
 				}
 				//for (var i:int=enemyList.length - 1; i >=0; i--)
+				
 				for (var i:int=0; i < enemyList.length; i++)
 				{
 					if (loaded == true)

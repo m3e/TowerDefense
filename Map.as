@@ -191,6 +191,10 @@
 				case Keyboard.NUMBER_5 :
 					selectTower(towersInitiate.towerList[4]);
 					break;
+					
+				case Keyboard.NUMBER_6 :
+					selectTower(towersInitiate.towerList[5]);
+					break;
 
 				case Keyboard.Q :
 					stage.frameRate = 24;
@@ -252,7 +256,7 @@
 
 			//Selected Square
 			towerSelectedSquare = new Shape ();
-			towerSelectedSquare.graphics.lineStyle(2,0xFF0000);
+			towerSelectedSquare.graphics.lineStyle(4,0xFFFFFF);
 			towerSelectedSquare.graphics.beginFill(0xFFFFFF,0);
 			towerSelectedSquare.graphics.drawRect(0,0,tileSide,tileSide);
 			towerSelectedSquare.graphics.endFill();
@@ -369,6 +373,7 @@
 			{
 
 				var newTower:Tower = new towerImg.towerReference();
+				
 				newTower.enemyList = enemyList;
 				newTower.x = e.currentTarget.x;
 				newTower.y = e.currentTarget.y;

@@ -10,10 +10,10 @@
 		public function Enemy2(Map:Array)
 		{
 			super(Map);
-			eHp = 180;
-			maxMoveSpeed = 2;
+			eHp = 70;
+			maxMoveSpeed = 3;
 			moveSpeed = maxMoveSpeed;
-			goldValue = 18;
+			goldValue = 19;
 			// constructor code
 		}
 	}

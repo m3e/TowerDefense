@@ -3,22 +3,23 @@
 	
 	
 	
-	public class IceTower extends Tower {
+	public class FlameThrowerTower extends Tower {
 		
 		
-		public function IceTower() {
+		public function FlameThrowerTower() {
 			super()
-			tBaseColor = 0x330099
-			tRange = 100
-			tDmg = 0;
-			tAtkSpeed = 24;
-			tAoe = 25
-			tbSpeed = 20;
+			tBaseColor = 0xFF3300
+			tRange = 85
+			tDmg = 5;
+			tAtkSpeed = 2;
+			tAoe = 0
+			tbSpeed = 8;
 			// constructor code
 		}
 		override internal function fire():void
 		{
-			var newBullet:Bullet = new IceTowerBullet(enemyList);
+			var newBullet:Bullet = new Bullet(enemyList);
+			newBullet.gotoAndStop(2);
 			newBullet.x = this.x;
 			newBullet.y = this.y;
 			newBullet.bTarget = tTarget;
