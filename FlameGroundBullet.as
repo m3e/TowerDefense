@@ -11,6 +11,7 @@
 		
 		public function FlameGroundBullet(myTarget:Object) {
 			bTarget = myTarget;
+			this.mouseEnabled = false
 			addEventListener(Event.ADDED_TO_STAGE, added)
 			// constructor code
 		}

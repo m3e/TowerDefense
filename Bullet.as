@@ -22,6 +22,7 @@
 		public function Bullet(EnemyList:Array)
 		{
 			stop();
+			this.mouseEnabled = false
 			enemyList = new Array  ;
 			enemyList = EnemyList;
 			bTarget = null;
@@ -58,7 +59,9 @@
 			var angle:Number = Math.atan2(yDist,xDist);//the angle that it must move
 			ySpeed = Math.sin(angle) * bSpeed;//calculate how much it should move the enemy vertically
 			xSpeed = Math.cos(angle) * bSpeed;//calculate how much it should move the enemy horizontally
-
+			
+			//this.rotation = (angle/Math.PI)*180;
+			
 			if (Math.abs(xSpeed) > Math.abs(xDist))
 			{
 				xSpeed = xDist;

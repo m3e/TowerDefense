@@ -20,6 +20,8 @@
 		public var iceTowerImg:IceTowerImg;
 		public var meleeSwordTowerImg:MeleeSwordTowerImg
 		public var flameThrowerTowerImg:FlameThrowerTowerImg;
+		public var magmaThrowerImg:MagmaThrowerImg;
+		public var iceSpikeImg:IceSpikeImg;
 		
 		public var towerList:Array;
 		
@@ -39,8 +41,10 @@
 			iceTowerImg = new IceTowerImg();
 			meleeSwordTowerImg = new MeleeSwordTowerImg();
 			flameThrowerTowerImg = new FlameThrowerTowerImg();
+			magmaThrowerImg = new MagmaThrowerImg();
+			iceSpikeImg = new IceSpikeImg();
 			
-			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg,iceTowerImg,meleeSwordTowerImg,flameThrowerTowerImg)
+			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg,iceTowerImg,meleeSwordTowerImg,flameThrowerTowerImg,magmaThrowerImg,iceSpikeImg)
 			
 			
 			
