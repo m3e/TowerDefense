@@ -1,18 +1,25 @@
 ﻿package debuffs {
 	
 	import flash.display.Sprite;
+	import flash.events.*;
 	import enemies.Enemy;
+	
 	
 	public class Debuff extends Sprite {
 		
-		public static var slow:Slow;
+		private static var slow:Slow;
+		private static var burn:Burn;
 		
 		public function Debuff() {
 			// constructor code
 		}
-		public static function addDebuffSlow(enemy:Enemy, amount:Number,seconds:Number):void
+		public static function addSlow(enemy:Enemy, amount:Number,seconds:Number):void
 		{
 			slow = new Slow(enemy,amount,seconds)
+		}
+		public static function addBurn(enemy:Enemy, amount:Number,seconds:Number,frequency:Number):void
+		{
+			burn = new Burn(enemy,amount,seconds,frequency)
 		}
 	}
 	

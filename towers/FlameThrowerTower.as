@@ -14,19 +14,8 @@
 			tAtkSpeed = 2;
 			tAoe = 0
 			tbSpeed = 8;
+			bFrame = 2;
 			// constructor code
-		}
-		override internal function fire():void
-		{
-			var newBullet:Bullet = new Bullet(enemyList);
-			newBullet.gotoAndStop(2);
-			newBullet.x = this.x;
-			newBullet.y = this.y;
-			newBullet.bTarget = tTarget;
-			newBullet.bDmg = tDmg;
-			newBullet.bSpeed = tbSpeed;
-			newBullet.bAoe = tAoe;
-			_root.addChild(newBullet);
 		}
 	}
 	

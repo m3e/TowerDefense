@@ -9,23 +9,25 @@
 		public function IceSpike() {
 			super();
 			tBaseColor = 0x3399FF
-			tRange = 600
+			tRange = 150
 			tDmg = 15;
-			tAtkSpeed = 5;
-			tbSpeed = 15;
+			tAtkSpeed = 6;
+			tbSpeed = 30;
 			tAoe = 0;
+			bFrame = 4;
 			// constructor code
 		}
-		override internal function fire():void
+		override internal function addDebuffs(bullet:Bullet):void
 		{
-			var newBullet:IceSpikeBullet = new IceSpikeBullet(enemyList);
-			newBullet.x = this.x;
-			newBullet.y = this.y;
-			newBullet.bTarget = tTarget;
-			newBullet.bDmg = tDmg;
-			newBullet.bSpeed = tbSpeed;
-			newBullet.bAoe = tAoe;
-			_root.addChild(newBullet);
+			var debuffsArray:Array = new Array;
+			
+			var debuffType:Array = new Array;
+			
+			debuffType.push("slow",.20,.5)
+			
+			debuffsArray.push(debuffType)
+			
+			bullet.debuffArray = debuffsArray;
 		}
 	}
 	

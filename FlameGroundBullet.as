@@ -23,11 +23,6 @@
 		private function eFrame(e:Event):void
 		{
 			framesAlive++
-			/*if (bTarget != null)
-			{
-			this.x = bTarget.x
-			this.y = bTarget.y
-			}*/
 			if (framesAlive == 2 || bTarget == null)
 			{
 				destroyThis();

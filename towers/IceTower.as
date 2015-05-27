@@ -1,7 +1,7 @@
 ﻿package towers {
 	
 	
-	
+	import debuffs.Debuff
 	
 	public class IceTower extends Tower {
 		
@@ -13,20 +13,24 @@
 			tDmg = 0;
 			tAtkSpeed = 24;
 			tAoe = 25
-			tbSpeed = 20;
+			tbSpeed = 24;
+			bFrame = 3;
 			// constructor code
 		}
-		override internal function fire():void
+		override internal function addDebuffs(bullet:Bullet):void
 		{
-			var newBullet:Bullet = new IceTowerBullet(enemyList);
-			newBullet.x = this.x;
-			newBullet.y = this.y;
-			newBullet.bTarget = tTarget;
-			newBullet.bDmg = tDmg;
-			newBullet.bSpeed = tbSpeed;
-			newBullet.bAoe = tAoe;
-			_root.addChild(newBullet);
+			var debuffsArray:Array = new Array;
+			
+			var debuffType:Array = new Array;
+			
+			debuffType.push("slow",.40,3)
+			
+			debuffsArray.push(debuffType)
+			
+			bullet.debuffArray = debuffsArray;
 		}
+		
+		
 	}
 	
 }

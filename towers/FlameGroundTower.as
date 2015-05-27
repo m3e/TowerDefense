@@ -9,12 +9,10 @@
 	{
 
 		private var burnList:Array;
-		private var burn:Burn;
 
 		public function FlameGroundTower()
 		{
 			super();
-			burn = new Burn();
 			burnList = new Array();
 			tBaseColor = 0x660000;
 			tRange = 50;
@@ -73,7 +71,7 @@
 			var newBullet:FlameGroundBullet;
 			for (var i:int=0; i < burnList.length; i++)
 			{
-				burn.burnEnemy(burnList[i],tDmg);
+				burnList[i].eHp -= tDmg
 				newBullet = new FlameGroundBullet(burnList[i]);
 				newBullet.x = burnList[i].x;
 				newBullet.y = burnList[i].y;

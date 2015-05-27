@@ -208,6 +208,10 @@
 					stage.frameRate = 96;
 					break;
 					
+				case Keyboard.R :
+					stage.frameRate = 1;
+					break;
+					
 			}
 		}
 		private function setupTileListeners():void

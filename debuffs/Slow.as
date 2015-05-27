@@ -7,8 +7,6 @@
 	
 	public class Slow extends Debuff {
 		
-		private var enemyList:Array
-		
 		private var enemy:Enemy;
 		private var amount:Number;
 		private var seconds:Number;
@@ -23,16 +21,18 @@
 			addEventListener(Event.ENTER_FRAME, debuffTick)
 			// constructor code
 		}
-		public static function slow(enemy:Enemy, amount:Number,seconds:Number):void
-		{
-			
-		}
 		private function debuffTick(e:Event):void
 		{
 			if (enemy != null && frames < seconds * 24)
 			{
-				
+				if (enemy.moveSpeed < enemy.maxMoveSpeed - (enemy.maxMoveSpeed * amount))
+				{
+					
+				}
+				else
+				{
 				enemy.moveSpeed = enemy.maxMoveSpeed - (enemy.maxMoveSpeed * amount)
+				}
 			}
 			else
 			{
