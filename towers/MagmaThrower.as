@@ -24,7 +24,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("burn",5,2,12)
+			debuffType.push("burn",5,2)
 			
 			debuffsArray.push(debuffType)
 			

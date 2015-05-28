@@ -50,7 +50,8 @@
 						break;
 						
 					case ("burn") :
-						debuffs.Debuff.addBurn(dEnemy,debuffArray[i][1],debuffArray[i][2],debuffArray[i][3])
+						
+						debuffs.Debuff.addBurn(dEnemy,debuffArray[i][1],debuffArray[i][2])
 						break;
 				}
 			}
@@ -100,34 +101,36 @@
 			this.y +=  ySpeed;
 
 			//Hit Test
-			if (this.hitTestObject(bTarget))
+			if (_root.contains(bTarget) && this.hitTestObject(bTarget))
 			{
 
 				if (bAoe > 0)
 				{
 					//If AOE
+					
 					hitAoe();
 					//End AOE
 				}
 				else
 				{
 					//If Single Target
+					
 					hitTarget(bTarget);
 					//End Single Target
 				}
 				//Destroy
 				destroyThis();
 			}
-			else if (bTarget == null)
+			else if (!(_root.contains(bTarget)) && this.hitTestObject(bTarget))
 			{
-				trace("Bullet: Target is Null - Destroying Bullet");
 				destroyThis();
 			}
 		}
 		internal function hitTarget(dEnemy:Enemy):void
 		{
+			
 			addDebuffs(dEnemy);
-			dEnemy.eHp -=  bDmg;
+			dEnemy.takeDmg(bDmg);
 		}
 		
 		internal function hitAoe():void
@@ -144,11 +147,13 @@
 		public function destroyThis():void
 		{
 			//this function will just remove this guy from the stage
+			debuffArray = null;
 			this.removeEventListener(Event.ENTER_FRAME, eFrame);
 			enemyList = null;
 			bTarget = null;
 			_root.removeChild(this);
 			_root = null;
+
 
 		}
 

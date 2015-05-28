@@ -17,9 +17,13 @@
 		{
 			slow = new Slow(enemy,amount,seconds)
 		}
-		public static function addBurn(enemy:Enemy, amount:Number,seconds:Number,frequency:Number):void
+		public static function addBurn(enemy:Enemy, amount:Number,seconds:Number):void
 		{
-			burn = new Burn(enemy,amount,seconds,frequency)
+			burn = new Burn(enemy,amount,seconds)
+		}
+		public static function addBristle(enemy:Enemy, amountNumber, seconds:Number):void
+		{
+			
 		}
 	}
 	

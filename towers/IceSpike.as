@@ -9,7 +9,7 @@
 		public function IceSpike() {
 			super();
 			tBaseColor = 0x3399FF
-			tRange = 150
+			tRange = 650
 			tDmg = 15;
 			tAtkSpeed = 6;
 			tbSpeed = 30;

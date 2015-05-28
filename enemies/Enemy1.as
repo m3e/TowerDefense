@@ -13,6 +13,8 @@
 			maxMoveSpeed = 4;
 			moveSpeed = maxMoveSpeed;
 			goldValue = 13;
+			maxArmor=3;
+			armor=3;
 		}
 	}
 }

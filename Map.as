@@ -195,6 +195,18 @@
 				case Keyboard.NUMBER_6 :
 					selectTower(towersInitiate.towerList[5]);
 					break;
+				
+				case Keyboard.NUMBER_7 :
+					selectTower(towersInitiate.towerList[6]);
+					break;
+					
+				case Keyboard.NUMBER_8 :
+					selectTower(towersInitiate.towerList[7]);
+					break;
+				
+				case Keyboard.NUMBER_9 :
+					selectTower(towersInitiate.towerList[8]);
+					break;
 
 				case Keyboard.Q :
 					stage.frameRate = 24;

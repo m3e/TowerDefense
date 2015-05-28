@@ -71,7 +71,7 @@
 			var newBullet:FlameGroundBullet;
 			for (var i:int=0; i < burnList.length; i++)
 			{
-				burnList[i].eHp -= tDmg
+				burnList[i].takeDmg(tDmg);
 				newBullet = new FlameGroundBullet(burnList[i]);
 				newBullet.x = burnList[i].x;
 				newBullet.y = burnList[i].y;

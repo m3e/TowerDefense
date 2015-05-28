@@ -1,7 +1,7 @@
 ﻿package enemies
 {
 
-	import flash.display.MovieClip
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.*;
 	import flash.geom.Point;
@@ -14,12 +14,16 @@
 		public var maxMoveSpeed:Number;
 		public var moveSpeed:Number;
 		public var mapArray:Array;
+		//root used on Debuffs to place image
 		public var _root:MovieClip;
 		public var goldValue:int;
 		public var id:int;
+		public var maxArmor:int;
+		public var armor:int;
 
 		public function Enemy(Map:Array)
 		{
+			id = 9999*Math.random()
 			mapArray = Map;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			addEventListener(Event.ENTER_FRAME, startMovement);
@@ -30,63 +34,77 @@
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 		}
-		public function startMovement(e:Event):void
+		public function determineArmor(dmg:int):Number
 		{
+			var dmgReduction:Number = ((armor)*0.06)/(1+0.06*(armor));
+			dmgReduction = Math.round(dmgReduction * 100) / 100
+			return dmgReduction
+		}
+		public function takeDmg(dmg:Number):void
+		{
+			//calculate reduced dmg
+			if (eHp > 0)
+			{
+			dmg -= (dmg * determineArmor(armor))
+			eHp -= dmg;
+			}
 			if (eHp <= 0)
 			{
-
 				destroyThis();
 			}
-			else
+		}
+		public function startMovement(e:Event):void
+		{
+
+
+			switch (mapArray[Math.floor(pt.y)][Math.floor(pt.x)])
 			{
+				case 1 :
 
-				switch (mapArray[Math.floor(pt.y)][Math.floor(pt.x)])
-				{
-					case 1 :
-						
-						x +=  moveSpeed;
-						if (Math.floor(x/32) != pt.x)
-						{
-							x -=  x % 32;
-							pt.x = x / 32;
-						}
-						break;
+					x +=  moveSpeed;
+					if (Math.floor(x/32) != pt.x)
+					{
+						x -=  x % 32;
+						pt.x = x / 32;
+					}
+					break;
 
-					case 2 :
-						
-						y +=  moveSpeed;
-						if (Math.floor(y/32) != pt.y)
-						{
-							y -=  y % 32;
-							pt.y = y / 32;
+				case 2 :
 
-						}
-						break;
+					y +=  moveSpeed;
+					if (Math.floor(y/32) != pt.y)
+					{
+						y -=  y % 32;
+						pt.y = y / 32;
 
-					case 3 :
-						
-						x -=  moveSpeed;
-						if (Math.ceil(x/32) != pt.x)
-						{
-							pt.x--;
-							x +=  Math.abs(pt.x * 32 - x);
-						}
-						break;
+					}
+					break;
 
-					case 4 :
-						y -=  moveSpeed;
-						
-						if (Math.ceil(y/32) != pt.y)
-						{
-							pt.y--;
-							y +=  Math.abs(pt.y * 32 - y);
-						}
-						break;
-				}
+				case 3 :
+
+					x -=  moveSpeed;
+					if (Math.ceil(x/32) != pt.x)
+					{
+						pt.x--;
+						x +=  Math.abs(pt.x * 32 - x);
+					}
+					break;
+
+				case 4 :
+					y -=  moveSpeed;
+
+					if (Math.ceil(y/32) != pt.y)
+					{
+						pt.y--;
+						y +=  Math.abs(pt.y * 32 - y);
+					}
+					break;
 			}
 		}
+
 		private function destroyThis():void
 		{
+			trace("destroyed")
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
 			_root.removeChild(this);
