@@ -14,6 +14,8 @@
 			tAtkSpeed = 60;
 			tbSpeed = 32;
 			tAoe = 50;
+			tCost = 300;
+			tType = "phys"
 			// constructor code
 		}
 

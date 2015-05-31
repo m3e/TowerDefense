@@ -18,14 +18,15 @@
 			amount = _amount
 			seconds = _seconds
 			frames = 0;
+			debuffNow()
 			addEventListener(Event.ENTER_FRAME, debuffTick)
 			// constructor code
 		}
-		private function debuffTick(e:Event):void
+		private function debuffNow():void
 		{
 			if (enemy != null && frames < seconds * 24)
 			{
-				
+				enemy.armor = enemy.maxArmor - amount;
 			}
 			else
 			{
@@ -33,9 +34,13 @@
 			}
 			frames++
 		}
+		private function debuffTick(e:Event):void
+		{
+			debuffNow();
+		}
 		private function finish():void
 		{
-			
+			enemy.armor = enemy.maxArmor;
 			removeEventListener(Event.ENTER_FRAME, debuffTick)
 			enemy = null;
 		}

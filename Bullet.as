@@ -19,6 +19,7 @@
 		public var bTarget:*;
 		public var bDmg:Number;
 		public var bAoe:Number;
+		public var bType:String;
 
 		public var debuffArray:Array;
 		internal var _root:MovieClip;
@@ -50,8 +51,11 @@
 						break;
 						
 					case ("burn") :
-						
 						debuffs.Debuff.addBurn(dEnemy,debuffArray[i][1],debuffArray[i][2])
+						break;
+					
+					case ("brittle") :
+						debuffs.Debuff.addBrittle(dEnemy,debuffArray[i][1],debuffArray[i][2])
 						break;
 				}
 			}
@@ -130,7 +134,7 @@
 		{
 			
 			addDebuffs(dEnemy);
-			dEnemy.takeDmg(bDmg);
+			dEnemy.takeDmg(bDmg,bType);
 		}
 		
 		internal function hitAoe():void

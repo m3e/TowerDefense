@@ -14,7 +14,8 @@
 			tAtkSpeed = 40;
 			tbSpeed = 36;
 			tAoe = 50;
-			
+			tCost = 400;
+			tType = "fire"
 			bFrame = 2
 			// constructor code
 		}

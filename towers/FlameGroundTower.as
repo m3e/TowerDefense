@@ -18,6 +18,8 @@
 			tRange = 50;
 			tDmg = 3;
 			tAtkSpeed = 6;
+			tCost = 250;
+			tType = "fire"
 			// constructor code
 		}
 		override internal function eFrame(e:Event):void
@@ -71,7 +73,7 @@
 			var newBullet:FlameGroundBullet;
 			for (var i:int=0; i < burnList.length; i++)
 			{
-				burnList[i].takeDmg(tDmg);
+				burnList[i].takeDmg(tDmg,tType);
 				newBullet = new FlameGroundBullet(burnList[i]);
 				newBullet.x = burnList[i].x;
 				newBullet.y = burnList[i].y;

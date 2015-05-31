@@ -9,6 +9,8 @@
 			tDmg = 5;
 			tAtkSpeed = 5;
 			tbSpeed = 20;
+			tCost = 250;
+			tType = "fire"
 			// constructor code
 		}
 	}

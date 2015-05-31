@@ -387,9 +387,11 @@
 		{
 			if (e.currentTarget.occupied == false && towerImg != null)
 			{
-
 				var newTower:Tower = new towerImg.towerReference();
 				
+				if (userInfo.canAfford(newTower.tCost) == true)
+				{
+				userInfo.changeGold(-newTower.tCost);
 				newTower.enemyList = enemyList;
 				newTower.x = e.currentTarget.x;
 				newTower.y = e.currentTarget.y;
@@ -398,6 +400,11 @@
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
 				e.currentTarget.occupied = true;
+				}
+				else
+				{
+					trace("Can't afford this tower.");
+				}
 			}
 		}
 		private function onMouseOver(e:Event):void

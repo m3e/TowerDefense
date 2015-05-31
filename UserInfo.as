@@ -16,7 +16,7 @@
 		public var gold:int;
 		
 		public function UserInfo() {
-			gold = 400;
+			gold = 40000;
 			
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			// constructor code
@@ -44,6 +44,15 @@
 			
 			_root.addChild(goldBoxText);
 			
+		}
+		public function canAfford(cost:int):Boolean
+		{
+			var afford:Boolean;
+			if (cost <= gold)
+			{
+				afford = true;
+			}
+			return afford;
 		}
 		public function changeGold(goldChange:int):void
 		{

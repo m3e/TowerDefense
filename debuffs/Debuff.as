@@ -9,6 +9,7 @@
 		
 		private static var slow:Slow;
 		private static var burn:Burn;
+		private static var brittle:Brittle;
 		
 		public function Debuff() {
 			// constructor code
@@ -21,9 +22,9 @@
 		{
 			burn = new Burn(enemy,amount,seconds)
 		}
-		public static function addBristle(enemy:Enemy, amountNumber, seconds:Number):void
+		public static function addBrittle(enemy:Enemy, amount:Number, seconds:Number):void
 		{
-			
+			brittle = new Brittle(enemy,amount,seconds)
 		}
 	}
 	

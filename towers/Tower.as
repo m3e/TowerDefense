@@ -23,6 +23,8 @@
 		public var tTarget:Sprite;
 		public var tAtkSpeed:Number;
 		public var tAoe:Number;
+		public var tCost:int;
+		public var tType:String;
 
 		public var tBaseColor:int;
 
@@ -129,6 +131,7 @@
 			newBullet.bDmg = tDmg;
 			newBullet.bSpeed = tbSpeed;
 			newBullet.bAoe = tAoe;
+			newBullet.bType = tType;
 			//End Set bullet stats
 			_root.addChild(newBullet);
 		}

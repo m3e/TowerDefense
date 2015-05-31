@@ -15,6 +15,8 @@
 			tAoe = 0
 			tbSpeed = 8;
 			bFrame = 2;
+			tCost = 350;
+			tType = "fire"
 			// constructor code
 		}
 	}

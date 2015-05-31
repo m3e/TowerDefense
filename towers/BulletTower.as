@@ -9,6 +9,8 @@
 			tDmg = 3;
 			tAtkSpeed = 3;
 			tbSpeed = 50;
+			tCost = 200;
+			tType = "phys"
 			// constructor code
 		}
 

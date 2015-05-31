@@ -9,7 +9,7 @@
 
 	public class Enemy extends Sprite
 	{
-		public var eHp:Number;
+		public var eHp:int;
 		public var pt:Point = new Point();
 		public var maxMoveSpeed:Number;
 		public var moveSpeed:Number;
@@ -23,7 +23,7 @@
 
 		public function Enemy(Map:Array)
 		{
-			id = 9999*Math.random()
+			id = 9999 * Math.random();
 			mapArray = Map;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			addEventListener(Event.ENTER_FRAME, startMovement);
@@ -34,19 +34,42 @@
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 		}
-		public function determineArmor(dmg:int):Number
+		public function determineArmor(dmg:int, damageType:String):Number
 		{
-			var dmgReduction:Number = ((armor)*0.06)/(1+0.06*(armor));
-			dmgReduction = Math.round(dmgReduction * 100) / 100
-			return dmgReduction
+			var dmgReduction:Number = 0;
+			switch (damageType)
+			{
+				case ("phys") :
+					if (armor > 0)
+					{
+						dmgReduction = ((armor)*0.06)/(1+0.06*(armor));
+						dmgReduction = Math.round(dmgReduction * 100) / 100;
+					}
+					else if (armor < 0)
+					{
+						dmgReduction = -(1- Math.pow(2-0.94,armor));
+					}
+
+					break;
+
+				case ("fire") :
+				case ("ice") :
+				case ("earth") :
+					
+
+					break;
+			}
+			trace(damageType);
+			return dmgReduction;
+
 		}
-		public function takeDmg(dmg:Number):void
+		public function takeDmg(dmg:Number,dType:String):void
 		{
 			//calculate reduced dmg
 			if (eHp > 0)
 			{
-			dmg -= (dmg * determineArmor(armor))
-			eHp -= dmg;
+				dmg -=  (dmg * determineArmor(armor,dType));
+				eHp -=  dmg;
 			}
 			if (eHp <= 0)
 			{
@@ -104,7 +127,6 @@
 
 		private function destroyThis():void
 		{
-			trace("destroyed")
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
 			_root.removeChild(this);

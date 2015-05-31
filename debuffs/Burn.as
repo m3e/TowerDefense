@@ -34,7 +34,7 @@
 				if (frames % 12 == 0 && enemy._root != null)
 				{
 					newBulletOnTarget();
-					enemy.takeDmg(amount);
+					enemy.takeDmg(amount,"fire");
 
 					
 				}

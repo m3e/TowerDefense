@@ -10,11 +10,13 @@
 			super()
 			tBaseColor = 0x330099
 			tRange = 100
-			tDmg = 0;
+			tDmg = 15;
 			tAtkSpeed = 24;
 			tAoe = 25
 			tbSpeed = 24;
 			bFrame = 3;
+			tCost = 200;
+			tType = "ice"
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
