@@ -9,7 +9,7 @@
 
 	public class Enemy extends Sprite
 	{
-		public var eHp:int;
+		internal var eHp:int;
 		public var pt:Point = new Point();
 		public var maxMoveSpeed:Number;
 		public var moveSpeed:Number;
