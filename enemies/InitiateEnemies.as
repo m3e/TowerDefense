@@ -40,7 +40,8 @@
 			mapArray = MapArray;
 			enemyList = EnemyList;
 			_root = _Root;
-			addEventListener(Event.ENTER_FRAME, startEnemies);
+			//addEventListener(Event.ENTER_FRAME, startEnemies);
+			createDmgDummy();
 			// constructor code
 		}
 		private function startEnemies(e:Event):void
@@ -102,8 +103,21 @@
 				}
 				
 				createEnemy(i);
+				
 			}
 			enemyTimer++;
+		}
+		private function createDmgDummy():void
+		{
+			var enemy:Enemy = new dpsTestEnemy(mapArray)
+			
+			_root.addChild(enemy);
+			enemy.x = 0;
+			enemy.y = 0 * tileSide;
+			enemy.pt.x = 0;
+			enemy.pt.y = 0;
+			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+			enemyList.push(enemy);
 		}
 		private function createEnemy(i):void
 		{

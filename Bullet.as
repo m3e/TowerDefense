@@ -99,6 +99,7 @@
 			{
 				ySpeed = yDist;
 			}
+			
 			//End distance Matching
 			//move the bullet towards the enemy
 			this.x +=  xSpeed;

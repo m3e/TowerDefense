@@ -16,7 +16,7 @@
 		public var gold:int;
 		
 		public function UserInfo() {
-			gold = 40000;
+			gold = 400;
 			
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			// constructor code

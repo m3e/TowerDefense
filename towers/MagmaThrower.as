@@ -11,7 +11,7 @@
 			tBaseColor = 0xFF9900
 			tRange = 150
 			tDmg = 15;
-			tAtkSpeed = 40;
+			tAtkSpeed = 32;
 			tbSpeed = 36;
 			tAoe = 50;
 			tCost = 400;

@@ -10,19 +10,21 @@
 	public class Enemy extends Sprite
 	{
 		internal var eHp:int;
-		public var pt:Point = new Point();
+		internal var pt:Point = new Point();
 		public var maxMoveSpeed:Number;
 		public var moveSpeed:Number;
-		public var mapArray:Array;
+		internal var mapArray:Array;
 		//root used on Debuffs to place image
 		public var _root:MovieClip;
 		public var goldValue:int;
 		public var id:int;
 		public var maxArmor:int;
 		public var armor:int;
+		public var distanceTraveled:Number;
 
 		public function Enemy(Map:Array)
 		{
+			distanceTraveled = 0;
 			id = 9999 * Math.random();
 			mapArray = Map;
 			addEventListener(Event.ADDED_TO_STAGE, added);
@@ -34,7 +36,7 @@
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 		}
-		public function determineArmor(dmg:int, damageType:String):Number
+		internal function determineArmor(dmg:int, damageType:String):Number
 		{
 			var dmgReduction:Number = 0;
 			switch (damageType)
@@ -55,11 +57,10 @@
 				case ("fire") :
 				case ("ice") :
 				case ("earth") :
-					
+
 
 					break;
 			}
-			trace(damageType);
 			return dmgReduction;
 
 		}
@@ -76,10 +77,12 @@
 				destroyThis();
 			}
 		}
-		public function startMovement(e:Event):void
+		internal function startMovement(e:Event):void
 		{
-
-
+			moveCharacter();
+		}
+		internal function moveCharacter():void
+		{
 			switch (mapArray[Math.floor(pt.y)][Math.floor(pt.x)])
 			{
 				case 1 :
@@ -122,7 +125,12 @@
 						y +=  Math.abs(pt.y * 32 - y);
 					}
 					break;
+					
+				default :
+				destroyThis();
+				break;
 			}
+			distanceTraveled += moveSpeed;
 		}
 
 		private function destroyThis():void

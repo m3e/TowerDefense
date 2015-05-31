@@ -33,12 +33,15 @@
 
 		//enemyList is given in Map().. don't ask why
 		public var enemyList:Array;
+		
+		internal var targeting:String;
 		internal var _root:*;
 
 		internal var bFrame:int;
 
 		public function Tower()
 		{
+			targeting="first"
 			loaded = true;
 			loadedTimer = 0;
 			tAoe = 0;
@@ -80,13 +83,22 @@
 					//End Reload
 
 				}
-
 				if (loaded == true)
 				{
+					switch (targeting)
+					{
+						case ("first"):
+						enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
+						for (var q:int=0; q < enemyList.length; q++)
+						{
+							trace("Q:",q,"Traveled:",enemyList[q].distanceTraveled);
+						}
+					}
 					for (var i:int=0; i < enemyList.length; i++)
 					{
 
 						//Set Target
+
 						if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange)
 						{
 							//if the selected enemy is close enough, then set it as the target
