@@ -21,6 +21,7 @@
 		public var maxArmor:int;
 		public var armor:int;
 		public var distanceTraveled:Number;
+		public var killed:Boolean;
 
 		public function Enemy(Map:Array)
 		{
@@ -74,6 +75,7 @@
 			}
 			if (eHp <= 0)
 			{
+				killed = true;
 				destroyThis();
 			}
 		}
@@ -90,7 +92,9 @@
 					x +=  moveSpeed;
 					if (Math.floor(x/32) != pt.x)
 					{
+						distanceTraveled -=  x % 32;
 						x -=  x % 32;
+						
 						pt.x = x / 32;
 					}
 					break;
@@ -100,7 +104,9 @@
 					y +=  moveSpeed;
 					if (Math.floor(y/32) != pt.y)
 					{
+						distanceTraveled -=  y % 32;
 						y -=  y % 32;
+						
 						pt.y = y / 32;
 
 					}
@@ -111,8 +117,11 @@
 					x -=  moveSpeed;
 					if (Math.ceil(x/32) != pt.x)
 					{
+						
 						pt.x--;
+						distanceTraveled -=  Math.abs(pt.x * 32 - x);
 						x +=  Math.abs(pt.x * 32 - x);
+						
 					}
 					break;
 
@@ -121,16 +130,19 @@
 
 					if (Math.ceil(y/32) != pt.y)
 					{
+						
 						pt.y--;
+						distanceTraveled -=  Math.abs(pt.y * 32 - y);
 						y +=  Math.abs(pt.y * 32 - y);
+						
 					}
 					break;
-					
+
 				default :
-				destroyThis();
-				break;
+					destroyThis();
+					break;
 			}
-			distanceTraveled += moveSpeed;
+			distanceTraveled +=  moveSpeed;
 		}
 
 		private function destroyThis():void

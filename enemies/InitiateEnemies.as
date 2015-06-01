@@ -40,9 +40,13 @@
 			mapArray = MapArray;
 			enemyList = EnemyList;
 			_root = _Root;
-			//addEventListener(Event.ENTER_FRAME, startEnemies);
-			createDmgDummy();
+			//startRound();
+			//createDmgDummy();
 			// constructor code
+		}
+		public function startRound():void
+		{
+			addEventListener(Event.ENTER_FRAME, startEnemies);
 		}
 		private function startEnemies(e:Event):void
 		{
@@ -107,7 +111,7 @@
 			}
 			enemyTimer++;
 		}
-		private function createDmgDummy():void
+		public function createDmgDummy():void
 		{
 			var enemy:Enemy = new dpsTestEnemy(mapArray)
 			
@@ -135,9 +139,20 @@
 		}
 		private function enemyDead(e:Event):void
 		{
-			userInfo.changeGold(e.currentTarget.goldValue);
+			if (e.currentTarget.killed)
+			{
+				userInfo.changeGold(e.currentTarget.goldValue);
+			}
+			else
+			{
+				userInfo.updateLives(1);
+			}
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
+			if(userInfo.lives <= 0)
+			{
+				trace("Game over");
+			}
 		}
 		private function getClass(eName:String):Object
 		{

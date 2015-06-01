@@ -16,7 +16,7 @@
 			dmgArray = new Array;
 			dmgArray = [,,,,,,,,,,,,,,,,,,,,,,,]
 			eHp = 45;
-			maxMoveSpeed = 3;
+			maxMoveSpeed = 4;
 			moveSpeed = maxMoveSpeed;
 			goldValue = 99999;
 			maxArmor=0;

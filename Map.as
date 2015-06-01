@@ -11,9 +11,11 @@
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 
 	import enemies.*;
 	import controls.mouse.MouseControls;
+	import flash.text.TextField;
 
 
 	public class Map extends MovieClip
@@ -34,6 +36,12 @@
 
 		//shapes
 		private var sideBar:Shape;
+		private var bottomBar:Shape;
+		private var startRoundButton:Sprite;
+		private var dpsDummyButton:Sprite;
+
+
+
 
 		//tower related
 		private var towerSelected:Object;
@@ -48,6 +56,8 @@
 
 		//controls
 		private var mouseControls:MouseControls;
+		private var _keyDown:Boolean;
+		private var shiftDown:Boolean;
 
 		//user
 		private var userInfo:UserInfo;
@@ -55,7 +65,7 @@
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
 
-		//enemies
+
 
 
 		public function Map()
@@ -75,15 +85,11 @@
 			[2,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0],
 			[1,1,1,1,1,1,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,4,3,3,3,3,3,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[2,3,3,3,3,3,3,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,0,0,0,0]];
+			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,1,1,1,4,0,0,0,0,0,0,0,0,0,0]];
 
 			tileArray = [  
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
 			[,,,,,,,,,,,,,,,,,,,],
@@ -124,6 +130,8 @@
 			//Creates: towerSelectedSquare
 			//Creates: sideBar
 			//Displays: sideBar
+			
+			
 
 			setupUser();
 			//Creates: userInfo
@@ -134,6 +142,9 @@
 			//Creates: EnemySpawner (timer)
 			//Creates: enemy1
 			//Requires: mapArray,userInfo
+			
+			setupBottomBar();
+			//requires setupEnemies();
 
 			setupTowers();
 			//Creates: towerImgs
@@ -167,11 +178,29 @@
 		private function setupKeyboard():void
 		{
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
+			stage.addEventListener(KeyboardEvent.KEY_UP, keyReleased);
+		}
+		private function keyReleased(e:KeyboardEvent):void
+		{
+			_keyDown = false;
+			shiftDown = false;
 		}
 		private function keyPressed(e:KeyboardEvent):void
 		{
+			_keyDown = true;
 			switch (e.keyCode)
 			{
+				case Keyboard.SHIFT :
+					shiftDown = true;
+					break;
+					
+				case Keyboard.ESCAPE :
+					if (towerSelected != null)
+					{
+					selectTower(towerSelected)
+					}
+					break;
+
 				case Keyboard.NUMBER_1 :
 					selectTower(towersInitiate.towerList[0]);
 					break;
@@ -191,19 +220,19 @@
 				case Keyboard.NUMBER_5 :
 					selectTower(towersInitiate.towerList[4]);
 					break;
-					
+
 				case Keyboard.NUMBER_6 :
 					selectTower(towersInitiate.towerList[5]);
 					break;
-				
+
 				case Keyboard.NUMBER_7 :
 					selectTower(towersInitiate.towerList[6]);
 					break;
-					
+
 				case Keyboard.NUMBER_8 :
 					selectTower(towersInitiate.towerList[7]);
 					break;
-				
+
 				case Keyboard.NUMBER_9 :
 					selectTower(towersInitiate.towerList[8]);
 					break;
@@ -211,19 +240,19 @@
 				case Keyboard.Q :
 					stage.frameRate = 24;
 					break;
-					
-					case Keyboard.W :
+
+				case Keyboard.W :
 					stage.frameRate = 48;
 					break;
-				
+
 				case Keyboard.E :
 					stage.frameRate = 96;
 					break;
-					
+
 				case Keyboard.R :
 					stage.frameRate = 1;
 					break;
-					
+
 			}
 		}
 		private function setupTileListeners():void
@@ -259,16 +288,87 @@
 			}
 			rangeCircle.visible = false;
 		}
+		private function setupBottomBar():void
+		{
+			bottomBar = new Shape();
+			bottomBar.graphics.beginFill(0x333333);
+			bottomBar.graphics.drawRect(0,0,740,84);
+			bottomBar.graphics.endFill();
+			bottomBar.y = 416;
+			_root.addChild(bottomBar);
+			
+			startRoundButton = new Sprite();
+			startRoundButton.graphics.beginFill(0x990000)
+			startRoundButton.graphics.lineStyle(1,0xFFFFFF)
+			startRoundButton.graphics.drawRect(0,0,80,20)
+			startRoundButton.graphics.endFill();
+			startRoundButton.y = 426
+			startRoundButton.x = 650
+			_root.addChild(startRoundButton);
+			
+			startRoundButton.addEventListener(MouseEvent.CLICK, startRound);
+			
+			var startRoundText:TextField = new TextField();
+			startRoundText.text = "Start"
+			startRoundText.width = 80
+			startRoundText.height = 20
+			startRoundText.textColor = 0xFFFFFF
+			startRoundText.x=675
+			startRoundText.y = 426
+			startRoundText.selectable = false
+			startRoundText.mouseEnabled = false;
+			_root.addChild(startRoundText)
+			
+			dpsDummyButton = new Sprite();
+			dpsDummyButton.graphics.beginFill(0x990000)
+			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF)
+			dpsDummyButton.graphics.drawRect(0,0,80,20)
+			dpsDummyButton.graphics.endFill();
+			dpsDummyButton.y = 460
+			dpsDummyButton.x = 650
+			_root.addChild(dpsDummyButton);
+			
+			dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
+			
+			var dpsDummyText:TextField = new TextField();
+			dpsDummyText.text = "DPS Dummy"
+			dpsDummyText.width = 80
+			dpsDummyText.height = 20
+			dpsDummyText.textColor = 0xFFFFFF
+			dpsDummyText.x=655
+			dpsDummyText.y = 460
+			dpsDummyText.selectable = false
+			dpsDummyText.mouseEnabled = false;
+			_root.addChild(dpsDummyText)
+			
+			
+			
+		}
+		private function startRound(e:Event):void
+		{
+			
+			initEnemies.startRound();
+			startRoundButton.removeEventListener(MouseEvent.CLICK, startRound);
+		}
+		private function sendDpsDummy(e:Event):void
+		{
+			
+			initEnemies.createDmgDummy();
+		}
 		private function setupSideBar():void
 		{
 
 			//BG
 			sideBar = new Shape();
 			sideBar.graphics.beginFill(0x333333);
-			sideBar.graphics.drawRect(0,0,160,480);
+			sideBar.graphics.drawRect(0,0,100,416);
 			sideBar.graphics.endFill();
 			sideBar.x = 640;
 			_root.addChild(sideBar);
+
+
+
+
 
 			//Selected Square
 			towerSelectedSquare = new Shape ();
@@ -280,6 +380,7 @@
 			_root.addChild(towerSelectedSquare);
 
 		}
+
 		public function selectTowerMouse(e:MouseEvent):void
 		{
 			var tower:Sprite = e.currentTarget as Sprite;
@@ -287,11 +388,14 @@
 		}
 		private function selectTower(tower:Object):void
 		{
+			//x&y for TowerSelectedSquare
 			towerSelectedSquare.x = tower.x;
 			towerSelectedSquare.y = tower.y;
-			//setup 
+
+			//if Tower sent is different from one selected
 			if (towerSelected != tower)
 			{
+				//towerSelected = tower sent via constructor
 				towerSelected = tower;
 				if (towerImg != null && _root.contains(towerImg))
 				{
@@ -328,6 +432,7 @@
 			}
 			else
 			{
+				//Tower selected is same as tower in memory
 				towerSelectedSquare.visible = ! towerSelectedSquare.visible;
 				towerSelected = null;
 				_root.removeChild(towerImg);
@@ -381,29 +486,38 @@
 			}
 
 		}
-		
+
 
 		private function addTower(e:MouseEvent):void
 		{
 			if (e.currentTarget.occupied == false && towerImg != null)
 			{
 				var newTower:Tower = new towerImg.towerReference();
-				
+
 				if (userInfo.canAfford(newTower.tCost) == true)
 				{
-				userInfo.changeGold(-newTower.tCost);
-				newTower.enemyList = enemyList;
-				newTower.x = e.currentTarget.x;
-				newTower.y = e.currentTarget.y;
-				_root.addChild(newTower);
-				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
-				e.currentTarget.occupied = true;
+
+					userInfo.changeGold(-newTower.tCost);
+					newTower.enemyList = enemyList;
+					newTower.x = e.currentTarget.x;
+					newTower.y = e.currentTarget.y;
+					_root.addChild(newTower);
+					newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+					newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+					newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
+					e.currentTarget.occupied = true;
+					if (_keyDown == true && shiftDown == true)
+					{
+						trace(_keyDown,shiftDown)
+					}
+					else
+					{
+						selectTower(towerSelected);
+					}
 				}
 				else
 				{
-					trace("Can't afford this tower.");
+					trace("Can't afford this tower.  Cost: ", newTower.tCost);
 				}
 			}
 		}

@@ -33,7 +33,7 @@
 
 		//enemyList is given in Map().. don't ask why
 		public var enemyList:Array;
-		
+
 		internal var targeting:String;
 		internal var _root:*;
 
@@ -41,7 +41,7 @@
 
 		public function Tower()
 		{
-			targeting="first"
+			targeting = "first";
 			loaded = true;
 			loadedTimer = 0;
 			tAoe = 0;
@@ -54,7 +54,7 @@
 		{
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-			
+
 			//change color
 			var colorMe:ColorTransform = new ColorTransform();
 			colorMe.color = tBaseColor;
@@ -87,12 +87,9 @@
 				{
 					switch (targeting)
 					{
-						case ("first"):
-						enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
-						for (var q:int=0; q < enemyList.length; q++)
-						{
-							trace("Q:",q,"Traveled:",enemyList[q].distanceTraveled);
-						}
+						case ("first") :
+							enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
+							break;
 					}
 					for (var i:int=0; i < enemyList.length; i++)
 					{
@@ -105,7 +102,7 @@
 							tTarget = enemyList[i];
 						}
 						//End target Set
-						
+
 						if (tTarget != null)
 						{
 							//Flash and Fire
@@ -115,7 +112,7 @@
 							var fireFlash:ColorTransform = new ColorTransform();
 							fireFlash.color = 0xFF0000;
 							this.transform.colorTransform = fireFlash;
-							
+
 							fire();
 							break;
 						}
@@ -127,14 +124,14 @@
 		}
 		internal function addDebuffs(bullet:Bullet):void
 		{
-			
+
 		}
 		internal function fire():void
 		{
 			//Create new Bullet
 			var newBullet:Bullet = new Bullet(enemyList);
 			newBullet.gotoAndStop(bFrame);
-			//add debuff
+			//add debuff;
 			addDebuffs(newBullet);
 			//Set Bullet location, target, dmg, speed, aoe
 			newBullet.x = this.x + (GameProperties.tileSide * .5);

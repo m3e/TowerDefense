@@ -68,8 +68,8 @@
 					towersInRow = 0;
 				}
 				
-				towerList[i].x = 660 + (50 * towersInRow)
-				towerList[i].y = 40 + (50 * extraRows)
+				towerList[i].x = 650 + (45 * towersInRow)
+				towerList[i].y = 10 + (45 * extraRows)
 				
 				towersInRow++;
 				

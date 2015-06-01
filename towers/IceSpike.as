@@ -31,7 +31,7 @@
 			
 			debuffType = new Array;
 			//brittle
-			debuffType.push("brittle",2,5)
+			debuffType.push("brittle",5,5)
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
