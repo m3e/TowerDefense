@@ -22,6 +22,7 @@
 		public var flameThrowerTowerImg:FlameThrowerTowerImg;
 		public var magmaThrowerImg:MagmaThrowerImg;
 		public var iceSpikeImg:IceSpikeImg;
+		public var arrowTowerImg:ArrowTowerImg;
 		
 		public var towerList:Array;
 		
@@ -34,6 +35,7 @@
 			towerList = new Array;
 			
 			//Add tower IMG
+			
 			bulletTowerImg = new BulletTowerImg();
 			splashTowerImg = new SplashTowerImg();
 			laserTowerImg = new LaserTowerImg();	
@@ -43,8 +45,10 @@
 			flameThrowerTowerImg = new FlameThrowerTowerImg();
 			magmaThrowerImg = new MagmaThrowerImg();
 			iceSpikeImg = new IceSpikeImg();
+			arrowTowerImg = new ArrowTowerImg();
 			
-			towerList.push(bulletTowerImg,splashTowerImg,laserTowerImg,flameGroundImg,iceTowerImg,meleeSwordTowerImg,flameThrowerTowerImg,magmaThrowerImg,iceSpikeImg)
+			
+			towerList.push(meleeSwordTowerImg,arrowTowerImg,splashTowerImg,laserTowerImg,flameGroundImg,iceTowerImg,flameThrowerTowerImg,magmaThrowerImg,iceSpikeImg,bulletTowerImg)
 			
 			
 			
@@ -59,8 +63,8 @@
 			for (var i:int=0; i < towerList.length; i++)
 			{
 				
-				var klasa:Class = getDefinitionByName(getQualifiedClassName(towerList[i])) as Class
-				towerList[i] = new klasa()
+				//var klasa:Class = getDefinitionByName(getQualifiedClassName(towerList[i])) as Class
+				//towerList[i] = new klasa()
 				
 				if (towersInRow == towersPerRow)
 				{
@@ -75,10 +79,6 @@
 				
 				_root.addChild(towerList[i]);
 			}
-		}
-		private function addTower(addedTower:Tower):void
-		{
-			
 		}
 
 	}

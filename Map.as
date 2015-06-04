@@ -13,6 +13,8 @@
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 
+	import design.*;
+
 	import enemies.*;
 	import controls.mouse.MouseControls;
 	import flash.text.TextField;
@@ -36,7 +38,7 @@
 
 		//shapes
 		private var sideBar:Shape;
-		private var bottomBar:Shape;
+		private var bottomBar:BottomBar;
 		private var startRoundButton:Sprite;
 		private var dpsDummyButton:Sprite;
 
@@ -46,9 +48,11 @@
 		//tower related
 		private var towerSelected:Object;
 		private var towerImg:Object;
+		private var upgradeableTower:Object;
 
 		//tower ui
-		private var towerSelectedSquare:Object;
+		private var towerSelectedSquare:Shape;
+		private var upgradeableTowerSquare:Shape;
 		private var rangeCircle:Shape;
 
 		//towers
@@ -75,19 +79,19 @@
 
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
-			[1,1,1,1,1,1,2,0,0,1,1,1,1,1,1,1,1,1,2,0],
-			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,1,1],
-			[0,0,0,0,0,0,2,0,0,4,3,3,3,3,3,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[2,3,3,3,3,3,3,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
-			[2,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0],
-			[2,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[1,1,1,1,1,1,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,1,1,1,4,0,0,0,0,0,0,0,0,0,0]];
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,0,1,1,1,1,2,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,0,4,0,0,0,2,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,0,4,0,0,0,2,0,0,0,0,1,1],
+			[1,1,1,1,4,0,1,1,1,4,0,0,0,2,0,0,0,0,4,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
 			tileArray = [  
 			[,,,,,,,,,,,,,,,,,,,],
@@ -130,8 +134,8 @@
 			//Creates: towerSelectedSquare
 			//Creates: sideBar
 			//Displays: sideBar
-			
-			
+
+
 
 			setupUser();
 			//Creates: userInfo
@@ -142,7 +146,7 @@
 			//Creates: EnemySpawner (timer)
 			//Creates: enemy1
 			//Requires: mapArray,userInfo
-			
+
 			setupBottomBar();
 			//requires setupEnemies();
 
@@ -193,11 +197,11 @@
 				case Keyboard.SHIFT :
 					shiftDown = true;
 					break;
-					
+
 				case Keyboard.ESCAPE :
 					if (towerSelected != null)
 					{
-					selectTower(towerSelected)
+						selectTower(towerSelected);
 					}
 					break;
 
@@ -288,71 +292,73 @@
 			}
 			rangeCircle.visible = false;
 		}
+
 		private function setupBottomBar():void
 		{
-			bottomBar = new Shape();
-			bottomBar.graphics.beginFill(0x333333);
-			bottomBar.graphics.drawRect(0,0,740,84);
-			bottomBar.graphics.endFill();
-			bottomBar.y = 416;
+			bottomBar = new BottomBar();
+
 			_root.addChild(bottomBar);
-			
+
+			bottomBar.upgrade1.addEventListener(MouseEvent.CLICK, upgradeTower);
+			bottomBar.upgrade2.addEventListener(MouseEvent.CLICK, upgradeTower);
+			bottomBar.upgrade3.addEventListener(MouseEvent.CLICK, upgradeTower);
+
+
 			startRoundButton = new Sprite();
-			startRoundButton.graphics.beginFill(0x990000)
-			startRoundButton.graphics.lineStyle(1,0xFFFFFF)
-			startRoundButton.graphics.drawRect(0,0,80,20)
+			startRoundButton.graphics.beginFill(0x990000);
+			startRoundButton.graphics.lineStyle(1,0xFFFFFF);
+			startRoundButton.graphics.drawRect(0,0,80,20);
 			startRoundButton.graphics.endFill();
-			startRoundButton.y = 426
-			startRoundButton.x = 650
+			startRoundButton.y = 426;
+			startRoundButton.x = 650;
 			_root.addChild(startRoundButton);
-			
+
 			startRoundButton.addEventListener(MouseEvent.CLICK, startRound);
-			
+
 			var startRoundText:TextField = new TextField();
-			startRoundText.text = "Start"
-			startRoundText.width = 80
-			startRoundText.height = 20
-			startRoundText.textColor = 0xFFFFFF
-			startRoundText.x=675
-			startRoundText.y = 426
-			startRoundText.selectable = false
+			startRoundText.text = "Start";
+			startRoundText.width = 80;
+			startRoundText.height = 20;
+			startRoundText.textColor = 0xFFFFFF;
+			startRoundText.x = 675;
+			startRoundText.y = 426;
+			startRoundText.selectable = false;
 			startRoundText.mouseEnabled = false;
-			_root.addChild(startRoundText)
-			
+			_root.addChild(startRoundText);
 			dpsDummyButton = new Sprite();
-			dpsDummyButton.graphics.beginFill(0x990000)
-			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF)
-			dpsDummyButton.graphics.drawRect(0,0,80,20)
+			dpsDummyButton.graphics.beginFill(0x990000);
+			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF);
+			dpsDummyButton.graphics.drawRect(0,0,80,20);
 			dpsDummyButton.graphics.endFill();
-			dpsDummyButton.y = 460
-			dpsDummyButton.x = 650
+			dpsDummyButton.y = 460;
+			dpsDummyButton.x = 650;
 			_root.addChild(dpsDummyButton);
-			
+
 			dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
-			
+
 			var dpsDummyText:TextField = new TextField();
-			dpsDummyText.text = "DPS Dummy"
-			dpsDummyText.width = 80
-			dpsDummyText.height = 20
-			dpsDummyText.textColor = 0xFFFFFF
-			dpsDummyText.x=655
-			dpsDummyText.y = 460
-			dpsDummyText.selectable = false
+			dpsDummyText.text = "DPS Dummy";
+			dpsDummyText.width = 80;
+			dpsDummyText.height = 20;
+			dpsDummyText.textColor = 0xFFFFFF;
+			dpsDummyText.x = 655;
+			dpsDummyText.y = 460;
+			dpsDummyText.selectable = false;
 			dpsDummyText.mouseEnabled = false;
-			_root.addChild(dpsDummyText)
-			
-			
-			
+			_root.addChild(dpsDummyText);
 		}
 		private function startRound(e:Event):void
 		{
-			
+
+			if(initEnemies.roundInProgress == false)
+			{
 			initEnemies.startRound();
-			startRoundButton.removeEventListener(MouseEvent.CLICK, startRound);
+			}
+			//startRoundButton.removeEventListener(MouseEvent.CLICK, startRound);
 		}
 		private function sendDpsDummy(e:Event):void
 		{
-			
+
 			initEnemies.createDmgDummy();
 		}
 		private function setupSideBar():void
@@ -368,7 +374,14 @@
 
 
 
-
+			//Upgradeable tower square
+			upgradeableTowerSquare = new Shape ();
+			upgradeableTowerSquare.graphics.lineStyle(4,0x000000);
+			upgradeableTowerSquare.graphics.beginFill(0xFFFFFF,0);
+			upgradeableTowerSquare.graphics.drawRect(0,0,tileSide,tileSide);
+			upgradeableTowerSquare.graphics.endFill();
+			upgradeableTowerSquare.visible = false;
+			_root.addChild(upgradeableTowerSquare );
 
 			//Selected Square
 			towerSelectedSquare = new Shape ();
@@ -392,7 +405,7 @@
 			towerSelectedSquare.x = tower.x;
 			towerSelectedSquare.y = tower.y;
 
-			//if Tower sent is different from one selected
+			//If there was a tower already selected and it does not equal the one you clicked
 			if (towerSelected != tower)
 			{
 				//towerSelected = tower sent via constructor
@@ -410,7 +423,8 @@
 				_root.addChild(towerImg);
 
 
-
+				trace(tower.towerReference);
+				
 				var mockTower:Tower = new tower.towerReference();
 
 				rangeCircle.width = mockTower.tRange * 2;
@@ -490,35 +504,84 @@
 
 		private function addTower(e:MouseEvent):void
 		{
+			upgradeableTower = null;
+			upgradeableTowerSquare.visible = false;
 			if (e.currentTarget.occupied == false && towerImg != null)
 			{
-				var newTower:Tower = new towerImg.towerReference();
-
-				if (userInfo.canAfford(newTower.tCost) == true)
+				addTowerToMap(e.currentTarget,towerImg.towerReference);
+				if (_keyDown == true && shiftDown == true)
 				{
 
-					userInfo.changeGold(-newTower.tCost);
-					newTower.enemyList = enemyList;
-					newTower.x = e.currentTarget.x;
-					newTower.y = e.currentTarget.y;
-					_root.addChild(newTower);
-					newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-					newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-					newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
-					e.currentTarget.occupied = true;
-					if (_keyDown == true && shiftDown == true)
-					{
-						trace(_keyDown,shiftDown)
-					}
-					else
-					{
-						selectTower(towerSelected);
-					}
 				}
 				else
 				{
-					trace("Can't afford this tower.  Cost: ", newTower.tCost);
+					selectTower(towerSelected);
 				}
+			}
+		}
+		private function addTowerToMap(mEvent:Object, TowerReference:Class):void
+		{
+			var klasa:Class = TowerReference;
+			var newTower:Tower = new klasa();
+
+			if (userInfo.canAfford(newTower.tCost))
+			{
+
+				userInfo.changeGold(-newTower.tCost);
+				newTower.enemyList = enemyList;
+				newTower.x = mEvent.x;
+				newTower.y = mEvent.y;
+				_root.addChild(newTower);
+				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				newTower.addEventListener(MouseEvent.CLICK, towerWasSelected);
+				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
+				mEvent.occupied = true;
+			}
+			else
+			{
+				trace("Can't afford this tower.  Cost: ", newTower.tCost);
+			}
+		}
+		private function upgradeTower(e:Event):void
+		{
+			if (upgradeableTower != null)
+			{
+				switch (e.currentTarget.name)
+				{
+					case ("upgrade1") :
+						if (userInfo.canAfford(upgradeableTower.upgradeOneCost))
+						{
+							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeOne());
+							upgradeableTower.destroyTower();
+
+							upgradeableTowerSquare.visible = false;
+							upgradeableTower = null;
+						}
+						break;
+
+					case ("upgrade2") :
+						if (userInfo.canAfford(upgradeableTower.upgradeTwoCost))
+						{
+							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeTwo());
+							upgradeableTower.destroyTower();
+
+							upgradeableTowerSquare.visible = false;
+							upgradeableTower = null;
+						}
+						break;
+					case ("upgrade3") :
+						if (userInfo.canAfford(upgradeableTower.upgradeThreeCost))
+						{
+							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeThree());
+							upgradeableTower.destroyTower();
+
+							upgradeableTowerSquare.visible = false;
+							upgradeableTower = null;
+						}
+						break;
+				}
+
 			}
 		}
 		private function onMouseOver(e:Event):void
@@ -547,8 +610,26 @@
 			}
 			rangeCircle.visible = false;
 		}
+		private function towerWasSelected(e:MouseEvent):void
+		{
+			if (upgradeableTower != e.currentTarget)
+			{
+
+				upgradeableTower = e.currentTarget;
+
+				upgradeableTowerSquare.visible = true;
+				upgradeableTowerSquare.x = upgradeableTower.x;
+				upgradeableTowerSquare.y = upgradeableTower.y;
+			}
+			else
+			{
+				upgradeableTower = null;
+				upgradeableTowerSquare.visible = false;
+			}
+		}
 		private function towerRemoved(e:Event):void
 		{
+			e.currentTarget.removeEventListener(MouseEvent.CLICK, towerWasSelected);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);

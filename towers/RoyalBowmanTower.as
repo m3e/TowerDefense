@@ -3,13 +3,13 @@
 	
 	
 	
-	public class BulletTower extends Tower{
-
-
-		public function BulletTower() {
+	public class RoyalBowmanTower extends Tower {
+		
+		
+		public function RoyalBowmanTower() {
 			super();
-			tBaseColor = 0xD6D6D6
-			tRange = 100
+			tBaseColor = 0x66FF99
+			tRange = 160
 			tDmg = 3;
 			tAtkSpeed = 3;
 			tbSpeed = 30;
@@ -17,7 +17,6 @@
 			tType = "phys"
 			// constructor code
 		}
-
 	}
 	
 }

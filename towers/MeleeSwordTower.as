@@ -9,12 +9,12 @@
 		public function MeleeSwordTower() {
 			super()
 			tBaseColor = 0x999999
-			tRange = 65
-			tDmg = 10;
-			tAtkSpeed = 8;
+			tRange = 50
+			tDmg = 15;
+			tAtkSpeed = 24;
 			tAoe = 0
 			tbSpeed = 50;
-			tCost = 300;
+			tCost = 60;
 			tType = "phys"
 			// constructor code
 		}

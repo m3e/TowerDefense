@@ -21,7 +21,7 @@
 		public var lives:int;
 		
 		public function UserInfo() {
-			gold = 99999;
+			gold = 220;
 			
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			// constructor code

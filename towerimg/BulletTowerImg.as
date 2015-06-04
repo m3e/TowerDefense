@@ -8,6 +8,7 @@
 		public function BulletTowerImg() {
 			towerReference = BulletTower
 			
+			
 			// constructor code
 		}
 	}

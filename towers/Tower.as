@@ -9,6 +9,7 @@
 	import GameProperties;
 	import debuffs.*;
 
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	import enemies.Enemy;
 
@@ -39,15 +40,24 @@
 		internal var _root:*;
 
 		internal var bFrame:int;
+		
+		public var upgradeOneCost:int;
+		public var upgradeTwoCost:int;
+		public var upgradeThreeCost:int;
 
 		public function Tower()
 		{
+			tTarget = new Array;
 			targeting = "first";
 			loaded = true;
 			loadedTimer = 0;
 			tAoe = 0;
 			bFrame = 1;
 			tNumberOfTargets = 1;
+			
+			upgradeOneCost = int.MAX_VALUE
+			upgradeTwoCost = int.MAX_VALUE
+			upgradeThreeCost = int.MAX_VALUE
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -66,7 +76,7 @@
 		{
 			if (_root != undefined)
 			{
-				tTarget = new Array  ;
+				tTarget.length = 0  ;
 				if (loaded == false)
 				{
 					//Reload
@@ -95,7 +105,6 @@
 					}
 					for (var i:int=0; i < enemyList.length && tTarget.length < tNumberOfTargets; i++)
 					{
-						//trace(i);
 						//Set Target
 
 						if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange)
@@ -140,10 +149,10 @@
 		{
 			specialFunction();
 			//Create new Bullet
+			var newBullet:Bullet
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				trace(tTarget.length);
-				var newBullet:Bullet = new Bullet(enemyList);
+				newBullet = new Bullet(enemyList);
 				newBullet.gotoAndStop(bFrame);
 				//add debuff;
 				addDebuffs(newBullet);
@@ -158,6 +167,18 @@
 				//End Set bullet stats
 				_root.addChild(newBullet);
 			}
+		}
+		public function upgradeOne():Class
+		{
+			return Class;
+		}
+		internal function upgradeTwo():Class
+		{
+			return Class;
+		}
+		internal function upgradeThree():Class
+		{
+			return Class;
 		}
 		public function destroyTower():void
 		{

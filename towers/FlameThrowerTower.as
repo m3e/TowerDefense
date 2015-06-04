@@ -20,10 +20,16 @@
 			bFrame = 2;
 			tCost = 350;
 			tType = "fire";
-			tNumberOfTargets = 5;
+			tNumberOfTargets = 1;
+			
+			upgradeOneCost = 550
 			// constructor code
 		}
-		
+		override public function upgradeOne():Class
+		{
+			return FlameThrower2
+		}
+
 	}
 
 }

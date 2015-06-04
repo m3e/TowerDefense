@@ -12,7 +12,7 @@
 			eHp = 45;
 			maxMoveSpeed = 3;
 			moveSpeed = maxMoveSpeed;
-			goldValue = 13;
+			goldValue = 7;
 			maxArmor=0;
 			armor=0;
 		}
