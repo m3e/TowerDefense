@@ -20,7 +20,8 @@
 		public var tRange:int;
 		public var tDmg:Number;
 		public var tbSpeed:int;
-		public var tTarget:Sprite;
+		public var tTarget:Array;
+		internal var tNumberOfTargets:int;
 		public var tAtkSpeed:Number;
 		public var tAoe:Number;
 		public var tCost:int;
@@ -46,6 +47,7 @@
 			loadedTimer = 0;
 			tAoe = 0;
 			bFrame = 1;
+			tNumberOfTargets = 1;
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -64,7 +66,7 @@
 		{
 			if (_root != undefined)
 			{
-				tTarget = null;
+				tTarget = new Array  ;
 				if (loaded == false)
 				{
 					//Reload
@@ -91,31 +93,35 @@
 							enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
 							break;
 					}
-					for (var i:int=0; i < enemyList.length; i++)
+					for (var i:int=0; i < enemyList.length && tTarget.length < tNumberOfTargets; i++)
 					{
-
+						//trace(i);
 						//Set Target
 
 						if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange)
 						{
 							//if the selected enemy is close enough, then set it as the target
-							tTarget = enemyList[i];
+							tTarget.push(enemyList[i]);
 						}
-						//End target Set
-
-						if (tTarget != null)
+						if (tTarget.length >= tNumberOfTargets)
 						{
-							//Flash and Fire
-							loaded = false;
-							loadedTimer = 0;
-
-							var fireFlash:ColorTransform = new ColorTransform();
-							fireFlash.color = 0xFF0000;
-							this.transform.colorTransform = fireFlash;
-
-							fire();
 							break;
 						}
+						//End target Set
+					}
+					if (tTarget.length > 0)
+					{
+						//Flash and Fire
+						loaded = false;
+						loadedTimer = 0;
+
+						var fireFlash:ColorTransform = new ColorTransform();
+						fireFlash.color = 0xFF0000;
+						this.transform.colorTransform = fireFlash;
+
+						fire();
+
+
 						//End Flash and Fire
 
 					}
@@ -126,23 +132,32 @@
 		{
 
 		}
+		internal function specialFunction():void
+		{
+
+		}
 		internal function fire():void
 		{
+			specialFunction();
 			//Create new Bullet
-			var newBullet:Bullet = new Bullet(enemyList);
-			newBullet.gotoAndStop(bFrame);
-			//add debuff;
-			addDebuffs(newBullet);
-			//Set Bullet location, target, dmg, speed, aoe
-			newBullet.x = this.x + (GameProperties.tileSide * .5);
-			newBullet.y = this.y + (GameProperties.tileSide * .5);
-			newBullet.bTarget = tTarget;
-			newBullet.bDmg = tDmg;
-			newBullet.bSpeed = tbSpeed;
-			newBullet.bAoe = tAoe;
-			newBullet.bType = tType;
-			//End Set bullet stats
-			_root.addChild(newBullet);
+			for (var i:int=0; i < tTarget.length; i++)
+			{
+				trace(tTarget.length);
+				var newBullet:Bullet = new Bullet(enemyList);
+				newBullet.gotoAndStop(bFrame);
+				//add debuff;
+				addDebuffs(newBullet);
+				//Set Bullet location, target, dmg, speed, aoe
+				newBullet.x = this.x + (GameProperties.tileSide * .5);
+				newBullet.y = this.y + (GameProperties.tileSide * .5);
+				newBullet.bTarget = tTarget[i];
+				newBullet.bDmg = tDmg;
+				newBullet.bSpeed = tbSpeed;
+				newBullet.bAoe = tAoe;
+				newBullet.bType = tType;
+				//End Set bullet stats
+				_root.addChild(newBullet);
+			}
 		}
 		public function destroyTower():void
 		{

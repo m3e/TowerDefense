@@ -20,6 +20,7 @@
 			tAtkSpeed = 6;
 			tCost = 250;
 			tType = "fire"
+			
 			// constructor code
 		}
 		override internal function eFrame(e:Event):void
