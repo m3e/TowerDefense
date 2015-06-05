@@ -57,6 +57,9 @@
 					case ("brittle") :
 						debuffs.Debuff.addBrittle(dEnemy,debuffArray[i][1],debuffArray[i][2])
 						break;
+					case ("poison") :
+						debuffs.Debuff.addPoison(dEnemy,debuffArray[i][1],debuffArray[i][2],debuffArray[i][3])
+						break;
 				}
 			}
 		}

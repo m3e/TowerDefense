@@ -15,8 +15,9 @@
 			tbSpeed = 30;
 			tAoe = 0;
 			bFrame = 4;
-			tCost = 450;
+			tCost = 400;
 			tType = "ice"
+			tDescription = "Shoots ice spikes.  You lose the AoE, but this tower slows by 30% and reduces armor by 5 on enemies.  Large range, good damage.  Cost: "+tCost.toString();
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -26,7 +27,7 @@
 			var debuffType:Array = new Array;
 			
 			//slow
-			debuffType.push("slow",.15,.5)
+			debuffType.push("slow",.3,.5)
 			debuffsArray.push(debuffType)
 			
 			debuffType = new Array;

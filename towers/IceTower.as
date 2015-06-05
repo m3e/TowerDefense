@@ -10,12 +10,12 @@
 			super()
 			tBaseColor = 0x330099
 			tRange = 100
-			tDmg = 15;
+			tDmg = 5;
 			tAtkSpeed = 24;
-			tAoe = 25
+			tAoe = 40
 			tbSpeed = 24;
 			bFrame = 3;
-			tCost = 200;
+			tCost = 250;
 			tType = "ice"
 			// constructor code
 		}
@@ -25,11 +25,15 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.40,3)
+			debuffType.push("slow",.3,3)
 			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
+		}
+		override public function upgradeOne():Class
+		{
+			return IceSpike
 		}
 		
 		

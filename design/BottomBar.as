@@ -32,7 +32,7 @@
 			_root.addChild(bottomBar);
 			
 			upgrade1 = new TextField();
-			upgrade1.text = "Upgrade One has a full list of effects which includes but is not limited to having the ability to sprew fire from ones mouth and burning the enemy."
+			upgrade1.text = "It's still Alpha so I'm only going to explain this once.  Those squares at the top right are towers.  Q 1x speed, W 2x speed, E 4x, R = 1 frame per second."
 			upgrade1.wordWrap = true;
 			upgrade1.width = 190
 			upgrade1.height = 90
@@ -48,7 +48,7 @@
 			_root.addChild(upgrade1);
 			
 			upgrade2 = new TextField();
-			upgrade2.text = "Upgrade 2 has a full list of effects which includes but is not limited to having the ability to sprew fire from ones mouth and burning the enemy."
+			upgrade2.text = "Click start.  When enemies stop coming, round is finished, press start again.  DPS test dummy sends an invincible punching bag that displays dps.  Advise don't send during round."
 			upgrade2.wordWrap = true;
 			upgrade2.width = 190
 			upgrade2.height = 90
@@ -64,7 +64,7 @@
 			_root.addChild(upgrade2);
 			
 			upgrade3 = new TextField();
-			upgrade3.text = "Upgrade 3  has a full list of effects which includes but is not limited to having the ability to sprew fire from ones mouth and burning the enemy."
+			upgrade3.text = "Press Z to toggle health bars.  Read description below this game.  F5 to restart.  Space to start round.  https://github.com/m3e/TowerDefense"
 			upgrade3.wordWrap = true;
 			upgrade3.width = 190
 			upgrade3.height = 90

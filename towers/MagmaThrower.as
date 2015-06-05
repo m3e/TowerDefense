@@ -14,9 +14,10 @@
 			tAtkSpeed = 32;
 			tbSpeed = 36;
 			tAoe = 50;
-			tCost = 400;
+			tCost = 350;
 			tType = "fire"
 			bFrame = 2
+			tDescription = "Throws large fireballs that explode in an AoE and deal 10 burning damage to all caught 3 seconds.  Slow attack speed.  Cost: "+tCost.toString();
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void

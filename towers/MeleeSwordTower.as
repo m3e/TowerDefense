@@ -10,8 +10,8 @@
 			super()
 			tBaseColor = 0x999999
 			tRange = 50
-			tDmg = 15;
-			tAtkSpeed = 24;
+			tDmg = 18;
+			tAtkSpeed = 18;
 			tAoe = 0
 			tbSpeed = 50;
 			tCost = 60;

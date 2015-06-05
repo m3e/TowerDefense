@@ -68,6 +68,9 @@
 
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
+		
+		//booleans
+		private var healthBarOn:Boolean;
 
 
 
@@ -233,14 +236,11 @@
 					selectTower(towersInitiate.towerList[6]);
 					break;
 
-				case Keyboard.NUMBER_8 :
-					selectTower(towersInitiate.towerList[7]);
-					break;
-
-				case Keyboard.NUMBER_9 :
-					selectTower(towersInitiate.towerList[8]);
-					break;
-
+				case Keyboard.Z :
+					healthBarOn = !healthBarOn;
+					healthBarToggle();
+					
+				
 				case Keyboard.Q :
 					stage.frameRate = 24;
 					break;
@@ -257,6 +257,18 @@
 					stage.frameRate = 1;
 					break;
 
+				case Keyboard.SPACE :
+					startRoundKeyboard();
+					break;
+
+			}
+		}
+		private function healthBarToggle():void
+		{
+			initEnemies.healthBarOn = healthBarOn;
+			for (var i:int=0; i <enemyList.length; i++)
+			{
+				enemyList[i].healthBarOnOff();
 			}
 		}
 		private function setupTileListeners():void
@@ -313,7 +325,7 @@
 			startRoundButton.x = 650;
 			_root.addChild(startRoundButton);
 
-			startRoundButton.addEventListener(MouseEvent.CLICK, startRound);
+			startRoundButton.addEventListener(MouseEvent.CLICK, startRoundMouse);
 
 			var startRoundText:TextField = new TextField();
 			startRoundText.text = "Start";
@@ -347,14 +359,20 @@
 			dpsDummyText.mouseEnabled = false;
 			_root.addChild(dpsDummyText);
 		}
-		private function startRound(e:Event):void
+		private function startRound():void
 		{
-
-			if(initEnemies.roundInProgress == false)
+			if (initEnemies.roundInProgress == false)
 			{
-			initEnemies.startRound();
+				initEnemies.startRound();
 			}
-			//startRoundButton.removeEventListener(MouseEvent.CLICK, startRound);
+		}
+		private function startRoundKeyboard():void
+		{
+			startRound();
+		}
+		private function startRoundMouse(e:Event):void
+		{
+			startRound();
 		}
 		private function sendDpsDummy(e:Event):void
 		{
@@ -422,9 +440,6 @@
 				towerImg.y = mouseY - (mouseY % tileSide);
 				_root.addChild(towerImg);
 
-
-				trace(tower.towerReference);
-				
 				var mockTower:Tower = new tower.towerReference();
 
 				rangeCircle.width = mockTower.tRange * 2;
@@ -545,42 +560,44 @@
 		}
 		private function upgradeTower(e:Event):void
 		{
+			var klasa:Class;
+			var testTower:Tower;
 			if (upgradeableTower != null)
 			{
 				switch (e.currentTarget.name)
 				{
 					case ("upgrade1") :
-						if (userInfo.canAfford(upgradeableTower.upgradeOneCost))
-						{
-							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeOne());
-							upgradeableTower.destroyTower();
 
-							upgradeableTowerSquare.visible = false;
-							upgradeableTower = null;
-						}
+						klasa = upgradeableTower.upgradeOne();
 						break;
+
 
 					case ("upgrade2") :
-						if (userInfo.canAfford(upgradeableTower.upgradeTwoCost))
-						{
-							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeTwo());
-							upgradeableTower.destroyTower();
-
-							upgradeableTowerSquare.visible = false;
-							upgradeableTower = null;
-						}
+						klasa = upgradeableTower.upgradeTwo();
 						break;
-					case ("upgrade3") :
-						if (userInfo.canAfford(upgradeableTower.upgradeThreeCost))
-						{
-							addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/32],upgradeableTower.upgradeThree());
-							upgradeableTower.destroyTower();
 
-							upgradeableTowerSquare.visible = false;
-							upgradeableTower = null;
-						}
+					case ("upgrade3") :
+						klasa = upgradeableTower.upgradeThree();
 						break;
 				}
+				if (klasa is Class)
+				{
+					testTower = new klasa();
+					if (userInfo.canAfford(testTower.tCost))
+					{
+						addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/tileSide],klasa);
+						upgradeableTower.destroyTower();
+
+						upgradeableTowerSquare.visible = false;
+						upgradeableTower = null;
+					}
+					else
+					{
+						trace("Cannot afford.  Cost: ",testTower.tCost);
+					}
+					testTower.destroyTower();
+				}
+
 
 			}
 		}
@@ -620,6 +637,43 @@
 				upgradeableTowerSquare.visible = true;
 				upgradeableTowerSquare.x = upgradeableTower.x;
 				upgradeableTowerSquare.y = upgradeableTower.y;
+				
+				var klasa:Class 
+				var testTower:Tower;
+				
+				if (upgradeableTower.upgradeOne() != null)
+				{
+				klasa = upgradeableTower.upgradeOne()
+				testTower = new klasa();
+				bottomBar.upgrade1.text = testTower.tDescription;
+				testTower.destroyTower();
+				}
+				else
+				{
+					bottomBar.upgrade1.text = "No upgrade available."
+				}
+				if (upgradeableTower.upgradeTwo() != null)
+				{
+				klasa = upgradeableTower.upgradeTwo()
+				testTower = new klasa();
+				bottomBar.upgrade2.text = testTower.tDescription;
+				testTower.destroyTower();
+				}
+				else
+				{
+					bottomBar.upgrade2.text = "No upgrade available."
+				}
+				if (upgradeableTower.upgradeThree() != null)
+				{
+				klasa = upgradeableTower.upgradeThree()
+				testTower = new klasa();
+				bottomBar.upgrade3.text = testTower.tDescription;
+				testTower.destroyTower();
+				}
+				else
+				{
+					bottomBar.upgrade3.text = "No upgrade available."
+				}
 			}
 			else
 			{

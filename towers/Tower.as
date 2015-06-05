@@ -16,6 +16,7 @@
 	public class Tower extends MovieClip
 	{
 
+		public var tDescription:String;
 		public var cost:int;
 
 		public var tRange:int;
@@ -39,14 +40,11 @@
 		internal var targeting:String;
 		internal var _root:*;
 
-		internal var bFrame:int;
-		
-		public var upgradeOneCost:int;
-		public var upgradeTwoCost:int;
-		public var upgradeThreeCost:int;
+		internal var bFrame:int;		
 
 		public function Tower()
 		{
+			tDescription = "No description" + this;
 			tTarget = new Array;
 			targeting = "first";
 			loaded = true;
@@ -55,9 +53,6 @@
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			
-			upgradeOneCost = int.MAX_VALUE
-			upgradeTwoCost = int.MAX_VALUE
-			upgradeThreeCost = int.MAX_VALUE
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -170,15 +165,15 @@
 		}
 		public function upgradeOne():Class
 		{
-			return Class;
+			return null;
 		}
-		internal function upgradeTwo():Class
+		public function upgradeTwo():Class
 		{
-			return Class;
+			return null;
 		}
-		internal function upgradeThree():Class
+		public function upgradeThree():Class
 		{
-			return Class;
+			return null;
 		}
 		public function destroyTower():void
 		{

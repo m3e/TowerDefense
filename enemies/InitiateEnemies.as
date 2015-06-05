@@ -34,6 +34,8 @@
 		private var enemy12:Enemy12;
 
 		private var enemyTimer:int;
+		
+		public var healthBarOn:Boolean;
 
 
 		public function InitiateEnemies(MapArray:Array, EnemyList:Array,_Root:Object,_userInfo:UserInfo,TileSide:int)
@@ -91,6 +93,10 @@
 
 			//var enemy:Enemy = new Enemy1(mapArray);
 			_root.addChild(enemy);
+			if(healthBarOn)
+			{
+				enemy.healthBarOnOff();
+			}
 			enemy.x = 0;
 			enemy.y = 6 * tileSide;
 			enemy.pt.x = 0;

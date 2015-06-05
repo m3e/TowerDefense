@@ -1,6 +1,5 @@
 ﻿package debuffs {
 	import enemies.Enemy;
-	import flash.utils.Timer;
 	import flash.events.Event;
 	import flash.display.MovieClip
 	
@@ -8,30 +7,31 @@
 	public class Slow extends Debuff {
 		
 		private var enemy:Enemy;
-		private var amount:Number;
-		private var seconds:Number;
+		private var sAmount:Number;
+		private var sSeconds:Number;
 		
 		private var frames:int;
 		
 		public function Slow(_enemy:Enemy, _amount:Number,_seconds:Number) {
 			enemy = _enemy
-			amount = _amount
-			seconds = _seconds
+			sAmount = _amount
+			sSeconds = _seconds
 			frames = 0;
 			addEventListener(Event.ENTER_FRAME, debuffTick)
 			// constructor code
 		}
 		private function debuffTick(e:Event):void
 		{
-			if (enemy != null && frames < seconds * 24)
+			if (enemy != null && frames < sSeconds * 24)
 			{
-				if (enemy.moveSpeed < enemy.maxMoveSpeed - (enemy.maxMoveSpeed * amount))
+				if (sAmount > enemy.iceSlow)
 				{
-					
+					enemy.iceSlow = sAmount;
+					enemy.determineMoveSpeed()
 				}
 				else
 				{
-				enemy.moveSpeed = enemy.maxMoveSpeed - (enemy.maxMoveSpeed * amount)
+				
 				}
 			}
 			else
@@ -42,7 +42,8 @@
 		}
 		private function finish():void
 		{
-			enemy.moveSpeed = enemy.maxMoveSpeed
+			enemy.iceSlow = 0;
+			enemy.determineMoveSpeed()
 			removeEventListener(Event.ENTER_FRAME, debuffTick)
 			enemy = null;
 		}

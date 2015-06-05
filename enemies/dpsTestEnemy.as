@@ -14,7 +14,7 @@
 			super(Map);
 			dmgCounter = 0;
 			dmgArray = new Array;
-			dmgArray = [,,,,,,,,,,,,,,,,,,,,,,,]
+			dmgArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			eHp = 45;
 			maxMoveSpeed = 4;
 			moveSpeed = maxMoveSpeed;
@@ -39,11 +39,14 @@
 		override internal function startMovement(e:Event):void
 		{
 			frames++
+			
+			findDps();
 			if (frames == 25)
 			{
-				findDps()
+				//findDps()
 				frames = 1
 			}
+			
 			
 			calculateDpsFrame()
 			
@@ -51,14 +54,21 @@
 		}
 		private function findDps():void
 		{
-			var dps:Number=0;
+			var dps:Number;
+			dps = 0;
+			
 			for (var i:int=0; i <dmgArray.length; i++)
 			{
 				dps += dmgArray[i]
+				
 			}
-			if (dps != 0)
+			if (dps >= 0)
 			{
-			trace(dps);
+			dpsNumber.text = dps.toString();
+			}
+			else
+			{
+				dpsNumber.text = "0";
 			}
 		}
 		private function calculateDpsFrame():void
