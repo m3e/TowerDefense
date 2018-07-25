@@ -97,6 +97,11 @@
 						case ("first") :
 							enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
 							break;
+							
+						case ("last") :
+							enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
+							break;
+							
 					}
 					for (var i:int=0; i < enemyList.length && tTarget.length < tNumberOfTargets; i++)
 					{

@@ -18,6 +18,11 @@
 			tType = "phys"
 			// constructor code
 		}
+		
+		override public function upgradeOne():Class
+		{
+			return BerserkerTower
+		}
 	}
 	
 }
