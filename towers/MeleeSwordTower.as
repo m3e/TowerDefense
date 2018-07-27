@@ -23,6 +23,10 @@
 		{
 			return BerserkerTower
 		}
+		override public function upgradeTwo():Class
+		{
+			return KnightTower
+		}
 	}
 	
 }
