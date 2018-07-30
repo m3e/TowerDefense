@@ -3,16 +3,16 @@
 	
 	
 	
-	public class KnightTower extends Tower {
+	public class Knight extends Tower {
 		
 		
-		public function KnightTower() {
+		public function Knight() {
+			
+			tBaseColor = 0xd8d6d4;
 			super();
-			tBaseColor = 0x444444;
 			tRange = 50;
 			tDmg = 38;
 			tAtkSpeed = 15;
-			tAoe = 0;
 			tbSpeed = 50;
 			tCost = 205;
 			tType = "phys";

@@ -12,9 +12,11 @@
 		private static var brittle:Brittle;
 		private static var poison:Poison;
 		
+		
 		public function Debuff() {
 			// constructor code
 		}
+		
 		public static function addSlow(enemy:Enemy, amount:Number,seconds:Number):void
 		{
 			slow = new Slow(enemy,amount,seconds)

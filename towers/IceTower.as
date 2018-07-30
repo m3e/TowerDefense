@@ -8,15 +8,17 @@
 		
 		public function IceTower() {
 			super()
-			tBaseColor = 0x330099
+			tBaseColor = 0x0000FF
 			tRange = 100
-			tDmg = 5;
-			tAtkSpeed = 24;
-			tAoe = 40
+			tDmg = 20;
+			tAtkSpeed = 36;
+			tAoe = 0
 			tbSpeed = 24;
 			bFrame = 3;
 			tCost = 250;
 			tType = "ice"
+			
+			tDescription = "Icey.  Cold.  Refreshing.  Slows by 10% for 1 second.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -25,7 +27,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.3,3)
+			debuffType.push("slow",.1,1)
 			
 			debuffsArray.push(debuffType)
 			
@@ -33,9 +35,16 @@
 		}
 		override public function upgradeOne():Class
 		{
-			return IceSpike
+			return Spike
 		}
-		
+		override public function upgradeTwo():Class
+		{
+			return SnowMachine
+		}
+		override public function upgradeThree():Class
+		{
+			return FrozenPond
+		}
 		
 	}
 	

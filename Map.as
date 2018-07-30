@@ -32,6 +32,7 @@
 		//critical arrays
 		private var mapArray:Array;
 		private var tileArray:Array;
+		private var towerArray:Array;
 
 		//object lists
 		private var enemyList:Array;
@@ -79,6 +80,7 @@
 		{
 			enemyList = new Array  ;
 			tileArray = new Array  ;
+			towerArray = new Array;
 
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
@@ -96,23 +98,16 @@
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
-			tileArray = [  
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,],
-			[,,,,,,,,,,,,,,,,,,,]];
-
-
-
+			for (var row:int=0; row < mapArray.length; row++)
+			{
+				tileArray[row] = []
+				towerArray[row] = []
+				for (var col:int=0; col < mapArray[0].length; col++)
+				{
+					tileArray[row][col] = undefined
+					towerArray[row][col] = undefined
+				}
+			}
 
 			addEventListener(Event.ADDED_TO_STAGE, added);
 
@@ -239,7 +234,11 @@
 				case Keyboard.Z :
 					healthBarOn = !healthBarOn;
 					healthBarToggle();
+					break;
 					
+				case Keyboard.X :
+					sellTower(upgradeableTower);
+					break;
 				
 				case Keyboard.Q :
 					stage.frameRate = 24;
@@ -427,6 +426,7 @@
 			if (towerSelected != tower)
 			{
 				//towerSelected = tower sent via constructor
+				
 				towerSelected = tower;
 				if (towerImg != null && _root.contains(towerImg))
 				{
@@ -462,11 +462,27 @@
 			else
 			{
 				//Tower selected is same as tower in memory
+				
 				towerSelectedSquare.visible = ! towerSelectedSquare.visible;
 				towerSelected = null;
 				_root.removeChild(towerImg);
 				towerImg = null;
 				rangeCircle.visible = false;
+			}
+			
+		}
+		private function sellTower(tower:Object)
+		{
+			if (upgradeableTower != null)
+			{
+				
+				
+				tileArray[tower.y/tileSide][tower.x/tileSide].occupied = false;
+				
+				
+				upgradeableTower.destroyTower();
+				upgradeableTower = null;
+				upgradeableTowerSquare.visible = false;
 			}
 		}
 		private function setupRangeCircle():void
@@ -538,15 +554,20 @@
 		{
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa();
-
 			if (userInfo.canAfford(newTower.tCost))
 			{
 
 				userInfo.changeGold(-newTower.tCost);
 				newTower.enemyList = enemyList;
+				newTower.towerArray = towerArray;
+				
 				newTower.x = mEvent.x;
 				newTower.y = mEvent.y;
+				
+				towerArray[newTower.y/tileSide][newTower.x/tileSide] = newTower;
+				
 				_root.addChild(newTower);
+				
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				newTower.addEventListener(MouseEvent.CLICK, towerWasSelected);
@@ -571,7 +592,6 @@
 						klasa = upgradeableTower.upgradeOne();
 						break;
 
-
 					case ("upgrade2") :
 						klasa = upgradeableTower.upgradeTwo();
 						break;
@@ -585,10 +605,13 @@
 					testTower = new klasa();
 					if (userInfo.canAfford(testTower.tCost))
 					{
-						addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/tileSide],klasa);
+						
 						upgradeableTower.destroyTower();
-
 						upgradeableTowerSquare.visible = false;
+						
+						addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/tileSide],klasa);
+						
+						
 						upgradeableTower = null;
 					}
 					else
@@ -683,6 +706,8 @@
 		}
 		private function towerRemoved(e:Event):void
 		{
+			
+			towerArray[e.currentTarget.y/tileSide][e.currentTarget.x/tileSide] = undefined;
 			e.currentTarget.removeEventListener(MouseEvent.CLICK, towerWasSelected);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);

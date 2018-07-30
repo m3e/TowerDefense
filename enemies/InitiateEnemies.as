@@ -15,7 +15,7 @@
 		private var _root:Object;
 		private var userInfo:UserInfo;
 		private var tileSide:int;
-		
+
 		public var roundInProgress:Boolean;
 		private var roundNumber:int;
 
@@ -34,7 +34,7 @@
 		private var enemy12:Enemy12;
 
 		private var enemyTimer:int;
-		
+
 		public var healthBarOn:Boolean;
 
 
@@ -57,7 +57,7 @@
 		}
 		private function stopRound():void
 		{
-			roundNumber++
+			roundNumber++;
 			roundInProgress = false;
 			removeEventListener(Event.ENTER_FRAME, startEnemies);
 		}
@@ -68,16 +68,15 @@
 			{
 				createEnemy(roundNumber);
 			}
-			if (enemyTimer % 360 == 0 && enemyTimer != 0 && !(enemyTimer >= 360*12))
+			if (enemyTimer % 24 == 0 && enemyTimer != 0 && !(enemyTimer >= 24*12))
 			{
-				stopRound()
+				stopRound();
 			}
 			enemyTimer++;
 		}
 		public function createDmgDummy():void
 		{
-			var enemy:Enemy = new dpsTestEnemy(mapArray)
-			
+			var enemy:Enemy = new dpsTestEnemy(mapArray);
 			_root.addChild(enemy);
 			enemy.x = 0;
 			enemy.y = 6 * tileSide;
@@ -88,19 +87,17 @@
 		}
 		private function createEnemy(i):void
 		{
-			var enemy:Enemy = getClass("enemies.Enemy"+i.toString()) as Enemy;
 			
-
-			//var enemy:Enemy = new Enemy1(mapArray);
+			var enemy:Enemy = getClass("enemies.Enemy"+i.toString()) as Enemy;
 			_root.addChild(enemy);
-			if(healthBarOn)
-			{
-				enemy.healthBarOnOff();
-			}
 			enemy.x = 0;
 			enemy.y = 6 * tileSide;
 			enemy.pt.x = 0;
 			enemy.pt.y = 6;
+			if (healthBarOn)
+			{
+				enemy.healthBarOnOff();
+			}
 			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			enemyList.push(enemy);
 		}
@@ -116,7 +113,7 @@
 			}
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
-			if(userInfo.lives <= 0)
+			if (userInfo.lives <= 0)
 			{
 				trace("Game over");
 			}

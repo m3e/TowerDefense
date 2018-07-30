@@ -13,7 +13,7 @@
 		
 		private var _root:Object;
 		
-		public var bulletTowerImg:BulletTowerImg;
+		public var gunTowerImg:GunTowerImg;
 		public var splashTowerImg:SplashTowerImg;
 		public var laserTowerImg:LaserTowerImg;
 		public var iceTowerImg:IceTowerImg;
@@ -33,18 +33,17 @@
 			
 			//Add tower IMG
 			
-			bulletTowerImg = new BulletTowerImg();
+			gunTowerImg = new GunTowerImg();
 			splashTowerImg = new SplashTowerImg();
 			laserTowerImg = new LaserTowerImg();	
-			
 			iceTowerImg = new IceTowerImg();
 			meleeSwordTowerImg = new MeleeSwordTowerImg();
 			flameThrowerTowerImg = new FlameThrowerTowerImg();
-			
 			arrowTowerImg = new ArrowTowerImg();
 			
 			
-			towerList.push(meleeSwordTowerImg,arrowTowerImg,flameThrowerTowerImg,iceTowerImg,splashTowerImg,bulletTowerImg,laserTowerImg)
+			
+			towerList.push(meleeSwordTowerImg,arrowTowerImg,flameThrowerTowerImg,iceTowerImg,splashTowerImg,gunTowerImg,laserTowerImg)
 			
 			
 			

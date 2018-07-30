@@ -1,13 +1,13 @@
 ﻿package towerimg {
 	
-	import towers.SplashTower;
+	import towers.Splash
 	
 	
 	public class SplashTowerImg extends TowerImg {
 		
 		
 		public function SplashTowerImg() {
-			towerReference = SplashTower
+			towerReference = Splash
 			
 			// constructor code
 		}

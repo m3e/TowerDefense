@@ -1,13 +1,13 @@
 ﻿package towerimg {
 	
-	import towers.FlameThrowerTower;
+	import towers.FireTower;
 	
 	
 	public class FlameThrowerTowerImg extends TowerImg {
 		
 		
 		public function FlameThrowerTowerImg() {
-			towerReference = FlameThrowerTower
+			towerReference = FireTower
 			// constructor code
 		}
 	}

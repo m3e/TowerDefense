@@ -9,10 +9,12 @@
 		private var frames:int;
 		private var dmgArray:Array;
 		private var dmgCounter:Number;
+		private var dmgTotal:Number;
 		
 		public function dpsTestEnemy(Map) {
 			super(Map);
 			dmgCounter = 0;
+			dmgTotal = 0;
 			dmgArray = new Array;
 			dmgArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			eHp = 45;
@@ -21,6 +23,7 @@
 			goldValue = 99999;
 			maxArmor=0;
 			armor=0;
+			
 			// constructor code
 		}
 		override public function takeDmg(dmg:Number,dType:String):void
@@ -35,6 +38,8 @@
 		{
 			
 			dmgCounter += dmg
+			dmgTotal += dmg
+			
 		}
 		override internal function startMovement(e:Event):void
 		{
@@ -76,6 +81,16 @@
 			dmgArray[frames-1] = dmgCounter
 			
 			dmgCounter = 0;
+		}
+		override internal function destroyThis():void
+		{
+			trace("DPS Dummy Dmg: " + dmgTotal);
+			mapArray = null;
+			removeEventListener(Event.ENTER_FRAME, startMovement);
+			_root.removeChild(healthBar);
+			healthBar = null;
+			_root.removeChild(this);
+			_root = null;
 		}
 	}
 	

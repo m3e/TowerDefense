@@ -1,13 +1,13 @@
 ﻿package towerimg {
 	
-	import towers.MeleeSwordTower;
+	import towers.MeleeSword;
 	
 	
 	public class MeleeSwordTowerImg extends TowerImg {
 		
 		
 		public function MeleeSwordTowerImg() {
-			towerReference = MeleeSwordTower
+			towerReference = MeleeSword
 			// constructor code
 		}
 	}

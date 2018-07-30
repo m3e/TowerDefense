@@ -27,7 +27,7 @@
 
 		public var poisonSlow:Number;
 		public var iceSlow:Number;
-		private var healthBar:HealthBar;
+		internal var healthBar:HealthBar;
 
 		public function Enemy(Map:Array)
 		{
@@ -48,6 +48,8 @@
 			_root.addChild(healthBar);
 			healthBar.visible = false;
 			removeEventListener(Event.ADDED_TO_STAGE, added);
+			
+			trace(eMaxHp,maxMoveSpeed,goldValue,maxArmor)
 		}
 		public function determineMoveSpeed():void
 		{
@@ -104,6 +106,8 @@
 		}
 		public function healthBarOnOff():void
 		{
+			healthBar.x = this.x;
+			healthBar.y = this.y;
 			healthBar.visible = !(healthBar.visible);
 		}
 		private function updateHealth():void
@@ -180,7 +184,7 @@
 			updateHealth();
 		}
 
-		private function destroyThis():void
+		internal function destroyThis():void
 		{
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);

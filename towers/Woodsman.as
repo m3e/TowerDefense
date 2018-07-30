@@ -8,7 +8,7 @@
 		
 		public function Woodsman() {
 			super();
-			tBaseColor = 0x33CC33
+			tBaseColor = 0x66a843
 			tRange = 95
 			tDmg = 20;
 			tAtkSpeed = 12;

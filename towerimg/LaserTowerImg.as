@@ -1,12 +1,12 @@
 ﻿package towerimg {
 	
-	import towers.LaserTower
+	import towers.Laser
 	
 	public class LaserTowerImg extends TowerImg {
 		
 		
 		public function LaserTowerImg() {
-			towerReference = LaserTower
+			towerReference = Laser
 			
 			// constructor code
 		}

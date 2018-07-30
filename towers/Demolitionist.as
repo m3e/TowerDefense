@@ -7,8 +7,8 @@
 		
 		
 		public function Demolitionist() {
-			super();
 			tBaseColor = 0x444444
+			super();
 			tRange = 133
 			tDmg = 60;
 			tAtkSpeed = 40;

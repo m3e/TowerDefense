@@ -8,6 +8,8 @@
 
 		public function Enemy1(Map:Array)
 		{
+			
+			
 			super(Map);
 			eHp = 45;
 			maxMoveSpeed = 3;
@@ -15,6 +17,7 @@
 			goldValue = 7;
 			maxArmor=0;
 			armor=0;
+			
 		}
 	}
 }

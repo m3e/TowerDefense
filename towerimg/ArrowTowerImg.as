@@ -1,14 +1,14 @@
 ﻿package towerimg
 {
 
-	import towers.ArrowTower;
+	import towers.Arrow;
 
 	public class ArrowTowerImg extends TowerImg{
 
 
 		public function ArrowTowerImg()
 		{
-			towerReference = ArrowTower;
+			towerReference = Arrow;
 
 			// constructor code
 		}
