@@ -69,6 +69,7 @@
 
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
+		private var roundManager:RoundManager;
 		
 		//booleans
 		private var healthBarOn:Boolean;
@@ -84,19 +85,19 @@
 
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,4,0,2,0,0,1,1,1,1,2,0,0,0,0,0,0],
-			[0,0,0,0,4,0,2,0,0,4,0,0,0,2,0,0,0,0,0,0],
-			[0,0,0,0,4,0,2,0,0,4,0,0,0,2,0,0,0,0,1,1],
-			[1,1,1,1,4,0,1,1,1,4,0,0,0,2,0,0,0,0,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,2,0,0,0,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,0,0,0,4,0,0,0,2,0,0,0,0,0,1,1,1,1],
+			[1,1,1,1,4,0,2,0,1,1,1,4,0,0,0,2,0,0,0,0,0,4,0,0,0],
+			[0,0,0,0,0,0,2,0,4,0,0,0,0,0,0,2,0,0,0,0,0,4,0,0,0],
+			[0,0,0,0,0,0,1,1,4,0,0,0,0,0,0,2,0,0,0,0,0,4,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,0,0,0,0,0,4,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,4,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,4,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
@@ -360,9 +361,9 @@
 		}
 		private function startRound():void
 		{
-			if (initEnemies.roundInProgress == false)
+			if (roundManager.roundInProgress == false)
 			{
-				initEnemies.startRound();
+				roundManager.startRound();
 			}
 		}
 		private function startRoundKeyboard():void
@@ -386,7 +387,7 @@
 			sideBar.graphics.beginFill(0x333333);
 			sideBar.graphics.drawRect(0,0,100,416);
 			sideBar.graphics.endFill();
-			sideBar.x = 640;
+			sideBar.x = mapArray[0].length * tileSide;
 			_root.addChild(sideBar);
 
 
@@ -497,6 +498,7 @@
 		private function setupEnemies():void
 		{
 			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide);
+			roundManager = new RoundManager(initEnemies);
 		}
 		private function setupMap():void
 		{
@@ -576,6 +578,7 @@
 			}
 			else
 			{
+				newTower.destroyTower();
 				trace("Can't afford this tower.  Cost: ", newTower.tCost);
 			}
 		}

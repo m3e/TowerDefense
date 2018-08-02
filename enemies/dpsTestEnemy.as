@@ -3,27 +3,36 @@
 	import enemies.Enemy;
 	import flash.events.*;
 	
-	public class dpsTestEnemy extends Enemy {
-		
+	public class dpsTestEnemy extends Enemy 
+	{
 		
 		private var frames:int;
 		private var dmgArray:Array;
 		private var dmgCounter:Number;
 		private var dmgTotal:Number;
 		
-		public function dpsTestEnemy(Map) {
+		//private var startTime:String;
+		//private var endTime:String;
+		
+		public function dpsTestEnemy(Map) 
+		{
 			super(Map);
 			dmgCounter = 0;
 			dmgTotal = 0;
 			dmgArray = new Array;
 			dmgArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			eHp = 45;
-			maxMoveSpeed = 4;
-			moveSpeed = maxMoveSpeed;
+			maxMoveSpeed = 3;
+			
+			
 			goldValue = 99999;
 			maxArmor=0;
 			armor=0;
 			
+			
+			//var date:Date = new Date();
+			//startTime=date.toLocaleTimeString();
+
 			// constructor code
 		}
 		override public function takeDmg(dmg:Number,dType:String):void
@@ -61,7 +70,7 @@
 		{
 			var dps:Number;
 			dps = 0;
-			
+		
 			for (var i:int=0; i <dmgArray.length; i++)
 			{
 				dps += dmgArray[i]
@@ -85,6 +94,13 @@
 		override internal function destroyThis():void
 		{
 			trace("DPS Dummy Dmg: " + dmgTotal);
+			
+			/*var date:Date = new Date();
+			endTime = date.toLocaleTimeString()
+			trace("MS/maxMS: ,",moveSpeed,maxMoveSpeed);
+			trace("Time start: ",startTime);
+			trace("Time ended: ",endTime);*/
+			
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
 			_root.removeChild(healthBar);

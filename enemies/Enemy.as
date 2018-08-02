@@ -44,12 +44,13 @@
 		private function added(e:Event):void
 		{
 			eMaxHp = eHp;
+			moveSpeed = maxMoveSpeed;
 			_root = MovieClip(root);
 			_root.addChild(healthBar);
 			healthBar.visible = false;
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			
-			trace(eMaxHp,maxMoveSpeed,goldValue,maxArmor)
+			//trace(eMaxHp,maxMoveSpeed,goldValue,maxArmor)
 		}
 		public function determineMoveSpeed():void
 		{

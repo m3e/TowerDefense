@@ -65,7 +65,7 @@
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			
-			addEventListener(Event.ENTER_FRAME, eFrame);
+			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
 		}
@@ -74,6 +74,7 @@
 			
 			_root = MovieClip(root);
 			
+			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			rectangle.graphics.beginFill(tBaseColor); // choosing the colour for the fill, here it is red
 			rectangle.graphics.drawRect(0,0, 32,32); // (x spacing, y spacing, width, height)

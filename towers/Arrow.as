@@ -9,11 +9,11 @@
 		public function Arrow() {
 			tBaseColor = 0x96cc8a
 			super();
-			tRange = 95
-			tDmg = 15;
-			tAtkSpeed = 30;
+			tRange = 100
+			tDmg = 10;
+			tAtkSpeed = 18;
 			tbSpeed = 20;
-			tCost = 80;
+			tCost = 40;
 			tType = "phys"
 			bFrame = 5;			
 

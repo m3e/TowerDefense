@@ -25,11 +25,11 @@
 			
 			var bottomBar:Shape = new Shape();
 			bottomBar.graphics.beginFill(0x333333);
-			bottomBar.graphics.drawRect(0,0,740,100);
+			bottomBar.graphics.drawRect(0,0,900,100);
 			bottomBar.graphics.endFill();
 			bottomBar.y = 416;
 			
-			_root.addChild(bottomBar);
+			_root.addChildAt(bottomBar,_root.getChildIndex(_root.getChildByName("goldBox")) - 1);
 			
 			upgrade1 = new TextField();
 			upgrade1.text = "It's still Alpha so I'm only going to explain this once.  Those squares at the top right are towers.  Q 1x speed, W 2x speed, E 4x, R = 1 frame per second."

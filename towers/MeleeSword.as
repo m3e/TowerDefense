@@ -11,11 +11,11 @@
 			super()
 			
 			tRange = 50
-			tDmg = 18;
-			tAtkSpeed = 18;
+			tDmg = 15;
+			tAtkSpeed = 24;
 			tAoe = 0
 			tbSpeed = 50;
-			tCost = 60;
+			tCost = 30;
 			tType = "phys"
 			// constructor code
 		}

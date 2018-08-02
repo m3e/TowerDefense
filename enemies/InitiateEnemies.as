@@ -16,7 +16,7 @@
 		private var userInfo:UserInfo;
 		private var tileSide:int;
 
-		public var roundInProgress:Boolean;
+		
 		private var roundNumber:int;
 
 		private var enemy:Enemy;
@@ -33,8 +33,6 @@
 		private var enemy11:Enemy11;
 		private var enemy12:Enemy12;
 
-		private var enemyTimer:int;
-
 		public var healthBarOn:Boolean;
 
 
@@ -50,42 +48,34 @@
 			//createDmgDummy();
 			// constructor code
 		}
-		public function startRound():void
-		{
-			roundInProgress = true;
-			addEventListener(Event.ENTER_FRAME, startEnemies);
-		}
-		private function stopRound():void
-		{
-			roundNumber++;
-			roundInProgress = false;
-			removeEventListener(Event.ENTER_FRAME, startEnemies);
-		}
-		private function startEnemies(e:Event):void
-		{
-
-			if (enemyTimer % 24 == 0)
-			{
-				createEnemy(roundNumber);
-			}
-			if (enemyTimer % 24 == 0 && enemyTimer != 0 && !(enemyTimer >= 24*12))
-			{
-				stopRound();
-			}
-			enemyTimer++;
-		}
+		
 		public function createDmgDummy():void
 		{
+			/*for (var i:int=1; i <= 8; i++)
+			{
 			var enemy:Enemy = new dpsTestEnemy(mapArray);
+			enemy.x = 0;
+			enemy.y = 6 * tileSide;
+			enemy.maxMoveSpeed = i;
+			enemy.pt.x = 0;
+			enemy.pt.y = 6;
+			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			_root.addChild(enemy);
+			enemyList.push(enemy);
+			}*/
+			
+			
+			var enemy:Enemy = new dpsTestEnemy(mapArray);
 			enemy.x = 0;
 			enemy.y = 6 * tileSide;
 			enemy.pt.x = 0;
 			enemy.pt.y = 6;
+			//enemy.maxMoveSpeed = 31;
 			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+			_root.addChild(enemy);
 			enemyList.push(enemy);
 		}
-		private function createEnemy(i):void
+		public function createEnemy(i):void
 		{
 			
 			var enemy:Enemy = getClass("enemies.Enemy"+i.toString()) as Enemy;

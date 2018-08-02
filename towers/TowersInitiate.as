@@ -67,7 +67,8 @@
 					towersInRow = 0;
 				}
 				
-				towerList[i].x = 650 + (45 * towersInRow)
+				towerList[i].x = 810 + (45 * towersInRow)
+				//mapArray.length * tileSide + 10
 				towerList[i].y = 10 + (45 * extraRows)
 				
 				towersInRow++;

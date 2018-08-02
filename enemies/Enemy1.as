@@ -11,10 +11,10 @@
 			
 			
 			super(Map);
-			eHp = 45;
+			eHp = 35;
 			maxMoveSpeed = 3;
 			moveSpeed = maxMoveSpeed;
-			goldValue = 7;
+			goldValue = 2;
 			maxArmor=0;
 			armor=0;
 			

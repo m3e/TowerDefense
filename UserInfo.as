@@ -21,7 +21,7 @@
 		public var lives:int;
 		
 		public function UserInfo() {
-			gold = 1211110;
+			gold = 100;
 			
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			// constructor code
@@ -39,19 +39,21 @@
 			goldBox.graphics.beginFill(0x000000,.5)
 			goldBox.graphics.drawRect(0, 0, 80, 20)
 			goldBox.graphics.endFill();
-			goldBox.x = 650
-			goldBox.y = 390
+			goldBox.x = 750//650
+			goldBox.y = 426//390
+			goldBox.name = "goldBox"
+			//goldBox.mouseEnabled = false
 			_root.addChild(goldBox);
 			
 			goldBoxText = new TextField;
 			goldBoxText.textColor = 0xFFFFFF
 			goldBoxText.text = gold.toString();
-			goldBoxText.x = 655
-			goldBoxText.y = 390
+			goldBoxText.x = 755
+			goldBoxText.y = 426
 			goldBoxText.height = 20
 			goldBoxText.width = 80;
 			goldBoxText.selectable = false;
-			
+			goldBoxText.mouseEnabled = false
 			_root.addChild(goldBoxText);
 			
 			//LIVES
@@ -60,8 +62,10 @@
 			livesBar.graphics.beginFill(0x000000,.5)
 			livesBar.graphics.drawRect(0,0,80,20);
 			livesBar.graphics.endFill();
-			livesBar.x = 650
-			livesBar.y = 360
+			livesBar.x = 750//650
+			livesBar.y = 460//360
+			livesBar.name = "livesBar"
+			//livesBar.mouseEnabled = false
 			_root.addChild(livesBar);
 			
 			lives = 50;
@@ -69,12 +73,12 @@
 			livesTextBox = new TextField();
 			livesTextBox.textColor = 0xFFFFFF
 			livesTextBox.text = "Lives: " + lives.toString();
-			livesTextBox.x = 650
-			livesTextBox.y = 360
+			livesTextBox.x = 755
+			livesTextBox.y = 460
 			livesTextBox.height = 20
 			livesTextBox.width = 80
 			livesTextBox.selectable = false;
-			
+			livesTextBox.mouseEnabled = false
 			_root.addChild(livesTextBox);
 			
 		}

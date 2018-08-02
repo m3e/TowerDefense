@@ -21,7 +21,7 @@
 			tAtkSpeed = 1;
 			tCost = 550;
 			tType = "ice";
-			tDescription = "Slows all units passing through.  Cost: " + tCost.toString();
+			tDescription = "Slows all units passing through by 30%.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		override internal function eFrame(e:Event):void
@@ -78,7 +78,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.5,.5)
+			debuffType.push("slow",.8,.5)
 			
 			debuffsArray.push(debuffType)
 			
