@@ -10,7 +10,7 @@
 			tBaseColor = 0x96cc8a
 			super();
 			tRange = 100
-			tDmg = 10;
+			tDmg = 12;
 			tAtkSpeed = 18;
 			tbSpeed = 20;
 			tCost = 40;

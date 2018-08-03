@@ -1,19 +1,20 @@
-﻿package enemies  {
-	
-	import enemies.Enemy
-	
-	
-	public class Enemy5 extends Enemy {
-		
-		
-		public function Enemy5(Map:Array) {
+﻿package enemies
+{
+
+	import enemies.Enemy;
+	public class Enemy5 extends Enemy
+	{
+
+
+		public function Enemy5(Map:Array)
+		{
 			super(Map);
-			eHp = 140;
+			eMaxHp = 140;
 			maxMoveSpeed = 4
-			moveSpeed = maxMoveSpeed
 			goldValue = 25;
+			maxArmor=0;
 			// constructor code
 		}
 	}
-	
+
 }

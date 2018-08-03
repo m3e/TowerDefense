@@ -91,6 +91,25 @@
 			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			enemyList.push(enemy);
 		}
+		public function customEnemy(waveArray:Array):void
+		{
+			var enemy:Enemy12 = new Enemy12(mapArray);
+			enemy.eMaxHp = waveArray[0]
+			enemy.maxMoveSpeed = waveArray[1]
+			enemy.goldValue = waveArray[2]
+			enemy.maxArmor = waveArray[3]
+			_root.addChild(enemy);
+			enemy.x = 0;
+			enemy.y = 6 * tileSide;
+			enemy.pt.x = 0;
+			enemy.pt.y = 6;
+			if (healthBarOn)
+			{
+				enemy.healthBarOnOff();
+			}
+			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+			enemyList.push(enemy);
+		}
 		private function enemyDead(e:Event):void
 		{
 			if (e.currentTarget.killed)

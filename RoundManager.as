@@ -62,16 +62,20 @@
 			
 
 		}
+		public function sendWave(waveArray:Array)
+		{
+			initEnemies.customEnemy(waveArray)
+		}
 		private function compileRoundsData():void
 		{
 			switch (currentRound)
 			{
 				case 1 :
-					numberToSend = 20;
+					numberToSend = 8;
 					break;
 
 				case 2 :
-					numberToSend = 20;
+					numberToSend = 8;
 					break;
 
 				case 3 :
@@ -89,6 +93,9 @@
 				case 6 :
 					numberToSend = 15;
 					break;
+					
+				case 12 :
+					numberToSend = 99999;
 					
 				default:
 					numberToSend = 15;

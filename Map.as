@@ -55,6 +55,9 @@
 		private var towerSelectedSquare:Shape;
 		private var upgradeableTowerSquare:Shape;
 		private var rangeCircle:Shape;
+		
+		//ui
+		private var inputField:InputField;
 
 		//towers
 		private var towersInitiate:TowersInitiate;
@@ -366,6 +369,18 @@
 				roundManager.startRound();
 			}
 		}
+		private function sendWave(e:MouseEvent)
+		{
+			var waveArray:Array = new Array;
+			var hp:int = Number(inputField.hpField.text)
+			var ms:int = Number(inputField.msField.text)
+			var gold:int= Number(inputField.goldField.text)
+			var armor:int = Number(inputField.armorField.text)
+			var numSend:int = Number(inputField.numField.text)
+			var freq:int = Number(inputField.freqField.text)
+			waveArray = [hp,ms,gold,armor,numSend,freq]
+			roundManager.sendWave(waveArray);
+		}
 		private function startRoundKeyboard():void
 		{
 			startRound();
@@ -409,6 +424,13 @@
 			towerSelectedSquare.graphics.endFill();
 			towerSelectedSquare.visible = false;
 			_root.addChild(towerSelectedSquare);
+			
+			inputField = new InputField();
+			inputField.x = 800
+			inputField.y = 250
+			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave)
+			_root.addChild(inputField);
+			
 
 		}
 
@@ -480,7 +502,7 @@
 				
 				tileArray[tower.y/tileSide][tower.x/tileSide].occupied = false;
 				
-				
+				userInfo.changeGold(upgradeableTower.tCost);
 				upgradeableTower.destroyTower();
 				upgradeableTower = null;
 				upgradeableTowerSquare.visible = false;

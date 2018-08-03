@@ -12,13 +12,13 @@
 		{
 			super();
 			tBaseColor = 0xFF3300;
-			tRange = 90;
-			tDmg = 3;
-			tAtkSpeed = 2;
+			tRange = 75;
+			tDmg = 5;
+			tAtkSpeed = 4;
 			tAoe = 0;
 			tbSpeed = 8;
 			bFrame = 2;
-			tCost = 350;
+			tCost = 70;
 			tType = "fire";
 			tNumberOfTargets = 1;
 			

@@ -11,7 +11,7 @@
 			super()
 			
 			tRange = 50
-			tDmg = 15;
+			tDmg = 17;
 			tAtkSpeed = 24;
 			tAoe = 0
 			tbSpeed = 50;

@@ -43,8 +43,9 @@
 		}
 		private function added(e:Event):void
 		{
-			eMaxHp = eHp;
+			eHp = eMaxHp;
 			moveSpeed = maxMoveSpeed;
+			armor = maxArmor;
 			_root = MovieClip(root);
 			_root.addChild(healthBar);
 			healthBar.visible = false;
