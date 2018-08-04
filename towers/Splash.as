@@ -18,6 +18,8 @@
 			tType = "phys"
 			bFrame = 6
 			
+			tDescription = "Big, explodey, splash guy.  Hits more than one unit if they're close.  Cost: " + tCost.toString();
+			
 			// constructor code
 		}
 		override public function upgradeOne():Class

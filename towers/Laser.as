@@ -11,6 +11,8 @@
 			tbSpeed = 20;
 			tCost = 10;
 			tType = "fire"
+			
+			tDescription = "Goes *Pew* *Pew* *Pew*.  Enemies think it's too hot.  We think it's justtt right.  Cost: " + tCost.toString();
 			// constructor code
 		}
 	}

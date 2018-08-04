@@ -18,6 +18,7 @@
 	import enemies.*;
 	import controls.mouse.MouseControls;
 	import flash.text.TextField;
+	import flash.display.DisplayObject;
 
 
 	public class Map extends MovieClip
@@ -55,7 +56,7 @@
 		private var towerSelectedSquare:Shape;
 		private var upgradeableTowerSquare:Shape;
 		private var rangeCircle:Shape;
-		
+
 		//ui
 		private var inputField:InputField;
 
@@ -67,13 +68,15 @@
 		private var _keyDown:Boolean;
 		private var shiftDown:Boolean;
 
+		private var towerStatsOver:TowerStatsOver;
+
 		//user
 		private var userInfo:UserInfo;
 
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
 		private var roundManager:RoundManager;
-		
+
 		//booleans
 		private var healthBarOn:Boolean;
 
@@ -84,32 +87,32 @@
 		{
 			enemyList = new Array  ;
 			tileArray = new Array  ;
-			towerArray = new Array;
+			towerArray = new Array  ;
 
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,1,1,2,0,0,0,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,4,0,2,0,0,0,0,4,0,0,0,2,0,0,0,0,0,1,1,1,1],
-			[1,1,1,1,4,0,2,0,1,1,1,4,0,0,0,2,0,0,0,0,0,4,0,0,0],
-			[0,0,0,0,0,0,2,0,4,0,0,0,0,0,0,2,0,0,0,0,0,4,0,0,0],
-			[0,0,0,0,0,0,1,1,4,0,0,0,0,0,0,2,0,0,0,0,0,4,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,0,0,0,0,0,4,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,4,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,4,0,0,0],
+			[0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+			[1,1,2,0,4,0,2,0,4,0,0,0,2,0,0,1,1,1,1,1,1,1,1,1,1],
+			[0,0,2,0,4,0,2,0,4,0,2,3,3,0,0,4,0,0,0,0,0,0,0,0,0],
+			[0,0,1,1,4,0,1,1,4,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
-				tileArray[row] = []
-				towerArray[row] = []
+				tileArray[row] = [];
+				towerArray[row] = [];
 				for (var col:int=0; col < mapArray[0].length; col++)
 				{
-					tileArray[row][col] = undefined
-					towerArray[row][col] = undefined
+					tileArray[row][col] = undefined;
+					towerArray[row][col] = undefined;
 				}
 			}
 
@@ -175,6 +178,28 @@
 		private function setupMouseControls():void
 		{
 			mouseControls = new MouseControls(towersInitiate.towerList,this);
+			towerStatsOver = new TowerStatsOver  ;
+			_root.addChild(towerStatsOver);
+			towerStatsOver.visible = false;
+		}
+		public function mouseHoverOut(e:Event):void
+		{
+			towerStatsOver.visible = false;
+			
+		}
+
+		public function mouseHoverOver(e:Event):void
+		{
+			towerStatsOver.visible = true;
+			_root.setChildIndex(towerStatsOver, _root.numChildren - 1);
+			towerStatsOver.x = e.currentTarget.x - 170;
+			towerStatsOver.y = e.currentTarget.y
+			;
+			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
+			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2)
+			towerStatsOver.RngBox.text = e.currentTarget.tRange
+			towerStatsOver.TypeBox.text = e.currentTarget.tType
+			towerStatsOver.DescBox.text = e.currentTarget.tDescription
 		}
 		private function setupTowers():void
 		{
@@ -207,43 +232,15 @@
 					}
 					break;
 
-				case Keyboard.NUMBER_1 :
-					selectTower(towersInitiate.towerList[0]);
-					break;
-
-				case Keyboard.NUMBER_2 :
-					selectTower(towersInitiate.towerList[1]);
-					break;
-
-				case Keyboard.NUMBER_3 :
-					selectTower(towersInitiate.towerList[2]);
-					break;
-
-				case Keyboard.NUMBER_4 :
-					selectTower(towersInitiate.towerList[3]);
-					break;
-
-				case Keyboard.NUMBER_5 :
-					selectTower(towersInitiate.towerList[4]);
-					break;
-
-				case Keyboard.NUMBER_6 :
-					selectTower(towersInitiate.towerList[5]);
-					break;
-
-				case Keyboard.NUMBER_7 :
-					selectTower(towersInitiate.towerList[6]);
-					break;
-
 				case Keyboard.Z :
-					healthBarOn = !healthBarOn;
+					healthBarOn = ! healthBarOn;
 					healthBarToggle();
 					break;
-					
+
 				case Keyboard.X :
 					sellTower(upgradeableTower);
 					break;
-				
+
 				case Keyboard.Q :
 					stage.frameRate = 24;
 					break;
@@ -264,6 +261,39 @@
 					startRoundKeyboard();
 					break;
 
+			}
+			if (!(inputField.contains(e.target as DisplayObject)))
+			{
+				switch (e.keyCode)
+				{
+					case Keyboard.NUMBER_1 :
+						selectTower(towersInitiate.towerList[0]);
+						break;
+
+					case Keyboard.NUMBER_2 :
+						selectTower(towersInitiate.towerList[1]);
+						break;
+
+					case Keyboard.NUMBER_3 :
+						selectTower(towersInitiate.towerList[2]);
+						break;
+
+					case Keyboard.NUMBER_4 :
+						selectTower(towersInitiate.towerList[3]);
+						break;
+
+					case Keyboard.NUMBER_5 :
+						selectTower(towersInitiate.towerList[4]);
+						break;
+
+					case Keyboard.NUMBER_6 :
+						selectTower(towersInitiate.towerList[5]);
+						break;
+
+					case Keyboard.NUMBER_7 :
+						selectTower(towersInitiate.towerList[6]);
+						break;
+				}
 			}
 		}
 		private function healthBarToggle():void
@@ -366,20 +396,24 @@
 		{
 			if (roundManager.roundInProgress == false)
 			{
-				roundManager.startRound();
+				roundManager.startRound(true);
 			}
 		}
 		private function sendWave(e:MouseEvent)
 		{
-			var waveArray:Array = new Array;
-			var hp:int = Number(inputField.hpField.text)
-			var ms:int = Number(inputField.msField.text)
-			var gold:int= Number(inputField.goldField.text)
-			var armor:int = Number(inputField.armorField.text)
-			var numSend:int = Number(inputField.numField.text)
-			var freq:int = Number(inputField.freqField.text)
-			waveArray = [hp,ms,gold,armor,numSend,freq]
-			roundManager.sendWave(waveArray);
+			if (roundManager.roundInProgress == false)
+			{
+				var waveArray:Array = new Array  ;
+				var hp:int = Number(inputField.hpField.text);
+				var ms:int = Number(inputField.msField.text);
+				var gold:int = Number(inputField.goldField.text);
+				var armor:int = Number(inputField.armorField.text);
+				var numSend:int = Number(inputField.numField.text);
+				var freq:int = Number(inputField.freqField.text);
+				var eFrame:int = 11;
+				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame];
+				roundManager.sendWave(waveArray);
+			}
 		}
 		private function startRoundKeyboard():void
 		{
@@ -424,13 +458,13 @@
 			towerSelectedSquare.graphics.endFill();
 			towerSelectedSquare.visible = false;
 			_root.addChild(towerSelectedSquare);
-			
+
 			inputField = new InputField();
-			inputField.x = 800
-			inputField.y = 250
-			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave)
+			inputField.x = 800;
+			inputField.y = 250;
+			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave);
 			_root.addChild(inputField);
-			
+
 
 		}
 
@@ -449,7 +483,7 @@
 			if (towerSelected != tower)
 			{
 				//towerSelected = tower sent via constructor
-				
+
 				towerSelected = tower;
 				if (towerImg != null && _root.contains(towerImg))
 				{
@@ -485,23 +519,23 @@
 			else
 			{
 				//Tower selected is same as tower in memory
-				
+
 				towerSelectedSquare.visible = ! towerSelectedSquare.visible;
 				towerSelected = null;
 				_root.removeChild(towerImg);
 				towerImg = null;
 				rangeCircle.visible = false;
 			}
-			
+
 		}
 		private function sellTower(tower:Object)
 		{
 			if (upgradeableTower != null)
 			{
-				
-				
-				tileArray[tower.y/tileSide][tower.x/tileSide].occupied = false;
-				
+
+
+				tileArray[tower.y / tileSide][tower.x / tileSide].occupied = false;
+
 				userInfo.changeGold(upgradeableTower.tCost);
 				upgradeableTower.destroyTower();
 				upgradeableTower = null;
@@ -584,14 +618,14 @@
 				userInfo.changeGold(-newTower.tCost);
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
-				
+
 				newTower.x = mEvent.x;
 				newTower.y = mEvent.y;
-				
-				towerArray[newTower.y/tileSide][newTower.x/tileSide] = newTower;
-				
+
+				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
+
 				_root.addChild(newTower);
-				
+
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				newTower.addEventListener(MouseEvent.CLICK, towerWasSelected);
@@ -603,6 +637,7 @@
 				newTower.destroyTower();
 				trace("Can't afford this tower.  Cost: ", newTower.tCost);
 			}
+
 		}
 		private function upgradeTower(e:Event):void
 		{
@@ -630,13 +665,13 @@
 					testTower = new klasa();
 					if (userInfo.canAfford(testTower.tCost))
 					{
-						
+
 						upgradeableTower.destroyTower();
 						upgradeableTowerSquare.visible = false;
-						
+
 						addTowerToMap(tileArray[upgradeableTower.y/tileSide][upgradeableTower.x/tileSide],klasa);
-						
-						
+
+
 						upgradeableTower = null;
 					}
 					else
@@ -685,42 +720,42 @@
 				upgradeableTowerSquare.visible = true;
 				upgradeableTowerSquare.x = upgradeableTower.x;
 				upgradeableTowerSquare.y = upgradeableTower.y;
-				
-				var klasa:Class 
+
+				var klasa:Class;
 				var testTower:Tower;
-				
+
 				if (upgradeableTower.upgradeOne() != null)
 				{
-				klasa = upgradeableTower.upgradeOne()
-				testTower = new klasa();
-				bottomBar.upgrade1.text = testTower.tDescription;
-				testTower.destroyTower();
+					klasa = upgradeableTower.upgradeOne();
+					testTower = new klasa();
+					bottomBar.upgrade1.text = testTower.tDescription;
+					testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade1.text = "No upgrade available."
+					bottomBar.upgrade1.text = "No upgrade available.";
 				}
 				if (upgradeableTower.upgradeTwo() != null)
 				{
-				klasa = upgradeableTower.upgradeTwo()
-				testTower = new klasa();
-				bottomBar.upgrade2.text = testTower.tDescription;
-				testTower.destroyTower();
+					klasa = upgradeableTower.upgradeTwo();
+					testTower = new klasa();
+					bottomBar.upgrade2.text = testTower.tDescription;
+					testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade2.text = "No upgrade available."
+					bottomBar.upgrade2.text = "No upgrade available.";
 				}
 				if (upgradeableTower.upgradeThree() != null)
 				{
-				klasa = upgradeableTower.upgradeThree()
-				testTower = new klasa();
-				bottomBar.upgrade3.text = testTower.tDescription;
-				testTower.destroyTower();
+					klasa = upgradeableTower.upgradeThree();
+					testTower = new klasa();
+					bottomBar.upgrade3.text = testTower.tDescription;
+					testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade3.text = "No upgrade available."
+					bottomBar.upgrade3.text = "No upgrade available.";
 				}
 			}
 			else
@@ -731,8 +766,8 @@
 		}
 		private function towerRemoved(e:Event):void
 		{
-			
-			towerArray[e.currentTarget.y/tileSide][e.currentTarget.x/tileSide] = undefined;
+
+			towerArray[e.currentTarget.y / tileSide][e.currentTarget.x / tileSide] = undefined;
 			e.currentTarget.removeEventListener(MouseEvent.CLICK, towerWasSelected);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);

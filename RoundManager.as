@@ -13,6 +13,8 @@
 		private var enemyTimer:int;
 		private var initEnemies:InitiateEnemies;
 		private var numberToSend:int;
+		private var frameTimer:int;
+		private var waveArray:Array;
 
 		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
@@ -20,86 +22,143 @@
 			currentRound = 1;
 			initEnemies = _initEnemies;
 			// constructor code
-			compileRoundsData();
 		}
-		public function startRound():void
+		public function startRound(increaseRound:Boolean):void
 		{
-			enemyTimer = 0;
+			
+			if (increaseRound)
+			{
+				compileRoundsData();
+				currentRound++;
+			}
+			frameTimer = 0;
 			roundInProgress = true;
-			addEventListener(Event.ENTER_FRAME, startEnemies);
+			addEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
 		private function stopRound():void
 		{
-			currentRound++;
-			compileRoundsData();
+			
+			waveArray = []
+			frameTimer = 0;
 			roundInProgress = false;
-			removeEventListener(Event.ENTER_FRAME, startEnemies);
+			removeEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
-		private function startEnemies(e:Event):void
+		private function spawnTimer(e:Event):void
 		{
 
-
-
-			if (enemyTimer % 24 == 0)
+			if (frameTimer % waveArray[5] == 0)
 			{
-				initEnemies.createEnemy(currentRound);
-				numberToSend--;
+
+				initEnemies.customEnemy(waveArray);
+				waveArray[4] = (waveArray[4] - 1);
 			}
-			//if (enemyTimer % 24 == 0 && enemyTimer != 0 && !(enemyTimer >= 24*12))
-			if (numberToSend == 0)
+
+			if (waveArray[4] == 0)
 			{
 				stopRound();
 			}
-			else if (numberToSend < 0)
+			else if (waveArray[4] < 0)
 			{
 				trace("RoundManager.numberToSend < 0?");
-				enemyTimer++;
+				frameTimer++;
 			}
 			else
 			{
-				enemyTimer++;
-			}
-			
+				frameTimer++;
 
+			}
 		}
-		public function sendWave(waveArray:Array)
+		public function sendWave(WaveArray:Array)
 		{
-			initEnemies.customEnemy(waveArray)
+			waveArray = WaveArray;
+			startRound(false);
 		}
 		private function compileRoundsData():void
 		{
+			waveArray = new Array  ;
+			var hp:int;
+			var ms:int;
+			var gold:int;
+			var armor:int;
+			var numSend:int;
+			var freq:int;
+			var eFrame:int = 5;
+			
+			if (currentRound > 12)
+			{
+				currentRound = 12;
+			}
+
+
 			switch (currentRound)
 			{
 				case 1 :
-					numberToSend = 8;
+					hp = 50;
+					ms = 2.5;
+					gold = 7;
+					armor = 0;
+					numSend = 1;
+					freq = 12
+					
+					;
 					break;
 
 				case 2 :
-					numberToSend = 8;
+					hp = 70;
+					ms = 3;
+					gold = 8;
+					armor = 0;
+					numSend = 1;
+					freq = 12
+					
 					break;
 
 				case 3 :
-					numberToSend = 15;
+					hp = 45;
+					ms = 6;
+					gold = 15;
+					armor = 0;
+					numSend = 1;
+					freq = 12
 					break;
 
 				case 4 :
-					numberToSend = 15;
+					hp = 140;
+					ms = 3;
+					gold = 30;
+					armor = 0;
+					numSend = 1;
+					freq = 12
 					break;
 
 				case 5 :
-					numberToSend = 15;
+					hp = 140;
+					ms = 4;
+					gold = 25;
+					armor = 0;
+					numSend = 1;
+					freq = 12
 					break;
 
 				case 6 :
-					numberToSend = 15;
+					hp = 120;
+					ms = 5;
+					gold = 20;
+					armor = 0;
+					numSend = 1;
+					freq = 12
 					break;
-					
-				case 12 :
-					numberToSend = 99999;
-					
-				default:
-					numberToSend = 15;
+
+				default :
+					hp = 120;
+					ms = 5;
+					gold = 20;
+					armor = 0;
+					numSend = 1;
+					freq = 12
 			}
+			eFrame = currentRound;
+			waveArray = [hp,ms,gold,armor,numSend,freq,eFrame];
 		}
 	}
 

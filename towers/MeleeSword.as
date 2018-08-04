@@ -1,6 +1,6 @@
 ﻿package towers {
 	
-	
+	import sounds.SoundManager;
 	
 	
 	public class MeleeSword extends Tower {
@@ -17,6 +17,8 @@
 			tbSpeed = 50;
 			tCost = 30;
 			tType = "phys"
+			
+			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		
@@ -31,6 +33,11 @@
 		override public function upgradeThree():Class
 		{
 			return Commander
+		}
+		override internal function fireSound():void
+		{
+			SoundManager.sfx("swordhit");
+			
 		}
 	}
 	

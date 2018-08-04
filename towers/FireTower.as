@@ -22,6 +22,8 @@
 			tType = "fire";
 			tNumberOfTargets = 1;
 			
+			tDescription = "Takes fire and throws it, like some sort of throwing flame machine.  Cost: " + tCost.toString();
+			
 			// constructor code
 		}
 		override public function upgradeOne():Class

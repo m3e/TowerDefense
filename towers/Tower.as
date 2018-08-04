@@ -14,6 +14,8 @@
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	import enemies.Enemy;
+	
+	import sounds.SoundManager;
 
 	public class Tower extends MovieClip
 	{
@@ -46,6 +48,8 @@
 		internal var targeting:String;
 		internal var _root:*;
 
+		
+		
 		internal var bFrame:int;		
 		
 		internal var rectangle:Shape 
@@ -170,9 +174,14 @@
 		{
 
 		}
+		internal function fireSound():void
+		{
+			
+		}
 		internal function fire():void
 		{
 			specialFunction();
+			fireSound();
 			//Create new Bullet
 			var newBullet:Bullet
 			for (var i:int=0; i < tTarget.length; i++)
@@ -238,6 +247,7 @@
 			tTarget = null;
 			enemyList = null;
 			towerArray = null;
+			buffsArray = []
 			
 			if (_root != undefined && _root.contains(this))
 			{

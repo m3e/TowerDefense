@@ -8,7 +8,7 @@
 	import design.HealthBar;
 
 
-	public class Enemy extends Sprite
+	public class Enemy extends MovieClip
 	{
 		internal var eMaxHp:int;
 		internal var eHp:int;
@@ -24,6 +24,7 @@
 		public var armor:int;
 		public var distanceTraveled:Number;
 		public var killed:Boolean;
+		public var eFrame:int;
 
 		public var poisonSlow:Number;
 		public var iceSlow:Number;
@@ -31,6 +32,8 @@
 
 		public function Enemy(Map:Array)
 		{
+			stop();
+			eFrame = 1
 			poisonSlow = 0;
 			iceSlow = 0;
 			distanceTraveled = 0;
@@ -46,6 +49,7 @@
 			eHp = eMaxHp;
 			moveSpeed = maxMoveSpeed;
 			armor = maxArmor;
+			this.gotoAndStop(eFrame);
 			_root = MovieClip(root);
 			_root.addChild(healthBar);
 			healthBar.visible = false;

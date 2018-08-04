@@ -16,11 +16,11 @@
 		private var userInfo:UserInfo;
 		private var tileSide:int;
 
-		
-		private var roundNumber:int;
+
+
 
 		private var enemy:Enemy;
-		private var enemy1:Enemy1;
+		/*private var enemy1:Enemy1;
 		private var enemy2:Enemy2;
 		private var enemy3:Enemy3;
 		private var enemy4:Enemy4;
@@ -31,84 +31,55 @@
 		private var enemy9:Enemy9;
 		private var enemy10:Enemy10;
 		private var enemy11:Enemy11;
-		private var enemy12:Enemy12;
+		private var enemy12:Enemy12;*/
 
 		public var healthBarOn:Boolean;
 
 
 		public function InitiateEnemies(MapArray:Array, EnemyList:Array,_Root:Object,_userInfo:UserInfo,TileSide:int)
 		{
-			roundNumber = 1;
+
 			tileSide = TileSide;
 			userInfo = _userInfo;
 			mapArray = MapArray;
 			enemyList = EnemyList;
 			_root = _Root;
-			//startRound();
-			//createDmgDummy();
 			// constructor code
 		}
-		
+
 		public function createDmgDummy():void
 		{
-			/*for (var i:int=1; i <= 8; i++)
-			{
-			var enemy:Enemy = new dpsTestEnemy(mapArray);
-			enemy.x = 0;
-			enemy.y = 6 * tileSide;
-			enemy.maxMoveSpeed = i;
-			enemy.pt.x = 0;
-			enemy.pt.y = 6;
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			_root.addChild(enemy);
-			enemyList.push(enemy);
-			}*/
-			
-			
 			var enemy:Enemy = new dpsTestEnemy(mapArray);
 			enemy.x = 0;
 			enemy.y = 6 * tileSide;
 			enemy.pt.x = 0;
 			enemy.pt.y = 6;
-			//enemy.maxMoveSpeed = 31;
 			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			_root.addChild(enemy);
-			enemyList.push(enemy);
-		}
-		public function createEnemy(i):void
-		{
-			
-			var enemy:Enemy = getClass("enemies.Enemy"+i.toString()) as Enemy;
-			_root.addChild(enemy);
-			enemy.x = 0;
-			enemy.y = 6 * tileSide;
-			enemy.pt.x = 0;
-			enemy.pt.y = 6;
-			if (healthBarOn)
-			{
-				enemy.healthBarOnOff();
-			}
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			enemyList.push(enemy);
 		}
 		public function customEnemy(waveArray:Array):void
 		{
-			var enemy:Enemy12 = new Enemy12(mapArray);
-			enemy.eMaxHp = waveArray[0]
-			enemy.maxMoveSpeed = waveArray[1]
-			enemy.goldValue = waveArray[2]
-			enemy.maxArmor = waveArray[3]
-			_root.addChild(enemy);
-			enemy.x = 0;
-			enemy.y = 6 * tileSide;
-			enemy.pt.x = 0;
-			enemy.pt.y = 6;
-			if (healthBarOn)
-			{
-				enemy.healthBarOnOff();
-			}
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			enemyList.push(enemy);
+			
+			
+				var enemy:Enemy = new Enemy(mapArray);
+				enemy.eMaxHp = waveArray[0];
+				enemy.maxMoveSpeed = waveArray[1];
+				enemy.goldValue = waveArray[2];
+				enemy.maxArmor = waveArray[3];
+				enemy.eFrame = waveArray[6];
+				_root.addChild(enemy);
+				enemy.x = 0;
+				enemy.y = 6 * tileSide;
+				enemy.pt.x = 0;
+				enemy.pt.y = 6;
+				if (!(healthBarOn))
+				{
+					enemy.healthBarOnOff();
+				}
+				enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+				enemyList.push(enemy);
+				
 		}
 		private function enemyDead(e:Event):void
 		{
@@ -127,12 +98,12 @@
 				trace("Game over");
 			}
 		}
-		private function getClass(eName:String):Object
+		/*private function getClass(eName:String):Object
 		{
 			var klasa:Class = getDefinitionByName(eName) as Class;
 			var instance:Object = new klasa(mapArray);
 			return (instance);
-		}
+		}*/
 	}
 
 }

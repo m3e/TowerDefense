@@ -1,6 +1,6 @@
 ﻿package towers {
 	
-	
+	import sounds.SoundManager;
 	
 	
 	public class Arrow extends Tower {
@@ -17,6 +17,7 @@
 			tType = "phys"
 			bFrame = 5;			
 
+			tDescription = "The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		override public function upgradeOne():Class
@@ -30,6 +31,11 @@
 		override public function upgradeThree():Class
 		{
 			return Rogue
+		}
+		override internal function fireSound():void
+		{
+			SoundManager.sfx("arrowShot");
+			
 		}
 	}
 }
