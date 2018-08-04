@@ -200,6 +200,8 @@
 			towerStatsOver.RngBox.text = e.currentTarget.tRange
 			towerStatsOver.TypeBox.text = e.currentTarget.tType
 			towerStatsOver.DescBox.text = e.currentTarget.tDescription
+			towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
+			towerStatsOver.CostBox.text = e.currentTarget.tCost;
 		}
 		private function setupTowers():void
 		{
@@ -255,6 +257,10 @@
 
 				case Keyboard.R :
 					stage.frameRate = 1;
+					break;
+					
+				case Keyboard.U :
+					inputField.visible = !(inputField.visible)
 					break;
 
 				case Keyboard.SPACE :
@@ -460,14 +466,26 @@
 			_root.addChild(towerSelectedSquare);
 
 			inputField = new InputField();
-			inputField.x = 800;
-			inputField.y = 250;
+			inputField.x = 692;
+			inputField.y = 8;
 			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave);
+			inputField.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
+			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
 			_root.addChild(inputField);
 
 
 		}
-
+		private function mouseDownAction(e:MouseEvent):void
+		{
+			inputField.startDrag();
+			
+			
+		}
+		private function mouseUpAction(e:MouseEvent):void
+		{
+			inputField.stopDrag();
+		}
+		
 		public function selectTowerMouse(e:MouseEvent):void
 		{
 			var tower:Sprite = e.currentTarget as Sprite;

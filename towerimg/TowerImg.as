@@ -12,6 +12,7 @@
 		public var tAtkSpeed:int;
 		public var tType:String;
 		public var tDescription:String;
+		public var tCost:int;
 		
 		public function TowerImg() {
 			addEventListener(Event.ADDED, imgAdded)
@@ -26,6 +27,7 @@
 			tAtkSpeed = mockTower.tAtkSpeed
 			tType = mockTower.tType
 			tDescription = mockTower.tDescription
+			tCost = mockTower.tCost;
 			
 			mockTower.destroyTower();
 		}
