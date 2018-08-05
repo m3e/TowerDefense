@@ -149,11 +149,10 @@
 
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
-			//Creates: enemy1
 			//Requires: mapArray,userInfo
 
 			setupBottomBar();
-			//requires setupEnemies();
+			//requires initEnemies for buttons
 
 			setupTowers();
 			//Creates: towerImgs
@@ -268,7 +267,10 @@
 					break;
 
 			}
-			if (!(inputField.contains(e.target as DisplayObject)))
+			trace(!(inputField.contains(e.target as DisplayObject)))
+			trace(e.target)
+			trace(!(e.target is TextField))
+			if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 			{
 				switch (e.keyCode)
 				{
@@ -376,6 +378,7 @@
 			startRoundText.selectable = false;
 			startRoundText.mouseEnabled = false;
 			_root.addChild(startRoundText);
+			
 			dpsDummyButton = new Sprite();
 			dpsDummyButton.graphics.beginFill(0x990000);
 			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF);
@@ -431,7 +434,6 @@
 		}
 		private function sendDpsDummy(e:Event):void
 		{
-
 			initEnemies.createDmgDummy();
 		}
 		private function setupSideBar():void

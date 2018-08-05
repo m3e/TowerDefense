@@ -37,8 +37,10 @@
 		}
 		override public function takeDmg(dmg:Number,dType:String):void
 		{
-			
-				dmg -=  (dmg * determineArmor(armor,dType));
+				
+				dmg -=  (dmg * determineArmor(armor,dType))
+				dmg = (dmg * (1 + increasedDmgTaken))
+				
 				
 				addDamage(dmg);
 			

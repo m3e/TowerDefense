@@ -9,15 +9,15 @@
 		public function Spike() {
 			super();
 			tBaseColor = 0x3399FF
-			tRange = 120
-			tDmg = 15;
-			tAtkSpeed = 6;
+			tRange = 133
+			tDmg = 80;
+			tAtkSpeed = 22;
 			tbSpeed = 30;
 			tAoe = 0;
 			bFrame = 4;
-			tCost = 400;
+			tCost = 180;
 			tType = "ice"
-			tDescription = "Shoots ice spikes.  Slows by 30%, reduces armor by 5 on enemies.  Large range, good damage.  Cost: "+tCost.toString();
+			tDescription = "Shoots ice spikes.  Long range, single target.  Slows 15% and reduces armor by 2."
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -27,13 +27,13 @@
 			var debuffType:Array = new Array;
 			
 			//slow
-			debuffType.push("slow",.3,.5)
+			debuffType.push("slow",.15,.2)
 			debuffsArray.push(debuffType)
 			
 			debuffType = new Array;
 			
 			//brittle
-			debuffType.push("brittle",5,5)
+			debuffType.push("brittle",5,2)
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;

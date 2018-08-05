@@ -93,23 +93,23 @@
 			switch (currentRound)
 			{
 				case 1 :
-					hp = 50;
-					ms = 2.5;
-					gold = 7;
+					hp = 24;
+					ms = 3;
+					gold = 8;
 					armor = 0;
-					numSend = 1;
-					freq = 12
+					numSend = 12;
+					freq = 14
 					
 					;
 					break;
 
 				case 2 :
-					hp = 70;
+					hp = 60;
 					ms = 3;
 					gold = 8;
 					armor = 0;
-					numSend = 1;
-					freq = 12
+					numSend = 10;
+					freq = 16
 					
 					break;
 

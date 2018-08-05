@@ -17,10 +17,10 @@
 			burnList = new Array();
 			tBaseColor = 0x660000;
 			tRange = 50;
-			tDmg = 12.5;
-			tAtkSpeed = 6;
+			tDmg = 10;
+			tAtkSpeed = 8;
 			tbSpeed = 50;
-			tCost = 550;
+			tCost = 220;
 			tType = "fire"
 			tDescription = "Burns the ground in a 1 block AoE (very short range!) dealing 50 damage a second to anything in its range.  Strong.  Cost: "+tCost.toString();
 			// constructor code

@@ -17,8 +17,20 @@
 			tCost = 205;
 			tType = "phys";
 
-			tDescription = "It's a Knight in shining armor.  Well, it was shiny yesterday, before all the battling.  Cost: " + tCost.toString();
+			tDescription = "It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds."
 			// constructor code
+		}
+		override internal function addDebuffs(bullet:Bullet):void
+		{
+			var debuffsArray:Array = new Array;
+			
+			var debuffType:Array = new Array;
+			
+			//penitence
+			debuffType.push("penitence",.1,2)
+			debuffsArray.push(debuffType)
+			
+			bullet.debuffArray = debuffsArray;
 		}
 	}
 	

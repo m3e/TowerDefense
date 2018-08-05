@@ -17,11 +17,11 @@
 			firing = false;
 			tBaseColor = 0x66FFFF;
 			tRange = 50;
-			tDmg = 1;
+			tDmg = 0;
 			tAtkSpeed = 1;
 			tCost = 550;
 			tType = "ice";
-			tDescription = "Slows all units passing through by 30%.  Cost: " + tCost.toString();
+			tDescription = "Slows all units passing through by 30% but deals no damage.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		override internal function eFrame(e:Event):void

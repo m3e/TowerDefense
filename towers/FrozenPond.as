@@ -24,7 +24,7 @@
 			tType = "ice";
 			tNumberOfTargets = 1;
 			targeting = "first";
-			tDescription = "Frozen Pond.  Feel nature's tranquility.  Buffs nearby towers 15% atk speed.  Cost: " + tCost.toString();
+			tDescription = "Frozen Pond.  Feel nature's tranquility.  Buffs towers within 2 blocks 15% dmg.  Cost: " + tCost.toString();
 			// constructor code
 		}
 
@@ -106,7 +106,7 @@
 			
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				tBuff = new Buff(tTarget[i],1,8)
+				tBuff = new Buff(tTarget[i],.15,2)
 				_root.addChild(tBuff);
 			}
 		}

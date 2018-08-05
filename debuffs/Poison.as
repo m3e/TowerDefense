@@ -11,7 +11,6 @@
 		private var sAmount:Number;
 		private var sSeconds:Number;
 		private var pAmount:Number;
-		private var pSeconds:Number;
 
 		private var frames:int;
 

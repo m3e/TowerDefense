@@ -25,6 +25,7 @@
 		public var distanceTraveled:Number;
 		public var killed:Boolean;
 		public var eFrame:int;
+		public var increasedDmgTaken:Number;
 
 		public var poisonSlow:Number;
 		public var iceSlow:Number;
@@ -33,6 +34,7 @@
 		public function Enemy(Map:Array)
 		{
 			stop();
+			increasedDmgTaken = 0;
 			eFrame = 1
 			poisonSlow = 0;
 			iceSlow = 0;
@@ -94,8 +96,11 @@
 			//calculate reduced dmg
 			if (eHp > 0)
 			{
-				dmg -=  (dmg * determineArmor(armor,dType));
-				eHp -=  dmg;
+				dmg -=  ((dmg * determineArmor(armor,dType)) * (1 + increasedDmgTaken))
+				
+				dmg = (dmg * (1 + increasedDmgTaken))
+				
+				eHp -=  dmg
 			}
 			if (eHp <= 0)
 			{

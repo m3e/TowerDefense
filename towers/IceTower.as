@@ -11,14 +11,14 @@
 			tBaseColor = 0x0000FF
 			tRange = 100
 			tDmg = 20;
-			tAtkSpeed = 36;
-			tAoe = 0
+			tAtkSpeed = 24;
+			tAoe = 30
 			tbSpeed = 24;
 			bFrame = 3;
-			tCost = 250;
+			tCost = 80;
 			tType = "ice"
 			
-			tDescription = "Icey.  Cold.  Refreshing.  Slows by 10% for 1 second.  Cost: " + tCost.toString();
+			tDescription = "Icey.  Cold.  Refreshing.  Slows by 10% to small area for 2 seconds.  Cost: " + tCost.toString();
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -27,7 +27,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.1,1)
+			debuffType.push("slow",.1,2)
 			
 			debuffsArray.push(debuffType)
 			

@@ -17,7 +17,7 @@
 		public var splashTowerImg:SplashTowerImg;
 		public var laserTowerImg:LaserTowerImg;
 		public var iceTowerImg:IceTowerImg;
-		public var meleeSwordTowerImg:MeleeSwordTowerImg
+		public var warriorTowerImg:WarriorTowerImg
 		public var flameThrowerTowerImg:FlameThrowerTowerImg;
 		public var arrowTowerImg:ArrowTowerImg;
 		
@@ -37,13 +37,14 @@
 			splashTowerImg = new SplashTowerImg();
 			laserTowerImg = new LaserTowerImg();	
 			iceTowerImg = new IceTowerImg();
-			meleeSwordTowerImg = new MeleeSwordTowerImg();
+			warriorTowerImg = new WarriorTowerImg();
 			flameThrowerTowerImg = new FlameThrowerTowerImg();
 			arrowTowerImg = new ArrowTowerImg();
 			
 			
 			
-			towerList.push(meleeSwordTowerImg,arrowTowerImg,flameThrowerTowerImg,iceTowerImg,splashTowerImg,gunTowerImg,laserTowerImg)
+			towerList.push(warriorTowerImg,arrowTowerImg,flameThrowerTowerImg,iceTowerImg,splashTowerImg,gunTowerImg,laserTowerImg)
+			
 			
 			
 			

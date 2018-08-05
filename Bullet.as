@@ -46,6 +46,10 @@
 			{
 				switch (debuffArray[i][0])
 				{
+					case ("penitence") :
+						debuffs.Debuff.addPenitence(dEnemy,debuffArray[i][1],debuffArray[i][2])
+						break;
+					
 					case ("slow") :
 						debuffs.Debuff.addSlow(dEnemy,debuffArray[i][1],debuffArray[i][2])
 						break;

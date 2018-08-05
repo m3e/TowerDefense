@@ -3,10 +3,10 @@
 	import sounds.SoundManager;
 	
 	
-	public class MeleeSword extends Tower {
+	public class Warrior extends Tower {
 		
 		
-		public function MeleeSword() {
+		public function Warrior() {
 			tBaseColor = 0x8c8781
 			super()
 			

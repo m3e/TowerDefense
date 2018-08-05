@@ -11,12 +11,17 @@
 		private static var burn:Burn;
 		private static var brittle:Brittle;
 		private static var poison:Poison;
+		private static var penitence:Penitence;
 		
 		
 		public function Debuff() {
 			// constructor code
 		}
 		
+		public static function addPenitence(enemy:Enemy, amount:Number,seconds:Number):void
+		{
+			penitence = new Penitence(enemy, amount, seconds);
+		}
 		public static function addSlow(enemy:Enemy, amount:Number,seconds:Number):void
 		{
 			slow = new Slow(enemy,amount,seconds)

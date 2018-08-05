@@ -10,23 +10,23 @@
 			super();
 			tBaseColor = 0x66a843
 			tRange = 95
-			tDmg = 20;
-			tAtkSpeed = 12;
+			tDmg = 60;
+			tAtkSpeed = 24;
 			tbSpeed = 20;
-			tCost = 250;
+			tCost = 120;
 			tType = "earth"
 			bFrame = 5;
-			tNumberOfTargets = 2
-			tDescription = "The Woodsman.  Shoots Earth arrows, can hit two targets, fires twice a second and applies slight poison + 15% slow (poison slow stacks with ice). Cost: "+tCost.toString();
+			tNumberOfTargets = 1
+			tDescription = "The Woodsman.  Shoots Earth arrows, poisons 5 dps + slow 35% for 2 seconds.  Single target.";
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
 		{
-			var debuffsArray:Array = new Array;
-			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("poison",.15,5,3)
+			var debuffsArray:Array = new Array;
+			
+			debuffType.push("poison",.35,5,2)
 			
 			debuffsArray.push(debuffType)
 			

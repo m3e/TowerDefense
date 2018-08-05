@@ -10,11 +10,11 @@
 			super();
 			tBaseColor = 0x000000
 			tRange = 133
-			tDmg = 15;
-			tAtkSpeed = 60;
+			tDmg = 8;
+			tAtkSpeed = 16;
 			tbSpeed = 10;
-			tAoe = 50;
-			tCost = 100;
+			tAoe = 80;
+			tCost = 50;
 			tType = "phys"
 			bFrame = 6
 			
