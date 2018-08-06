@@ -23,7 +23,7 @@
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, addSelf)
 			
-			var bottomBar:Shape = new Shape();
+			/*var bottomBar:Shape = new Shape();
 			bottomBar.graphics.beginFill(0x333333);
 			bottomBar.graphics.drawRect(0,0,900,100);
 			bottomBar.graphics.endFill();
@@ -77,7 +77,7 @@
 			upgrade3.selectable = false
 			
 			
-			_root.addChild(upgrade3);
+			_root.addChild(upgrade3);*/
 		}
 	}
 	

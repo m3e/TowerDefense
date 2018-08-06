@@ -95,7 +95,7 @@
 				case 1 :
 					hp = 24;
 					ms = 3;
-					gold = 8;
+					gold = 5;
 					armor = 0;
 					numSend = 12;
 					freq = 14
@@ -114,39 +114,66 @@
 					break;
 
 				case 3 :
-					hp = 45;
+					hp = 55;
 					ms = 6;
-					gold = 15;
+					gold = 5;
 					armor = 0;
-					numSend = 1;
-					freq = 12
+					numSend = 20;
+					freq = 14
 					break;
 
 				case 4 :
 					hp = 140;
 					ms = 3;
-					gold = 30;
+					gold = 9;
 					armor = 0;
-					numSend = 1;
-					freq = 12
+					numSend = 14;
+					freq = 16
 					break;
 
 				case 5 :
-					hp = 140;
+					hp = 160;
 					ms = 4;
-					gold = 25;
+					gold = 10;
 					armor = 0;
-					numSend = 1;
-					freq = 12
+					numSend = 14;
+					freq = 16
 					break;
 
 				case 6 :
-					hp = 120;
+					hp = 160;
 					ms = 5;
-					gold = 20;
+					gold = 9;
 					armor = 0;
-					numSend = 1;
+					numSend = 20;
 					freq = 12
+					break;
+					
+				case 7 :
+					hp = 240
+					ms = 4
+					gold = 10
+					armor = 0
+					numSend = 18
+					freq = 14
+					break;
+					
+				case 8 :
+					hp = 300
+					ms = 4
+					gold = 11
+					armor = 0
+					numSend = 18
+					freq = 14
+					break;
+					
+				case 9 :
+					hp = 560
+					ms = 3
+					gold = 0
+					armor = 0
+					numSend = 16
+					freq = 16
 					break;
 
 				default :

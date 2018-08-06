@@ -9,7 +9,7 @@
 		public function Splash() {
 			super();
 			tBaseColor = 0x000000
-			tRange = 133
+			tRange = 110
 			tDmg = 8;
 			tAtkSpeed = 16;
 			tbSpeed = 10;

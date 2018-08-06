@@ -15,6 +15,13 @@
 			numField.restrict = "0-9"
 			freqField.restrict = "0-9"
 			
+			goldField.text = String(0)
+			hpField.text = String(0)
+			msField.text = String(0)
+			armorField.text = String(0)
+			numField.text = String(0)
+			freqField.text = String(0)
+			
 			/*goldField.addEventListener(Event.CHANGE, changedText)
 			hpField.addEventListener(Event.CHANGE, changedText)
 			msField.addEventListener(Event.CHANGE, changedText)

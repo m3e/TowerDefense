@@ -39,7 +39,6 @@
 		private var enemyList:Array;
 
 		//shapes
-		private var sideBar:Shape;
 		private var bottomBar:BottomBar;
 		private var startRoundButton:Sprite;
 		private var dpsDummyButton:Sprite;
@@ -132,15 +131,9 @@
 			//Displays: maps
 
 			setupRangeCircle();
-			//Creates: rangeCircle
+			//Creates: rangeCircle shape
 
-
-			setupSideBar();
-			//Creates: towerSelectedSquare
-			//Creates: sideBar
-			//Displays: sideBar
-
-
+			setupTowerSquares();
 
 			setupUser();
 			//Creates: userInfo
@@ -184,7 +177,6 @@
 		public function mouseHoverOut(e:Event):void
 		{
 			towerStatsOver.visible = false;
-			
 		}
 
 		public function mouseHoverOver(e:Event):void
@@ -193,7 +185,6 @@
 			_root.setChildIndex(towerStatsOver, _root.numChildren - 1);
 			towerStatsOver.x = e.currentTarget.x - 170;
 			towerStatsOver.y = e.currentTarget.y
-			;
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
 			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2)
 			towerStatsOver.RngBox.text = e.currentTarget.tRange
@@ -229,7 +220,7 @@
 				case Keyboard.ESCAPE :
 					if (towerSelected != null)
 					{
-						selectTower(towerSelected);
+						buildTower(towerSelected);
 					}
 					break;
 
@@ -267,39 +258,36 @@
 					break;
 
 			}
-			trace(!(inputField.contains(e.target as DisplayObject)))
-			trace(e.target)
-			trace(!(e.target is TextField))
 			if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 			{
 				switch (e.keyCode)
 				{
 					case Keyboard.NUMBER_1 :
-						selectTower(towersInitiate.towerList[0]);
+						buildTower(towersInitiate.towerList[0]);
 						break;
 
 					case Keyboard.NUMBER_2 :
-						selectTower(towersInitiate.towerList[1]);
+						buildTower(towersInitiate.towerList[1]);
 						break;
 
 					case Keyboard.NUMBER_3 :
-						selectTower(towersInitiate.towerList[2]);
+						buildTower(towersInitiate.towerList[2]);
 						break;
 
 					case Keyboard.NUMBER_4 :
-						selectTower(towersInitiate.towerList[3]);
+						buildTower(towersInitiate.towerList[3]);
 						break;
 
 					case Keyboard.NUMBER_5 :
-						selectTower(towersInitiate.towerList[4]);
+						buildTower(towersInitiate.towerList[4]);
 						break;
 
 					case Keyboard.NUMBER_6 :
-						selectTower(towersInitiate.towerList[5]);
+						buildTower(towersInitiate.towerList[5]);
 						break;
 
 					case Keyboard.NUMBER_7 :
-						selectTower(towersInitiate.towerList[6]);
+						buildTower(towersInitiate.towerList[6]);
 						break;
 				}
 			}
@@ -352,9 +340,9 @@
 
 			_root.addChild(bottomBar);
 
-			bottomBar.upgrade1.addEventListener(MouseEvent.CLICK, upgradeTower);
+			/*bottomBar.upgrade1.addEventListener(MouseEvent.CLICK, upgradeTower);
 			bottomBar.upgrade2.addEventListener(MouseEvent.CLICK, upgradeTower);
-			bottomBar.upgrade3.addEventListener(MouseEvent.CLICK, upgradeTower);
+			bottomBar.upgrade3.addEventListener(MouseEvent.CLICK, upgradeTower);*/
 
 
 			startRoundButton = new Sprite();
@@ -436,23 +424,13 @@
 		{
 			initEnemies.createDmgDummy();
 		}
-		private function setupSideBar():void
+		private function setupTowerSquares():void
 		{
-
-			//BG
-			sideBar = new Shape();
-			sideBar.graphics.beginFill(0x333333);
-			sideBar.graphics.drawRect(0,0,100,416);
-			sideBar.graphics.endFill();
-			sideBar.x = mapArray[0].length * tileSide;
-			_root.addChild(sideBar);
-
-
 
 			//Upgradeable tower square
 			upgradeableTowerSquare = new Shape ();
-			upgradeableTowerSquare.graphics.lineStyle(4,0x000000);
-			upgradeableTowerSquare.graphics.beginFill(0xFFFFFF,0);
+			upgradeableTowerSquare.graphics.lineStyle(4,0x665544);
+			upgradeableTowerSquare.graphics.beginFill(0x665544,0);
 			upgradeableTowerSquare.graphics.drawRect(0,0,tileSide,tileSide);
 			upgradeableTowerSquare.graphics.endFill();
 			upgradeableTowerSquare.visible = false;
@@ -460,8 +438,8 @@
 
 			//Selected Square
 			towerSelectedSquare = new Shape ();
-			towerSelectedSquare.graphics.lineStyle(4,0xFFFFFF);
-			towerSelectedSquare.graphics.beginFill(0xFFFFFF,0);
+			towerSelectedSquare.graphics.lineStyle(4,0x665544);
+			towerSelectedSquare.graphics.beginFill(665544,0);
 			towerSelectedSquare.graphics.drawRect(0,0,tileSide,tileSide);
 			towerSelectedSquare.graphics.endFill();
 			towerSelectedSquare.visible = false;
@@ -480,8 +458,6 @@
 		private function mouseDownAction(e:MouseEvent):void
 		{
 			inputField.startDrag();
-			
-			
 		}
 		private function mouseUpAction(e:MouseEvent):void
 		{
@@ -491,9 +467,9 @@
 		public function selectTowerMouse(e:MouseEvent):void
 		{
 			var tower:Sprite = e.currentTarget as Sprite;
-			selectTower(tower);
+			buildTower(tower);
 		}
-		private function selectTower(tower:Object):void
+		private function buildTower(tower:Object):void
 		{
 			//x&y for TowerSelectedSquare
 			towerSelectedSquare.x = tower.x;
@@ -503,8 +479,8 @@
 			if (towerSelected != tower)
 			{
 				//towerSelected = tower sent via constructor
-
 				towerSelected = tower;
+				
 				if (towerImg != null && _root.contains(towerImg))
 				{
 					_root.removeChild(towerImg);
@@ -517,14 +493,9 @@
 				towerImg.y = mouseY - (mouseY % tileSide);
 				_root.addChild(towerImg);
 
-				var mockTower:Tower = new tower.towerReference();
-
-				rangeCircle.width = mockTower.tRange * 2;
-				rangeCircle.height = mockTower.tRange * 2;
+				rangeCircle.width = towerImg.tRange * 2;
+				rangeCircle.height = towerImg.tRange * 2;
 				towerSelectedSquare.visible = true;
-
-				mockTower.destroyTower();
-
 				rangeCircle.visible = true;
 				rangeCircle.x = mouseX - (mouseX % tileSide) + (tileSide * .5);
 				rangeCircle.y = mouseY - (mouseY % tileSide) + (tileSide * .5);
@@ -624,7 +595,7 @@
 				}
 				else
 				{
-					selectTower(towerSelected);
+					buildTower(towerSelected);
 				}
 			}
 		}
@@ -632,6 +603,7 @@
 		{
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa();
+			klasa = null;
 			if (userInfo.canAfford(newTower.tCost))
 			{
 
@@ -659,7 +631,7 @@
 			}
 
 		}
-		private function upgradeTower(e:Event):void
+		/*private function upgradeTower(e:Event):void
 		{
 			var klasa:Class;
 			var testTower:Tower;
@@ -668,7 +640,6 @@
 				switch (e.currentTarget.name)
 				{
 					case ("upgrade1") :
-
 						klasa = upgradeableTower.upgradeOne();
 						break;
 
@@ -703,7 +674,7 @@
 
 
 			}
-		}
+		}*/
 		private function onMouseOver(e:Event):void
 		{
 			if (towerImg != null)
@@ -741,7 +712,7 @@
 				upgradeableTowerSquare.x = upgradeableTower.x;
 				upgradeableTowerSquare.y = upgradeableTower.y;
 
-				var klasa:Class;
+				/*var klasa:Class;
 				var testTower:Tower;
 
 				if (upgradeableTower.upgradeOne() != null)
@@ -776,7 +747,7 @@
 				else
 				{
 					bottomBar.upgrade3.text = "No upgrade available.";
-				}
+				}*/
 			}
 			else
 			{
