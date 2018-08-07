@@ -2,7 +2,7 @@
 	
 	import towers.Gun;
 	
-	public class GunTowerImg extends TowerImg {
+	public class GunTowerImg extends PsuedoTower {
 		
 		
 		public function GunTowerImg() {

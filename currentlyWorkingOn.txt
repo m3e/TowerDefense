@@ -1,0 +1,7 @@
+tabs
+
+bottombar,map,towersinitiate,psuedoTower,tower,menumanager,warrior
+
+attempting to get bottombar.menumanagerinstance. to updateCurrentMenu() and gets tower upgrades to become icons
+
+have to decide how icons/skills/buttons are to appear

@@ -3,7 +3,7 @@
 
 	import towers.Arrow;
 
-	public class ArrowTowerImg extends TowerImg{
+	public class ArrowTowerImg extends PsuedoTower{
 
 
 		public function ArrowTowerImg()

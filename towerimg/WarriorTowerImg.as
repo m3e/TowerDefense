@@ -3,7 +3,7 @@
 	import towers.Warrior;
 	
 	
-	public class WarriorTowerImg extends TowerImg {
+	public class WarriorTowerImg extends PsuedoTower {
 		
 		
 		public function WarriorTowerImg() {

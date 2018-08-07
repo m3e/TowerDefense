@@ -2,7 +2,7 @@
 	
 	import towers.Laser
 	
-	public class LaserTowerImg extends TowerImg {
+	public class LaserTowerImg extends PsuedoTower {
 		
 		
 		public function LaserTowerImg() {

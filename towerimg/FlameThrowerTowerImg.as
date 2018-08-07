@@ -3,7 +3,7 @@
 	import towers.FireTower;
 	
 	
-	public class FlameThrowerTowerImg extends TowerImg {
+	public class FlameThrowerTowerImg extends PsuedoTower {
 		
 		
 		public function FlameThrowerTowerImg() {

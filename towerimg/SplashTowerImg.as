@@ -3,7 +3,7 @@
 	import towers.Splash
 	
 	
-	public class SplashTowerImg extends TowerImg {
+	public class SplashTowerImg extends PsuedoTower {
 		
 		
 		public function SplashTowerImg() {

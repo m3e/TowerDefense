@@ -33,8 +33,11 @@
 		public var tCost:int;
 		public var tType:String;
 		
+		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
+		
+		public var tMenu:Array;
 
 		public var tBaseColor:int;
 
@@ -69,6 +72,9 @@
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			
+			tMenu = [[,,,],
+					 [,,,],
+					 [,upgradeThree(),upgradeTwo(),upgradeOne()]];
 			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -77,6 +83,9 @@
 		{			
 			
 			_root = MovieClip(root);
+			
+			
+					 
 			
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
@@ -214,6 +223,7 @@
 		{
 			return null;
 		}
+		
 		internal function checkB(xCo:int,yCo:int):Boolean
 		{
 			var inBounds:Boolean;
