@@ -17,6 +17,7 @@
 		public function BottomBar() {
 			// constructor code
 			addEventListener(Event.ADDED_TO_STAGE, addSelf)
+			trace(t1,t2,t3,t4);
 		}
 		private function addSelf(e:Event):void
 		{
