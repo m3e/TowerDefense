@@ -37,6 +37,14 @@
 		{
 			menuManager.tileMapClicked(e)
 		}
+		public function keyDownPress(e:KeyboardEvent):void
+		{
+			menuManager.keyDownPress(e);
+		}
+		public function defaultMenu():void
+		{
+			menuManager.returnToDefaultMenu();
+		}
 	}
 	
 }

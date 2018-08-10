@@ -16,7 +16,6 @@
 	import design.*;
 
 	import enemies.*;
-	import controls.mouse.MouseControls;
 	import flash.text.TextField;
 	import flash.display.DisplayObject;
 	import towerimg.PsuedoTower;
@@ -44,31 +43,21 @@
 		private var startRoundButton:Sprite;
 		private var dpsDummyButton:Sprite;
 
-
-
-
 		//tower related
 		private var towerBeingBuilt:Object;
 		private var psuedoTower:Object;
 		private var mouseclickedTower:Object;
 
 		//tower ui
-		//private var towerBeingBuiltSquare:Shape;
 		private var mouseclickedTowerSquare:Shape;
 		private var rangeCircle:Shape;
 
 		//ui
 		private var inputField:InputField;
 
-		//towers
-		//private var towersInitiate:TowersInitiate;
-
 		//controls
-		private var mouseControls:MouseControls;
 		private var _keyDown:Boolean;
 		private var shiftDown:Boolean;
-
-		//private var towerStatsOver:TowerStatsOver;
 
 		//user
 		private var userInfo:UserInfo;
@@ -79,9 +68,6 @@
 
 		//booleans
 		private var healthBarOn:Boolean;
-
-
-
 
 		public function Map()
 		{
@@ -115,12 +101,7 @@
 					towerArray[row][col] = undefined;
 				}
 			}
-
 			addEventListener(Event.ADDED_TO_STAGE, added);
-
-
-
-
 			// constructor code;
 		}
 		private function added(e:Event):void
@@ -139,8 +120,6 @@
 			setupUser();
 			//Creates: userInfo
 
-
-
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
 			//Requires: mapArray,userInfo
@@ -148,54 +127,17 @@
 			setupBottomBar();
 			//requires initEnemies for buttons
 
-			setupTowers();
-			//Creates: psuedoTowers
-			//Displays: psuedoTowers
-			//Requires: enemyList
-
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
 			//Requires: RangeCircle
 			//Requires: psuedoTowers
 
 			setupTileListeners();
-
-			setupMouseControls();
-
 		}
 		private function setupUser():void
 		{
 			userInfo = new UserInfo();
 			_root.addChild(userInfo);
-		}
-		private function setupMouseControls():void
-		{
-			//mouseControls = new MouseControls(towersInitiate.towerList,this);
-			/*towerStatsOver = new TowerStatsOver  ;
-			_root.addChild(towerStatsOver);
-			towerStatsOver.visible = false;*/
-		}
-		public function mouseHoverOut(e:Event):void
-		{
-			//towerStatsOver.visible = false;
-		}
-		public function mouseHoverOver(e:Event):void
-		{
-			/*towerStatsOver.visible = true;
-			_root.setChildIndex(towerStatsOver, _root.numChildren - 1);
-			towerStatsOver.x = e.currentTarget.x - 170;
-			towerStatsOver.y = e.currentTarget.y
-			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2)
-			towerStatsOver.RngBox.text = e.currentTarget.tRange
-			towerStatsOver.TypeBox.text = e.currentTarget.tType
-			towerStatsOver.DescBox.text = e.currentTarget.tDescription
-			towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
-			towerStatsOver.CostBox.text = e.currentTarget.tCost;*/
-		}
-		private function setupTowers():void
-		{
-			//towersInitiate = new TowersInitiate(_root,enemyList);
 		}
 		private function setupKeyboard():void
 		{
@@ -229,7 +171,11 @@
 					break;
 
 				case Keyboard.X :
-					sellTower(mouseclickedTower);
+					if (mouseclickedTower != null)
+					{
+						sellTower(mouseclickedTower);
+						bottomBar.keyDownPress(e);
+					}
 					break;
 
 				case Keyboard.Q :
@@ -247,9 +193,9 @@
 				case Keyboard.R :
 					stage.frameRate = 1;
 					break;
-					
+
 				case Keyboard.U :
-					inputField.visible = !(inputField.visible)
+					inputField.visible = !(inputField.visible);
 					break;
 
 				case Keyboard.SPACE :
@@ -259,35 +205,11 @@
 			}
 			if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 			{
-				switch (e.keyCode)
+				bottomBar.keyDownPress(e);
+				if (mouseclickedTower != null)
 				{
-					/*case Keyboard.NUMBER_1 :
-						buildTower(towersInitiate.towerList[0]);
-						break;
-
-					case Keyboard.NUMBER_2 :
-						buildTower(towersInitiate.towerList[1]);
-						break;
-
-					case Keyboard.NUMBER_3 :
-						buildTower(towersInitiate.towerList[2]);
-						break;
-
-					case Keyboard.NUMBER_4 :
-						buildTower(towersInitiate.towerList[3]);
-						break;
-
-					case Keyboard.NUMBER_5 :
-						buildTower(towersInitiate.towerList[4]);
-						break;
-
-					case Keyboard.NUMBER_6 :
-						buildTower(towersInitiate.towerList[5]);
-						break;
-
-					case Keyboard.NUMBER_7 :
-						buildTower(towersInitiate.towerList[6]);
-						break;*/
+					mouseclickedTowerSquare.visible = false;
+					mouseclickedTower = null;
 				}
 			}
 		}
@@ -320,7 +242,7 @@
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
 
 				psuedoTower.visible = true;
-				
+
 				psuedoTower.x = e.currentTarget.x;
 				psuedoTower.y = e.currentTarget.y;
 			}
@@ -331,13 +253,15 @@
 			{
 				psuedoTower.visible = false;
 			}
-			rangeCircle.visible = false;
+			if (mouseclickedTower == null)
+			{
+				rangeCircle.visible = false;
+			}
 		}
-
 		private function setupBottomBar():void
 		{
 			bottomBar = new BottomBar(this);
-			bottomBar.y = 416
+			bottomBar.y = 416;
 			_root.addChild(bottomBar);
 
 			/*bottomBar.upgrade1.addEventListener(MouseEvent.CLICK, upgradeTower);
@@ -366,7 +290,7 @@
 			startRoundText.selectable = false;
 			startRoundText.mouseEnabled = false;
 			_root.addChild(startRoundText);
-			
+
 			dpsDummyButton = new Sprite();
 			dpsDummyButton.graphics.beginFill(0x990000);
 			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF);
@@ -426,7 +350,6 @@
 		}
 		private function setupTowerSquares():void
 		{
-
 			//Upgradeable tower square
 			mouseclickedTowerSquare = new Shape ();
 			mouseclickedTowerSquare.graphics.lineStyle(4,0x665544);
@@ -436,15 +359,6 @@
 			mouseclickedTowerSquare.visible = false;
 			_root.addChild(mouseclickedTowerSquare );
 
-			//Selected Square
-			/*towerBeingBuiltSquare = new Shape ();
-			towerBeingBuiltSquare.graphics.lineStyle(4,0x665544);
-			towerBeingBuiltSquare.graphics.beginFill(665544,0);
-			towerBeingBuiltSquare.graphics.drawRect(0,0,tileSide,tileSide);
-			towerBeingBuiltSquare.graphics.endFill();
-			towerBeingBuiltSquare.visible = false;
-			_root.addChild(towerBeingBuiltSquare);*/
-
 			inputField = new InputField();
 			inputField.x = 692;
 			inputField.y = 8;
@@ -452,8 +366,6 @@
 			inputField.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
 			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
 			_root.addChild(inputField);
-
-
 		}
 		private function mouseDownAction(e:MouseEvent):void
 		{
@@ -462,78 +374,63 @@
 		private function mouseUpAction(e:MouseEvent):void
 		{
 			inputField.stopDrag();
-		}	
-		public function selectTowerMouse(e:MouseEvent):void
-		{
-			//var tower:Sprite = e.currentTarget as Sprite;
-			//buildTower(tower);
 		}
 		public function buildTower(tower:Object):void
 		{
-			
-			
-
 			//If there was a tower already selected and it does not equal the one you clicked
 			if (towerBeingBuilt != tower)
 			{
 				//towerBeingBuilt = tower sent via constructor
 				towerBeingBuilt = tower;
-				
+
 				if (psuedoTower != null && _root.contains(psuedoTower))
 				{
-					
 					_root.removeChild(psuedoTower);
 					psuedoTower = null;
 				}
-				
-				psuedoTower = new PsuedoTower(tower.towerReference)
+
+				psuedoTower = new PsuedoTower(tower.towerReference);
 				psuedoTower.mouseEnabled = false;
 				_root.addChild(psuedoTower);
 				psuedoTower.visible = false;
 				rangeCircle.visible = false;
-				/*psuedoTower = getDefinitionByName(getQualifiedClassName(towerBeingBuilt));
-				psuedoTower = new psuedoTower();
-				psuedoTower.mouseEnabled = false;
-				psuedoTower.x = mouseX - (mouseX % tileSide);
-				psuedoTower.y = mouseY - (mouseY % tileSide);
-				_root.addChild(psuedoTower);*/
-				
 
+				psuedoTower.x = Math.floor(mouseX / tileSide) * tileSide;
+				psuedoTower.y = Math.floor(mouseY / tileSide) * tileSide
+				;
 				rangeCircle.width = psuedoTower.tRange * 2;
 				rangeCircle.height = psuedoTower.tRange * 2;
+				rangeCircle.x = psuedoTower.x + (tileSide * .5);
+				rangeCircle.y = psuedoTower.y + (tileSide * .5);
+
 				//towerBeingBuiltSquare.visible = true;
-
-				/*if (psuedoTower.x >= mapArray[0].length * tileSide || psuedoTower.y >= mapArray.length * tileSide)
+				if (psuedoTower.x > 0 && psuedoTower.y > 0 && psuedoTower.x <= (mapArray[0].length * tileSide) - psuedoTower.width && psuedoTower.y <= (mapArray.length * tileSide) - psuedoTower.height)
 				{
-					psuedoTower.visible = false;
-					rangeCircle.visible = false;
-				}*/
-
+					psuedoTower.visible = true;
+					rangeCircle.visible = true;
+				}
 			}
 			else
 			{
 				//Tower selected is same as tower in memory
-
-				//towerBeingBuiltSquare.visible = ! towerBeingBuiltSquare.visible;
 				towerBeingBuilt = null;
 				_root.removeChild(psuedoTower);
 				psuedoTower = null;
 				rangeCircle.visible = false;
 			}
-
 		}
 		private function sellTower(tower:Object)
 		{
 			if (mouseclickedTower != null)
 			{
-
-
 				tileArray[tower.y / tileSide][tower.x / tileSide].occupied = false;
 
 				userInfo.changeGold(mouseclickedTower.tCost);
+
+				rangeCircle.visible = false;
+				mouseclickedTowerSquare.visible = false;
 				mouseclickedTower.destroyTower();
 				mouseclickedTower = null;
-				mouseclickedTowerSquare.visible = false;
 			}
 		}
 		private function setupRangeCircle():void
@@ -583,29 +480,23 @@
 			}
 
 		}
-
-
 		private function tileClicked(e:MouseEvent):void
 		{
-			mouseclickedTower = null;
-			mouseclickedTowerSquare.visible = false;
+			if (mouseclickedTower != null)
+			{
+				mouseclickedTowerSquare.visible = false;
+				rangeCircle.visible = false;
+				mouseclickedTower = null;
+				bottomBar.tileMapClicked(e);
+			}
 			if (e.currentTarget.occupied == false && psuedoTower != null)
 			{
-				addTowerToMap(e.currentTarget,psuedoTower.towerReference);
-				
-				if (_keyDown == true && shiftDown == true)
-				{
-
-				}
-				else
-				{
-					buildTower(towerBeingBuilt);
-					bottomBar.tileMapClicked(e);
-				}
+				addTowerToMap(e,psuedoTower.towerReference);
 			}
 		}
-		private function addTowerToMap(mEvent:Object, TowerReference:Class):void
+		private function addTowerToMap(e:Event, TowerReference:Class):void
 		{
+			var mEvent:Object = e.currentTarget;
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa();
 			klasa = null;
@@ -613,9 +504,9 @@
 			{
 
 				userInfo.changeGold(-newTower.tCost);
+
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
-
 				newTower.x = mEvent.x;
 				newTower.y = mEvent.y;
 
@@ -628,59 +519,68 @@
 				newTower.addEventListener(MouseEvent.CLICK, towerMapClicked);
 				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
 				mEvent.occupied = true;
+
+				if (_keyDown == true && shiftDown == true)
+				{
+				}
+				else
+				{
+					buildTower(towerBeingBuilt);
+					bottomBar.tileMapClicked(e);
+					rangeCircle.visible = false;
+				}
 			}
 			else
 			{
 				newTower.destroyTower();
-				
+
 				trace("Can't afford this tower.  Cost: ", newTower.tCost);
 				newTower = null;
 			}
-
 		}
 		/*private function upgradeTower(e:Event):void
 		{
-			var klasa:Class;
-			var testTower:Tower;
-			if (mouseclickedTower != null)
-			{
-				switch (e.currentTarget.name)
-				{
-					case ("upgrade1") :
-						klasa = mouseclickedTower.upgradeOne();
-						break;
-
-					case ("upgrade2") :
-						klasa = mouseclickedTower.upgradeTwo();
-						break;
-
-					case ("upgrade3") :
-						klasa = mouseclickedTower.upgradeThree();
-						break;
-				}
-				if (klasa is Class)
-				{
-					testTower = new klasa();
-					if (userInfo.canAfford(testTower.tCost))
-					{
-
-						mouseclickedTower.destroyTower();
-						mouseclickedTowerSquare.visible = false;
-
-						addTowerToMap(tileArray[mouseclickedTower.y/tileSide][mouseclickedTower.x/tileSide],klasa);
-
-
-						mouseclickedTower = null;
-					}
-					else
-					{
-						trace("Cannot afford.  Cost: ",testTower.tCost);
-					}
-					testTower.destroyTower();
-				}
-
-
-			}
+		var klasa:Class;
+		var testTower:Tower;
+		if (mouseclickedTower != null)
+		{
+		switch (e.currentTarget.name)
+		{
+		case ("upgrade1") :
+		klasa = mouseclickedTower.upgradeOne();
+		break;
+		
+		case ("upgrade2") :
+		klasa = mouseclickedTower.upgradeTwo();
+		break;
+		
+		case ("upgrade3") :
+		klasa = mouseclickedTower.upgradeThree();
+		break;
+		}
+		if (klasa is Class)
+		{
+		testTower = new klasa();
+		if (userInfo.canAfford(testTower.tCost))
+		{
+		
+		mouseclickedTower.destroyTower();
+		mouseclickedTowerSquare.visible = false;
+		
+		addTowerToMap(tileArray[mouseclickedTower.y/tileSide][mouseclickedTower.x/tileSide],klasa);
+		
+		
+		mouseclickedTower = null;
+		}
+		else
+		{
+		trace("Cannot afford.  Cost: ",testTower.tCost);
+		}
+		testTower.destroyTower();
+		}
+		
+		
+		}
 		}*/
 		private function onMouseOver(e:Event):void
 		{
@@ -688,7 +588,6 @@
 			{
 				psuedoTower.visible = false;
 			}
-
 			/*rangeCircle.visible = true;
 			rangeCircle.width = e.currentTarget.tRange * 2;
 			rangeCircle.height = e.currentTarget.tRange * 2;
@@ -699,91 +598,84 @@
 		{
 			if (towerBeingBuilt != null)
 			{
-				
-
 				rangeCircle.width = towerBeingBuilt.tRange * 2;
 				rangeCircle.height = towerBeingBuilt.tRange * 2;
-
-				
 			}
-			
 		}
 		private function towerMapClicked(e:MouseEvent):void
 		{
+			if (towerBeingBuilt != null)
+			{
+				buildTower(towerBeingBuilt);
+			}
 			if (mouseclickedTower != e.currentTarget)
 			{
 				mouseclickedTower = e.currentTarget;
-				
+
 				mouseclickedTowerSquare.visible = true;
 				mouseclickedTowerSquare.x = mouseclickedTower.x;
 				mouseclickedTowerSquare.y = mouseclickedTower.y;
-				
+
 				rangeCircle.visible = true;
 				rangeCircle.width = e.currentTarget.tRange * 2;
 				rangeCircle.height = e.currentTarget.tRange * 2;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
-				
-				trace("map.towermapclicked");
+
 				bottomBar.towerMapClicked(e);
-				if (towerBeingBuilt != null)
-				{
-					buildTower(towerBeingBuilt);
-				}
 
 				/*var klasa:Class;
 				var testTower:Tower;
-
+				
 				if (mouseclickedTower.upgradeOne() != null)
 				{
-					klasa = mouseclickedTower.upgradeOne();
-					testTower = new klasa();
-					bottomBar.upgrade1.text = testTower.tDescription;
-					testTower.destroyTower();
+				klasa = mouseclickedTower.upgradeOne();
+				testTower = new klasa();
+				bottomBar.upgrade1.text = testTower.tDescription;
+				testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade1.text = "No upgrade available.";
+				bottomBar.upgrade1.text = "No upgrade available.";
 				}
 				if (mouseclickedTower.upgradeTwo() != null)
 				{
-					klasa = mouseclickedTower.upgradeTwo();
-					testTower = new klasa();
-					bottomBar.upgrade2.text = testTower.tDescription;
-					testTower.destroyTower();
+				klasa = mouseclickedTower.upgradeTwo();
+				testTower = new klasa();
+				bottomBar.upgrade2.text = testTower.tDescription;
+				testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade2.text = "No upgrade available.";
+				bottomBar.upgrade2.text = "No upgrade available.";
 				}
 				if (mouseclickedTower.upgradeThree() != null)
 				{
-					klasa = mouseclickedTower.upgradeThree();
-					testTower = new klasa();
-					bottomBar.upgrade3.text = testTower.tDescription;
-					testTower.destroyTower();
+				klasa = mouseclickedTower.upgradeThree();
+				testTower = new klasa();
+				bottomBar.upgrade3.text = testTower.tDescription;
+				testTower.destroyTower();
 				}
 				else
 				{
-					bottomBar.upgrade3.text = "No upgrade available.";
+				bottomBar.upgrade3.text = "No upgrade available.";
 				}*/
 			}
 			else
 			{
+				bottomBar.defaultMenu();
 				mouseclickedTower = null;
 				mouseclickedTowerSquare.visible = false;
+				rangeCircle.visible = false;
 			}
 		}
 		private function towerRemoved(e:Event):void
 		{
-
 			towerArray[e.currentTarget.y / tileSide][e.currentTarget.x / tileSide] = undefined;
 			e.currentTarget.removeEventListener(MouseEvent.CLICK, towerMapClicked);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
 		}
-
 	}
-
 }

@@ -1,4 +1,8 @@
-﻿package towers
+﻿
+
+
+
+package towers
 {
 
 	import flash.display.MovieClip;
@@ -36,8 +40,6 @@
 		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
-		
-		public var tMenu:Array;
 
 		public var tBaseColor:int;
 
@@ -72,17 +74,24 @@
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			
-			tMenu = [[,,,],
-					 [,,,],
-					 [,upgradeThree(),upgradeTwo(),upgradeOne()]];
+			
 			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
 		}
+		public function tMenu():Array
+		{
+			var e:Array = new Array
+				e = [[,,,],
+					 [,,,],
+					 [,upgradeThree(),upgradeTwo(),upgradeOne()]];
+					 
+				return e;
+		}
 		private function added(e:Event):void
 		{			
 			
-			_root = MovieClip(root);
+			_root = parent;
 			
 			
 					 
