@@ -17,6 +17,7 @@
 			tbSpeed = 50;
 			tCost = 30;
 			tType = "phys"
+			tFrame = 1;
 			
 			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.  Cost: " + tCost.toString();
 			// constructor code

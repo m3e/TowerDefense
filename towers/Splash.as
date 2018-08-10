@@ -17,6 +17,7 @@
 			tCost = 50;
 			tType = "phys"
 			bFrame = 6
+			tFrame = 5
 			
 			tDescription = "Big, explodey, splash guy.  Hits more than one unit if they're close.  Cost: " + tCost.toString();
 			

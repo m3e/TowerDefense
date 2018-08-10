@@ -21,6 +21,7 @@
 			tCost = 70;
 			tType = "fire";
 			tNumberOfTargets = 1;
+			tFrame = 3;
 			
 			tDescription = "Takes fire and throws it, like some sort of throwing flame machine.  Cost: " + tCost.toString();
 			

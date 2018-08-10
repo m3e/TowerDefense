@@ -17,6 +17,7 @@
 			bFrame = 3;
 			tCost = 80;
 			tType = "ice"
+			tFrame = 4;
 			
 			tDescription = "Icey.  Cold.  Refreshing.  Slows by 10% to small area for 2 seconds.  Cost: " + tCost.toString();
 			// constructor code

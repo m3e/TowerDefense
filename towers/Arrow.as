@@ -16,6 +16,7 @@
 			tCost = 40;
 			tType = "phys"
 			bFrame = 5;			
+			tFrame = 2;
 
 			tDescription = "The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.  Cost: " + tCost.toString();
 			// constructor code

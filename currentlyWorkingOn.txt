@@ -1,7 +1,3 @@
-tabs
+bottombar,map,menumanager
 
-bottombar,map,towersinitiate,psuedoTower,tower,menumanager,warrior
-
-attempting to get bottombar.menumanagerinstance. to updateCurrentMenu() and gets tower upgrades to become icons
-
-have to decide how icons/skills/buttons are to appear
+trying to determine why double click on context menu makes missing links

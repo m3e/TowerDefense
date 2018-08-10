@@ -15,14 +15,14 @@
 		public function MouseControls(TowerList:Array, myParent:Object)
 		{
 
-			towerList = new Array  ;
+			/*towerList = new Array  ;
 			towerList = TowerList;
 			for (var i:int=0; i < towerList.length; i++)
 			{
 				towerList[i].addEventListener(MouseEvent.CLICK, myParent.selectTowerMouse);
 				towerList[i].addEventListener(MouseEvent.MOUSE_OVER, myParent.mouseHoverOver);
 				towerList[i].addEventListener(MouseEvent.MOUSE_OUT, myParent.mouseHoverOut);
-			}
+			}*/
 			// constructor code
 		}
 
