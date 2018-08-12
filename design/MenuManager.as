@@ -17,6 +17,7 @@
 	public class MenuManager extends MovieClip
 	{
 
+		private var sellObject:SellObject;
 		private var menuIsDefault:Boolean;
 		private var towerBeingBuiltSquare:Shape;
 		private var menuIcon:MenuIcon;
@@ -24,9 +25,11 @@
 		private var cellsArray:Array;
 		private var towerStatsOver:TowerStatsOver;
 		private var _root:Object;
+		private var selectedTower:Tower;
 
 		public function MenuManager(e:Object)
 		{
+
 			currentMenuSelected = new Array  ;
 			cellsArray = new Array  ;
 			_root = e;
@@ -51,7 +54,9 @@
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-
+			sellObject = new SellObject();
+			addChild(sellObject);
+			sellObject.visible = false;
 
 			towerBeingBuiltSquare = new Shape ();
 			towerBeingBuiltSquare.graphics.lineStyle(4,0x665544);
@@ -61,80 +66,78 @@
 			towerBeingBuiltSquare.visible = false;
 			addChild(towerBeingBuiltSquare);
 
-			returnToDefaultMenu();
-
 			towerStatsOver = new TowerStatsOver  ;
 			addChild(towerStatsOver);
 			towerStatsOver.visible = false;
+			
+			returnToDefaultMenu();
 		}
 		public function keyDownPress(e:KeyboardEvent):void
 		{
 
 			switch (e.keyCode)
 			{
-				case Keyboard.X :
-					returnToDefaultMenu();
-					break;
-
-				case Keyboard.NUMBER_1 :
+					/*case Keyboard.NUMBER_1 :
 					if (menuIsDefault == true)
 					{
 					}
 					else
 					{
-						returnToDefaultMenu();
+					returnToDefaultMenu();
 					}
 					selectTower(currentMenuSelected[0][0]);
 					break;
-
-				case Keyboard.NUMBER_2 :
+					
+					case Keyboard.NUMBER_2 :
 					if (menuIsDefault == true)
 					{
 					}
 					else
 					{
-						returnToDefaultMenu();
+					returnToDefaultMenu();
 					}
 					selectTower(currentMenuSelected[0][1]);
 					break;
-
-				case Keyboard.NUMBER_3 :
+					
+					case Keyboard.NUMBER_3 :
 					if (menuIsDefault == true)
 					{
 					}
 					else
 					{
-						returnToDefaultMenu();
+					returnToDefaultMenu();
 					}
 					selectTower(currentMenuSelected[0][2]);
 					break;
-
-				case Keyboard.NUMBER_4 :
+					
+					case Keyboard.NUMBER_4 :
 					if (menuIsDefault == true)
 					{
 					}
 					else
 					{
-						returnToDefaultMenu();
+					returnToDefaultMenu();
 					}
 					selectTower(currentMenuSelected[0][3]);
 					break;
-
-				case Keyboard.NUMBER_5 :
+					
+					case Keyboard.NUMBER_5 :
 					if (menuIsDefault == true)
 					{
 					}
 					else
 					{
-						returnToDefaultMenu();
+					returnToDefaultMenu();
 					}
 					selectTower(currentMenuSelected[1][0]);
-					break;
+					break;*/
 			}
 		}
 		public function returnToDefaultMenu():void
 		{
+			selectedTower = null;
 			emptyOutMenuSelected();
+			towerStatsOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
 			   [Splash,,,],
@@ -171,6 +174,16 @@
 								currentMenuSelected[i][p].addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
 								currentMenuSelected[i][p].addEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
 								break;
+
+							case (ct is String) :
+								if (ct == "Sell")
+								{
+									sellObject.x = cellsArray[2][0].x;
+									sellObject.y = cellsArray[2][0].y;
+									sellObject.visible = true;
+									sellObject.addEventListener(MouseEvent.CLICK, sellObjectClicked);
+								}
+								break;
 						}
 					}
 				}
@@ -184,19 +197,32 @@
 		private function selectTower(tower:Object):void
 		{
 
+			switch (true)
+			{
+				case (selectedTower == null) :
 
-			if ((towerBeingBuiltSquare.x != tower.x || towerBeingBuiltSquare.y != tower.y) || towerBeingBuiltSquare.visible == false)
-			{
-				towerBeingBuiltSquare.x = tower.x;
-				towerBeingBuiltSquare.y = tower.y;
-				setChildIndex(towerBeingBuiltSquare, numChildren -1);
-				towerBeingBuiltSquare.visible = true;
+					if ((towerBeingBuiltSquare.x != tower.x || towerBeingBuiltSquare.y != tower.y) || towerBeingBuiltSquare.visible == false)
+					{
+						towerBeingBuiltSquare.x = tower.x;
+						towerBeingBuiltSquare.y = tower.y;
+						setChildIndex(towerBeingBuiltSquare, numChildren -1);
+						towerBeingBuiltSquare.visible = true;
+					}
+					else
+					{
+						towerBeingBuiltSquare.visible = false;
+					}
+					_root.buildTower(tower);
+					break
+					
+				case (selectedTower != null):
+					
+					_root.upgradeTower(tower);
+					break;
+
 			}
-			else
-			{
-				towerBeingBuiltSquare.visible = false;
-			}
-			_root.buildTower(tower);
+			;
+
 
 		}
 		public function tileMapClicked(e:Event):void
@@ -226,6 +252,13 @@
 			towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
 			towerStatsOver.CostBox.text = e.currentTarget.tCost;
 		}
+		public function towerMapClicked(e:Event):void
+		{
+			updateMenu(e);
+			selectedTower = e.currentTarget as Tower;
+			sellObject.importTowerToSell(selectedTower);
+		}
+
 		public function updateMenu(e:Event):void
 		{
 			switch (true)
@@ -239,6 +272,14 @@
 					break;
 			}
 			updateCurrentMenu();
+		}
+		private function sellObjectClicked(e:MouseEvent):void
+		{
+			sellObject.sellTower();
+		}
+		public function sellObjectSelected():void
+		{
+			sellObject.sellTower();
 		}
 		private function emptyOutMenuSelected():void
 		{
@@ -261,6 +302,13 @@
 								currentMenuSelected[i][p].removeEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
 								removeChild(ct);
 								break;
+
+							case (ct is String) :
+								if (ct == "Sell")
+								{
+									sellObject.visible = false;
+									sellObject.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
+								}
 						}
 						currentMenuSelected[i][p] = null;
 					}

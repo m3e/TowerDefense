@@ -73,8 +73,7 @@
 		private function beginClass(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
-
-			_root = MovieClip(root);
+			_root = e.currentTarget.parent;
 
 			fire();
 		}

@@ -21,6 +21,7 @@
 			tAtkSpeed = 1;
 			tCost = 550;
 			tType = "ice";
+			tFrame = 16
 			tDescription = "Slows all units passing through by 30% but deals no damage.  Cost: " + tCost.toString();
 			// constructor code
 		}

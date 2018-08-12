@@ -22,6 +22,7 @@
 			tbSpeed = 50;
 			tCost = 220;
 			tType = "fire"
+			tFrame = 14
 			tDescription = "Burns the ground in a 1 block AoE (very short range!) dealing 50 damage a second to anything in its range.  Strong.  Cost: "+tCost.toString();
 			// constructor code
 		}

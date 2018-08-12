@@ -16,6 +16,7 @@
 			tNumberOfTargets = 2;
 			tCost = 175;
 			tType = "phys"
+			tFrame = 9
 			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds per hit and slows by 15%.  Cost: "+ tCost.toString();
 			// constructor code
 		}

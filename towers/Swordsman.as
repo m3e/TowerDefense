@@ -15,6 +15,7 @@
 			tbSpeed = 50;
 			tCost = 120;
 			tType = "phys";
+			tFrame = 7
 
 			tDescription = "The Swordsman.  Attacks twice a second.  Hits hard af.  Cost: " + tCost.toString();
 			// constructor code

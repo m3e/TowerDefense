@@ -15,6 +15,7 @@
 			tbSpeed = 50;
 			tCost = 999;
 			tType = "phys"
+			tFrame = 8
 			
 			tDescription = "Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. Cost: " + tCost.toString();
 		}

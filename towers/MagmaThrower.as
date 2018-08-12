@@ -17,6 +17,7 @@
 			tCost = 160;
 			tType = "fire"
 			bFrame = 2
+			tFrame = 13	
 			tDescription = "Throws large fireballs that explode in an AoE and deal 5 burning damage to all caught for 3 seconds.  Slow attack speed.  Cost: "+tCost.toString();
 			// constructor code
 		}

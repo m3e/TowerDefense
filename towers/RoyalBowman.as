@@ -16,6 +16,7 @@
 			tCost = 180;
 			tType = "phys"
 			bFrame = 5;
+			tFrame = 10
 			tDescription = "The Royal Bowman.  Shoots 6 shots a second.  Applies -3 armor for 3 seconds on the enemy it hits.  Larger range.  Cost: "+tCost.toString()
 			// constructor code
 		}

@@ -17,6 +17,7 @@
 			tType = "earth"
 			bFrame = 5;
 			tNumberOfTargets = 1
+			tFrame = 11
 			tDescription = "The Woodsman.  Shoots Earth arrows, poisons 5 dps + slow 35% for 2 seconds.  Single target. Cost: " + tCost.toString();
 			// constructor code
 		}

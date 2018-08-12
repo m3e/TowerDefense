@@ -52,7 +52,7 @@
 			moveSpeed = maxMoveSpeed;
 			armor = maxArmor;
 			this.gotoAndStop(eFrame);
-			_root = MovieClip(root);
+			_root = e.currentTarget.parent
 			_root.addChild(healthBar);
 			healthBar.visible = false;
 			removeEventListener(Event.ADDED_TO_STAGE, added);

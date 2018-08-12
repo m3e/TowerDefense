@@ -21,6 +21,7 @@
 			tCost = 180;
 			tType = "fire";
 			tNumberOfTargets = 2;
+			tFrame = 12;
 			tDescription = "Doubles the flames coming from this tower and increases damage.  This tower likes fire.  Cost: "+tCost.toString()
 			// constructor code
 		}

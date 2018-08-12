@@ -1,7 +1,7 @@
 ﻿package towers
 {
 
-
+	import sounds.SoundManager;
 
 
 	public class FireTower extends Tower
@@ -38,6 +38,10 @@
 		override public function upgradeThree():Class
 		{
 			return MagmaThrower
+		}
+		override internal function fireSound():void
+		{
+			SoundManager.sfx("flame");
 		}
 
 	}

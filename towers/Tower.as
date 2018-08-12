@@ -15,6 +15,7 @@ package towers
 	import flash.geom.*
 	import flash.display.*
 	
+	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	import enemies.Enemy;
@@ -52,6 +53,8 @@ package towers
 
 		internal var targeting:String;
 		internal var _root:*;
+		
+		
 
 		
 		
@@ -73,6 +76,8 @@ package towers
 			tAoe = 0;
 			bFrame = 1;
 			tNumberOfTargets = 1;
+			tFrame = 19
+			
 			
 			
 			
@@ -84,7 +89,7 @@ package towers
 			var e:Array = new Array
 				e = [[,,,],
 					 [,,,],
-					 [,upgradeThree(),upgradeTwo(),upgradeOne()]];
+					 ["Sell",upgradeThree(),upgradeTwo(),upgradeOne()]];
 					 
 				return e;
 		}
@@ -92,16 +97,18 @@ package towers
 		{			
 			
 			_root = parent;
-			
+			gotoAndStop(tFrame);
+			trace(tFrame);
 			
 					 
 			
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-			rectangle.graphics.beginFill(tBaseColor); // choosing the colour for the fill, here it is red
-			rectangle.graphics.drawRect(0,0, 32,32); // (x spacing, y spacing, width, height)
+			rectangle.graphics.beginFill(0xFF0000); // choosing the colour for the fill, here it is red
+			rectangle.graphics.drawRect(0,0, this.width,this.height); // (x spacing, y spacing, width, height)
 			rectangle.graphics.endFill(); // not always needed but I like to put it in to end the fill
 			addChild(rectangle); // adds the rectangle to the stage
+			rectangle.visible = false;
 			
 			
 			
@@ -121,9 +128,7 @@ package towers
 					if (loadedTimer == 1)
 					{
 						
-						var returnFromFireFlash:ColorTransform = new ColorTransform();
-						returnFromFireFlash.color = tBaseColor;
-						rectangle.transform.colorTransform = returnFromFireFlash;
+						rectangle.visible = false;
 					}
 					//Reload
 					if (loadedTimer == tAtkSpeed)
@@ -167,9 +172,7 @@ package towers
 						loaded = false;
 						loadedTimer = 0;
 
-						var fireFlash:ColorTransform = new ColorTransform();
-						fireFlash.color = 0xFF0000;
-						rectangle.transform.colorTransform = fireFlash;
+						rectangle.visible = true;
 
 						fire();
 

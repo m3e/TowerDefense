@@ -17,6 +17,7 @@
 			bFrame = 4;
 			tCost = 180;
 			tType = "ice"
+			tFrame = 17
 			tDescription = "Shoots ice spikes.  Long range, single target.  Slows 15% and reduces armor by 2. Cost: " + tCost.toString()
 			// constructor code
 		}

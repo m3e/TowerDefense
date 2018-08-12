@@ -24,6 +24,9 @@
 	public class Map extends MovieClip
 	{
 
+		private var menuManager:MenuManager;
+		private var middleInfo:MiddleInfoContent;
+
 		//root
 		private var _root:Object;
 
@@ -77,19 +80,19 @@
 
 			//1=right 2=down 3=left 4=up
 			mapArray = [  
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,1,1,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,4,0,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0],
-			[1,1,2,0,4,0,2,0,4,0,0,0,2,0,0,1,1,1,1,1,1,1,1,1,1],
-			[0,0,2,0,4,0,2,0,4,0,2,3,3,0,0,4,0,0,0,0,0,0,0,0,0],
-			[0,0,1,1,4,0,1,1,4,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,4,0,2,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[1,1,2,0,4,0,2,0,4,0,0,0,2,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[0,0,2,0,4,0,2,0,4,0,2,3,3,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,1,1,4,0,1,1,4,0,2,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,4,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
@@ -107,10 +110,12 @@
 		private function added(e:Event):void
 		{
 			_root = this;
+
+
+
 			setupMap();
 			//Sets: mapArray
 			//Sets: tileArray
-			//Displays: maps
 
 			setupRangeCircle();
 			//Creates: rangeCircle shape
@@ -126,6 +131,16 @@
 
 			setupBottomBar();
 			//requires initEnemies for buttons
+
+			menuManager = new MenuManager(_root);
+			menuManager.x = 695;
+			menuManager.y = 427;
+			addChild(menuManager);
+
+			middleInfo = new MiddleInfoContent();
+			middleInfo.x = 382;
+			middleInfo.y = 427;
+			addChild(middleInfo);
 
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
@@ -173,8 +188,7 @@
 				case Keyboard.X :
 					if (mouseclickedTower != null)
 					{
-						sellTower(mouseclickedTower);
-						bottomBar.keyDownPress(e);
+						menuManager.sellObjectSelected();
 					}
 					break;
 
@@ -205,12 +219,12 @@
 			}
 			if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 			{
-				bottomBar.keyDownPress(e);
-				if (mouseclickedTower != null)
+				menuManager.keyDownPress(e);
+				/*if (mouseclickedTower != null)
 				{
-					mouseclickedTowerSquare.visible = false;
-					mouseclickedTower = null;
-				}
+				mouseclickedTowerSquare.visible = false;
+				mouseclickedTower = null;
+				}*/
 			}
 		}
 		private function healthBarToggle():void
@@ -397,7 +411,10 @@
 
 				psuedoTower.x = Math.floor(mouseX / tileSide) * tileSide;
 				psuedoTower.y = Math.floor(mouseY / tileSide) * tileSide
-				;
+				
+				psuedoTower.width = tileSide
+				psuedoTower.height = tileSide
+				
 				rangeCircle.width = psuedoTower.tRange * 2;
 				rangeCircle.height = psuedoTower.tRange * 2;
 				rangeCircle.x = psuedoTower.x + (tileSide * .5);
@@ -419,18 +436,19 @@
 				rangeCircle.visible = false;
 			}
 		}
-		private function sellTower(tower:Object)
+		public function sellTower(tower:Object)
 		{
 			if (mouseclickedTower != null)
 			{
-				tileArray[tower.y / tileSide][tower.x / tileSide].occupied = false;
-
 				userInfo.changeGold(mouseclickedTower.tCost);
 
-				rangeCircle.visible = false;
-				mouseclickedTowerSquare.visible = false;
 				mouseclickedTower.destroyTower();
-				mouseclickedTower = null;
+
+				removeMouseClickedTower();
+
+				tileArray[tower.y / tileSide][tower.x / tileSide].occupied = false;
+
+				menuManager.returnToDefaultMenu();
 			}
 		}
 		private function setupRangeCircle():void
@@ -487,16 +505,16 @@
 				mouseclickedTowerSquare.visible = false;
 				rangeCircle.visible = false;
 				mouseclickedTower = null;
-				bottomBar.tileMapClicked(e);
+				menuManager.tileMapClicked(e);
 			}
 			if (e.currentTarget.occupied == false && psuedoTower != null)
 			{
-				addTowerToMap(e,psuedoTower.towerReference);
+				addTowerToMap(e.currentTarget.x,e.currentTarget.y,psuedoTower.towerReference);
 			}
 		}
-		private function addTowerToMap(e:Event, TowerReference:Class):void
+		private function addTowerToMap(towerX,towerY,TowerReference:Class):void
 		{
-			var mEvent:Object = e.currentTarget;
+
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa();
 			klasa = null;
@@ -507,8 +525,8 @@
 
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
-				newTower.x = mEvent.x;
-				newTower.y = mEvent.y;
+				newTower.x = towerX
+				newTower.y = towerY
 
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
@@ -518,16 +536,23 @@
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				newTower.addEventListener(MouseEvent.CLICK, towerMapClicked);
 				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
-				mEvent.occupied = true;
 
-				if (_keyDown == true && shiftDown == true)
+				tileArray[newTower.y / tileSide][newTower.x / tileSide].occupied = true;
+
+				if (mouseclickedTower != null)
 				{
+					removeMouseClickedTower();
 				}
 				else
 				{
-					buildTower(towerBeingBuilt);
-					bottomBar.tileMapClicked(e);
-					rangeCircle.visible = false;
+					if (_keyDown == true && shiftDown == true)
+					{
+					}
+					else
+					{
+						buildTower(towerBeingBuilt);
+						removeMouseClickedTower();
+					}
 				}
 			}
 			else
@@ -538,50 +563,39 @@
 				newTower = null;
 			}
 		}
-		/*private function upgradeTower(e:Event):void
+
+		public function upgradeTower(tower:PsuedoTower):void
 		{
-		var klasa:Class;
-		var testTower:Tower;
-		if (mouseclickedTower != null)
-		{
-		switch (e.currentTarget.name)
-		{
-		case ("upgrade1") :
-		klasa = mouseclickedTower.upgradeOne();
-		break;
-		
-		case ("upgrade2") :
-		klasa = mouseclickedTower.upgradeTwo();
-		break;
-		
-		case ("upgrade3") :
-		klasa = mouseclickedTower.upgradeThree();
-		break;
+			var klasa:Class;
+			var testTower:Tower;
+
+			if (mouseclickedTower != null)
+			{
+				klasa = Class(getDefinitionByName(getQualifiedClassName(tower.towerReference)));
+			}
+			if (klasa is Class)
+			{
+				testTower = new klasa();
+				if (userInfo.canAfford(testTower.tCost))
+				{
+					mouseclickedTower.destroyTower();
+
+					addTowerToMap(mouseclickedTower.x,mouseclickedTower.y,klasa);
+
+					removeMouseClickedTower();
+				}
+				else
+				{
+					trace("Cannot afford.  Cost: ",testTower.tCost);
+				}
+				testTower.destroyTower();
+				klasa = null;
+			}
+
+
+
+
 		}
-		if (klasa is Class)
-		{
-		testTower = new klasa();
-		if (userInfo.canAfford(testTower.tCost))
-		{
-		
-		mouseclickedTower.destroyTower();
-		mouseclickedTowerSquare.visible = false;
-		
-		addTowerToMap(tileArray[mouseclickedTower.y/tileSide][mouseclickedTower.x/tileSide],klasa);
-		
-		
-		mouseclickedTower = null;
-		}
-		else
-		{
-		trace("Cannot afford.  Cost: ",testTower.tCost);
-		}
-		testTower.destroyTower();
-		}
-		
-		
-		}
-		}*/
 		private function onMouseOver(e:Event):void
 		{
 			if (psuedoTower != null)
@@ -622,7 +636,9 @@
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
 
-				bottomBar.towerMapClicked(e);
+
+				middleInfo.updateText(e);
+				menuManager.towerMapClicked(e);
 
 				/*var klasa:Class;
 				var testTower:Tower;
@@ -663,11 +679,15 @@
 			}
 			else
 			{
-				bottomBar.defaultMenu();
-				mouseclickedTower = null;
-				mouseclickedTowerSquare.visible = false;
-				rangeCircle.visible = false;
+				removeMouseClickedTower();
 			}
+		}
+		private function removeMouseClickedTower():void
+		{
+			menuManager.returnToDefaultMenu();
+			mouseclickedTower = null;
+			mouseclickedTowerSquare.visible = false;
+			rangeCircle.visible = false;
 		}
 		private function towerRemoved(e:Event):void
 		{
