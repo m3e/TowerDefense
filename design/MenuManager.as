@@ -242,8 +242,10 @@
 		{
 			towerStatsOver.visible = true;
 			setChildIndex(towerStatsOver, numChildren - 1);
+			
 			towerStatsOver.x = e.currentTarget.x - 60;
 			towerStatsOver.y = e.currentTarget.y - 100;
+			
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
 			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 			towerStatsOver.RngBox.text = e.currentTarget.tRange;

@@ -104,6 +104,7 @@
 					towerArray[row][col] = undefined;
 				}
 			}
+			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code;
 		}
@@ -133,7 +134,7 @@
 			//requires initEnemies for buttons
 
 			menuManager = new MenuManager(_root);
-			menuManager.x = 695;
+			menuManager.x = 691;
 			menuManager.y = 427;
 			addChild(menuManager);
 

@@ -1,3 +1,0 @@
-bottombar,map,menumanager
-
-trying to determine why double click on context menu makes missing links
