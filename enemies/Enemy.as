@@ -11,7 +11,7 @@
 	public class Enemy extends MovieClip
 	{
 		internal var eMaxHp:int;
-		internal var eHp:int;
+		public var eHp:int;
 		internal var pt:Point = new Point();
 		public var maxMoveSpeed:Number;
 		public var moveSpeed:Number;

@@ -18,7 +18,7 @@
 			tAoe = 0;
 			tbSpeed = 8;
 			bFrame = 2;
-			tCost = 70;
+			tCost = 60;
 			tType = "fire";
 			tNumberOfTargets = 1;
 			tFrame = 3;

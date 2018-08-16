@@ -18,9 +18,10 @@
 	{
 
 		private var sellObject:SellObject;
+		private var targetingIcon:TargetingIcon;
 		private var menuIsDefault:Boolean;
 		private var towerBeingBuiltSquare:Shape;
-		private var menuIcon:MenuIcon;
+		
 		private var currentMenuSelected:Array;
 		private var cellsArray:Array;
 		private var towerStatsOver:TowerStatsOver;
@@ -57,6 +58,10 @@
 			sellObject = new SellObject();
 			addChild(sellObject);
 			sellObject.visible = false;
+			
+			targetingIcon = new TargetingIcon();
+			addChild(targetingIcon);
+			targetingIcon.visible = false;
 
 			towerBeingBuiltSquare = new Shape ();
 			towerBeingBuiltSquare.graphics.lineStyle(4,0x665544);
@@ -69,7 +74,7 @@
 			towerStatsOver = new TowerStatsOver  ;
 			addChild(towerStatsOver);
 			towerStatsOver.visible = false;
-			
+
 			returnToDefaultMenu();
 		}
 		public function keyDownPress(e:KeyboardEvent):void
@@ -176,14 +181,22 @@
 								break;
 
 							case (ct is String) :
-								if (ct == "Sell")
+								switch (true)
 								{
-									sellObject.x = cellsArray[2][0].x;
-									sellObject.y = cellsArray[2][0].y;
-									sellObject.visible = true;
-									sellObject.addEventListener(MouseEvent.CLICK, sellObjectClicked);
+									case (ct == "Sell") :
+										sellObject.x = cellsArray[2][0].x;
+										sellObject.y = cellsArray[2][0].y;
+										sellObject.visible = true;
+										sellObject.addEventListener(MouseEvent.CLICK, sellObjectClicked);
+										break;
+
+									case (ct == "Targeting") :
+										targetingIcon.x = cellsArray[1][0].x;
+										targetingIcon.y = cellsArray[1][0].y;
+										targetingIcon.visible = true;
+										targetingIcon.addEventListener(MouseEvent.CLICK, targetingIconClicked);
+										break;
 								}
-								break;
 						}
 					}
 				}
@@ -213,15 +226,14 @@
 						towerBeingBuiltSquare.visible = false;
 					}
 					_root.buildTower(tower);
-					break
-					
-				case (selectedTower != null):
-					
+					break;
+				case (selectedTower != null) :
+
 					_root.upgradeTower(tower);
 					break;
 
 			}
-			;
+
 
 
 		}
@@ -242,10 +254,10 @@
 		{
 			towerStatsOver.visible = true;
 			setChildIndex(towerStatsOver, numChildren - 1);
-			
+
 			towerStatsOver.x = e.currentTarget.x - 60;
 			towerStatsOver.y = e.currentTarget.y - 100;
-			
+
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
 			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 			towerStatsOver.RngBox.text = e.currentTarget.tRange;
@@ -259,6 +271,7 @@
 			updateMenu(e);
 			selectedTower = e.currentTarget as Tower;
 			sellObject.importTowerToSell(selectedTower);
+			targetingIcon.importTower(selectedTower);
 		}
 
 		public function updateMenu(e:Event):void
@@ -278,6 +291,10 @@
 		private function sellObjectClicked(e:MouseEvent):void
 		{
 			sellObject.sellTower();
+		}
+		private function targetingIconClicked(e:MouseEvent):void
+		{
+			targetingIcon.changeTargeting();
 		}
 		public function sellObjectSelected():void
 		{
@@ -310,6 +327,11 @@
 								{
 									sellObject.visible = false;
 									sellObject.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
+								}
+								else if (ct == "Targeting")
+								{
+									targetingIcon.visible = false;
+									targetingIcon.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
 								}
 						}
 						currentMenuSelected[i][p] = null;

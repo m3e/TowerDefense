@@ -18,14 +18,15 @@
 			tBaseColor = 0x66FFFF;
 			tRange = 50;
 			tDmg = 0;
-			tAtkSpeed = 1;
+			tAtkSpeed = 2;
 			tCost = 550;
 			tType = "ice";
 			tFrame = 16
+			targeting = "All"
 			tDescription = "Slows all units passing through by 30% but deals no damage.  Cost: " + tCost.toString();
 			// constructor code
 		}
-		override internal function eFrame(e:Event):void
+		/*override internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
@@ -68,7 +69,7 @@
 				}
 			}
 
-		}
+		}*/
 		override internal function specialFunction():void
 		{
 			
@@ -79,7 +80,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.8,.5)
+			debuffType.push("slow",.3,.5)
 			
 			debuffsArray.push(debuffType)
 			
