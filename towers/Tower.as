@@ -21,6 +21,7 @@ package towers
 
 	import sounds.SoundManager;
 	import flash.events.MouseEvent;
+	import flash.media.SoundChannel;
 
 	public class Tower extends MovieClip
 	{
@@ -54,9 +55,11 @@ package towers
 		public var targeting:String;
 		internal var _root:*;
 
-
-
-
+		private var sound:SoundChannel;
+		internal var clickedOnSounds:Array;
+		internal var fireSoundString:String;
+		private var fireSoundOn:Boolean;
+		private var fireSoundChannel:SoundChannel;
 
 		internal var bFrame:int;
 
@@ -64,6 +67,8 @@ package towers
 
 		public function Tower()
 		{
+			fireSoundString = "default";
+			clickedOnSounds = new Array  ;
 			buffsArray = new Array  ;
 			rectangle = new Shape  ;
 			tDmgBuff = 0;
@@ -77,7 +82,7 @@ package towers
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			tFrame = 19
-			
+			;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
 		}
@@ -94,7 +99,7 @@ package towers
 		{
 			_root = parent;
 			gotoAndStop(tFrame);
-
+			getSounds();
 			addEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
@@ -107,10 +112,24 @@ package towers
 			addChild(rectangle);// adds the rectangle to the stage
 			rectangle.visible = false;
 		}
-		internal function clickedOn(e:MouseEvent):void
+		internal function getSounds():void
 		{
 			
+		}
+		internal function clickedOn(e:MouseEvent):void
+		{
+			var i:int = (Math.random() * clickedOnSounds.length);
+			if (sound == null)
+			{
+				sound = SoundManager.sfx(clickedOnSounds[i]);
+			}
+			sound.addEventListener(Event.SOUND_COMPLETE, soundEnd);
+		}
+		internal function soundEnd(e:Event):void
+		{
 			
+			sound.removeEventListener(Event.SOUND_COMPLETE, soundEnd);
+			sound = null;
 		}
 		internal function eFrame(e:Event):void
 		{
@@ -193,9 +212,9 @@ package towers
 				case ("Weak") :
 					enemyList.sortOn("eHp", Array.NUMERIC);
 					break;
-				
+
 				case ("All") :
-					
+
 					break;
 
 			}
@@ -210,32 +229,44 @@ package towers
 		}
 		internal function fireSound():void
 		{
-
+			if (fireSoundOn == false)
+			{
+			fireSoundOn = true;
+			fireSoundChannel = SoundManager.sfx(fireSoundString);
+			fireSoundChannel.addEventListener(Event.SOUND_COMPLETE,fireSoundEnd)
+			}
+		}
+		private function fireSoundEnd(e:Event):void
+		{
+			
+			fireSoundOn = false;
+			e.currentTarget.removeEventListener(Event.SOUND_COMPLETE,fireSoundEnd)
+			fireSoundChannel = null;
 		}
 		internal function fire():void
 		{
-			
-				specialFunction();
-				fireSound();
-				//Create new Bullet
-				var newBullet:Bullet;
-				for (var i:int=0; i < tTarget.length; i++)
-				{
-					newBullet = new Bullet(enemyList);
-					newBullet.gotoAndStop(bFrame);
-					//add debuff;
-					addDebuffs(newBullet);
-					//Set Bullet location, target, dmg, speed, aoe
-					newBullet.x = this.x + (GameProperties.tileSide * .5);
-					newBullet.y = this.y + (GameProperties.tileSide * .5);
-					newBullet.bTarget = tTarget[i];
-					newBullet.bDmg = tDmg * (1 + tDmgBuff);
-					newBullet.bSpeed = tbSpeed;
-					newBullet.bAoe = tAoe;
-					newBullet.bType = tType;
-					//End Set bullet stats
-					_root.addChild(newBullet);
-				}
+
+			specialFunction();
+			fireSound();
+			//Create new Bullet
+			var newBullet:Bullet;
+			for (var i:int=0; i < tTarget.length; i++)
+			{
+				newBullet = new Bullet(enemyList);
+				newBullet.gotoAndStop(bFrame);
+				//add debuff;
+				addDebuffs(newBullet);
+				//Set Bullet location, target, dmg, speed, aoe
+				newBullet.x = this.x + (GameProperties.tileSide * .5);
+				newBullet.y = this.y + (GameProperties.tileSide * .5);
+				newBullet.bTarget = tTarget[i];
+				newBullet.bDmg = tDmg * (1 + tDmgBuff);
+				newBullet.bSpeed = tbSpeed;
+				newBullet.bAoe = tAoe;
+				newBullet.bType = tType;
+				//End Set bullet stats
+				_root.addChild(newBullet);
+			}
 		}
 		public function upgradeOne():Class
 		{

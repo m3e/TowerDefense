@@ -61,7 +61,7 @@
 			}
 		}
 
-		public static function sfx(fxName:String):void
+		public static function sfx(fxName:String):SoundChannel
 		{
 			if (sfxs.length < 30)
 			{
@@ -70,9 +70,8 @@
 			var sound:SoundChannel = song.play(0,0,trans)
 			sfxs.push(sound);
 			sound.addEventListener(Event.SOUND_COMPLETE, removeSfx);
-			
 			}
-			
+			return sound;
 			
 		}
 		private static function removeSfx(e:Event):void

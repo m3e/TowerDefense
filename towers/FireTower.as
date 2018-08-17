@@ -22,6 +22,7 @@
 			tType = "fire";
 			tNumberOfTargets = 1;
 			tFrame = 3;
+			fireSoundString = "flame"
 			
 			tDescription = "Takes fire and throws it, like some sort of throwing flame machine.  Cost: " + tCost.toString();
 			
@@ -39,11 +40,7 @@
 		{
 			return MagmaThrower
 		}
-		override internal function fireSound():void
-		{
-			SoundManager.sfx("flame");
-			
-		}
+		
 
 	}
 

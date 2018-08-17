@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="VelocityTracker,com.greensock.utils.VelocityTracker,target,addProp,getByTarget,getVelocity,isTracking,isTrackingProp,removeProp,track,untrack"><title>com.greensock.utils.VelocityTracker</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'VelocityTracker - GreenSock Documentation';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GreenSock ActionScript API Docs</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?com/greensock/utils/VelocityTracker.html&amp;com/greensock/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">VelocityTracker</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("VelocityTracker"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.greensock.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public final   class  VelocityTracker</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">VelocityTracker  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><p></p><p></p>
+ Allows you to have the velocity of particular properties automatically tracked for you
+ so that you can access them anytime using the VelocityTracker's <code>getVelocity()</code> 
+ method, like <code>myTracker.getVelocity("y")</code>. For example, let's say there's an object that the 
+ user interacts with by dragging it or maybe it is being tweened and then at some point you want
+ to create a tween based on that velocity. Normally, you'd need to write your own tracking code 
+ that records that object's <code>x</code> and <code>y</code> properties (as well as time stamps) 
+ so that when it comes time to feed the <code>velocity</code> into whatever other code you need to run, 
+ you'd have the necessary data to calculate it. But let's face it: that can be cumbersome to do manually, 
+ and that's precisely why VelocityTracker exists.
+ 
+ <p>Use the static <code>VelocityTracker.track()</code> method to start tracking properties. <i>You generally 
+ should <b>not</b> use the VelocityTracker's constructor because there needs to only be one 
+ VelocityTracker instance associated with any particular object.</i> The <code>track()</code> method will 
+ return the instance that you can then use to <code>getVelocity()</code> like:</p>
+ 
+               <div class="listing" version="3.0"><pre>
+//first, start tracking "x" and "y":
+var tracker:VelocityTracker = VelocityTracker.track(obj, "x,y");
+ 
+//then, after at least 100ms and 2 "ticks", we can get the velocity of each property:
+var vx:Number = tracker.getVelocity("x");
+var vy:Number = tracker.getVelocity("y");
+ </pre></div>
+ 
+               <p>
+                  <b>What kinds of properties can be tracked?</b>
+               </p>
+               <p>Pretty much any numeric property of any object can be tracked, including function-based ones. 
+ For example, <code>obj.x</code> or <code>obj.rotation</code> or even <code>obj.myCustomProp()</code>. 
+ In fact, for getters and setters that start with the 
+ word "get" or "set" (like <code>getCustomProp()</code> and <code>setCustomProp()</code>), it will 
+ automatically find the matching counterpart method and use the getter appropriately, so you can track
+ the getter or setter and it'll work. You <b>cannot</b>, however, track custom plugin-related 
+ values like "directionalRotation" or "autoAlpha" or "physics2D" because those aren't real properties
+ of the object. You should instead track the real properties that those plugins affect, like "rotation" or
+ "alpha" or "x" or "y".</p>
+ 
+               <p>This class is used in <code>ThrowPropsPlugin</code> to make it easy to create velocity-based tweens
+ that smoothly transition an object's movement (or rotation or whatever) and glide to a stop.</p>
+ 
+               <p>Note: In order to report accurately, at least 100ms and 2 ticks of the core tweening engine must have been elapsed before you check velocity.</p>
+ 
+               <p>
+                  <b>Copyright 2008-2013, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html" target="">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/" target="">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
+ 
+            <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#target" class="signatureLink">target</a> : Object<div class="summaryTableDescription"> Returns the target object with which the VelocityTracker is associated.</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addProp()" class="signatureLink">addProp</a>(prop:String, type:String = num):void</div><div class="summaryTableDescription">
+		 Adds a property to track
+		 
+		 </div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getByTarget()" class="signatureLink">getByTarget</a>(target:Object):<a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></div><div class="summaryTableDescription">[static] 
+		 Returns the VelocityTracker associated with a particular object.</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getVelocity()" class="signatureLink">getVelocity</a>(prop:String):Number</div><div class="summaryTableDescription">
+		 Returns the current velocity of the given property.</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isTracking()" class="signatureLink">isTracking</a>(target:Object, prop:String = null):Boolean</div><div class="summaryTableDescription">[static] 
+		 Allows you to discern whether the velocity of a particular target or one of its properties is being tracked 
+		 (typically initiated using the VelocityTracker.track() method).</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isTrackingProp()" class="signatureLink">isTrackingProp</a>(prop:String):Boolean</div><div class="summaryTableDescription">
+		 Allows you to discern whether the velocity of a particular property is being tracked.</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeProp()" class="signatureLink">removeProp</a>(prop:String):void</div><div class="summaryTableDescription">
+		 Stops tracking a particular property
+		 
+		 </div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#track()" class="signatureLink">track</a>(target:Object, props:String, types:String = num):<a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></div><div class="summaryTableDescription">[static] 
+		 Allows you to have the velocity of particular properties automatically tracked for you
+		 so that you can access them anytime using the VelocityTracker's getVelocity() 
+		 method, like myTracker.getVelocity("y").</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#untrack()" class="signatureLink">untrack</a>(target:Object, props:String = null):void</div><div class="summaryTableDescription">[static] 
+		 Stops tracking the velocity of certain properties (or all properties of an object), like ones initiated with
+		 the track() method.</div></td><td class="summaryTableOwnerCol">VelocityTracker</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="target"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">target</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>public var target:Object</code><p></p><p></p><p> Returns the target object with which the VelocityTracker is associated. </p></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addProp()"></a><a name="addProp(String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addProp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addProp(prop:String, type:String = num):void</code><p></p><p></p><p>
+		 Adds a property to track
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">prop</span>:String</code> &mdash; <code>"rad"</code> for radian-based rotation or <code>"deg"</code> for degree-based rotation - this is only useful to define if the property is rotation-related and you'd like to have VelocityTracker compensate for artificial jumps in the value when the rotational midline is crossed, like when rotation goes from 179 to -178 degrees it would interpret that as a change of 3 instead of 357 degrees. Leave this blank unless you want the rotational compensation.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> (default = <code>num</code>)<code></code></td></tr></table></p></div><a name="getByTarget()"></a><a name="getByTarget(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getByTarget</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function getByTarget(target:Object):<a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></code><p></p><p></p><p>
+		 Returns the VelocityTracker associated with a particular object. If none exists, 
+		 <code>null</code> will be returned.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:Object</code> &mdash; The object whose VelocityTracker should be returned
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></code> &mdash; the VelocityTracker associated with the object (or <code>null</code> if none exists)
+		 </td></tr></table></div><a name="getVelocity()"></a><a name="getVelocity(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getVelocity</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getVelocity(prop:String):Number</code><p></p><p></p><p>
+		 Returns the current velocity of the given property.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">prop</span>:String</code> &mdash; Property name (like <code>"x"</code>)
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; The current velocity
+		 </td></tr></table></div><a name="isTracking()"></a><a name="isTracking(Object,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isTracking</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isTracking(target:Object, prop:String = null):Boolean</code><p></p><p></p><p>
+		 Allows you to discern whether the velocity of a particular target or one of its properties is being tracked 
+		 (typically initiated using the <code>VelocityTracker.track()</code> method). 
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:Object</code> &mdash; The target object
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">prop</span>:String</code> (default = <code>null</code>)<code></code> &mdash; the name of the property to check, like <code>"x"</code> or <code>"y"</code>. 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the target/property is being tracked, <code>false</code> if not.
+		 </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="VelocityTracker.html#track()" target="">track()</a><br/><a href="VelocityTracker.html#untrack()" target="">untrack()</a><br/><a href="VelocityTracker.html#removeProp()" target="">removeProp()</a><br/><a href="VelocityTracker.html#addProp()" target="">addProp()</a></div></div><a name="isTrackingProp()"></a><a name="isTrackingProp(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isTrackingProp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isTrackingProp(prop:String):Boolean</code><p></p><p></p><p>
+		 Allows you to discern whether the velocity of a particular property is being tracked.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">prop</span>:String</code> &mdash; the name of the property to check, like <code>"x"</code> or <code>"y"</code>. 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the target/property is being tracked, <code>false</code> if not.
+		 </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="VelocityTracker.html#addProp()" target="">addProp()</a><br/><a href="VelocityTracker.html#removeProp()" target="">removeProp()</a></div></div><a name="removeProp()"></a><a name="removeProp(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeProp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeProp(prop:String):void</code><p></p><p></p><p>
+		 Stops tracking a particular property
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">prop</span>:String</code> &mdash; the property name to stop tracking
+		 </td></tr></table></p></div><a name="track()"></a><a name="track(Object,String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">track</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function track(target:Object, props:String, types:String = num):<a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></code><p></p><p></p><p>
+		 Allows you to have the velocity of particular properties automatically tracked for you
+		 so that you can access them anytime using the VelocityTracker's <code>getVelocity()</code> 
+		 method, like <code>myTracker.getVelocity("y")</code>. For example, let's say there's an object that the 
+		 user interacts with by dragging it or maybe it is being tweened and then at some point you want
+		 to create a tween that smoothly continues that motion and glides to
+		 a rest. Normally, you'd need to write your own tracking code that records that object's <code>x</code>
+		 and <code>y</code> properties (as well as time stamps) so that when it comes time to feed the 
+		 <code>velocity</code> into the tween, you'd have the necessary data to 
+		 calculate it. But let's face it: that can be cumbersome to do manually, and that's precisely why
+		 the <code>track()</code> method exists. 
+		 
+		 <p>Just feed in the <code>target</code> and a comma-delimited list of properties that you want
+		 tracked like this:</p><p><code>
+		 
+		 var tracker:VelocityTracker = VelocityTracker.track(obj, "x,y");</code></p>
+		 
+		 <p>Then every time the core tweening engine updates (at whatever frame rate you're running), 
+		 the <code>x</code> and <code>y</code> values (or whichever properties you define) will be recorded 
+		 along with time stamps (it keeps a maximum of 2 of these values and keeps writing over the previous
+		 ones, so don't worry about memory buildup). This even works with properties that are function-based, like 
+		 getters and setters.</p>
+		 
+		 <p>Then, after at least 100ms and 2 "ticks" of the core engine have elapsed (so that some data has been recorded),
+		 you can use the VelocityTracker's <code>getVelocity()</code> method to get the current velocity of a particular 
+		 property.</p>
+		 
+		 <div class="listing" version="3.0"><pre>
+//first, start tracking "x" and "y":
+var tracker:VelocityTracker = VelocityTracker.track(obj, "x,y");
+ 
+//then, after at least 100ms, we can get the velocity:
+var vx:Number = tracker.getVelocity("x");
+var vy:Number = tracker.getVelocity("y");
+ </pre></div>
+		 
+		 <p><b>IMPORTANT:</b> you should <code>untrack()</code> properties when you no longer 
+		 need them tracked in order to maximize performance and ensure things are released for garbage collection. 
+		 To untrack, simply use the <code>untrack()</code> method:</p>
+		 
+		 <div class="listing" version="3.0"><pre>
+//stop tracking only the "x" property: 
+VelocityTracker.untrack(obj, "x");
+ 
+//stop tracking "x" and "y":
+VelocityTracker.untrack(obj, "x,y");
+ 
+//stop tracking all properties of obj:
+VelocityTracker.untrack(obj);
+         </pre></div>
+		 
+		 <p><b>What kinds of properties can be tracked?</b></p>
+		 <p>Pretty much any numeric property of any object can be tracked, including function-based ones. 
+		 For example, <code>obj.x</code> or <code>obj.rotation</code> or even <code>obj.myCustomProp()</code>. 
+		 In fact, for getters and setters that start with the 
+		 word "get" or "set" (like <code>getCustomProp()</code> and <code>setCustomProp()</code>), it will 
+		 automatically find the matching counterpart method and use the getter appropriately, so you can track
+		 the getter or setter and it'll work. You <b>cannot</b>, however, track custom plugin-related 
+		 values like "directionalRotation" or "autoAlpha" or "physics2D" because those aren't real properties
+		 of the object. You should instead track the real properties that those plugins affect, like "rotation" or
+		 "alpha" or "x" or "y".</p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:Object</code> &mdash; the target object whose properties will be tracked
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">props</span>:String</code> &mdash; a comma-delimited list of property names, like <code>"y"</code> or <code>"x,y"</code>
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">types</span>:String</code> (default = <code>num</code>)<code></code> &mdash; a comma-delimited list of property types (only helpful if they are rotation-based), <code>"rad"</code> for radian-based rotation or <code>"deg"</code> for degree-based rotation - this is only useful you'd like to have VelocityTracker compensate for artificial jumps in rotational values when the rotational midline is crossed, like when rotation goes from 179 to -178 degrees it would interpret that as a change of 3 instead of 357 degrees. Leave this blank unless you want the rotational compensation. You can use <code>"num"</code> to indicate normal numeric behavior (or leave it blank). 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/greensock/utils/VelocityTracker.html">VelocityTracker</a></code> &mdash; a VelocityTracker object that's responsible for doing the tracking. 
+		 </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="VelocityTracker.html#untrack()" target="">untrack()</a><br/><a href="VelocityTracker.html#isTracking()" target="">isTracking()</a></div></div><a name="untrack()"></a><a name="untrack(Object,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">untrack</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function untrack(target:Object, props:String = null):void</code><p></p><p></p><p>
+		 Stops tracking the velocity of certain properties (or all properties of an object), like ones initiated with
+		 the <code>track()</code> method.
+		 
+		 <div class="listing" version="3.0"><pre>
+//starts tracking "x" and "y":
+var tracker:VelocityTracker = VelocityTracker.track(obj, "x,y");
+ 
+//stops tracking only the "x" property: 
+VelocityTracker.untrack(obj, "x");
+ 
+//stops tracking "x" and "y":
+VelocityTracker.untrack(obj, "x,y");
+ 
+//stops tracking all properties of obj:
+VelocityTracker.untrack(obj);
+//or you can use the removeProp() method directly on the VelocityTracker instance to remove one at a time:
+tracker.removeProp("x");
+         </pre></div>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:Object</code> &mdash; the target object whose properties should stop being tracked
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">props</span>:String</code> (default = <code>null</code>)<code></code> &mdash; a comma-delimited list of properties to stop tracking. If <code>null</code>, ALL properties of the <code>target</code> will stop being tracked. 
+		 </td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="VelocityTracker.html#track()" target="">track()</a><br/><a href="VelocityTracker.html#isTracking()" target="">isTracking()</a><br/><a href="VelocityTracker.html#removeProp()" target="">removeProp()</a></div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Thu Oct 24 2013, 01:43 PM -05:00  </center></div></body></html><!--<br/>Thu Oct 24 2013, 01:43 PM -05:00  -->

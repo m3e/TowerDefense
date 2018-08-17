@@ -21,18 +21,10 @@
 			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds per hit and slows by 15%.  Cost: "+ tCost.toString();
 			// constructor code
 		}
-		override internal function clickedOn(e:MouseEvent):void
+		override internal function getSounds():void
 		{
-			var i:int = (Math.random()*2)
-			if (i > 0)
-			{
-				SoundManager.sfx("roguehey")
-			}
-			else
-			{
-				SoundManager.sfx("roguehowareyou");
-			}
-		}
+			clickedOnSounds = ["roguehey","warriorroguehowareyouhowcanihelp"]
+		}		
 		override internal function addDebuffs(bullet:Bullet):void
 		{
 			var debuffsArray:Array = new Array;

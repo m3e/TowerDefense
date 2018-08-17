@@ -25,20 +25,10 @@
 			tDescription = "It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds. Cost: " + tCost.toString();
 			// constructor code
 		}
-		override internal function clickedOn(e:MouseEvent):void
+		override internal function getSounds():void
 		{
-			var i:int = (Math.random()*2);
-			switch (true)
-			{
-				case (i == 0) :
-					SoundManager.sfx("knightnofreeman");
-					break;
-
-				case (i == 1) :
-					SoundManager.sfx("knightshallicompare");
-					break;
-			}
-		}
+			clickedOnSounds = ["knightnofreeman","knightshallicompare"]
+		}		
 		override internal function addDebuffs(bullet:Bullet):void
 		{
 			var debuffsArray:Array = new Array  ;
