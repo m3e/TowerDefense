@@ -19,6 +19,8 @@
 	import flash.text.TextField;
 	import flash.display.DisplayObject;
 	import towerimg.PsuedoTower;
+	
+	import sounds.SoundManager;
 
 
 	public class Map extends MovieClip
@@ -243,6 +245,7 @@
 				for (var o:int=0; o< tileArray[i].length; o++)
 				{
 					tileArray[i][o].addEventListener(MouseEvent.CLICK, tileClicked);
+					tileArray[i][o].addEventListener(MouseEvent.MOUSE_DOWN, tileDown);
 					tileArray[i][o].addEventListener(MouseEvent.MOUSE_OVER, hoverOver);
 					tileArray[i][o].addEventListener(MouseEvent.MOUSE_OUT, hoverOverOut);
 				}
@@ -278,11 +281,6 @@
 			bottomBar = new BottomBar(this);
 			bottomBar.y = 416;
 			_root.addChild(bottomBar);
-
-			/*bottomBar.upgrade1.addEventListener(MouseEvent.CLICK, upgradeTower);
-			bottomBar.upgrade2.addEventListener(MouseEvent.CLICK, upgradeTower);
-			bottomBar.upgrade3.addEventListener(MouseEvent.CLICK, upgradeTower);*/
-
 
 			startRoundButton = new Sprite();
 			startRoundButton.graphics.beginFill(0x990000);
@@ -357,6 +355,7 @@
 		}
 		private function startRoundMouse(e:Event):void
 		{
+			SoundManager.sfx("roundstart2");
 			startRound();
 		}
 		private function sendDpsDummy(e:Event):void
@@ -468,7 +467,6 @@
 		}
 		private function setupMap():void
 		{
-
 			var tile:MovieClip;
 			for (var i:int=0; i < mapArray.length; i++)
 			{
@@ -493,14 +491,12 @@
 					tile.x = o * tileSide;
 					tile.y = i * tileSide;
 					tileArray[i][o] = tile
-					
-					;
 				}
 			}
-
 		}
-		private function tileClicked(e:MouseEvent):void
+		private function tileDown(e:MouseEvent):void
 		{
+			
 			if (mouseclickedTower != null)
 			{
 				mouseclickedTowerSquare.visible = false;
@@ -508,6 +504,16 @@
 				mouseclickedTower = null;
 				menuManager.tileMapClicked(e);
 			}
+			else if (towerBeingBuilt == null)
+			{
+				var i:int = (Math.random()*5)+1
+				var dirtName:String = "dirt"+i;
+				SoundManager.sfx(dirtName);
+			}
+			
+		}
+		private function tileClicked(e:MouseEvent):void
+		{
 			if (e.currentTarget.occupied == false && psuedoTower != null)
 			{
 				addTowerToMap(e.currentTarget.x,e.currentTarget.y,psuedoTower.towerReference);
@@ -515,7 +521,6 @@
 		}
 		private function addTowerToMap(towerX,towerY,TowerReference:Class):void
 		{
-
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa();
 			klasa = null;
@@ -535,7 +540,7 @@
 
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-				newTower.addEventListener(MouseEvent.CLICK, towerMapClicked);
+				newTower.addEventListener(MouseEvent.MOUSE_DOWN, towerMapClicked);
 				newTower.addEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
 
 				tileArray[newTower.y / tileSide][newTower.x / tileSide].occupied = true;
@@ -592,10 +597,6 @@
 				testTower.destroyTower();
 				klasa = null;
 			}
-
-
-
-
 		}
 		private function onMouseOver(e:Event):void
 		{
@@ -603,11 +604,6 @@
 			{
 				psuedoTower.visible = false;
 			}
-			/*rangeCircle.visible = true;
-			rangeCircle.width = e.currentTarget.tRange * 2;
-			rangeCircle.height = e.currentTarget.tRange * 2;
-			rangeCircle.x = e.currentTarget.x + (tileSide * .5);
-			rangeCircle.y = e.currentTarget.y + (tileSide * .5);*/
 		}
 		private function onMouseOut(e:Event):void
 		{
@@ -637,46 +633,8 @@
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
 
-
 				middleInfo.updateText(e);
 				menuManager.towerMapClicked(e);
-
-				/*var klasa:Class;
-				var testTower:Tower;
-				
-				if (mouseclickedTower.upgradeOne() != null)
-				{
-				klasa = mouseclickedTower.upgradeOne();
-				testTower = new klasa();
-				bottomBar.upgrade1.text = testTower.tDescription;
-				testTower.destroyTower();
-				}
-				else
-				{
-				bottomBar.upgrade1.text = "No upgrade available.";
-				}
-				if (mouseclickedTower.upgradeTwo() != null)
-				{
-				klasa = mouseclickedTower.upgradeTwo();
-				testTower = new klasa();
-				bottomBar.upgrade2.text = testTower.tDescription;
-				testTower.destroyTower();
-				}
-				else
-				{
-				bottomBar.upgrade2.text = "No upgrade available.";
-				}
-				if (mouseclickedTower.upgradeThree() != null)
-				{
-				klasa = mouseclickedTower.upgradeThree();
-				testTower = new klasa();
-				bottomBar.upgrade3.text = testTower.tDescription;
-				testTower.destroyTower();
-				}
-				else
-				{
-				bottomBar.upgrade3.text = "No upgrade available.";
-				}*/
 			}
 			else
 			{
@@ -693,7 +651,7 @@
 		private function towerRemoved(e:Event):void
 		{
 			towerArray[e.currentTarget.y / tileSide][e.currentTarget.x / tileSide] = undefined;
-			e.currentTarget.removeEventListener(MouseEvent.CLICK, towerMapClicked);
+			e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, towerMapClicked);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);

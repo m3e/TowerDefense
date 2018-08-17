@@ -15,7 +15,7 @@
 			tAoe = 30
 			tbSpeed = 24;
 			bFrame = 3;
-			tCost = 80;
+			tCost = 50;
 			tType = "ice"
 			tFrame = 4;
 			

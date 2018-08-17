@@ -79,8 +79,7 @@
 		{
 			var sfx:* = e.currentTarget;
 			sfxs.splice(sfxs.indexOf(sfx),1);
-			sfx = null;
-			trace(sfxs.length)
+			sfx = null;			
 		}
 		/*public static function bgfx(fxName:String):void
 		{

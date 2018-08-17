@@ -2,7 +2,7 @@
 	
 	
 	
-	
+	import sounds.SoundManager;
 	public class Woodsman extends Tower {
 		
 		
@@ -32,6 +32,10 @@
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
+		}
+		override internal function fireSound():void
+		{
+			SoundManager.sfx("arrowShot");
 		}
 	}
 	

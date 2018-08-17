@@ -36,7 +36,6 @@
 		override internal function fireSound():void
 		{
 			SoundManager.sfx("arrowShot");
-			
 		}
 	}
 }

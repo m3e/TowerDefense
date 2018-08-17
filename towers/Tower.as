@@ -17,8 +17,10 @@ package towers
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	import enemies.Enemy;
+	import flash.events.MouseEvent;
 
 	import sounds.SoundManager;
+	import flash.events.MouseEvent;
 
 	public class Tower extends MovieClip
 	{
@@ -76,9 +78,6 @@ package towers
 			tNumberOfTargets = 1;
 			tFrame = 19
 			
-			
-			
-			;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
 		}
@@ -93,12 +92,10 @@ package towers
 		}
 		private function added(e:Event):void
 		{
-
 			_root = parent;
 			gotoAndStop(tFrame);
 
-
-
+			addEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			rectangle.graphics.beginFill(0xFF0000);
@@ -109,10 +106,11 @@ package towers
 			// not always needed but I like to put it in to end the fill;
 			addChild(rectangle);// adds the rectangle to the stage
 			rectangle.visible = false;
-
-
-
-
+		}
+		internal function clickedOn(e:MouseEvent):void
+		{
+			
+			
 		}
 		internal function eFrame(e:Event):void
 		{
@@ -273,7 +271,7 @@ package towers
 		{
 			removeEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-
+			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
 			while (buffsArray.length > 0)
 			{
 
