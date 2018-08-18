@@ -14,7 +14,7 @@
 			tAtkSpeed = 3;
 			tbSpeed = 30;
 			tCost = 260;
-			tType = "phys"
+			tType = "normal"
 			
 			tDescription = "Guns are sort of unfair against the metal armor the creeps wear.  That's why it shoots pellets.  It still hurts tho.  Cost: " + tCost.toString();
 			// constructor code

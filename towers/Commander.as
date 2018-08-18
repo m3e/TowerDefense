@@ -14,9 +14,9 @@
 			tAtkSpeed = 18;
 			tbSpeed = 50;
 			tCost = 999;
-			tType = "phys"
+			tType = "normal"
 			tFrame = 8
-			
+			fireSoundString = "swordhit"
 			tDescription = "Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. Cost: " + tCost.toString();
 		}
 	}

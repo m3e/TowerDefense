@@ -16,14 +16,15 @@
 			tbSpeed = 30;
 			tNumberOfTargets = 2;
 			tCost = 175;
-			tType = "phys"
+			tType = "pierce"
 			tFrame = 9
+			fireSoundString = "stab"
 			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds per hit and slows by 15%.  Cost: "+ tCost.toString();
 			// constructor code
 		}
 		override internal function getSounds():void
 		{
-			clickedOnSounds = ["roguehey","warriorroguehowareyouhowcanihelp"]
+			clickedOnSounds = ["roguehey","roguehowareyou"]
 		}		
 		override internal function addDebuffs(bullet:Bullet):void
 		{
@@ -37,10 +38,5 @@
 			
 			bullet.debuffArray = debuffsArray;
 		}
-		override internal function fireSound():void
-		{
-			SoundManager.sfx("stab");
-		}
 	}
-	
 }

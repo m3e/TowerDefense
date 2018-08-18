@@ -20,7 +20,7 @@
 			tAoe = 0;
 			tbSpeed = 50;
 			tCost = 30;
-			tType = "phys";
+			tType = "normal";
 			tFrame = 1;
 			fireSoundString = "swordhit"
 

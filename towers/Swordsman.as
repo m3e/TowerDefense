@@ -14,9 +14,9 @@
 			tAoe = 0;
 			tbSpeed = 50;
 			tCost = 120;
-			tType = "phys";
+			tType = "heavy";
 			tFrame = 7
-
+			fireSoundString = "swordhit"
 			tDescription = "The Swordsman.  Attacks twice a second.  Hits hard af.  Cost: " + tCost.toString();
 			// constructor code
 		}

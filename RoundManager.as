@@ -4,6 +4,7 @@
 	import flash.display.Sprite;
 	import flash.events.*;
 	import enemies.InitiateEnemies;
+	import sounds.SoundManager;
 
 	public class RoundManager extends Sprite
 	{
@@ -25,7 +26,7 @@
 		}
 		public function startRound(increaseRound:Boolean):void
 		{
-			
+			SoundManager.sfx("roundstart2");
 			if (increaseRound)
 			{
 				compileRoundsData();

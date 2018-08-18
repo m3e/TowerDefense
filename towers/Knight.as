@@ -19,8 +19,9 @@
 			tAtkSpeed = 15;
 			tbSpeed = 50;
 			tCost = 205;
-			tType = "phys";
+			tType = "normal";
 			tFrame = 6;
+			fireSoundString = "swordhit"
 
 			tDescription = "It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds. Cost: " + tCost.toString();
 			// constructor code

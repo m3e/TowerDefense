@@ -7,6 +7,7 @@
 	import flash.events.*;
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.display.DisplayObjectContainer;
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getDefinitionByName;
 	import flash.ui.Keyboard;
@@ -45,8 +46,8 @@
 
 		//shapes
 		private var bottomBar:BottomBar;
-		private var startRoundButton:Sprite;
-		private var dpsDummyButton:Sprite;
+		private var startRoundButton:StartRoundButton;
+		private var dpsDummyButton:DpsDummyButton;
 
 		//tower related
 		private var towerBeingBuilt:Object;
@@ -130,20 +131,26 @@
 
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
-			//Requires: mapArray,userInfo
-
+			//Requires: mapArray
+			
 			setupBottomBar();
 			//requires initEnemies for buttons
+			
+			
+
+			
 
 			menuManager = new MenuManager(_root);
-			menuManager.x = 691;
-			menuManager.y = 427;
+			menuManager.x = 677;
+			menuManager.y = 423;
 			addChild(menuManager);
 
 			middleInfo = new MiddleInfoContent();
-			middleInfo.x = 382;
-			middleInfo.y = 427;
+			middleInfo.x = 318;
+			middleInfo.y = 423;
 			addChild(middleInfo);
+			
+			
 
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
@@ -151,6 +158,11 @@
 			//Requires: psuedoTowers
 
 			setupTileListeners();
+			
+			
+			setChildIndex(userInfo,numChildren-1);
+			
+			
 		}
 		private function setupUser():void
 		{
@@ -282,49 +294,17 @@
 			bottomBar.y = 416;
 			_root.addChild(bottomBar);
 
-			startRoundButton = new Sprite();
-			startRoundButton.graphics.beginFill(0x990000);
-			startRoundButton.graphics.lineStyle(1,0xFFFFFF);
-			startRoundButton.graphics.drawRect(0,0,80,20);
-			startRoundButton.graphics.endFill();
-			startRoundButton.x = 150;
+			startRoundButton = new StartRoundButton();
+			startRoundButton.x = 593;
 			startRoundButton.y = 426;
 			_root.addChild(startRoundButton);
-
 			startRoundButton.addEventListener(MouseEvent.CLICK, startRoundMouse);
 
-			var startRoundText:TextField = new TextField();
-			startRoundText.text = "Start";
-			startRoundText.width = 80;
-			startRoundText.height = 20;
-			startRoundText.textColor = 0xFFFFFF;
-			startRoundText.x = 175;
-			startRoundText.y = 426;
-			startRoundText.selectable = false;
-			startRoundText.mouseEnabled = false;
-			_root.addChild(startRoundText);
-
-			dpsDummyButton = new Sprite();
-			dpsDummyButton.graphics.beginFill(0x990000);
-			dpsDummyButton.graphics.lineStyle(1,0xFFFFFF);
-			dpsDummyButton.graphics.drawRect(0,0,80,20);
-			dpsDummyButton.graphics.endFill();
-			dpsDummyButton.x = 150;
-			dpsDummyButton.y = 460;
+			dpsDummyButton = new DpsDummyButton();
+			dpsDummyButton.x = 593;
+			dpsDummyButton.y = 450;
 			_root.addChild(dpsDummyButton);
-
 			dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
-
-			var dpsDummyText:TextField = new TextField();
-			dpsDummyText.text = "DPS Dummy";
-			dpsDummyText.width = 80;
-			dpsDummyText.height = 20;
-			dpsDummyText.textColor = 0xFFFFFF;
-			dpsDummyText.x = 155;
-			dpsDummyText.y = 460;
-			dpsDummyText.selectable = false;
-			dpsDummyText.mouseEnabled = false;
-			_root.addChild(dpsDummyText);
 		}
 		private function startRound():void
 		{
@@ -355,7 +335,7 @@
 		}
 		private function startRoundMouse(e:Event):void
 		{
-			SoundManager.sfx("roundstart2");
+			
 			startRound();
 		}
 		private function sendDpsDummy(e:Event):void
@@ -537,6 +517,7 @@
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
 				_root.addChild(newTower);
+				SoundManager.sfx("buildtower");
 
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 				newTower.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);

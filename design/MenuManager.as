@@ -1,6 +1,6 @@
 ﻿package design
 {
-
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import towers.*;
 	import flash.events.Event;
@@ -253,13 +253,21 @@
 		private function mouseHoverOver(e:Event):void
 		{
 			towerStatsOver.visible = true;
-			setChildIndex(towerStatsOver, numChildren - 1);
+			setChildIndex(towerStatsOver, numChildren -1);
+			_root.setChildIndex(this, _root.numChildren - 1);
 
-			towerStatsOver.x = e.currentTarget.x - 60;
-			towerStatsOver.y = e.currentTarget.y - 100;
+			towerStatsOver.x = e.currentTarget.x;
+			towerStatsOver.y = e.currentTarget.y - 110;
+			if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
+			{
+				var a:Number = stage.stageWidth
+				var b:Number = e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width
+				var c:Number = b - a
+				towerStatsOver.x -= c + 3
+			}
 
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-			towerStatsOver.SpdBox.text = (24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
+			towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 			towerStatsOver.RngBox.text = e.currentTarget.tRange;
 			towerStatsOver.TypeBox.text = e.currentTarget.tType;
 			towerStatsOver.DescBox.text = e.currentTarget.tDescription;

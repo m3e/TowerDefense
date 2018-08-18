@@ -13,20 +13,17 @@
 		private var _root:Object;
 				
 		//GOLD
-		private var goldBox:Shape;
-		private var goldBoxText:TextField;
+		private var goldBox:GoldBox;
 		public var gold:int;
 		
 		//LIVES
-		private var livesBar:Shape;
-		private var livesTextBox:TextField;
+		private var livesBar:LivesBar;
 		public var lives:int;
 		
 		public function UserInfo() {
 			gold = 100;
-			
+			lives = 20;
 			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
-			
 			// constructor code
 		}
 		private function addedToStage(e:Event):void
@@ -35,58 +32,22 @@
 			
 			_root = MovieClip(root)
 			
-			
 			//GOLD
-			goldBox = new Shape();
-			goldBox.graphics.lineStyle(2, 0xFFFFFF)
-			goldBox.graphics.beginFill(0x000000,.5)
-			goldBox.graphics.drawRect(0, 0, 80, 20)
-			goldBox.graphics.endFill();
-			goldBox.x = 810
-			goldBox.y = 350
+			goldBox = new GoldBox();
+			goldBox.x = 591
+			goldBox.y = 475
 			goldBox.name = "goldBox"
-			//goldBox.mouseEnabled = false
-			_root.addChild(goldBox);
-			
-			goldBoxText = new TextField();
-			goldBoxText.textColor = 0xFFFFFF
-			goldBoxText.text = gold.toString();
-			goldBoxText.x = goldBox.x + 5
-			goldBoxText.y = goldBox.y
-			goldBoxText.height = 20
-			goldBoxText.width = 80;
-			goldBoxText.selectable = false;
-			goldBoxText.mouseEnabled = false
-			
-			_root.addChild(goldBoxText);
+			goldBox.GoldText.text = gold.toString();
+			addChild(goldBox);
 			
 			//LIVES
-			livesBar = new Shape();
-			livesBar.graphics.lineStyle(2,0xFFFFFF)
-			livesBar.graphics.beginFill(0x000000,.5)
-			livesBar.graphics.drawRect(0,0,80,20);
-			livesBar.graphics.endFill();
-			livesBar.x = 810
-			livesBar.y = 380
+			livesBar = new LivesBar();
+			livesBar.x = 585
+			livesBar.y = 500
 			livesBar.name = "livesBar"
-			//livesBar.mouseEnabled = false
-			_root.addChild(livesBar);
-			
-			lives = 50;
-			
-			livesTextBox = new TextField();
-			livesTextBox.textColor = 0xFFFFFF
-			livesTextBox.text = "Lives: " + lives.toString();
-			livesTextBox.x = livesBar.x + 5
-			livesTextBox.y = livesBar.y
-			livesTextBox.height = 20
-			livesTextBox.width = 80
-			livesTextBox.selectable = false;
-			livesTextBox.mouseEnabled = false
-			_root.addChild(livesTextBox);
-			
-		}
-		
+			livesBar.LivesText.text = lives.toString();
+			addChild(livesBar);
+		}		
 		public function canAfford(cost:int):Boolean
 		{
 			var afford:Boolean;
@@ -99,12 +60,12 @@
 		public function changeGold(goldChange:int):void
 		{
 			gold += goldChange
-			goldBoxText.text = gold.toString();
+			goldBox.GoldText.text = gold.toString();
 		}
 		public function updateLives(subtractedLives:int):void
 		{
 			lives -= subtractedLives;
-			livesTextBox.text = "Lives: " + lives.toString();
+			livesBar.LivesText.text = lives.toString();
 		}
 		public function getGold():int
 		{

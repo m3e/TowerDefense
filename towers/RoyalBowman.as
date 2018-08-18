@@ -14,9 +14,10 @@
 			tAtkSpeed = 4;
 			tbSpeed = 20;
 			tCost = 180;
-			tType = "phys"
+			tType = "pierce"
 			bFrame = 5;
 			tFrame = 10
+			fireSoundString = "arrowShot"
 			tDescription = "The Royal Bowman.  Shoots 6 shots a second.  Applies -3 armor for 3 seconds on the enemy it hits.  Larger range.  Cost: "+tCost.toString()
 			// constructor code
 		}
@@ -31,10 +32,6 @@
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
-		}
-		override internal function fireSound():void
-		{
-			SoundManager.sfx("arrowShot");
 		}
 	}
 	

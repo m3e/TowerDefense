@@ -11,11 +11,20 @@
 		private var dmgCounter:Number;
 		private var dmgTotal:Number;
 		
+		private var lDmg:Number;
+		private var mDmg:Number;
+		private var hDmg:Number;
+		private var fDmg:Number;
+		
 		//private var startTime:String;
 		//private var endTime:String;
 		
 		public function dpsTestEnemy(Map) 
 		{
+			lDmg = 0
+			mDmg = 0
+			hDmg = 0
+			fDmg = 0
 			super(Map);
 			dmgCounter = 0;
 			dmgTotal = 0;
@@ -38,13 +47,43 @@
 		override public function takeDmg(dmg:Number,dType:String):void
 		{
 				
-				dmg -=  (dmg * determineArmor(armor,dType))
-				dmg = (dmg * (1 + increasedDmgTaken))
+				var lightDmg:Number = dmg
 				
+				armorType = "light"
+				lightDmg = checkMatchup(lightDmg,dType)
+				lightDmg = determineArmor(lightDmg)
+				lightDmg *= (1 + increasedDmgTaken)
+				lDmg += lightDmg
 				
+				var mediumDmg:Number = dmg
+				armorType = "medium"
+				mediumDmg = checkMatchup(mediumDmg,dType)
+				mediumDmg = determineArmor(mediumDmg)
+				mediumDmg *= (1 + increasedDmgTaken)
+				mDmg += mediumDmg
+				
+				var heavyDmg:Number = dmg
+				armorType = "heavy"
+				heavyDmg = checkMatchup(heavyDmg,dType)
+				heavyDmg = determineArmor(heavyDmg)
+				heavyDmg *= (1 + increasedDmgTaken)
+				hDmg += heavyDmg
+				
+				var fortDmg:Number = dmg
+				armorType = "fort"
+				fortDmg = checkMatchup(fortDmg,dType)
+				fortDmg = determineArmor(fortDmg)
+				fortDmg *= (1 + increasedDmgTaken)
+				fDmg += fortDmg
+				
+				armorType = "pure"
+				dmg = checkMatchup(dmg,dType)
+				dmg = determineArmor(dmg)
+				dmg *= (1 + increasedDmgTaken)
 				addDamage(dmg);
 			
 		}
+		
 		private function addDamage(dmg:Number):void
 		{
 			
@@ -95,7 +134,11 @@
 		}
 		override internal function destroyThis():void
 		{
-			trace("DPS Dummy Dmg: " + dmgTotal);
+			trace("DPS @ 100%: " + dmgTotal);
+			trace("DPS vs Light: ",lDmg)
+			trace("DPS vs Medium: ",mDmg)
+			trace("DPS vs Heavy: ",hDmg)
+			trace("DPS vs Fort: ",fDmg)
 			
 			/*var date:Date = new Date();
 			endTime = date.toLocaleTimeString()

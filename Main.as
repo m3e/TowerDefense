@@ -18,8 +18,11 @@
 			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/oyfhcudrxqvpil4/shblock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/wykubut91hcocgq/swhit.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			*/
-			
+			queue.append(new MP3Loader("sounds/sfx/building/buildtower.mp3", {name:"buildtower", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/roundstart/roundstart2.mp3", {name:"roundstart2", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			
+			queue.append(new MP3Loader("sounds/sfx/voices/archer/hellothere.mp3", {name:"archerhellothere", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/voices/archer/whatdoyouneed.mp3", {name:"archerwhatdoyouneed", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
 			queue.append(new MP3Loader("sounds/sfx/dirt/dirt1.mp3", {name:"dirt1", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/dirt/dirt2.mp3", {name:"dirt2", volume:1, autoPlay:false, estimatedBytes: 2000}));

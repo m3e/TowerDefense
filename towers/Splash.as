@@ -11,11 +11,11 @@
 			tBaseColor = 0x000000
 			tRange = 110
 			tDmg = 8;
-			tAtkSpeed = 16;
+			tAtkSpeed = 20;
 			tbSpeed = 10;
 			tAoe = 80;
 			tCost = 50;
-			tType = "phys"
+			tType = "heavy"
 			bFrame = 6
 			tFrame = 5
 			

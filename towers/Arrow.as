@@ -14,13 +14,18 @@
 			tAtkSpeed = 18;
 			tbSpeed = 20;
 			tCost = 40;
-			tType = "phys"
+			tType = "pierce"
 			bFrame = 5;			
 			tFrame = 2;
+			fireSoundString = "arrowShot"
 
 			tDescription = "The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.  Cost: " + tCost.toString();
 			// constructor code
 		}
+		override internal function getSounds():void
+		{
+			clickedOnSounds = ["archerhellothere","archerwhatdoyouneed"]
+		}		
 		override public function upgradeOne():Class
 		{
 			return RoyalBowman
@@ -33,9 +38,6 @@
 		{
 			return Rogue
 		}
-		override internal function fireSound():void
-		{
-			SoundManager.sfx("arrowShot");
-		}
+		
 	}
 }

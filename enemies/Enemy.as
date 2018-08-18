@@ -6,6 +6,7 @@
 	import flash.events.*;
 	import flash.geom.Point;
 	import design.HealthBar;
+	import flash.utils.Dictionary;
 
 
 	public class Enemy extends MovieClip
@@ -26,14 +27,24 @@
 		public var killed:Boolean;
 		public var eFrame:int;
 		public var increasedDmgTaken:Number;
+		public var armorType:String;
+		
+		
 
 		public var poisonSlow:Number;
 		public var iceSlow:Number;
 		internal var healthBar:HealthBar;
+		
+		private var light:Object;
+		private var medium:Object;
+		private var heavy:Object;
+		private var fort:Object;
+		private var pure:Object;
 
 		public function Enemy(Map:Array)
 		{
 			stop();
+			armorType="heavy"
 			increasedDmgTaken = 0;
 			eFrame = 1
 			poisonSlow = 0;
@@ -56,49 +67,94 @@
 			_root.addChild(healthBar);
 			healthBar.visible = false;
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-			
+			setupArmor()
 			//trace(eMaxHp,maxMoveSpeed,goldValue,maxArmor)
 		}
 		public function determineMoveSpeed():void
 		{
 			moveSpeed = maxMoveSpeed - (maxMoveSpeed * (iceSlow + poisonSlow));
 		}
-		internal function determineArmor(dmg:int, damageType:String):Number
+		
+		private function setupArmor():void
 		{
-			var dmgReduction:Number = 0;
-			switch (damageType)
+			light = new Object()
+			medium = new Object()
+			heavy = new Object()
+			fort = new Object();
+			pure = new Object();
+			
+			light["pierce"] = 1.3;
+			light["normal"] = 1
+			light["heavy"] = .70
+			
+			medium["pierce"] = .9;
+			medium["normal"] = .9
+			medium["heavy"] = 1.2
+			
+			heavy["pierce"] = .8;
+			heavy["normal"] = .9
+			heavy["heavy"] = 1
+			
+			fort["pierce"] = .70;
+			fort["normal"] = .8
+			fort["heavy"] = 1.3
+			
+			pure["pierce"] = 1
+			pure["normal"] = 1
+			pure["heavy"] = 1
+			
+		}
+		internal function checkMatchup(dmg,dType):Number
+		{
+			var d:Number
+			if (dType == "ice" || dType == "fire" || dType == "earth")
 			{
-				case ("phys") :
-					if (armor > 0)
-					{
-						dmgReduction = ((armor)*0.06)/(1+0.06*(armor));
-						dmgReduction = Math.round(dmgReduction * 100) / 100;
-					}
-					else if (armor < 0)
-					{
-						dmgReduction = -(1- Math.pow(2-0.94,armor));
-					}
-
-					break;
-
-				case ("fire") :
-				case ("ice") :
-				case ("earth") :
-
-
-					break;
+				d = 1;
 			}
-			return dmgReduction;
-
+			else
+			{
+			switch (armorType)
+			{
+				case ("light"):
+				d = light[dType]
+				break;
+				
+				case ("medium"):
+				d = medium[dType]
+				break;
+				
+				case ("heavy"):
+				d = heavy[dType]
+				break;
+				
+				case ("fort"):
+				d = fort[dType]
+				break;
+				
+				case ("pure"):
+				d = pure[dType];
+				
+			}
+			}
+			return Number(dmg * d);
+		}
+		
+		internal function determineArmor(dmg:Number):Number
+		{
+			var d:Number = dmg
+			d -= armor
+			return d;
 		}
 		public function takeDmg(dmg:Number,dType:String):void
 		{
 			//calculate reduced dmg
 			if (eHp > 0)
 			{
-				dmg -=  ((dmg * determineArmor(armor,dType)) * (1 + increasedDmgTaken))
+				dmg = checkMatchup(dmg,dType)
 				
-				dmg = (dmg * (1 + increasedDmgTaken))
+				dmg = determineArmor(dmg);
+				
+				dmg = dmg * (1 + increasedDmgTaken)
 				
 				eHp -=  dmg
 			}

@@ -118,12 +118,13 @@ package towers
 		}
 		internal function clickedOn(e:MouseEvent):void
 		{
-			var i:int = (Math.random() * clickedOnSounds.length);
-			if (sound == null)
+			
+			if (sound == null && clickedOnSounds.length > 0)
 			{
+				var i:int = (Math.random() * clickedOnSounds.length);
 				sound = SoundManager.sfx(clickedOnSounds[i]);
+				sound.addEventListener(Event.SOUND_COMPLETE, soundEnd);
 			}
-			sound.addEventListener(Event.SOUND_COMPLETE, soundEnd);
 		}
 		internal function soundEnd(e:Event):void
 		{
@@ -229,7 +230,7 @@ package towers
 		}
 		internal function fireSound():void
 		{
-			if (fireSoundOn == false)
+			if (fireSoundOn == false && fireSoundString != "default")
 			{
 			fireSoundOn = true;
 			fireSoundChannel = SoundManager.sfx(fireSoundString);

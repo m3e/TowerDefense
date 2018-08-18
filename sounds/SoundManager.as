@@ -63,7 +63,7 @@
 
 		public static function sfx(fxName:String):SoundChannel
 		{
-			if (sfxs.length < 30)
+			if (sfxs.length < 29)
 			{
 			var song:Sound = queue.getContent(fxName);
 			var trans:SoundTransform = new SoundTransform(sfxVolume);
@@ -78,6 +78,7 @@
 		{
 			var sfx:* = e.currentTarget;
 			sfxs.splice(sfxs.indexOf(sfx),1);
+			sfx.removeEventListener(Event.SOUND_COMPLETE, removeSfx)
 			sfx = null;			
 		}
 		/*public static function bgfx(fxName:String):void

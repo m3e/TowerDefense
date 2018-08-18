@@ -26,50 +26,6 @@
 			tDescription = "Slows all units passing through by 30% but deals no damage.  Cost: " + tCost.toString();
 			// constructor code
 		}
-		/*override internal function eFrame(e:Event):void
-		{
-			if (_root != undefined)
-			{
-				tTarget.length = 0;
-				//for (var i:int=enemyList.length - 1; i >=0; i--)
-				for (var i:int=0; i < enemyList.length; i++)
-				{
-					
-					if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange)
-					{
-						//if the selected enemy is close enough, then set it as the target
-						tTarget.push(enemyList[i]);
-					}
-					
-				}
-				if (tTarget.length > 0)
-				{
-					
-					if (firing == false)
-					{
-						var fireFlash:ColorTransform = new ColorTransform();
-						fireFlash.color = 0xFF0000;
-						this.transform.colorTransform = fireFlash;
-						
-						
-					}
-					firing = true;
-					fire();
-				}
-				else if (tTarget.length == 0)
-				{
-					if (firing == true)
-					{
-						var returnFromFireFlash:ColorTransform = new ColorTransform();
-						returnFromFireFlash.color = tBaseColor;
-						this.transform.colorTransform = returnFromFireFlash;
-						
-					}
-					firing = false;
-				}
-			}
-
-		}*/
 		override internal function specialFunction():void
 		{
 			
