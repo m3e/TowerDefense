@@ -13,17 +13,17 @@
 			super();
 			tBaseColor = 0x440000;
 			tRange = 85;
-			tDmg = 10;
-			tAtkSpeed = 4;
+			tDmg = 13;
+			tAtkSpeed = 6;
 			tAoe = 0;
 			tbSpeed = 8;
 			bFrame = 2;
-			tCost = 180;
+			tCost = 120;
 			tType = "fire";
 			tNumberOfTargets = 2;
 			tFrame = 12;
 			fireSoundString = "flame";
-			tDescription = "Doubles the flames coming from this tower and increases damage.  This tower likes fire.  Cost: "+tCost.toString()
+			tDescription = "Bigger, badder, and hits 2 guys now.  This tower likes fire.";
 			// constructor code
 		}
 		

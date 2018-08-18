@@ -84,12 +84,13 @@
 			var numSend:int;
 			var freq:int;
 			var eFrame:int = 5;
+			var armorType:String
+			armorType = "pure"
 			
 			if (currentRound > 12)
 			{
 				currentRound = 12;
 			}
-
 
 			switch (currentRound)
 			{
@@ -100,6 +101,7 @@
 					armor = 0;
 					numSend = 12;
 					freq = 14
+					armorType = "medium"
 					
 					;
 					break;
@@ -111,6 +113,7 @@
 					armor = 0;
 					numSend = 10;
 					freq = 16
+					armorType = "medium"
 					
 					break;
 
@@ -121,6 +124,7 @@
 					armor = 0;
 					numSend = 20;
 					freq = 14
+					armorType = "light"
 					break;
 
 				case 4 :
@@ -130,6 +134,7 @@
 					armor = 0;
 					numSend = 14;
 					freq = 16
+					armorType = "heavy"
 					break;
 
 				case 5 :
@@ -139,6 +144,7 @@
 					armor = 0;
 					numSend = 14;
 					freq = 16
+					armorType = "medium"
 					break;
 
 				case 6 :
@@ -148,6 +154,7 @@
 					armor = 0;
 					numSend = 20;
 					freq = 12
+					armorType = "heavy"
 					break;
 					
 				case 7 :
@@ -157,6 +164,7 @@
 					armor = 0
 					numSend = 18
 					freq = 14
+					armorType = "light"
 					break;
 					
 				case 8 :
@@ -166,6 +174,7 @@
 					armor = 0
 					numSend = 18
 					freq = 14
+					armorType = "heavy"
 					break;
 					
 				case 9 :
@@ -175,6 +184,7 @@
 					armor = 0
 					numSend = 16
 					freq = 16
+					armorType = "medium"
 					break;
 
 				default :
@@ -186,7 +196,7 @@
 					freq = 12
 			}
 			eFrame = currentRound;
-			waveArray = [hp,ms,gold,armor,numSend,freq,eFrame];
+			waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType];
 		}
 	}
 

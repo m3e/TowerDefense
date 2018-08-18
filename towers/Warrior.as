@@ -24,7 +24,7 @@
 			tFrame = 1;
 			fireSoundString = "swordhit"
 
-			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.  Cost: " + tCost.toString();
+			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.";
 			// constructor code
 		}
 		override internal function getSounds():void

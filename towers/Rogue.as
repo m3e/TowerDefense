@@ -11,15 +11,15 @@
 			super();
 			tBaseColor = 0x5f5e77
 			tRange = 100
-			tDmg = 25;
-			tAtkSpeed = 20;
+			tDmg = 23;
+			tAtkSpeed = 18;
 			tbSpeed = 30;
 			tNumberOfTargets = 2;
-			tCost = 175;
+			tCost = 100;
 			tType = "pierce"
 			tFrame = 9
 			fireSoundString = "stab"
-			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds per hit and slows by 15%.  Cost: "+ tCost.toString();
+			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds per hit and slows by 15%.";
 			// constructor code
 		}
 		override internal function getSounds():void

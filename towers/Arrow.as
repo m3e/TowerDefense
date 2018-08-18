@@ -19,7 +19,7 @@
 			tFrame = 2;
 			fireSoundString = "arrowShot"
 
-			tDescription = "The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.  Cost: " + tCost.toString();
+			tDescription = "The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.";
 			// constructor code
 		}
 		override internal function getSounds():void

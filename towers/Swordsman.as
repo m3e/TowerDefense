@@ -9,15 +9,15 @@
 			super();
 			tBaseColor = 0xada9a4;
 			tRange = 50;
-			tDmg = 50;
-			tAtkSpeed = 16;
+			tDmg = 65;
+			tAtkSpeed = 20;
 			tAoe = 0;
 			tbSpeed = 50;
-			tCost = 120;
+			tCost = 80;
 			tType = "heavy";
 			tFrame = 7
 			fireSoundString = "swordhit"
-			tDescription = "The Swordsman.  Attacks twice a second.  Hits hard af.  Cost: " + tCost.toString();
+			tDescription = "The Swordsman.  Just a warrior on drugs.  Hits hard af.";
 			// constructor code
 		}
 

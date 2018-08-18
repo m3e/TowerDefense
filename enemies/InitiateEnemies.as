@@ -16,22 +16,7 @@
 		private var userInfo:UserInfo;
 		private var tileSide:int;
 
-
-
-
 		private var enemy:Enemy;
-		/*private var enemy1:Enemy1;
-		private var enemy2:Enemy2;
-		private var enemy3:Enemy3;
-		private var enemy4:Enemy4;
-		private var enemy5:Enemy5;
-		private var enemy6:Enemy6;
-		private var enemy7:Enemy7;
-		private var enemy8:Enemy8;
-		private var enemy9:Enemy9;
-		private var enemy10:Enemy10;
-		private var enemy11:Enemy11;
-		private var enemy12:Enemy12;*/
 
 		public var healthBarOn:Boolean;
 
@@ -68,6 +53,7 @@
 				enemy.goldValue = waveArray[2];
 				enemy.maxArmor = waveArray[3];
 				enemy.eFrame = waveArray[6];
+				enemy.armorType = waveArray[7];
 				_root.addChild(enemy);
 				enemy.x = 0;
 				enemy.y = 6 * tileSide;

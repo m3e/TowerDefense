@@ -324,8 +324,9 @@
 				var armor:int = Number(inputField.armorField.text);
 				var numSend:int = Number(inputField.numField.text);
 				var freq:int = Number(inputField.freqField.text);
+				var armorType:String = "pure"
 				var eFrame:int = 11;
-				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame];
+				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType];
 				roundManager.sendWave(waveArray);
 			}
 		}

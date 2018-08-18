@@ -19,16 +19,12 @@
 			tRange = 50;
 			tDmg = 0;
 			tAtkSpeed = 2;
-			tCost = 550;
+			tCost = 220;
 			tType = "ice";
 			tFrame = 16
 			targeting = "All"
-			tDescription = "Slows all units passing through by 30% but deals no damage.  Cost: " + tCost.toString();
+			tDescription = "Slows all units passing through by 30% but deals no damage.";
 			// constructor code
-		}
-		override internal function specialFunction():void
-		{
-			
 		}
 		override internal function addDebuffs(bullet:Bullet):void
 		{

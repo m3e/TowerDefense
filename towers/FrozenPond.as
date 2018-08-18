@@ -20,11 +20,11 @@
 			tAoe = 0;
 			tbSpeed = 0;
 			bFrame = 3;
-			tCost = 250;
+			tCost = 120;
 			tType = "ice";
 			tNumberOfTargets = 1;
 			tFrame = 15
-			tDescription = "Frozen Pond.  Feel nature's tranquility.  Buffs towers within 2 blocks 15% dmg.  Cost: " + tCost.toString();
+			tDescription = "Frozen Pond.  Feel nature's tranquility.  Buffs towers within 2 blocks 15% dmg.";
 			// constructor code
 		}
 

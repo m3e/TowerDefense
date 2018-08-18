@@ -18,13 +18,13 @@
 			tBaseColor = 0x660000;
 			tRange = 50;
 			tDmg = 10;
-			tAtkSpeed = 8;
+			tAtkSpeed = 6;
 			tbSpeed = 50;
-			tCost = 220;
+			tCost = 180;
 			tType = "fire"
 			tFrame = 14
 			targeting = "All"
-			tDescription = "Burns the ground in a 1 block AoE (very short range!) dealing 50 damage a second to anything in its range.  Strong.  Cost: "+tCost.toString();
+			tDescription = "Burns the ground in a 1 block AoE (melee range) dealing 40 damage a second to anything it can.  Strong.";
 			// constructor code
 		}
 		override internal function fire():void

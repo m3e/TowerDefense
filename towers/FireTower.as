@@ -18,13 +18,13 @@
 			tAoe = 0;
 			tbSpeed = 8;
 			bFrame = 2;
-			tCost = 60;
+			tCost = 55;
 			tType = "fire";
 			tNumberOfTargets = 1;
 			tFrame = 3;
 			fireSoundString = "flame"
 			
-			tDescription = "Takes fire and throws it, like some sort of throwing flame machine.  Cost: " + tCost.toString();
+			tDescription = "Takes fire and throws it, like some sort of throwing flame machine.";
 			
 			// constructor code
 		}

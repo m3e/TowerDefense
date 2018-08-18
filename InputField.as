@@ -22,13 +22,6 @@
 			numField.text = String(1)
 			freqField.text = String(1)
 			
-			/*goldField.addEventListener(Event.CHANGE, changedText)
-			hpField.addEventListener(Event.CHANGE, changedText)
-			msField.addEventListener(Event.CHANGE, changedText)
-			armorField.addEventListener(Event.CHANGE, changedText)
-			numField.addEventListener(Event.CHANGE, changedText)
-			freqField.addEventListener(Event.CHANGE, changedText)*/
-			
 			// constructor code
 		}
 		/*private function changedText(e:Event)
