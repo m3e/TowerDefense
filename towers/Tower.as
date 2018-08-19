@@ -62,8 +62,12 @@ package towers
 		private var fireSoundChannel:SoundChannel;
 
 		internal var bFrame:int;
+		
+		internal var tLevel:int;
 
 		internal var rectangle:Shape;
+		
+		public var uCost:int;
 
 		public function Tower()
 		{
@@ -79,18 +83,24 @@ package towers
 			loadedTimer = 0;
 			tbSpeed = 90;
 			tAoe = 0;
+			tLevel = 1;
 			bFrame = 1;
 			tNumberOfTargets = 1;
 			tFrame = 19
+			uCost=45;
 			;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
+		}
+		public function upgradeMe():void
+		{
+			
 		}
 		public function tMenu():Array
 		{
 			var e:Array = new Array  ;
 			e = [[,,,],
-			 ["Targeting",,,],
+			 ["Targeting",,,"UpgradeMe"],
 			 ["Sell",upgradeThree(),upgradeTwo(),upgradeOne()]];
 
 			return e;

@@ -118,12 +118,12 @@
 					break;
 
 				case 3 :
-					hp = 55;
-					ms = 6;
+					hp = 45;
+					ms = 5.3;
 					gold = 5;
 					armor = 0;
 					numSend = 20;
-					freq = 14
+					freq = 15
 					armorType = "light"
 					break;
 
@@ -186,6 +186,36 @@
 					freq = 16
 					armorType = "medium"
 					break;
+					
+				/*case 10 :
+					hp = 
+					ms = 
+					gold = 
+					armor = 
+					numSend = 
+					freq = 
+					armorType = ""
+					break;
+					
+				case 11 :
+					hp = 
+					ms = 
+					gold = 
+					armor = 
+					numSend = 
+					freq = 
+					armorType = ""
+					break;
+					
+				case 12 :
+					hp = 
+					ms = 
+					gold = 
+					armor = 
+					numSend = 
+					freq = 
+					armorType = ""
+					break;*/
 
 				default :
 					hp = 120;

@@ -71,7 +71,7 @@
 		{
 			if (e.currentTarget.killed)
 			{
-				userInfo.changeGold(e.currentTarget.goldValue);
+				UserInfo.changeGold(e.currentTarget.goldValue);
 			}
 			else
 			{

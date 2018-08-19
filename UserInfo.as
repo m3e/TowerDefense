@@ -13,8 +13,8 @@
 		private var _root:Object;
 				
 		//GOLD
-		private var goldBox:GoldBox;
-		public var gold:int;
+		private static var goldBox:GoldBox;
+		public static var gold:int;
 		
 		//LIVES
 		private var livesBar:LivesBar;
@@ -48,7 +48,7 @@
 			livesBar.LivesText.text = lives.toString();
 			addChild(livesBar);
 		}		
-		public function canAfford(cost:int):Boolean
+		public static function canAfford(cost:int):Boolean
 		{
 			var afford:Boolean;
 			if (cost <= gold)
@@ -57,7 +57,7 @@
 			}
 			return afford;
 		}
-		public function changeGold(goldChange:int):void
+		public static function changeGold(goldChange:int):void
 		{
 			gold += goldChange
 			goldBox.GoldText.text = gold.toString();

@@ -27,6 +27,31 @@
 			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.";
 			// constructor code
 		}
+		override public function upgradeMe():void
+		{
+			switch (tLevel)
+			{
+				case (1):
+				tLevel++
+				break;
+				
+				case (2):
+				tLevel++
+				break;
+				
+				case (3):
+				tLevel++
+				break;
+				
+				case (4):
+				tLevel++
+				break;
+				
+				case (5):
+				trace(tLevel++)
+				break;
+			}
+		}
 		override internal function getSounds():void
 		{
 			clickedOnSounds = ["warriorgreetings","warriorhowcanihelp"]

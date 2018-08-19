@@ -19,6 +19,7 @@
 
 		private var sellObject:SellObject;
 		private var targetingIcon:TargetingIcon;
+		private var upgradeIcon:UpgradeIcon;
 		private var menuIsDefault:Boolean;
 		private var towerBeingBuiltSquare:Shape;
 		
@@ -62,6 +63,10 @@
 			targetingIcon = new TargetingIcon();
 			addChild(targetingIcon);
 			targetingIcon.visible = false;
+			
+			upgradeIcon = new UpgradeIcon();
+			addChild(upgradeIcon);
+			upgradeIcon.visible = false;
 
 			towerBeingBuiltSquare = new Shape ();
 			towerBeingBuiltSquare.graphics.lineStyle(4,0x665544);
@@ -196,6 +201,14 @@
 										targetingIcon.visible = true;
 										targetingIcon.addEventListener(MouseEvent.CLICK, targetingIconClicked);
 										break;
+										
+									case (ct == "UpgradeMe") :
+										
+										upgradeIcon.x = cellsArray[1][3].x +1;
+										upgradeIcon.y = cellsArray[1][0].y+2;
+										upgradeIcon.visible = true;
+										upgradeIcon.addEventListener(MouseEvent.CLICK, upgradeIconClicked);
+										break;
 								}
 						}
 					}
@@ -280,8 +293,12 @@
 			selectedTower = e.currentTarget as Tower;
 			sellObject.importTowerToSell(selectedTower);
 			targetingIcon.importTower(selectedTower);
+			upgradeIcon.importTower(selectedTower);
 		}
-
+		private function upgradeIconClicked(e:Event):void
+		{
+			upgradeIcon.upgradeTower();
+		}
 		public function updateMenu(e:Event):void
 		{
 			switch (true)
@@ -340,6 +357,11 @@
 								{
 									targetingIcon.visible = false;
 									targetingIcon.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
+								}
+								else if (ct == "UpgradeMe")
+								{
+									upgradeIcon.visible = true;
+									upgradeIcon.removeEventListener(MouseEvent.CLICK, upgradeIconClicked);
 								}
 						}
 						currentMenuSelected[i][p] = null;
