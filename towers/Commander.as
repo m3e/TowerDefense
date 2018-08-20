@@ -1,4 +1,5 @@
 ﻿package towers {
+	import towers.skills.Skill;
 	
 	
 	
@@ -17,7 +18,13 @@
 			tType = "normal"
 			tFrame = 8
 			fireSoundString = "swordhit"
-			tDescription = "Likes to shout a lot of motivational things.  Nearby towers strangely reply to it.";
+			tDescription = "Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. DmgUp 20% to nearby towers.";
+		}
+		override internal function generateSkills():void
+		{
+			skill = new Skill(_root,"ally","instant",.2,2,4,2,towerArray)
+			addChild(skill)
+			skillsArray.push(skill);
 		}
 	}
 	

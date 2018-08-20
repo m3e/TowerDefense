@@ -4,11 +4,12 @@
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import buffs.*;
+	import towers.skills.Skill;
 
 	public class FrozenPond extends Tower
 	{
 		
-		private var tBuff:Buff;
+		private var tBuff:DmgBuff;
 
 		public function FrozenPond()
 		{
@@ -27,9 +28,13 @@
 			tDescription = "Frozen Pond.  Feel nature's tranquility.  Buffs towers within 2 blocks 15% dmg.";
 			// constructor code
 		}
-
-		
-		override internal function eFrame(e:Event):void
+		override internal function generateSkills():void
+		{
+			skill = new Skill(_root,"ally","instant",.15,2,2,2,towerArray)
+			addChild(skill);
+			skillsArray.push(skill);
+		}
+		/*override internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
@@ -57,7 +62,7 @@
 				if (loaded == true)
 				{
 					
-					var myX:int
+					/*var myX:int
 					var myY:int
 					for (var i:int = -tRange; i <= tRange; i++)
 					{
@@ -80,8 +85,8 @@
 									}
 								}
 						}
-					}
-					if (tTarget.length > 0)
+					}*/
+					/*if (tTarget.length > 0)
 					{
 						//Flash and Fire
 						loaded = false;
@@ -96,20 +101,17 @@
 
 						//End Flash and Fire
 
-					}
-				}
-			}
-		}
-		override internal function fire():void
-		{
-			specialFunction();
-			
+					}*/
+				//}
+			//}
+		//}
+		/*override internal function fire():void
+		{			
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				tBuff = new Buff(tTarget[i],.15,2)
-				_root.addChild(tBuff);
+				Buff.addDmgBuff(_root,tTarget[i],.15,2)
 			}
-		}
+		}*/
 	}
 
 }

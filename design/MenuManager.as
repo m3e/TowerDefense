@@ -360,7 +360,7 @@
 								}
 								else if (ct == "UpgradeMe")
 								{
-									upgradeIcon.visible = true;
+									upgradeIcon.visible = false;
 									upgradeIcon.removeEventListener(MouseEvent.CLICK, upgradeIconClicked);
 								}
 						}

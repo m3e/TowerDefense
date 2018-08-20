@@ -13,6 +13,8 @@
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	
+	import common.Commons;
 
 	import design.*;
 
@@ -34,7 +36,7 @@
 		private var _root:Object;
 
 		//constants
-		private var tileSide:int = 32;
+		private var tileSide:int;
 
 		//critical arrays
 		private var mapArray:Array;
@@ -80,27 +82,18 @@
 			enemyList = new Array  ;
 			tileArray = new Array  ;
 			towerArray = new Array  ;
+			tileSide = common.Commons.tileSide;
 
 			//1=right 2=down 3=left 4=up
-			mapArray = [  
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[1,1,1,1,2,0,0,0,0,4,0,0,0,2,0,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[0,0,0,0,2,0,0,0,0,4,0,0,0,2,0,4,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,1,1,1,1,1,4,0,2,3,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,4,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+			
+			mapArray = common.Commons.getMapArray();
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
+				
 				tileArray[row] = [];
 				towerArray[row] = [];
+				
 				for (var col:int=0; col < mapArray[0].length; col++)
 				{
 					tileArray[row][col] = undefined;

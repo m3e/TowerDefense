@@ -1,8 +1,4 @@
-﻿
-
-
-
-package towers
+﻿package towers
 {
 
 	import flash.display.MovieClip;
@@ -22,6 +18,7 @@ package towers
 	import sounds.SoundManager;
 	import flash.events.MouseEvent;
 	import flash.media.SoundChannel;
+	import towers.skills.Skill;
 
 	public class Tower extends MovieClip
 	{
@@ -53,7 +50,7 @@ package towers
 		public var towerArray:Array;
 
 		public var targeting:String;
-		internal var _root:*;
+		public var _root:*;
 
 		private var sound:SoundChannel;
 		internal var clickedOnSounds:Array;
@@ -62,15 +59,19 @@ package towers
 		private var fireSoundChannel:SoundChannel;
 
 		internal var bFrame:int;
-		
+
 		internal var tLevel:int;
 
 		internal var rectangle:Shape;
-		
+
 		public var uCost:int;
+
+		internal var skillsArray:Array;
+		internal var skill:Skill;
 
 		public function Tower()
 		{
+			skillsArray = [];
 			fireSoundString = "default";
 			clickedOnSounds = new Array  ;
 			buffsArray = new Array  ;
@@ -86,11 +87,15 @@ package towers
 			tLevel = 1;
 			bFrame = 1;
 			tNumberOfTargets = 1;
-			tFrame = 19
-			uCost=45;
-			;
+			tFrame = 19;
+			uCost = 45;
+			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
+		}
+		internal function generateSkills():void
+		{
+
 		}
 		public function upgradeMe():void
 		{
@@ -121,14 +126,13 @@ package towers
 			// not always needed but I like to put it in to end the fill;
 			addChild(rectangle);// adds the rectangle to the stage
 			rectangle.visible = false;
+			generateSkills();
 		}
 		internal function getSounds():void
 		{
-			
 		}
 		internal function clickedOn(e:MouseEvent):void
 		{
-			
 			if (sound == null && clickedOnSounds.length > 0)
 			{
 				var i:int = (Math.random() * clickedOnSounds.length);
@@ -138,7 +142,6 @@ package towers
 		}
 		internal function soundEnd(e:Event):void
 		{
-			
 			sound.removeEventListener(Event.SOUND_COMPLETE, soundEnd);
 			sound = null;
 		}
@@ -146,25 +149,28 @@ package towers
 		{
 			if (_root != undefined)
 			{
+				for (var k:int=0; k < skillsArray.length; k++)
+				{
+					skillsArray[k].activateSkill();
+				}
 				tTarget.length = 0;
+				//Reload
 				if (loaded == false)
 				{
-					//Reload
 					loadedTimer +=  1;
-
+					
 					//reset red flash from firing
-					if (loadedTimer == 1)
+					if (loadedTimer == 1) 
 					{
 						rectangle.visible = false;
 					}
-					//Reload
-					if (loadedTimer == tAtkSpeed)
+					
+					if (loadedTimer == tAtkSpeed) //Reload
 					{
 						loaded = true;
 					}
-					//End Reload
-
 				}
+				//End Reload
 				if (loaded == true)
 				{
 					targetingCheck();
@@ -212,12 +218,12 @@ package towers
 					enemyList.sortOn("distanceTraveled", Array.NUMERIC | Array.DESCENDING);
 					break;
 
-				case ("Last") :
-					enemyList.sortOn("distanceTraveled", Array.NUMERIC);
-					break;
-
 				case ("Strong") :
 					enemyList.sortOn("eHp", Array.NUMERIC | Array.DESCENDING);
+					break;
+
+				case ("Last") :
+					enemyList.sortOn("distanceTraveled", Array.NUMERIC);
 					break;
 
 				case ("Weak") :
@@ -234,30 +240,26 @@ package towers
 		{
 
 		}
-		internal function specialFunction():void
-		{
-
-		}
 		internal function fireSound():void
 		{
 			if (fireSoundOn == false && fireSoundString != "default")
 			{
-			fireSoundOn = true;
-			fireSoundChannel = SoundManager.sfx(fireSoundString);
-			fireSoundChannel.addEventListener(Event.SOUND_COMPLETE,fireSoundEnd)
+				fireSoundOn = true;
+				fireSoundChannel = SoundManager.sfx(fireSoundString);
+				fireSoundChannel.addEventListener(Event.SOUND_COMPLETE,fireSoundEnd);
 			}
 		}
 		private function fireSoundEnd(e:Event):void
 		{
-			
+
 			fireSoundOn = false;
-			e.currentTarget.removeEventListener(Event.SOUND_COMPLETE,fireSoundEnd)
+			e.currentTarget.removeEventListener(Event.SOUND_COMPLETE,fireSoundEnd);
 			fireSoundChannel = null;
 		}
 		internal function fire():void
 		{
 
-			specialFunction();
+
 			fireSound();
 			//Create new Bullet
 			var newBullet:Bullet;
@@ -316,12 +318,8 @@ package towers
 			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
 			while (buffsArray.length > 0)
 			{
-
-				buffsArray[0].tTarget = this;
 				buffsArray[0].finishBuff();
-				buffsArray.splice(0,1);
 			}
-
 			tTarget = null;
 			enemyList = null;
 			towerArray = null;

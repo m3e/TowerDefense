@@ -187,17 +187,17 @@
 					armorType = "medium"
 					break;
 					
-				/*case 10 :
-					hp = 
-					ms = 
-					gold = 
-					armor = 
-					numSend = 
-					freq = 
-					armorType = ""
+				case 10 :
+					hp =  800
+					ms = 3
+					gold = 0
+					armor = 0
+					numSend = 16
+					freq = 16
+					armorType = "heavy"
 					break;
 					
-				case 11 :
+				/*case 11 :
 					hp = 
 					ms = 
 					gold = 

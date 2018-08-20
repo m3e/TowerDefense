@@ -5,11 +5,13 @@
 	import flash.events.MouseEvent;
 	import flash.media.SoundChannel;
 	import flash.events.Event;
+	import towers.skills.Skill;
 
 	public class Warrior extends Tower
 	{
 
-
+		
+		
 		public function Warrior()
 		{
 			tBaseColor = 0x8c8781;
