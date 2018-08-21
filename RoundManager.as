@@ -16,6 +16,7 @@
 		private var numberToSend:int;
 		private var frameTimer:int;
 		private var waveArray:Array;
+		private var roundEndBonus:int;
 
 		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
@@ -42,6 +43,7 @@
 			waveArray = []
 			frameTimer = 0;
 			roundInProgress = false;
+			UserInfo.changeGold(roundEndBonus);
 			removeEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
 		private function spawnTimer(e:Event):void
@@ -97,104 +99,112 @@
 				case 1 :
 					hp = 24;
 					ms = 3;
-					gold = 5;
+					gold = 3;
 					armor = 0;
-					numSend = 12;
+					numSend = 15;
 					freq = 14
 					armorType = "medium"
-					
+					roundEndBonus = 15
 					;
 					break;
 
 				case 2 :
 					hp = 55;
 					ms = 3;
-					gold = 7;
+					gold = 3;
 					armor = 0;
-					numSend = 10;
+					numSend = 15;
 					freq = 16
 					armorType = "medium"
-					
+					roundEndBonus = 18
 					break;
 
 				case 3 :
 					hp = 55;
 					ms = 5;
-					gold = 5;
+					gold = 3;
 					armor = 0;
 					numSend = 20;
 					freq = 12
 					armorType = "light"
+					roundEndBonus = 22
 					break;
 
 				case 4 :
 					hp = 125;
 					ms = 3;
-					gold = 9;
+					gold = 4;
 					armor = 0;
 					numSend = 14;
 					freq = 16
 					armorType = "heavy"
+					roundEndBonus = 28
 					break;
 
 				case 5 :
 					hp = 160;
 					ms = 4;
-					gold = 10;
+					gold = 4;
 					armor = 0;
 					numSend = 14;
 					freq = 16
 					armorType = "medium"
+					roundEndBonus = 36
 					break;
 
 				case 6 :
 					hp = 160;
 					ms = 5;
-					gold = 9;
+					gold = 4;
 					armor = 0;
 					numSend = 20;
 					freq = 12
 					armorType = "heavy"
+					roundEndBonus = 48
 					break;
 					
 				case 7 :
 					hp = 240
 					ms = 4
-					gold = 10
+					gold = 5
 					armor = 0
 					numSend = 18
 					freq = 14
 					armorType = "light"
+					roundEndBonus = 56
 					break;
 					
 				case 8 :
 					hp = 300
 					ms = 4
-					gold = 11
+					gold = 5
 					armor = 0
 					numSend = 18
 					freq = 14
 					armorType = "heavy"
+					roundEndBonus = 68
 					break;
 					
 				case 9 :
 					hp = 560
 					ms = 3
-					gold = 0
+					gold = 5
 					armor = 0
 					numSend = 16
 					freq = 16
 					armorType = "medium"
+					roundEndBonus = 80
 					break;
 					
 				case 10 :
 					hp =  800
 					ms = 3
-					gold = 0
+					gold = 6
 					armor = 0
 					numSend = 16
 					freq = 16
 					armorType = "heavy"
+					roundEndBonus = 86
 					break;
 					
 				/*case 11 :
