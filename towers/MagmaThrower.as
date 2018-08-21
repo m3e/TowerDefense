@@ -10,7 +10,7 @@
 			super();
 			tBaseColor = 0xFF9900
 			tRange = 100
-			tDmg = 100;
+			tDmg = 80;
 			tAtkSpeed = 32;
 			tbSpeed = 36;
 			tAoe = 85;

@@ -11,7 +11,7 @@
 			super();
 			tBaseColor = 0x5f5e77
 			tRange = 100
-			tDmg = 23;
+			tDmg = 24;
 			tAtkSpeed = 18;
 			tbSpeed = 30;
 			tNumberOfTargets = 2;

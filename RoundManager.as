@@ -26,7 +26,7 @@
 		}
 		public function startRound(increaseRound:Boolean):void
 		{
-			SoundManager.sfx("roundstart2");
+			//SoundManager.sfx("roundstart2");
 			if (increaseRound)
 			{
 				compileRoundsData();
@@ -87,9 +87,9 @@
 			var armorType:String
 			armorType = "pure"
 			
-			if (currentRound > 12)
+			if (currentRound > 20)
 			{
-				currentRound = 12;
+				currentRound = 20;
 			}
 
 			switch (currentRound)
@@ -107,9 +107,9 @@
 					break;
 
 				case 2 :
-					hp = 60;
+					hp = 55;
 					ms = 3;
-					gold = 8;
+					gold = 7;
 					armor = 0;
 					numSend = 10;
 					freq = 16
@@ -118,17 +118,17 @@
 					break;
 
 				case 3 :
-					hp = 45;
-					ms = 5.3;
+					hp = 55;
+					ms = 5;
 					gold = 5;
 					armor = 0;
 					numSend = 20;
-					freq = 15
+					freq = 12
 					armorType = "light"
 					break;
 
 				case 4 :
-					hp = 140;
+					hp = 125;
 					ms = 3;
 					gold = 9;
 					armor = 0;

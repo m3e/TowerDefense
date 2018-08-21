@@ -173,8 +173,6 @@
 		}
 		public function healthBarOnOff():void
 		{
-			healthBar.x = this.x;
-			healthBar.y = this.y;
 			healthBar.visible = !(healthBar.visible);
 		}
 		private function updateHealth():void
@@ -184,7 +182,7 @@
 			{
 				healthBar.hpBar.scaleX = percentHP;
 				healthBar.x = this.x;
-				healthBar.y = this.y;
+				healthBar.y = this.y-4;
 			}
 		}
 		internal function moveCharacter():void
