@@ -19,7 +19,7 @@
 			tType = "ice"
 			tFrame = 4;
 			
-			tDescription = "Icey.  Cold.  Refreshing.  Slows by 15% to small area for 2 seconds.";
+			tDescription = "Icey.  Cold.  Refreshing.  Slows by 20% to small area for 2 seconds.";
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -28,7 +28,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.15,2)
+			debuffType.push("slow",.2,2)
 			
 			debuffsArray.push(debuffType)
 			
