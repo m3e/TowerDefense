@@ -66,6 +66,7 @@
 				enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 				enemyList.push(enemy);
 				
+				
 		}
 		private function enemyDead(e:Event):void
 		{

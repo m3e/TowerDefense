@@ -5,6 +5,7 @@
 	import flash.events.*;
 	import enemies.InitiateEnemies;
 	import sounds.SoundManager;
+	import enemies.Enemy;
 
 	public class RoundManager extends Sprite
 	{
@@ -35,6 +36,7 @@
 			}
 			frameTimer = 0;
 			roundInProgress = true;
+
 			addEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
 		private function stopRound():void
@@ -48,11 +50,10 @@
 		}
 		private function spawnTimer(e:Event):void
 		{
-
+			
 			if (frameTimer % waveArray[5] == 0)
 			{
-
-				initEnemies.customEnemy(waveArray);
+				initEnemies.customEnemy(waveArray)
 				waveArray[4] = (waveArray[4] - 1);
 			}
 
@@ -68,7 +69,6 @@
 			else
 			{
 				frameTimer++;
-
 			}
 		}
 		public function sendWave(WaveArray:Array)
@@ -122,7 +122,7 @@
 				case 3 :
 					hp = 55;
 					ms = 5;
-					gold = 3;
+					gold = 4;
 					armor = 0;
 					numSend = 20;
 					freq = 12

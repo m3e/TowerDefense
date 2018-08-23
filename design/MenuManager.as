@@ -22,12 +22,13 @@
 		private var upgradeIcon:UpgradeIcon;
 		private var menuIsDefault:Boolean;
 		private var towerBeingBuiltSquare:Shape;
-		
+
 		private var currentMenuSelected:Array;
 		private var cellsArray:Array;
 		private var towerStatsOver:TowerStatsOver;
 		private var _root:Object;
 		private var selectedTower:Tower;
+
 
 		public function MenuManager(e:Object)
 		{
@@ -56,14 +57,15 @@
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			sellObject = new SellObject();
 			addChild(sellObject);
 			sellObject.visible = false;
-			
+
 			targetingIcon = new TargetingIcon();
 			addChild(targetingIcon);
 			targetingIcon.visible = false;
-			
+
 			upgradeIcon = new UpgradeIcon();
 			addChild(upgradeIcon);
 			upgradeIcon.visible = false;
@@ -84,64 +86,6 @@
 		}
 		public function keyDownPress(e:KeyboardEvent):void
 		{
-
-			switch (e.keyCode)
-			{
-					/*case Keyboard.NUMBER_1 :
-					if (menuIsDefault == true)
-					{
-					}
-					else
-					{
-					returnToDefaultMenu();
-					}
-					selectTower(currentMenuSelected[0][0]);
-					break;
-					
-					case Keyboard.NUMBER_2 :
-					if (menuIsDefault == true)
-					{
-					}
-					else
-					{
-					returnToDefaultMenu();
-					}
-					selectTower(currentMenuSelected[0][1]);
-					break;
-					
-					case Keyboard.NUMBER_3 :
-					if (menuIsDefault == true)
-					{
-					}
-					else
-					{
-					returnToDefaultMenu();
-					}
-					selectTower(currentMenuSelected[0][2]);
-					break;
-					
-					case Keyboard.NUMBER_4 :
-					if (menuIsDefault == true)
-					{
-					}
-					else
-					{
-					returnToDefaultMenu();
-					}
-					selectTower(currentMenuSelected[0][3]);
-					break;
-					
-					case Keyboard.NUMBER_5 :
-					if (menuIsDefault == true)
-					{
-					}
-					else
-					{
-					returnToDefaultMenu();
-					}
-					selectTower(currentMenuSelected[1][0]);
-					break;*/
-			}
 		}
 		public function returnToDefaultMenu():void
 		{
@@ -150,11 +94,53 @@
 			towerStatsOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
-			   [Splash,,,],
+			   [Splash,Lightning,,],
 			   [,,,]];
 			menuIsDefault = true;
 			hideTowerBeingBuiltSquare();
 			updateCurrentMenu();
+		}
+		private function keyDownHandler(e:KeyboardEvent):void
+		{
+			if (menuIsDefault == true)
+			{
+				var tower:Object;
+				
+				switch (e.keyCode)
+				{
+					case (Keyboard.NUMBER_1) :
+						tower = currentMenuSelected[0][0]
+						selectTower(tower);
+						break;
+
+					case (Keyboard.NUMBER_2) :
+						tower = currentMenuSelected[0][1]
+						selectTower(tower);
+						break;
+
+					case (Keyboard.NUMBER_3) :
+						tower = currentMenuSelected[0][2]
+						selectTower(tower);
+						break;
+
+					case (Keyboard.NUMBER_4) :
+						tower = currentMenuSelected[0][3]
+						selectTower(tower);
+						break;
+
+					case (Keyboard.NUMBER_5) :
+						tower = currentMenuSelected[1][0]
+						selectTower(tower);
+						break;
+						
+					case (Keyboard.NUMBER_6) :
+						tower = currentMenuSelected[1][0]
+						selectTower(tower);
+						break;
+
+
+				}
+			}
 		}
 		private function updateCurrentMenu():void
 		{
@@ -183,6 +169,7 @@
 								currentMenuSelected[i][p].addEventListener(MouseEvent.CLICK, selectTowerMouse);
 								currentMenuSelected[i][p].addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
 								currentMenuSelected[i][p].addEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
+
 								break;
 
 							case (ct is String) :
@@ -201,11 +188,11 @@
 										targetingIcon.visible = true;
 										targetingIcon.addEventListener(MouseEvent.CLICK, targetingIconClicked);
 										break;
-										
+
 									case (ct == "UpgradeMe") :
-										
-										upgradeIcon.x = cellsArray[1][3].x +1;
-										upgradeIcon.y = cellsArray[1][0].y+2;
+
+										upgradeIcon.x = cellsArray[1][3].x + 1;
+										upgradeIcon.y = cellsArray[1][0].y + 2;
 										upgradeIcon.visible = true;
 										upgradeIcon.addEventListener(MouseEvent.CLICK, upgradeIconClicked);
 										break;
@@ -273,14 +260,14 @@
 			towerStatsOver.y = e.currentTarget.y - 110;
 			if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
 			{
-				var a:Number = stage.stageWidth
-				var b:Number = e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width
-				var c:Number = b - a
-				towerStatsOver.x -= c + 3
+				var a:Number = stage.stageWidth;
+				var b:Number = e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width;
+				var c:Number = b - a;
+				towerStatsOver.x -=  c + 3;
 			}
 
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-			towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
+			towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 			towerStatsOver.RngBox.text = e.currentTarget.tRange;
 			towerStatsOver.TypeBox.text = e.currentTarget.tType;
 			towerStatsOver.DescBox.text = e.currentTarget.tDescription;
