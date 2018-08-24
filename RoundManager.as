@@ -111,7 +111,7 @@
 				case 2 :
 					hp = 55;
 					ms = 3;
-					gold = 3;
+					gold = 4;
 					armor = 0;
 					numSend = 15;
 					freq = 16
@@ -122,7 +122,7 @@
 				case 3 :
 					hp = 55;
 					ms = 5;
-					gold = 4;
+					gold = 3;
 					armor = 0;
 					numSend = 20;
 					freq = 12
@@ -153,7 +153,7 @@
 					break;
 
 				case 6 :
-					hp = 160;
+					hp = 140;
 					ms = 5;
 					gold = 4;
 					armor = 0;
@@ -164,7 +164,7 @@
 					break;
 					
 				case 7 :
-					hp = 240
+					hp = 220
 					ms = 4
 					gold = 5
 					armor = 0

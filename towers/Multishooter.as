@@ -8,7 +8,7 @@
 		
 		public function Multishooter() {
 			super();
-			tRange = 100
+			tRange = 110
 			tDmg = 4;
 			tAtkSpeed = 4;
 			tbSpeed = 30;
@@ -19,7 +19,7 @@
 			tNumberOfTargets = 3;
 			
 
-			tDescription = "Hits 3 people at once.  Great vs great, weak vs low numbers.";
+			tDescription = "Lower arnge, but hits 3 people at once.  Great vs groups, weak vs low numbers.";
 			// constructor code
 		}
 		
