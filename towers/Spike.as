@@ -9,7 +9,7 @@
 		public function Spike() {
 			super();
 			tBaseColor = 0x3399FF
-			tRange = 130
+			tRange = 120
 			tDmg = 53;
 			tAtkSpeed = 22;
 			tbSpeed = 30;

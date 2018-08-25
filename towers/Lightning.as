@@ -9,10 +9,10 @@
 		
 		public function Lightning() {
 			super();
-			tRange = 140
+			tRange = 120
 			tDmg = 4;
-			tAtkSpeed = 4;
-			tbSpeed = 30;
+			tAtkSpeed = 5;
+			tbSpeed = 20;
 			tCost = 65;
 			tType = "fire"
 			bFrame = 7;			

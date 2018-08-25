@@ -16,14 +16,14 @@
 			super();
 			firing = false;
 			tBaseColor = 0x66FFFF;
-			tRange = 50;
+			tRange = 75;
 			tDmg = 0;
 			tAtkSpeed = 2;
-			tCost = 220;
+			tCost = 100;
 			tType = "ice";
 			tFrame = 16
 			targeting = "All"
-			tDescription = "Slows all units passing through by 30% but deals no damage.";
+			tDescription = "Slows all units passing through by 25% but deals no damage.";
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -32,7 +32,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.3,.5)
+			debuffType.push("slow",.25,.5)
 			
 			debuffsArray.push(debuffType)
 			

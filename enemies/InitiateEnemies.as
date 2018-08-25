@@ -43,7 +43,7 @@
 			_root.addChild(enemy);
 			enemyList.push(enemy);
 		}
-		public function customEnemy(waveArray:Array):void
+		public function customEnemy(waveArray:Array):Enemy
 		{
 			
 			
@@ -65,6 +65,8 @@
 				}
 				enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 				enemyList.push(enemy);
+				
+				return enemy;
 				
 				
 		}

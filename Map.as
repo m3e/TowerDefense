@@ -329,7 +329,6 @@
 		}
 		private function startRoundMouse(e:Event):void
 		{
-			
 			startRound();
 		}
 		private function sendDpsDummy(e:Event):void
