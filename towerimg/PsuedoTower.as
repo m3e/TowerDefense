@@ -14,6 +14,7 @@
 		public var tType:String;
 		public var tDescription:String;
 		public var tCost:int;
+		private var tId:int;
 		private var tFrame:int;
 		
 		public function PsuedoTower(TowerReference:Object) {
@@ -24,6 +25,7 @@
 		}
 		private function imgAdded (e:Event):void
 		{
+			removeEventListener(Event.ADDED, imgAdded)
 			var mockTower:Tower = new towerReference();
 			tRange = mockTower.tRange;
 			tDmg = mockTower.tDmg;
@@ -33,10 +35,13 @@
 			tCost = mockTower.tCost;
 			tFrame = mockTower.tFrame;
 			gotoAndStop(tFrame);
+
 			mockTower.destroyTower();
+			
 		}
 		private function removed(e:Event):void
 		{
+			removeEventListener(Event.REMOVED_FROM_STAGE, removed)
 			towerReference = null;
 		}
 

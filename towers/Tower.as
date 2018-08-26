@@ -19,13 +19,14 @@
 	import flash.events.MouseEvent;
 	import flash.media.SoundChannel;
 	import towers.skills.Skill;
+	import towers.TowerManager;
 
 	public class Tower extends MovieClip
 	{
 
 		public var tDescription:String;
 		public var cost:int;
-
+		internal var tName:String;
 		public var tRange:int;
 		public var tDmg:Number;
 		public var tbSpeed:int;
@@ -35,12 +36,10 @@
 		public var tAoe:Number;
 		public var tCost:int;
 		public var tType:String;
-
+		
 		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
-
-		public var tBaseColor:int;
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
@@ -72,23 +71,37 @@
 		public function Tower()
 		{
 			skillsArray = [];
-			fireSoundString = "default";
 			clickedOnSounds = new Array  ;
 			buffsArray = new Array  ;
 			rectangle = new Shape  ;
 			tDmgBuff = 0;
-			tDescription = "No description" + this;
 			tTarget = new Array  ;
 			targeting = "First";
 			loaded = true;
 			loadedTimer = 0;
-			tbSpeed = 90;
-			tAoe = 0;
 			tLevel = 1;
 			bFrame = 1;
-			tNumberOfTargets = 1;
-			tFrame = 19;
-			uCost = 45;
+			uCost = 45;			
+			
+			for (var i:int=0; i <TowerManager.towerList.length; i++)
+			{
+				if (TowerManager.towerList[i].tName == tName)
+				{
+					tName = TowerManager.towerList[i].tName;
+					tAoe = TowerManager.towerList[i].tAoe;
+					tRange = TowerManager.towerList[i].tRange;
+					tNumberOfTargets = TowerManager.towerList[i].tNumberOfTargets;
+					tDmg = TowerManager.towerList[i].tDmg;
+					tAtkSpeed = TowerManager.towerList[i].tAtkSpeed;
+					tCost = TowerManager.towerList[i].tCost;
+					tType = TowerManager.towerList[i].tType;
+					tbSpeed = TowerManager.towerList[i].tbSpeed;
+					bFrame = TowerManager.towerList[i].bFrame;
+					tFrame = TowerManager.towerList[i].tFrame;
+					fireSoundString = TowerManager.towerList[i].fireSoundString;
+					tDescription = TowerManager.towerList[i].tDescription
+				}
+			}
 			
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
@@ -119,11 +132,8 @@
 			addEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			rectangle.graphics.beginFill(0xFF0000);
-			// choosing the colour for the fill, here it is red;
 			rectangle.graphics.drawRect(0,0, this.width,this.height);
-			// (x spacing, y spacing, width, height);
 			rectangle.graphics.endFill();
-			// not always needed but I like to put it in to end the fill;
 			addChild(rectangle);// adds the rectangle to the stage
 			rectangle.visible = false;
 			generateSkills();

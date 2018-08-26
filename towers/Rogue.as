@@ -1,25 +1,13 @@
 ﻿package towers {
 	
-	import sounds.SoundManager;
 	import flash.events.MouseEvent;
-	
 	
 	public class Rogue extends Tower {
 		
-		
 		public function Rogue() {
+			
+			tName = "Rogue";
 			super();
-			tBaseColor = 0x5f5e77
-			tRange = 100
-			tDmg = 22;
-			tAtkSpeed = 18;
-			tbSpeed = 30;
-			tNumberOfTargets = 2;
-			tCost = 80;
-			tType = "pierce"
-			tFrame = 9
-			fireSoundString = "stab"
-			tDescription = "The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds and slows by 20%.";
 			// constructor code
 		}
 		override internal function getSounds():void
@@ -37,6 +25,14 @@
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
+		}
+		override public function upgradeOne():Class
+		{
+			return Shadow;
+		}
+		override public function upgradeTwo():Class
+		{
+			return Assassin;
 		}
 	}
 }

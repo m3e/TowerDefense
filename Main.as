@@ -3,11 +3,19 @@
 	import com.greensock.loading.*;
 	import com.greensock.events.LoaderEvent;	
 	import sounds.SoundManager;
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import towers.TowerManager;
 	
 	public class Main extends MovieClip{
 
 		private var soundManager:SoundManager;
 		private var queue:LoaderMax;
+		private var myLoader:URLLoader;
+		private var towerList:Array;	
+		private var towerManager:TowerManager;
+		
 		
 		public function Main() {
 			queue = new LoaderMax({name:"mainQueue", onProgress:progressHandler, onComplete: completeHandler});
@@ -56,7 +64,53 @@
 		{
 			
 		}
+		private function setupTowerManager():void
+		{
+			myLoader = new URLLoader  ;
+			myLoader.addEventListener(Event.COMPLETE,setupTowers);
+			myLoader.load(new URLRequest("towers/TowersList.xml"));
+		}
+		private function setupTowers(e:Event):void
+		{
+			towerList = new Array;
+			
+			var myXML = new XML(e.target.data);
+			var i:int = 0;
+			
+			while (i < myXML.Row.length())
+			{
+				
+				var tower:Object = new Object();
+				tower.tName = String(myXML.Row[i].Name);
+				tower.tId = int(myXML.Row[i].ID);
+				tower.tAoe = int(myXML.Row[i].AoE);
+				tower.tRange = int(myXML.Row[i].Range);
+				tower.tNumberOfTargets = int(myXML.Row[i].of_Targets);
+				tower.tDmg = int(myXML.Row[i].Dmg);
+				tower.tAtkSpeed = int(myXML.Row[i].Atk_Speed);
+				tower.tCost = int(myXML.Row[i].Cost);
+				tower.tType = String(myXML.Row[i].Type);
+				tower.tbSpeed = int(myXML.Row[i].bulletSpeed);
+				tower.bFrame = int(myXML.Row[i].bulletFrame);
+				tower.tFrame = int(myXML.Row[i].towerFrame);
+				tower.fireSoundString = String(myXML.Row[i].fireSoundString);
+				tower.tDescription = String(myXML.Row[i].tDescription);
+				
+				towerList.push(tower);
+				
+				//var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus];
+				
+				//roundsList.push(waveData);
+				i++;
+			}
+			towerManager = new TowerManager(towerList);
+			startGame();
+		}
 		private function completeHandler(e:LoaderEvent):void
+		{
+			setupTowerManager()
+		}
+		private function startGame():void
 		{
 			soundManager = new SoundManager(queue);
 			var map:Map = new Map();

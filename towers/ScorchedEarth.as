@@ -13,18 +13,10 @@
 
 		public function ScorchedEarth()
 		{
+			tName = "Scorched Earth";
 			super();
-			
-			tBaseColor = 0x660000;
-			tRange = 50;
-			tDmg = 10;
-			tAtkSpeed = 6;
-			tbSpeed = 50;
-			tCost = 180;
-			tType = "fire"
-			tFrame = 14
 			targeting = "All"
-			tDescription = "Burns the ground in a 1 block AoE (melee range) dealing 40 damage a second to anything it can.  Strong.";
+			
 			// constructor code
 		}
 		override internal function fire():void

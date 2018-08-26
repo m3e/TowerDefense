@@ -1,13 +1,13 @@
 ﻿package towers {
 	
+
 	
-	import sounds.SoundManager;
 	
-	public class RoyalBowman extends Tower {
+	public class Icicle extends Tower {
 		
 		
-		public function RoyalBowman() {
-			tName = "Royal Bowman";
+		public function Icicle() {
+			tName = "Icicle"
 			super();
 			// constructor code
 		}
@@ -17,15 +17,17 @@
 			
 			var debuffType:Array = new Array;
 			
+			//slow
+			debuffType.push("slow",.15,2)
+			debuffsArray.push(debuffType)
+			
+			debuffType = new Array;
+			
 			//brittle
-			debuffType.push("brittle",1,3)
+			debuffType.push("brittle",2,2)
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
-		}
-		override public function upgradeOne():Class
-		{
-			return Hero;
 		}
 	}
 	

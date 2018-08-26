@@ -68,7 +68,6 @@
 			healthBar.visible = false;
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			setupArmor()
-			//trace(eMaxHp,maxMoveSpeed,goldValue,maxArmor)
 		}
 		public function determineMoveSpeed():void
 		{

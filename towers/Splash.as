@@ -7,19 +7,8 @@
 
 
 		public function Splash() {
+			tName = "Splash";
 			super();
-			tBaseColor = 0x000000
-			tRange = 112
-			tDmg = 11;
-			tAtkSpeed = 24;
-			tbSpeed = 10;
-			tAoe = 60;
-			tCost = 60;
-			tType = "heavy"
-			bFrame = 6
-			tFrame = 5
-			
-			tDescription = "Big, explodey, splash guy.  Hits more than one unit if they're close.";
 			
 			// constructor code
 		}

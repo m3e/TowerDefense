@@ -1,18 +1,15 @@
-﻿package towers
-{
-
-	import flash.events.Event;
-	import flash.geom.ColorTransform;
-	import debuffs.*;
-
-	public class SnowMachine extends Tower
-	{
-
-		public function SnowMachine()
-		{
-			tName = "Snow Machine";
+﻿package towers {
+	
+	
+	import flash.events.MouseEvent;
+	
+	
+	public class Shadow extends Tower {
+		
+		
+		public function Shadow() {
+			tName = "Shadow";
 			super();
-			targeting = "All"
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -21,14 +18,12 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.25,.5)
+			debuffType.push("poison",.2,5,5)
 			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
 		}
-		
-
 	}
-
+	
 }

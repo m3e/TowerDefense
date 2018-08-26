@@ -31,7 +31,7 @@
 
 		private var menuManager:MenuManager;
 		private var middleInfo:MiddleInfoContent;
-
+		private var towerManager:TowerManager;
 		//root
 		private var _root:Object;
 
@@ -83,6 +83,7 @@
 			tileArray = new Array  ;
 			towerArray = new Array  ;
 			tileSide = common.Commons.tileSide;
+			
 
 			//1=right 2=down 3=left 4=up
 			
@@ -108,7 +109,7 @@
 		{
 			_root = this;
 
-
+			
 
 			setupMap();
 			//Sets: mapArray
@@ -130,18 +131,12 @@
 			//requires initEnemies for buttons
 			
 			
+			
+			setupBottomBarContent()
 
 			
 
-			menuManager = new MenuManager(_root);
-			menuManager.x = 677;
-			menuManager.y = 423;
-			addChild(menuManager);
-
-			middleInfo = new MiddleInfoContent();
-			middleInfo.x = 318;
-			middleInfo.y = 423;
-			addChild(middleInfo);
+			
 			
 			
 
@@ -156,6 +151,18 @@
 			setChildIndex(userInfo,numChildren-1);
 			
 			
+		}
+		private function setupBottomBarContent():void
+		{
+			menuManager = new MenuManager(_root);
+			menuManager.x = 677;
+			menuManager.y = 423;
+			addChild(menuManager);
+
+			middleInfo = new MiddleInfoContent();
+			middleInfo.x = 318;
+			middleInfo.y = 423;
+			addChild(middleInfo);
 		}
 		private function setupUser():void
 		{
@@ -566,7 +573,7 @@
 				}
 				else
 				{
-					trace("Cannot afford.  Cost: ",testTower.tCost);
+					trace("Cannot afford upgrade.  Cost: ",testTower.tCost);
 				}
 				testTower.destroyTower();
 				klasa = null;

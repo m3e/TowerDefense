@@ -1,14 +1,14 @@
 ﻿package towers {
 	
+	import flash.display.MovieClip;
 	
-	import sounds.SoundManager;
 	
-	public class RoyalBowman extends Tower {
+	public class Assassin extends Tower {
 		
 		
-		public function RoyalBowman() {
-			tName = "Royal Bowman";
-			super();
+		public function Assassin() {
+			tName = "Assassin";
+			super()
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -17,15 +17,11 @@
 			
 			var debuffType:Array = new Array;
 			
-			//brittle
-			debuffType.push("brittle",1,3)
+			debuffType.push("poison",.15,5,5)
+			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
-		}
-		override public function upgradeOne():Class
-		{
-			return Hero;
 		}
 	}
 	

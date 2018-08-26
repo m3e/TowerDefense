@@ -7,19 +7,9 @@
 		
 		
 		public function IceTower() {
-			super()
-			tBaseColor = 0x0000FF
-			tRange = 80
-			tDmg = 7;
-			tAtkSpeed = 20;
-			tAoe = 35
-			tbSpeed = 24;
-			bFrame = 3;
-			tCost = 50;
-			tType = "ice"
-			tFrame = 4;
 			
-			tDescription = "Icey.  Cold.  Refreshing.  Slows by 20% to small area for 2 seconds.";
+			tName = "Ice Tower";
+			super()
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -36,7 +26,7 @@
 		}
 		override public function upgradeOne():Class
 		{
-			return Spike
+			return Icicle
 		}
 		override public function upgradeTwo():Class
 		{

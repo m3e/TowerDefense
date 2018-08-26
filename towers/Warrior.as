@@ -14,19 +14,8 @@
 		
 		public function Warrior()
 		{
-			tBaseColor = 0x8c8781;
+			tName = "Warrior";
 			super();
-			tRange = 50;
-			tDmg = 17;
-			tAtkSpeed = 24;
-			tAoe = 0;
-			tbSpeed = 50;
-			tCost = 30;
-			tType = "normal";
-			tFrame = 1;
-			fireSoundString = "swordhit"
-
-			tDescription = "Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.";
 			// constructor code
 		}
 		override public function upgradeMe():void
