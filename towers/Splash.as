@@ -16,6 +16,10 @@
 		{
 			return Demolitionist
 		}
+		override public function upgradeTwo():Class
+		{
+			return Gun;
+		}
 
 	}
 	

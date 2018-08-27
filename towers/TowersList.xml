@@ -128,6 +128,7 @@
 		<Dmg>1</Dmg>
 		<Atk_Speed>24</Atk_Speed>
 		<Cost>1</Cost>
+		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>1</towerFrame>
@@ -142,6 +143,7 @@
 		<Dmg>1</Dmg>
 		<Atk_Speed>24</Atk_Speed>
 		<Cost>1</Cost>
+		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>1</towerFrame>
@@ -230,6 +232,7 @@
 		<Dmg>220</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>200</Cost>
+		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>26</towerFrame>
@@ -244,6 +247,7 @@
 		<Dmg>250</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>240</Cost>
+		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>1</towerFrame>
@@ -273,6 +277,7 @@
 		<Dmg>1</Dmg>
 		<Atk_Speed>24</Atk_Speed>
 		<Cost>1</Cost>
+		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>1</towerFrame>
@@ -286,6 +291,7 @@
 		<Dmg>1</Dmg>
 		<Atk_Speed>24</Atk_Speed>
 		<Cost>1</Cost>
+		<Type>heavy</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>1</towerFrame>
@@ -429,7 +435,7 @@
 	<Row>
 		<Name>Demo</Name>
 		<AoE>95</AoE>
-		<Range>110</Range>
+		<Range>112</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>50</Dmg>
 		<Atk_Speed>28</Atk_Speed>
@@ -444,15 +450,15 @@
 	<Row>
 		<Name>Gun</Name>
 		<AoE>0</AoE>
-		<Range>112</Range>
+		<Range>120</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>8</Dmg>
+		<Dmg>12</Dmg>
 		<Atk_Speed>3</Atk_Speed>
-		<Cost>90</Cost>
+		<Cost>110</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>1</bulletFrame>
-		<bulletSpeed>30</bulletSpeed>
-		<towerFrame>1</towerFrame>
+		<bulletSpeed>40</bulletSpeed>
+		<towerFrame>28</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Guns are sort of unfair against the metal armor the creeps wear.  That's why it shoots pellets.  It still hurts tho.</tDescription>
 	</Row>

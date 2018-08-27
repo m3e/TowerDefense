@@ -1,8 +1,6 @@
 ﻿package towers
 {
 
-
-	import sounds.SoundManager;
 	import flash.events.MouseEvent;
 
 	public class Knight extends Tower
