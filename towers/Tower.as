@@ -6,7 +6,6 @@
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
-	import GameProperties;
 	import debuffs.*;
 	import flash.geom.*;
 	import flash.display.*;
@@ -20,6 +19,7 @@
 	import flash.media.SoundChannel;
 	import towers.skills.Skill;
 	import towers.TowerManager;
+	import common.Commons;
 
 	public class Tower extends MovieClip
 	{
@@ -280,8 +280,9 @@
 				//add debuff;
 				addDebuffs(newBullet);
 				//Set Bullet location, target, dmg, speed, aoe
-				newBullet.x = this.x + (GameProperties.tileSide * .5);
-				newBullet.y = this.y + (GameProperties.tileSide * .5);
+				
+				newBullet.x = this.x + (common.Commons.tileSide * .5);
+				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
 				newBullet.bDmg = tDmg * (1 + tDmgBuff);
 				newBullet.bSpeed = tbSpeed;

@@ -4,9 +4,12 @@
 	import flash.display.Sprite;
 	import flash.events.*;
 	import flash.display.Shape;
-	import GameProperties;
+	import common.Commons;
 	import enemies.Enemy;
 	import debuffs.*;
+	
+	import com.greensock.*;
+	import com.greensock.easing.*;
 
 	public class Bullet extends MovieClip
 	{
@@ -20,6 +23,8 @@
 		public var bDmg:Number;
 		public var bAoe:Number;
 		public var bType:String;
+		
+		private var aoeVisual:Shape;
 
 		public var debuffArray:Array;
 		internal var _root:MovieClip;
@@ -31,6 +36,7 @@
 			this.mouseEnabled = false;
 			enemyList = new Array  ;
 			enemyList = EnemyList;
+			trace("b.elist:",enemyList.length)
 			bTarget = null;
 			bDmg = 0;
 			bAoe = 0;
@@ -90,8 +96,8 @@
 		private function fire():void
 		{
 			//Set distance
-			var yDist:Number = (bTarget.y + (GameProperties.tileSide * .5)) - this.y;//how far this guy is from the enemy (x)
-			var xDist:Number = (bTarget.x + (GameProperties.tileSide * .5)) - this.x;//how far it is from the enemy (y)
+			var yDist:Number = (bTarget.y + (common.Commons.tileSide * .5)) - this.y;//how far this guy is from the enemy (x)
+			var xDist:Number = (bTarget.x + (common.Commons.tileSide * .5)) - this.x;//how far it is from the enemy (y)
 			//Angle
 			var angle:Number = Math.atan2(yDist,xDist);//the angle that it must move
 			//X speed + y Speed
@@ -121,7 +127,6 @@
 				if (bAoe > 0)
 				{
 					//If AOE
-					
 					hitAoe();
 					//End AOE
 				}
@@ -149,14 +154,42 @@
 		
 		internal function hitAoe():void
 		{
-			for (var i:int=0; i < enemyList.length; i++)
+			
+			aoeVisual = new Shape();
+			aoeVisual.graphics.beginFill(0xFF0000,.5);
+			aoeVisual.graphics.drawCircle(0,0,bAoe);
+			aoeVisual.graphics.endFill();
+			aoeVisual.x = (bTarget.x + (common.Commons.tileSide *.5))
+			aoeVisual.y = (bTarget.y + (common.Commons.tileSide *.5));   
+			_root.addChild(aoeVisual);
+			TweenMax.to(aoeVisual, .3, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,aoeVisual]})	;
+			var eList:Array = common.Commons.newTheMap(enemyList)
+			for (var i:int=0; i < eList.length; i++)
 			{
-				if (distanceTwoPoints(bTarget.x + (GameProperties.tileSide*.5),enemyList[i].x + (GameProperties.tileSide*.5),bTarget.y + (GameProperties.tileSide*.5),enemyList[i].y + (GameProperties.tileSide*.5)) <= bAoe)
+				/*var test1:Shape = new Shape();
+				test1.graphics.beginFill(0xFFFFFF,1);
+				test1.graphics.drawCircle(0,0,16);
+				test1.graphics.endFill();
+				test1.x = (eList[i].x + (common.Commons.tileSide *.5))
+				test1.y = (eList[i].y + (common.Commons.tileSide *.5));   
+				TweenMax.to(test1, .5, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,test1]})	;
+				_root.addChild(test1)
+				trace(bTarget.x,eList[i].x,bTarget.y,eList[i].y,distanceTwoPoints(bTarget.x,eList[i].x,bTarget.y,eList[i].y),bAoe)*/
+				if (distanceTwoPoints(bTarget.x,eList[i].x,bTarget.y,eList[i].y) <= bAoe)
 				{
-					hitTarget(enemyList[i]);
+					hitTarget(eList[i]);
 				}
 
 			}
+		}
+		private function removeAoeVisual(myP:Object,targetShape:Shape):void
+		{
+			
+			if (myP.contains(targetShape))
+				{
+					myP.removeChild(targetShape);
+					aoeVisual = null;
+				}
 		}
 		public function destroyThis():void
 		{
@@ -167,8 +200,6 @@
 			bTarget = null;
 			_root.removeChild(this);
 			_root = null;
-
-
 		}
 
 	}

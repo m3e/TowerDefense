@@ -7,6 +7,7 @@
 	import flash.geom.Point;
 	import design.HealthBar;
 	import flash.utils.Dictionary;
+	import common.Commons;
 
 
 	public class Enemy extends MovieClip
@@ -192,24 +193,24 @@
 				case 1 :
 
 					x +=  moveSpeed;
-					if (Math.floor(x/32) != pt.x)
+					if (Math.floor(x/common.Commons.tileSide) != pt.x)
 					{
-						distanceTraveled -=  x % 32;
-						x -=  x % 32;
+						distanceTraveled -=  x % common.Commons.tileSide;
+						x -=  x % common.Commons.tileSide;
 
-						pt.x = x / 32;
+						pt.x = x / common.Commons.tileSide;
 					}
 					break;
 
 				case 2 :
 
 					y +=  moveSpeed;
-					if (Math.floor(y/32) != pt.y)
+					if (Math.floor(y/common.Commons.tileSide) != pt.y)
 					{
-						distanceTraveled -=  y % 32;
-						y -=  y % 32;
+						distanceTraveled -=  y % common.Commons.tileSide;
+						y -=  y % common.Commons.tileSide;
 
-						pt.y = y / 32;
+						pt.y = y / common.Commons.tileSide;
 
 					}
 					break;
@@ -217,12 +218,12 @@
 				case 3 :
 
 					x -=  moveSpeed;
-					if (Math.ceil(x/32) != pt.x)
+					if (Math.ceil(x/common.Commons.tileSide) != pt.x)
 					{
 
 						pt.x--;
-						distanceTraveled -=  Math.abs(pt.x * 32 - x);
-						x +=  Math.abs(pt.x * 32 - x);
+						distanceTraveled -=  Math.abs(pt.x * common.Commons.tileSide - x);
+						x +=  Math.abs(pt.x * common.Commons.tileSide - x);
 
 					}
 					break;
@@ -230,12 +231,12 @@
 				case 4 :
 					y -=  moveSpeed;
 
-					if (Math.ceil(y/32) != pt.y)
+					if (Math.ceil(y/common.Commons.tileSide) != pt.y)
 					{
 
 						pt.y--;
-						distanceTraveled -=  Math.abs(pt.y * 32 - y);
-						y +=  Math.abs(pt.y * 32 - y);
+						distanceTraveled -=  Math.abs(pt.y * common.Commons.tileSide - y);
+						y +=  Math.abs(pt.y * common.Commons.tileSide - y);
 
 					}
 					break;

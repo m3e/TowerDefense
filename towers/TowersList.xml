@@ -419,7 +419,7 @@
 	</Row>
 	<Row>
 		<Name>Splash</Name>
-		<AoE>60</AoE>
+		<AoE>70</AoE>
 		<Range>112</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>11</Dmg>
