@@ -36,7 +36,6 @@
 			this.mouseEnabled = false;
 			enemyList = new Array  ;
 			enemyList = EnemyList;
-			trace("b.elist:",enemyList.length)
 			bTarget = null;
 			bDmg = 0;
 			bAoe = 0;
