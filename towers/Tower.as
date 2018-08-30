@@ -177,7 +177,7 @@
 						rectangle.visible = false;
 					}
 					//Reload
-					trace("Tower.tAtkSpeed:",tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))
+					//trace("Tower.tAtkSpeed:",tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))
 					if (loadedTimer >= (tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))) 
 					{
 						loaded = true;
@@ -287,7 +287,7 @@
 				newBullet.x = this.x + (common.Commons.tileSide * .5);
 				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
-				trace("Tower.tDmg:",tDmg * (1 + tDmgBuff));
+				//trace("Tower.tDmg:",tDmg * (1 + tDmgBuff));
 				newBullet.bDmg = tDmg * (1 + tDmgBuff);
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;

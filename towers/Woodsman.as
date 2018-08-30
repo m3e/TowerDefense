@@ -8,7 +8,6 @@
 		
 		public function Woodsman() {
 			tName = "Woodsman";
-			
 			super();
 			// constructor code
 		}
@@ -18,12 +17,21 @@
 			
 			var debuffsArray:Array = new Array;
 			
-			debuffType.push("poison",.25,5,2)
+			debuffType.push("poison",.20,10,2)
 			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
 		}
+		override public function upgradeOne():Class
+		{
+			return Hunter;
+		}
+		override public function upgradeTwo():Class
+		{
+			return Alchemist;
+		}
+		
 	}
 	
 }

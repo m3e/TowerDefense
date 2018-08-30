@@ -18,7 +18,7 @@
 			var debuffType:Array = new Array;
 			
 			//slow
-			debuffType.push("slow",.15,2)
+			debuffType.push("slow",.18,2)
 			debuffsArray.push(debuffType)
 			
 			debuffType = new Array;

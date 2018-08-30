@@ -12,7 +12,6 @@
 		{
 			tName = "Snow Machine";
 			super();
-			targeting = "All"
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -21,7 +20,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.25,.5)
+			debuffType.push("slow",.18,.5)
 			
 			debuffsArray.push(debuffType)
 			

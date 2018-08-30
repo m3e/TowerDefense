@@ -16,6 +16,10 @@
 		{
 			return Multishooter
 		}
+		override public function upgradeTwo():Class
+		{
+			return Laser
+		}
 	}
 	
 }

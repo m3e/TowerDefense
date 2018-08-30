@@ -9,7 +9,6 @@
 
 		public function Knight()
 		{
-
 			tName = "Knight";
 			super();
 			// constructor code

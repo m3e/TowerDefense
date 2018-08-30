@@ -13,7 +13,7 @@
 	</Row>
 	<Row>
 		<currentRound>2</currentRound>
-		<maxHp>55</maxHp>
+		<maxHp>48</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>15</numberOfEnemies>
@@ -127,7 +127,7 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
-		<roundEndBonus>52</roundEndBonus>
+		<roundEndBonus>72</roundEndBonus>
 		<freq>14</freq>
 		<armorType>medium</armorType>
 		<maxArmor>0</maxArmor>
@@ -138,7 +138,7 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
-		<roundEndBonus>70</roundEndBonus>
+		<roundEndBonus>92</roundEndBonus>
 		<freq>16</freq>
 		<armorType>medium</armorType>
 		<maxArmor>0</maxArmor>
@@ -149,7 +149,7 @@
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>9</goldValue>
 		<numberOfEnemies>17</numberOfEnemies>
-		<roundEndBonus>72</roundEndBonus>
+		<roundEndBonus>93</roundEndBonus>
 		<freq>18</freq>
 		<armorType>light</armorType>
 		<maxArmor>0</maxArmor>
@@ -160,7 +160,7 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
-		<roundEndBonus>76</roundEndBonus>
+		<roundEndBonus>97</roundEndBonus>
 		<freq>16</freq>
 		<armorType>heavy</armorType>
 		<maxArmor>0</maxArmor>
@@ -171,7 +171,7 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
-		<roundEndBonus>78</roundEndBonus>
+		<roundEndBonus>98</roundEndBonus>
 		<freq>14</freq>
 		<armorType>light</armorType>
 		<maxArmor>0</maxArmor>
@@ -182,7 +182,7 @@
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>11</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
-		<roundEndBonus>88</roundEndBonus>
+		<roundEndBonus>108</roundEndBonus>
 		<freq>15</freq>
 		<armorType>light</armorType>
 		<maxArmor>0</maxArmor>
@@ -193,7 +193,7 @@
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>12</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
-		<roundEndBonus>92</roundEndBonus>
+		<roundEndBonus>112</roundEndBonus>
 		<freq>16</freq>
 		<armorType>heavy</armorType>
 		<maxArmor>0</maxArmor>
@@ -204,7 +204,7 @@
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>13</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
-		<roundEndBonus>100</roundEndBonus>
+		<roundEndBonus>120</roundEndBonus>
 		<freq>15</freq>
 		<armorType>medium</armorType>
 		<maxArmor>0</maxArmor>
@@ -215,7 +215,7 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>15</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
-		<roundEndBonus>160</roundEndBonus>
+		<roundEndBonus>0</roundEndBonus>
 		<freq>16</freq>
 		<armorType>light</armorType>
 		<maxArmor>0</maxArmor>

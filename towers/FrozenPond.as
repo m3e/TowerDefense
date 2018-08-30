@@ -2,7 +2,6 @@
 {
 
 	import flash.events.Event;
-	import flash.geom.ColorTransform;
 	import buffs.*;
 	import towers.skills.Skill;
 
@@ -15,13 +14,20 @@
 		{
 			tName = "Frozen Pond";
 			super();
+			targeting = "All";
 			// constructor code
 		}
-		override internal function generateSkills():void
+		override internal function addDebuffs(bullet:Bullet):void
 		{
-			skill = new Skill(_root,"dmgBuff","ally","instant",.15,2,2,2,towerArray)
-			addChild(skill);
-			skillsArray.push(skill);
+			var debuffsArray:Array = new Array;
+			
+			var debuffType:Array = new Array;
+			
+			//slow
+			debuffType.push("slow",.23,.6)
+			debuffsArray.push(debuffType)
+			
+			debuffType = new Array;
 		}
 	}
 }

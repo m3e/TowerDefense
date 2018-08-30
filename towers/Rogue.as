@@ -20,7 +20,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("poison",.2,5,1)
+			debuffType.push("poison",.15,3,2)
 			
 			debuffsArray.push(debuffType)
 			

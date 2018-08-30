@@ -3,7 +3,7 @@
 	<Row>
 		<Name>Archer</Name>
 		<AoE>0</AoE>
-		<Range>100</Range>
+		<Range>103</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>12</Dmg>
 		<Atk_Speed>18</Atk_Speed>
@@ -18,10 +18,10 @@
 	<Row>
 		<Name>Rogue</Name>
 		<AoE>0</AoE>
-		<Range>100</Range>
+		<Range>108</Range>
 		<of_Targets>2</of_Targets>
-		<Dmg>32</Dmg>
-		<Atk_Speed>22</Atk_Speed>
+		<Dmg>35</Dmg>
+		<Atk_Speed>24</Atk_Speed>
 		<Cost>120</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>5</bulletFrame>
@@ -33,7 +33,7 @@
 	<Row>
 		<Name>Shadow</Name>
 		<AoE>0</AoE>
-		<Range>100</Range>
+		<Range>108</Range>
 		<of_Targets>2</of_Targets>
 		<Dmg>55</Dmg>
 		<Atk_Speed>16</Atk_Speed>
@@ -43,15 +43,15 @@
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>22</towerFrame>
 		<fireSoundString>stab</fireSoundString>
-		<tDescription>In the shadows you'll find him.  Throwing daggers, hurting peeps.  Poisons 5 dmg every second for 5, slows for 20%.</tDescription>
+		<tDescription>In the shadows you'll find him.  Throwing daggers, hurting peeps.  Poisons 5 dmg every second for 5, slows for 15%.</tDescription>
 	</Row>
 	<Row>
 		<Name>Assassin</Name>
 		<AoE>0</AoE>
-		<Range>115</Range>
+		<Range>108</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>40</Dmg>
-		<Atk_Speed>13</Atk_Speed>
+		<Dmg>50</Dmg>
+		<Atk_Speed>22</Atk_Speed>
 		<Cost>175</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
@@ -63,9 +63,9 @@
 	<Row>
 		<Name>Royal Bowman</Name>
 		<AoE>0</AoE>
-		<Range>125</Range>
+		<Range>120</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>55</Dmg>
+		<Dmg>56</Dmg>
 		<Atk_Speed>17</Atk_Speed>
 		<Cost>135</Cost>
 		<Type>pierce</Type>
@@ -78,9 +78,9 @@
 	<Row>
 		<Name>Elven</Name>
 		<AoE>0</AoE>
-		<Range>125</Range>
+		<Range>120</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>120</Dmg>
+		<Dmg>110</Dmg>
 		<Atk_Speed>18</Atk_Speed>
 		<Cost>180</Cost>
 		<Type>normal</Type>
@@ -93,11 +93,11 @@
 	<Row>
 		<Name>Hero</Name>
 		<AoE>0</AoE>
-		<Range>125</Range>
+		<Range>120</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>200</Dmg>
-		<Atk_Speed>22</Atk_Speed>
-		<Cost>250</Cost>
+		<Dmg>120</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>190</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -108,7 +108,7 @@
 	<Row>
 		<Name>Woodsman</Name>
 		<AoE>0</AoE>
-		<Range>95</Range>
+		<Range>103</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>43</Dmg>
 		<Atk_Speed>20</Atk_Speed>
@@ -118,36 +118,37 @@
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>11</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
-		<tDescription>The Woodsman.  Shoots Earth arrows, poisons 5 dps + slow 25% for 2 seconds.  Single target.</tDescription>
+		<tDescription>The Woodsman.  Shoots Earth arrows, poisons 10 dps + slow 20% for 2 seconds.  Single target.</tDescription>
 	</Row>
 	<Row>
 		<Name>Hunter</Name>
 		<AoE>0</AoE>
-		<Range>95</Range>
+		<Range>103</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>1</Dmg>
-		<Atk_Speed>24</Atk_Speed>
-		<Cost>1</Cost>
+		<Dmg>125</Dmg>
+		<Atk_Speed>28</Atk_Speed>
+		<Cost>180</Cost>
 		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>1</towerFrame>
+		<towerFrame>32</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
-		<tDescription>Skilled with poisons.  30% slow + 10 dps for 2 seconds.</tDescription>
+		<tDescription>Skilled with poisons.  28% slow + 20 dps for 2 seconds.</tDescription>
 	</Row>
 	<Row>
 		<Name>Alchemist</Name>
-		<AoE>0</AoE>
-		<Range>95</Range>
+		<AoE>40</AoE>
+		<Range>103</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>1</Dmg>
-		<Atk_Speed>24</Atk_Speed>
-		<Cost>1</Cost>
-		<Type>earth</Type>
+		<Dmg>50</Dmg>
+		<Atk_Speed>40</Atk_Speed>
+		<Cost>190</Cost>
+		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>1</towerFrame>
+		<towerFrame>31</towerFrame>
 		<fireSoundString>default</fireSoundString>
+		<tDescription>Makes a big, poisonous splash when he attacks.  Slows 18% and 5 dmg for 2 seconds.</tDescription>
 	</Row>
 	<Row>
 		<Name>Warrior</Name>
@@ -169,8 +170,8 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>65</Dmg>
-		<Atk_Speed>16</Atk_Speed>
+		<Dmg>60</Dmg>
+		<Atk_Speed>20</Atk_Speed>
 		<Cost>80</Cost>
 		<Type>heavy</Type>
 		<bulletFrame>8</bulletFrame>
@@ -184,7 +185,7 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>160</Dmg>
+		<Dmg>120</Dmg>
 		<Atk_Speed>12</Atk_Speed>
 		<Cost>170</Cost>
 		<Type>heavy</Type>
@@ -199,7 +200,7 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>280</Dmg>
+		<Dmg>220</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>220</Cost>
 		<Type>normal</Type>
@@ -214,9 +215,9 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>100</Dmg>
-		<Atk_Speed>22</Atk_Speed>
-		<Cost>120</Cost>
+		<Dmg>64</Dmg>
+		<Atk_Speed>20</Atk_Speed>
+		<Cost>115</Cost>
 		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
@@ -229,22 +230,22 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>220</Dmg>
+		<Dmg>130</Dmg>
 		<Atk_Speed>16</Atk_Speed>
-		<Cost>200</Cost>
+		<Cost>190</Cost>
 		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>26</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>Death Knight.  Each hit increases enemy damage taken by 15% for 3 seconds.  xXxEdgeLordxXx</tDescription>
+		<tDescription>Death Knight.  Each hit increases enemy damage taken by 15% for 2 seconds.  xXxEdgeLordxXx</tDescription>
 	</Row>
 	<Row>
 		<Name>Paladin</Name>
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>250</Dmg>
+		<Dmg>120</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>240</Cost>
 		<Type>normal</Type>
@@ -267,7 +268,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>8</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. DmgUp 20% to nearby towers.</tDescription>
+		<tDescription>Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. DmgUp 12% to nearby towers.</tDescription>
 	</Row>
 	<Row>
 		<Name>General</Name>
@@ -302,7 +303,7 @@
 		<AoE>0</AoE>
 		<Range>75</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>5</Dmg>
+		<Dmg>4</Dmg>
 		<Atk_Speed>4</Atk_Speed>
 		<Cost>55</Cost>
 		<Type>fire</Type>
@@ -318,21 +319,21 @@
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>10</Dmg>
-		<Atk_Speed>6</Atk_Speed>
-		<Cost>140</Cost>
+		<Atk_Speed>8</Atk_Speed>
+		<Cost>160</Cost>
 		<Type>fire</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>14</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 40 damage a second to anything it can.  Strong.</tDescription>
+		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 30 damage a second to anything it can.  Strong.</tDescription>
 	</Row>
 	<Row>
 		<Name>Fire Spout</Name>
 		<AoE>0</AoE>
 		<Range>85</Range>
 		<of_Targets>2</of_Targets>
-		<Dmg>13</Dmg>
+		<Dmg>15</Dmg>
 		<Atk_Speed>6</Atk_Speed>
 		<Cost>120</Cost>
 		<Type>fire</Type>
@@ -344,10 +345,10 @@
 	</Row>
 	<Row>
 		<Name>Magma Thrower</Name>
-		<AoE>85</AoE>
-		<Range>100</Range>
+		<AoE>45</AoE>
+		<Range>95</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>80</Dmg>
+		<Dmg>60</Dmg>
 		<Atk_Speed>32</Atk_Speed>
 		<Cost>160</Cost>
 		<Type> fire</Type>
@@ -359,10 +360,10 @@
 	</Row>
 	<Row>
 		<Name>Ice Tower</Name>
-		<AoE>35</AoE>
+		<AoE>30</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>7</Dmg>
+		<Dmg>10</Dmg>
 		<Atk_Speed>20</Atk_Speed>
 		<Cost>50</Cost>
 		<Type>ice</Type>
@@ -370,22 +371,22 @@
 		<bulletSpeed>24</bulletSpeed>
 		<towerFrame>4</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Icey.  Cold.  Refreshing.  Slows by 20% to small area for 2 seconds.</tDescription>
+		<tDescription>Icey.  Cold.  Refreshing.  Slows by 18% to small area for 2 seconds.</tDescription>
 	</Row>
 	<Row>
 		<Name>Snow Machine</Name>
-		<AoE>0</AoE>
-		<Range>75</Range>
+		<AoE>43</AoE>
+		<Range>80</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>0</Dmg>
-		<Atk_Speed>2</Atk_Speed>
-		<Cost>100</Cost>
+		<Dmg>38</Dmg>
+		<Atk_Speed>42</Atk_Speed>
+		<Cost>110</Cost>
 		<Type>ice</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>16</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Slows all units passing through by 25% but deals no damage.</tDescription>
+		<tDescription>Bigger splash, still slows 18%.  Just a nice, little upgrade :)</tDescription>
 	</Row>
 	<Row>
 		<Name>Icicle</Name>
@@ -400,27 +401,27 @@
 		<bulletSpeed>30</bulletSpeed>
 		<towerFrame>17</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Shoots ice spikes.  Long range, single target.  Slows 15% and reduces armor by 2 for 2 seconds.</tDescription>
+		<tDescription>Shoots ice spikes.  Long range, single target.  Slows 18% and reduces armor by 1 for 2 seconds.</tDescription>
 	</Row>
 	<Row>
 		<Name>Frozen Pond</Name>
 		<AoE>0</AoE>
-		<Range>2</Range>
+		<Range>66</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>0</Dmg>
-		<Atk_Speed>24</Atk_Speed>
+		<Dmg>2</Dmg>
+		<Atk_Speed>4</Atk_Speed>
 		<Cost>120</Cost>
 		<Type>ice</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>0</bulletSpeed>
 		<towerFrame>15</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Frozen Pond.  Feel nature's tranquility.  Buffs towers within 2 blocks 15% dmg.</tDescription>
+		<tDescription>Frozen Pond.  Slows in a small AoE around it by 23% and does light damage</tDescription>
 	</Row>
 	<Row>
 		<Name>Splash</Name>
-		<AoE>70</AoE>
-		<Range>112</Range>
+		<AoE>40</AoE>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>11</Dmg>
 		<Atk_Speed>24</Atk_Speed>
@@ -434,8 +435,8 @@
 	</Row>
 	<Row>
 		<Name>Demo</Name>
-		<AoE>95</AoE>
-		<Range>112</Range>
+		<AoE>50</AoE>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>50</Dmg>
 		<Atk_Speed>28</Atk_Speed>
@@ -450,7 +451,7 @@
 	<Row>
 		<Name>Gun</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>12</Dmg>
 		<Atk_Speed>3</Atk_Speed>
@@ -465,10 +466,10 @@
 	<Row>
 		<Name>Lightning</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>8</Dmg>
-		<Atk_Speed>10</Atk_Speed>
+		<Dmg>10</Dmg>
+		<Atk_Speed>9</Atk_Speed>
 		<Cost>65</Cost>
 		<Type>fire</Type>
 		<bulletFrame>7</bulletFrame>
@@ -480,9 +481,9 @@
 	<Row>
 		<Name>Multishooter</Name>
 		<AoE>0</AoE>
-		<Range>110</Range>
+		<Range>106</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>8</Dmg>
+		<Dmg>9</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>90</Cost>
 		<Type>fire</Type>
@@ -495,15 +496,15 @@
 	<Row>
 		<Name>Laser</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>8</Dmg>
-		<Atk_Speed>6</Atk_Speed>
-		<Cost>110</Cost>
+		<Dmg>13</Dmg>
+		<Atk_Speed>3</Atk_Speed>
+		<Cost>130</Cost>
 		<Type>fire</Type>
-		<bulletFrame>0</bulletFrame>
+		<bulletFrame>9</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>1</towerFrame>
+		<towerFrame>30</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Goes *Pew* *Pew* *Pew*.  Enemies think it's too hot.  We think it's justtt right.</tDescription>
 	</Row>
