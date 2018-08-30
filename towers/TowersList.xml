@@ -28,7 +28,7 @@
 		<bulletSpeed>30</bulletSpeed>
 		<towerFrame>9</towerFrame>
 		<fireSoundString>stab</fireSoundString>
-		<tDescription>The Rogue.  Hits two targets at once.  Applies 1 dmg every second for 5 seconds and slows by 20%.</tDescription>
+		<tDescription>The Rogue.  Hits two targets at once.  Applies 3 dmg every second for 2 seconds and slows by 15%.</tDescription>
 	</Row>
 	<Row>
 		<Name>Shadow</Name>

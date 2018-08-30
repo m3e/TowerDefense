@@ -35,7 +35,7 @@
 	</Row>
 	<Row>
 		<currentRound>4</currentRound>
-		<maxHp>125</maxHp>
+		<maxHp>105</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -46,7 +46,7 @@
 	</Row>
 	<Row>
 		<currentRound>5</currentRound>
-		<maxHp>160</maxHp>
+		<maxHp>145</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -57,7 +57,7 @@
 	</Row>
 	<Row>
 		<currentRound>6</currentRound>
-		<maxHp>140</maxHp>
+		<maxHp>135</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -68,7 +68,7 @@
 	</Row>
 	<Row>
 		<currentRound>7</currentRound>
-		<maxHp>200</maxHp>
+		<maxHp>190</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>6</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -79,9 +79,9 @@
 	</Row>
 	<Row>
 		<currentRound>8</currentRound>
-		<maxHp>280</maxHp>
+		<maxHp>270</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
-		<goldValue>6</goldValue>
+		<goldValue>7</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
 		<roundEndBonus>42</roundEndBonus>
 		<freq>14</freq>
@@ -92,7 +92,7 @@
 		<currentRound>9</currentRound>
 		<maxHp>400</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
-		<goldValue>7</goldValue>
+		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
 		<roundEndBonus>44</roundEndBonus>
 		<freq>16</freq>
@@ -103,7 +103,7 @@
 		<currentRound>10</currentRound>
 		<maxHp>500</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
-		<goldValue>7</goldValue>
+		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
 		<roundEndBonus>45</roundEndBonus>
 		<freq>17</freq>
@@ -112,7 +112,7 @@
 	</Row>
 	<Row>
 		<currentRound>11</currentRound>
-		<maxHp>480</maxHp>
+		<maxHp>460</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -123,7 +123,7 @@
 	</Row>
 	<Row>
 		<currentRound>12</currentRound>
-		<maxHp>750</maxHp>
+		<maxHp>540</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -134,7 +134,7 @@
 	</Row>
 	<Row>
 		<currentRound>13</currentRound>
-		<maxHp>1100</maxHp>
+		<maxHp>700</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -145,7 +145,7 @@
 	</Row>
 	<Row>
 		<currentRound>14</currentRound>
-		<maxHp>1100</maxHp>
+		<maxHp>900</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>9</goldValue>
 		<numberOfEnemies>17</numberOfEnemies>
@@ -156,7 +156,7 @@
 	</Row>
 	<Row>
 		<currentRound>15</currentRound>
-		<maxHp>1150</maxHp>
+		<maxHp>1100</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -167,7 +167,7 @@
 	</Row>
 	<Row>
 		<currentRound>16</currentRound>
-		<maxHp>1350</maxHp>
+		<maxHp>1200</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -178,7 +178,7 @@
 	</Row>
 	<Row>
 		<currentRound>17</currentRound>
-		<maxHp>1600</maxHp>
+		<maxHp>1550</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>11</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -189,7 +189,7 @@
 	</Row>
 	<Row>
 		<currentRound>18</currentRound>
-		<maxHp>1850</maxHp>
+		<maxHp>1750</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>12</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -200,7 +200,7 @@
 	</Row>
 	<Row>
 		<currentRound>19</currentRound>
-		<maxHp>2200</maxHp>
+		<maxHp>2300</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>13</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
