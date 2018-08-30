@@ -19,7 +19,7 @@
 		}
 		override internal function generateSkills():void
 		{
-			skill = new Skill(_root,"ally","instant",.15,2,2,2,towerArray)
+			skill = new Skill(_root,"dmgBuff","ally","instant",.15,2,2,2,towerArray)
 			addChild(skill);
 			skillsArray.push(skill);
 		}

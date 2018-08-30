@@ -27,6 +27,10 @@
 		{
 			return Hero;
 		}
+		override public function upgradeTwo():Class
+		{
+			return Elven;
+		}
 	}
 	
 }

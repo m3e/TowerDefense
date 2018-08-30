@@ -20,9 +20,9 @@
 		<AoE>0</AoE>
 		<Range>100</Range>
 		<of_Targets>2</of_Targets>
-		<Dmg>22</Dmg>
-		<Atk_Speed>18</Atk_Speed>
-		<Cost>80</Cost>
+		<Dmg>32</Dmg>
+		<Atk_Speed>22</Atk_Speed>
+		<Cost>120</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>30</bulletSpeed>
@@ -35,7 +35,7 @@
 		<AoE>0</AoE>
 		<Range>100</Range>
 		<of_Targets>2</of_Targets>
-		<Dmg>80</Dmg>
+		<Dmg>55</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>185</Cost>
 		<Type>pierce</Type>
@@ -50,9 +50,9 @@
 		<AoE>0</AoE>
 		<Range>115</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>70</Dmg>
+		<Dmg>40</Dmg>
 		<Atk_Speed>13</Atk_Speed>
-		<Cost>265</Cost>
+		<Cost>175</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -65,9 +65,9 @@
 		<AoE>0</AoE>
 		<Range>125</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>50</Dmg>
-		<Atk_Speed>16</Atk_Speed>
-		<Cost>140</Cost>
+		<Dmg>55</Dmg>
+		<Atk_Speed>17</Atk_Speed>
+		<Cost>135</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -86,7 +86,7 @@
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>1</towerFrame>
+		<towerFrame>29</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
 		<tDescription>Calls upon Elven spirits to increase nearby towers attack speed by 10%.</tDescription>
 	</Row>
@@ -110,9 +110,9 @@
 		<AoE>0</AoE>
 		<Range>95</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>50</Dmg>
-		<Atk_Speed>16</Atk_Speed>
-		<Cost>120</Cost>
+		<Dmg>43</Dmg>
+		<Atk_Speed>20</Atk_Speed>
+		<Cost>80</Cost>
 		<Type> earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>

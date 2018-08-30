@@ -40,6 +40,7 @@
 		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
+		public var tAtkSpdBuff:Number;
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
@@ -75,6 +76,7 @@
 			buffsArray = new Array  ;
 			rectangle = new Shape  ;
 			tDmgBuff = 0;
+			tAtkSpdBuff = 0;
 			tTarget = new Array  ;
 			targeting = "First";
 			loaded = true;
@@ -174,8 +176,9 @@
 					{
 						rectangle.visible = false;
 					}
-					
-					if (loadedTimer == tAtkSpeed) //Reload
+					//Reload
+					trace("Tower.tAtkSpeed:",tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))
+					if (loadedTimer >= (tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))) 
 					{
 						loaded = true;
 					}
@@ -284,6 +287,7 @@
 				newBullet.x = this.x + (common.Commons.tileSide * .5);
 				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
+				trace("Tower.tDmg:",tDmg * (1 + tDmgBuff));
 				newBullet.bDmg = tDmg * (1 + tDmgBuff);
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;

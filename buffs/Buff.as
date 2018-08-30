@@ -7,7 +7,7 @@
 	public class Buff extends Sprite {
 		
 		private static var dmgBuff:DmgBuff;
-		
+		private static var atkSpdBuff:AtkSpdBuff;
 		
 		public function Buff() {
 			// constructor code
@@ -17,6 +17,11 @@
 		{
 			dmgBuff = new DmgBuff(ally,amount,seconds)
 			_Root.addChild(dmgBuff);
+		}
+		public static function addAtkSpdBuff(_Root:*,ally:Tower, amount:Number, seconds:Number):void
+		{
+			atkSpdBuff = new AtkSpdBuff(ally,amount,seconds)
+			_Root.addChild(atkSpdBuff);
 		}
 	}
 	

@@ -1,27 +1,25 @@
-﻿package buffs
-{
-
+﻿package buffs {
+	
 	import flash.display.Sprite;
 	import towers.Tower;
 	import flash.events.Event;
 	import flash.display.Shape;
 	
-	public class DmgBuff extends Sprite
-	{
-
+	
+	public class AtkSpdBuff extends Sprite {
+		
 		public var tTarget:Tower;
 		private var sAmount:Number;
 		private var sSeconds:Number;
 
 		private var rectangle:Shape;
 		private var frames:int;
-
-		public function DmgBuff(_Target:Tower, _amount:Number,_seconds:Number)
-		{
+		
+		public function AtkSpdBuff(_Target:Tower, _amount:Number,_seconds:Number) {
 			rectangle = new Shape  ;
-			rectangle.graphics.beginFill(0xDB2015);
+			rectangle.graphics.beginFill(0xE9FF30);
 			// choosing the colour for the fill, here it is red;
-			rectangle.graphics.drawRect(0,0, 8,8);
+			rectangle.graphics.drawRect(24,0, 8,8);
 			// (x spacing, y spacing, width, height);
 			rectangle.graphics.endFill();
 			// not always needed but I like to put it in to end the fill;
@@ -42,9 +40,9 @@
 			{
 				if (frames < sSeconds * 24)
 				{
-					if (sAmount > tTarget.tDmgBuff)
+					if (sAmount > tTarget.tAtkSpdBuff)
 					{
-						tTarget.tDmgBuff = sAmount;
+						tTarget.tAtkSpdBuff = sAmount;
 					}
 				}
 				else
@@ -62,7 +60,7 @@
 		public function finishBuff():void
 		{
 
-			tTarget.tDmgBuff = 0;
+			tTarget.tAtkSpdBuff = 0;
 			removeEventListener(Event.ENTER_FRAME, buffTick);
 			if (rectangle != null && this.contains(rectangle))
 			{
@@ -85,6 +83,5 @@
 			tTarget = null;
 		}
 	}
-
-
+	
 }

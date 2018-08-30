@@ -21,11 +21,13 @@
 		private var towerArray:Array;
 		private var bAmount:Number;
 		private var bSeconds:Number;
+		private var effect:String;
 		private var _root:*;
 
-		public function Skill(_Root:*,_allyOrEnemy:String,_instantOrBullet:String,_amount:Number,_seconds:Number,_atkSpeed:int,_range:int,_towerArray:Array)
+		public function Skill(_Root:*,_effect:String,_allyOrEnemy:String,_instantOrBullet:String,_amount:Number,_seconds:Number,_atkSpeed:int,_range:int,_towerArray:Array)
 		{
 			_root = _Root;
+			effect = _effect;
 			bSeconds = _seconds;
 			bAmount = _amount;
 			towerArray = _towerArray;
@@ -165,8 +167,17 @@
 		{
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				buffs.Buff.addDmgBuff(_root,tTarget[i],bAmount,bSeconds);
-				//Buff.addDmgBuff(_root,tTarget[i],.15,2)
+				switch (effect)
+				{
+					case ("dmgBuff"):
+					buffs.Buff.addDmgBuff(_root,tTarget[i],bAmount,bSeconds);
+					//Buff.addDmgBuff(_root,tTarget[i],.15,2)
+					break;
+					
+					case("atkSpdBuff"):
+					buffs.Buff.addAtkSpdBuff(_root,tTarget[i],bAmount,bSeconds);
+					break;
+				}
 			}
 		}
 		private function targetingCheck():void
