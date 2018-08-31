@@ -13,7 +13,7 @@
 	</Row>
 	<Row>
 		<currentRound>2</currentRound>
-		<maxHp>48</maxHp>
+		<maxHp>40</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>15</numberOfEnemies>
@@ -24,7 +24,7 @@
 	</Row>
 	<Row>
 		<currentRound>3</currentRound>
-		<maxHp>55</maxHp>
+		<maxHp>50</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>3</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -35,7 +35,7 @@
 	</Row>
 	<Row>
 		<currentRound>4</currentRound>
-		<maxHp>105</maxHp>
+		<maxHp>90</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -46,7 +46,7 @@
 	</Row>
 	<Row>
 		<currentRound>5</currentRound>
-		<maxHp>145</maxHp>
+		<maxHp>115</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -57,7 +57,7 @@
 	</Row>
 	<Row>
 		<currentRound>6</currentRound>
-		<maxHp>135</maxHp>
+		<maxHp>125</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -68,7 +68,7 @@
 	</Row>
 	<Row>
 		<currentRound>7</currentRound>
-		<maxHp>190</maxHp>
+		<maxHp>170</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>6</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -79,7 +79,7 @@
 	</Row>
 	<Row>
 		<currentRound>8</currentRound>
-		<maxHp>270</maxHp>
+		<maxHp>250</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -90,7 +90,7 @@
 	</Row>
 	<Row>
 		<currentRound>9</currentRound>
-		<maxHp>400</maxHp>
+		<maxHp>370</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -101,7 +101,7 @@
 	</Row>
 	<Row>
 		<currentRound>10</currentRound>
-		<maxHp>500</maxHp>
+		<maxHp>450</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -112,7 +112,7 @@
 	</Row>
 	<Row>
 		<currentRound>11</currentRound>
-		<maxHp>460</maxHp>
+		<maxHp>420</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -123,7 +123,7 @@
 	</Row>
 	<Row>
 		<currentRound>12</currentRound>
-		<maxHp>540</maxHp>
+		<maxHp>500</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -134,7 +134,7 @@
 	</Row>
 	<Row>
 		<currentRound>13</currentRound>
-		<maxHp>700</maxHp>
+		<maxHp>650</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -145,7 +145,7 @@
 	</Row>
 	<Row>
 		<currentRound>14</currentRound>
-		<maxHp>900</maxHp>
+		<maxHp>940</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>9</goldValue>
 		<numberOfEnemies>17</numberOfEnemies>
@@ -156,7 +156,7 @@
 	</Row>
 	<Row>
 		<currentRound>15</currentRound>
-		<maxHp>1100</maxHp>
+		<maxHp>980</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -167,7 +167,7 @@
 	</Row>
 	<Row>
 		<currentRound>16</currentRound>
-		<maxHp>1200</maxHp>
+		<maxHp>1100</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -178,7 +178,7 @@
 	</Row>
 	<Row>
 		<currentRound>17</currentRound>
-		<maxHp>1550</maxHp>
+		<maxHp>1400</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>11</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -189,7 +189,7 @@
 	</Row>
 	<Row>
 		<currentRound>18</currentRound>
-		<maxHp>1750</maxHp>
+		<maxHp>1600</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>12</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -200,7 +200,7 @@
 	</Row>
 	<Row>
 		<currentRound>19</currentRound>
-		<maxHp>2300</maxHp>
+		<maxHp>1750</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>13</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
@@ -211,7 +211,7 @@
 	</Row>
 	<Row>
 		<currentRound>20</currentRound>
-		<maxHp>2500</maxHp>
+		<maxHp>2000</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>15</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>

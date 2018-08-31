@@ -413,7 +413,7 @@
 		<Cost>120</Cost>
 		<Type>ice</Type>
 		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>0</bulletSpeed>
+		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>15</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Frozen Pond.  Slows in a small AoE around it by 23% and does light damage</tDescription>
