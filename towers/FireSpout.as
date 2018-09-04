@@ -14,6 +14,10 @@
 			super();
 			// constructor code
 		}
+		override public function upgradeOne():Class
+		{
+			return TripleSpout;
+		}
 		
 	}
 

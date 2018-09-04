@@ -1,22 +1,15 @@
-﻿package towers
-{
-
-	import flash.events.Event;
-	import flash.geom.ColorTransform;
-	import debuffs.*;
-
-	public class ScorchedEarth extends Tower
-	{
-
+﻿package towers {
+	
+	import flash.display.MovieClip;
+	
+	
+	public class Mars extends Tower {
 		
-
-
-		public function ScorchedEarth()
-		{
-			tName = "Scorched Earth";
-			super();
+		
+		public function Mars() {
+			tName = "Mars"
+			super()
 			targeting = "All"
-			
 			// constructor code
 		}
 		override internal function fire():void
@@ -34,11 +27,6 @@
 			tTarget.length = 0
 			
 		}
-		override public function upgradeOne():Class
-		{
-			return Mars;
-		}
-
 	}
-
+	
 }
