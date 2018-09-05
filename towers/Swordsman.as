@@ -10,14 +10,7 @@
 			super();
 			// constructor code
 		}
-		override public function upgradeOne():Class
-		{
-			return Samurai
-		}
-		override public function upgradeTwo():Class
-		{
-			return MasterSwordsman
-		}
+
 
 	}
 

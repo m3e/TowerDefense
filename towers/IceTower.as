@@ -18,24 +18,13 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.2,2)
+			debuffType.push("slow",.22,2)
 			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
 		}
-		override public function upgradeOne():Class
-		{
-			return Icicle
-		}
-		override public function upgradeTwo():Class
-		{
-			return SnowMachine
-		}
-		override public function upgradeThree():Class
-		{
-			return FrozenPond
-		}
+
 		
 	}
 	

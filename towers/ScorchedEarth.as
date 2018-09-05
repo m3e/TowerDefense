@@ -15,7 +15,6 @@
 		{
 			tName = "Scorched Earth";
 			super();
-			targeting = "All"
 			
 			// constructor code
 		}
@@ -34,10 +33,7 @@
 			tTarget.length = 0
 			
 		}
-		override public function upgradeOne():Class
-		{
-			return Mars;
-		}
+
 
 	}
 

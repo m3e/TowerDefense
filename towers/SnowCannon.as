@@ -5,12 +5,12 @@
 	import flash.geom.ColorTransform;
 	import debuffs.*;
 
-	public class SnowMachine extends Tower
+	public class SnowCannon extends Tower
 	{
 
-		public function SnowMachine()
+		public function SnowCannon()
 		{
-			tName = "Snow Machine";
+			tName = "Snow Cannon";
 			super();
 			// constructor code
 		}
@@ -20,7 +20,7 @@
 			
 			var debuffType:Array = new Array;
 			
-			debuffType.push("slow",.18,.5)
+			debuffType.push("slow",.22,2)
 			
 			debuffsArray.push(debuffType)
 			

@@ -23,14 +23,6 @@
 			
 			bullet.debuffArray = debuffsArray;
 		}
-		override public function upgradeOne():Class
-		{
-			return Hunter;
-		}
-		override public function upgradeTwo():Class
-		{
-			return Alchemist;
-		}
 		
 	}
 	

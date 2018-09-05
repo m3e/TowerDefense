@@ -21,11 +21,13 @@
 		private var roundEndBonus:int;
 		private var myLoader:URLLoader;
 		private var roundsList:Array;
+		private var enemyWaveTracker:Array;
 		private var enemyAlive:Array;
 		private var actualRound:Boolean;
 
 		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
+			enemyWaveTracker = new Array  ;
 			roundsList = new Array  ;
 			enemyAlive = new Array  ;
 			myLoader = new URLLoader  ;
@@ -39,12 +41,16 @@
 		public function startRound(increaseRound:Boolean):void
 		{
 			//SoundManager.sfx("roundstart2");
+			enemyAlive = new Array;
+			enemyWaveTracker.push(enemyAlive)
 			actualRound = false;
 			if (increaseRound)
 			{
+				trace("Starting wave");
 				actualRound = true;
 				waveArray = roundsList[currentRound - 1];
 				roundEndBonus = waveArray[8];
+				enemyAlive.push(roundEndBonus);
 				if (currentRound < roundsList.length)
 				{
 					currentRound++;
@@ -66,29 +72,26 @@
 			waveArray = [];
 			frameTimer = 0;
 			roundInProgress = false;
-			if (actualRound == true)
-			{
-				UserInfo.changeGold(roundEndBonus);
-			}
+			
+			enemyAlive = new Array;
 			removeEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
 		private function enemyDead(e:Event):void
 		{
 
-			//trace("Start:");
-			/*for (var i:int=0; i < enemyAlive.length; i++)
+			for (var i:int=0; i < enemyWaveTracker.length; i++)
 			{
-				trace(enemyAlive[i].id);
-			}*/
-			if (enemyAlive.indexOf(e.currentTarget) == -1)
-			{
-
-				trace("Fuck this shit:", e.currentTarget.id);
+				if (enemyWaveTracker[i].indexOf(e.currentTarget) != -1)
+				{
+					enemyWaveTracker[i].splice(enemyWaveTracker[i].indexOf(e.currentTarget),1);
+					if (enemyWaveTracker[i].length == 1)
+					{
+						UserInfo.changeGold(enemyWaveTracker[i][0])
+						enemyWaveTracker.splice(i,1)
+					}
+				}
 			}
-			enemyAlive.splice(enemyAlive.indexOf(e.currentTarget),1);
-
-			//trace("myID:",e.currentTarget.id,"+:",enemyAlive.length);
-
+			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
 		}
 		private function spawnTimer(e:Event):void
 		{
@@ -97,7 +100,6 @@
 			{
 				var newEnemy:Enemy = initEnemies.customEnemy(waveArray);
 				newEnemy.addEventListener(Event.REMOVED,enemyDead);
-				//trace("NewEnemyID:",newEnemy.id);
 				enemyAlive.push(newEnemy);
 				waveArray[4] = (waveArray[4] - 1);
 			}

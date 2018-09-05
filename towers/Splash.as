@@ -12,14 +12,7 @@
 			
 			// constructor code
 		}
-		override public function upgradeOne():Class
-		{
-			return Demolitionist
-		}
-		override public function upgradeTwo():Class
-		{
-			return Gun;
-		}
+
 
 	}
 	

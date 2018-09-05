@@ -14,6 +14,9 @@
 		<towerFrame>2</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
 		<tDescription>The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.</tDescription>
+		<upgradeOne>Rogue</upgradeOne>
+		<upgradeTwo>Woodsman</upgradeTwo>
+		<upgradeThree>RoyalBowman</upgradeThree>
 	</Row>
 	<Row>
 		<Name>Rogue</Name>
@@ -29,6 +32,8 @@
 		<towerFrame>9</towerFrame>
 		<fireSoundString>stab</fireSoundString>
 		<tDescription>The Rogue.  Hits two targets at once.  Applies 3 dmg every second for 2 seconds and slows by 15%.</tDescription>
+		<upgradeOne>Shadow</upgradeOne>
+		<upgradeTwo>Assassin</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Shadow</Name>
@@ -74,6 +79,8 @@
 		<towerFrame>10</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
 		<tDescription>The Royal Bowman.  Applies -1 armor for 3 seconds on the enemy it hits.  Larger range.</tDescription>
+		<upgradeOne>Elven</upgradeOne>
+		<upgradeTwo>Hero</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Elven</Name>
@@ -113,12 +120,14 @@
 		<Dmg>43</Dmg>
 		<Atk_Speed>20</Atk_Speed>
 		<Cost>80</Cost>
-		<Type> earth</Type>
+		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>11</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
 		<tDescription>The Woodsman.  Shoots Earth arrows, poisons 10 dps + slow 20% for 2 seconds.  Single target.</tDescription>
+		<upgradeOne>Hunter</upgradeOne>
+		<upgradeTwo>Alchemist</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Hunter</Name>
@@ -164,6 +173,9 @@
 		<towerFrame>1</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.</tDescription>
+		<upgradeOne>Swordsman</upgradeOne>
+		<upgradeTwo>Knight</upgradeTwo>
+		<upgradeThree>Commander</upgradeThree>
 	</Row>
 	<Row>
 		<Name>Swordsman</Name>
@@ -179,6 +191,8 @@
 		<towerFrame>7</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>The Swordsman.  Just a warrior on drugs.  Hits hard, hits fast.</tDescription>
+		<upgradeOne>Samurai</upgradeOne>
+		<upgradeTwo>MasterSwordsman</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Samurai</Name>
@@ -224,6 +238,7 @@
 		<towerFrame>6</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds. Tips fedora a lot.</tDescription>
+		<upgradeOne>DeathKnight</upgradeOne>
 	</Row>
 	<Row>
 		<Name>Death Knight</Name>
@@ -312,6 +327,9 @@
 		<towerFrame>3</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Takes fire and throws it, like some sort of throwing flame machine.</tDescription>
+		<upgradeOne>ScorchedEarth</upgradeOne>
+		<upgradeTwo>FireSpout</upgradeTwo>
+		<upgradeThree>MagmaThrower</upgradeThree>
 	</Row>
 	<Row>
 		<Name>Scorched Earth</Name>
@@ -327,6 +345,8 @@
 		<towerFrame>14</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 30 damage a second to anything it can.  Strong.</tDescription>
+		<upgradeOne>Mars</upgradeOne>
+		<targeting>All</targeting>
 	</Row>
 	<Row>
 		<Name>Mars</Name>
@@ -342,10 +362,12 @@
 		<towerFrame>33</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>60 damage a second to anything in melee range.</tDescription>
+		<targeting>All</targeting>
 	</Row>
 	<Row>
 		<Name>Solar Flare</Name>
 		<Type>fire</Type>
+		<targeting>All</targeting>
 	</Row>
 	<Row>
 		<Name>Fire Spout</Name>
@@ -361,6 +383,7 @@
 		<towerFrame>12</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Bigger, badder, and hits 2 guys now.  This tower likes fire.</tDescription>
+		<upgradeOne>TripleSpout</upgradeOne>
 	</Row>
 	<Row>
 		<Name>Triple Spout</Name>
@@ -389,12 +412,13 @@
 		<Dmg>55</Dmg>
 		<Atk_Speed>32</Atk_Speed>
 		<Cost>140</Cost>
-		<Type> fire</Type>
+		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
 		<bulletSpeed>36</bulletSpeed>
 		<towerFrame>13</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Throws large fireballs that explode in an AoE and deal 5 burning damage to all caught for 3 seconds.  Slow attack speed. Might be OP.</tDescription>
+		<upgradeOne>HotSpot</upgradeOne>
 	</Row>
 	<Row>
 		<Name>Hot Spot</Name>
@@ -420,18 +444,21 @@
 		<AoE>30</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>10</Dmg>
-		<Atk_Speed>20</Atk_Speed>
-		<Cost>50</Cost>
+		<Dmg>22</Dmg>
+		<Atk_Speed>42</Atk_Speed>
+		<Cost>45</Cost>
 		<Type>ice</Type>
 		<bulletFrame>3</bulletFrame>
 		<bulletSpeed>24</bulletSpeed>
 		<towerFrame>4</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Icey.  Cold.  Refreshing.  Slows by 18% to small area for 2 seconds.</tDescription>
+		<upgradeOne>SnowCannon</upgradeOne>
+		<upgradeTwo>Icicle</upgradeTwo>
+		<upgradeThree>FrozenPond</upgradeThree>
 	</Row>
 	<Row>
-		<Name>Snow Machine</Name>
+		<Name>Snow Cannon</Name>
 		<AoE>43</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
@@ -444,10 +471,6 @@
 		<towerFrame>16</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Bigger splash, still slows 18%.  Just a nice, little upgrade :)</tDescription>
-	</Row>
-	<Row>
-		<Name>Yeti</Name>
-		<Type>ice</Type>
 	</Row>
 	<Row>
 		<Name>Icicle</Name>
@@ -465,10 +488,6 @@
 		<tDescription>Shoots ice spikes.  Long range, single target.  Slows 18% and reduces armor by 1 for 2 seconds.</tDescription>
 	</Row>
 	<Row>
-		<Name>Blizzard</Name>
-		<Type>ice</Type>
-	</Row>
-	<Row>
 		<Name>Frozen Pond</Name>
 		<AoE>0</AoE>
 		<Range>66</Range>
@@ -482,10 +501,40 @@
 		<towerFrame>15</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Frozen Pond.  Slows in a small AoE around it by 23% and does light damage</tDescription>
+		<upgradeOne>Blizzard</upgradeOne>
+		<upgradeTwo>Yeti</upgradeTwo>
+		<targeting>All</targeting>
 	</Row>
 	<Row>
-		<Name>Ice Machine</Name>
+		<Name>Blizzard</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>10</Dmg>
+		<Atk_Speed>4</Atk_Speed>
+		<Cost>260</Cost>
 		<Type>ice</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>37</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Ice everywhere.  Same range, more slow, more damage.</tDescription>
+		<targeting>All</targeting>
+	</Row>
+	<Row>
+		<Name>Yeti</Name>
+		<AoE>50</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>90</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>280</Cost>
+		<Type>ice</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>36</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Big Yeti who hits hard and does AoE splash.</tDescription>
 	</Row>
 	<Row>
 		<Name>Splash</Name>
@@ -501,6 +550,8 @@
 		<towerFrame>5</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Big, explodey, splash guy.  Hits more than one unit if they're close.</tDescription>
+		<upgradeOne>Demolitionist</upgradeOne>
+		<upgradeTwo>Gun</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Demo</Name>
@@ -552,6 +603,8 @@
 		<towerFrame>20</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>I dare you to touch it.  Electricity travels fast and far.  Hey, what's this knob do?</tDescription>
+		<upgradeOne>Multishooter</upgradeOne>
+		<upgradeTwo>Laser</upgradeTwo>
 	</Row>
 	<Row>
 		<Name>Multishooter</Name>

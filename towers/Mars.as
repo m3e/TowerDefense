@@ -9,7 +9,7 @@
 		public function Mars() {
 			tName = "Mars"
 			super()
-			targeting = "All"
+			
 			// constructor code
 		}
 		override internal function fire():void

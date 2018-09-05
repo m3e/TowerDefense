@@ -28,10 +28,7 @@
 			debuffsArray.push(debuffType);
 			bullet.debuffArray = debuffsArray;
 		}
-		override public function upgradeOne():Class
-		{
-			return DeathKnight
-		}
+
 	}
 
 }

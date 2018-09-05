@@ -12,14 +12,7 @@
 			super();
 			// constructor code
 		}
-		override public function upgradeOne():Class
-		{
-			return Multishooter
-		}
-		override public function upgradeTwo():Class
-		{
-			return Laser
-		}
+
 	}
 	
 }

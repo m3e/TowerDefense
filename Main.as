@@ -95,7 +95,22 @@
 				tower.tFrame = int(myXML.Row[i].towerFrame);
 				tower.fireSoundString = String(myXML.Row[i].fireSoundString);
 				tower.tDescription = String(myXML.Row[i].tDescription);
-				
+				tower.tUpgradeOne = null;
+				tower.tUpgradeTwo = null;
+				tower.tUpgradeThree = null;
+				if (myXML.Row[i].upgradeOne != undefined)
+				{
+				tower.tUpgradeOne = String(myXML.Row[i].upgradeOne)
+				}
+				if (myXML.Row[i].upgradeTwo != undefined)
+				{
+				tower.tUpgradeTwo = String(myXML.Row[i].upgradeTwo)
+				}
+				if (myXML.Row[i].upgradeThree != undefined)
+				{
+				tower.tUpgradeThree = String(myXML.Row[i].upgradeThree)
+				}
+				tower.targeting = String(myXML.Row[i].targeting)
 				towerList.push(tower);
 				
 				//var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus];

@@ -2,21 +2,23 @@
 	
 	import flash.display.MovieClip;
 	
-	public class Alchemist extends Tower {
+	
+	public class Blizzard extends Tower {
 		
 		
-		public function Alchemist() {
-			tName = "Alchemist";
-			super();
+		public function Blizzard() {
+			tName = "Blizzard"
+			super()
+			targeting = "All"
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
 		{
-			var debuffType:Array = new Array;
-			
 			var debuffsArray:Array = new Array;
 			
-			debuffType.push("poison",.18,5,2)
+			var debuffType:Array = new Array;
+			
+			debuffType.push("slow",.28,.5)
 			
 			debuffsArray.push(debuffType)
 			

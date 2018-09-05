@@ -47,18 +47,6 @@
 		{
 			clickedOnSounds = ["warriorgreetings","warriorhowcanihelp"]
 		}		
-		override public function upgradeOne():Class
-		{
-			return Swordsman;
-		}
-		override public function upgradeTwo():Class
-		{
-			return Knight;
-		}
-		override public function upgradeThree():Class
-		{
-			return Commander;
-		}
 	}
 
 }

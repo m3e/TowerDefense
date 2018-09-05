@@ -14,7 +14,7 @@
 		{
 			tName = "Frozen Pond";
 			super();
-			targeting = "All";
+			
 			// constructor code
 		}
 		override internal function addDebuffs(bullet:Bullet):void
@@ -23,11 +23,12 @@
 			
 			var debuffType:Array = new Array;
 			
-			//slow
-			debuffType.push("slow",.23,.6)
+			debuffType.push("slow",.23,.5)
+			
 			debuffsArray.push(debuffType)
 			
-			debuffType = new Array;
+			bullet.debuffArray = debuffsArray;
 		}
+		
 	}
 }

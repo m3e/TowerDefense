@@ -20,6 +20,7 @@
 	import towers.skills.Skill;
 	import towers.TowerManager;
 	import common.Commons;
+	import towers.*;
 
 	public class Tower extends MovieClip
 	{
@@ -44,7 +45,7 @@
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
-
+		
 		//these given in Map, "n addTowerToMap"
 		public var enemyList:Array;
 		public var towerArray:Array;
@@ -57,6 +58,10 @@
 		internal var fireSoundString:String;
 		private var fireSoundOn:Boolean;
 		private var fireSoundChannel:SoundChannel;
+		
+		internal var tUpgradeOne:String
+		internal var tUpgradeTwo:String
+		internal var tUpgradeThree:String
 
 		internal var bFrame:int;
 
@@ -102,6 +107,14 @@
 					tFrame = TowerManager.towerList[i].tFrame;
 					fireSoundString = TowerManager.towerList[i].fireSoundString;
 					tDescription = TowerManager.towerList[i].tDescription
+					tUpgradeOne = TowerManager.towerList[i].tUpgradeOne
+					tUpgradeTwo = TowerManager.towerList[i].tUpgradeTwo
+					tUpgradeThree = (TowerManager.towerList[i].tUpgradeThree)
+					targeting = TowerManager.towerList[i].targeting
+					if(targeting != "All")
+					{
+						targeting = "First"
+					}
 				}
 			}
 			
@@ -298,15 +311,30 @@
 		}
 		public function upgradeOne():Class
 		{
-			return null;
+			var k:Class = null
+			if (tUpgradeOne != null)
+			{
+			k = (getDefinitionByName("towers."+tUpgradeOne) as Class)
+			}
+			return k;
 		}
 		public function upgradeTwo():Class
 		{
-			return null;
+			var k:Class = null
+			if (tUpgradeTwo != null)
+			{
+			k = (getDefinitionByName("towers."+tUpgradeTwo) as Class)
+			}
+			return k;
 		}
 		public function upgradeThree():Class
 		{
-			return null;
+			var k:Class = null
+			if (tUpgradeThree != null)
+			{
+			k = (getDefinitionByName("towers."+tUpgradeThree) as Class)
+			}
+			return k;
 		}
 
 		internal function checkB(xCo:int,yCo:int):Boolean

@@ -14,20 +14,7 @@
 			super();
 			// constructor code
 		}
-		override public function upgradeOne():Class
-		{
-			return FireSpout
-		}
-		override public function upgradeTwo():Class
-		{
-			return ScorchedEarth
-		}
-		override public function upgradeThree():Class
-		{
-			return MagmaThrower
-		}
 		
-
 	}
 
 }
