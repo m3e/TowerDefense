@@ -7,7 +7,7 @@
 		
 		
 		public function MegaZap() {
-			tName = "Death Ray"
+			tName = "MegaZap"
 			super();
 			// constructor code
 		}

@@ -150,7 +150,7 @@
 		<Range>103</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>50</Dmg>
-		<Atk_Speed>40</Atk_Speed>
+		<Atk_Speed>36</Atk_Speed>
 		<Cost>190</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
@@ -336,7 +336,7 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>10</Dmg>
+		<Dmg>12</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>155</Cost>
 		<Type>fire</Type>
@@ -344,7 +344,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>14</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 30 damage a second to anything it can.  Strong.</tDescription>
+		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 36 damage a second to anything it can.  Strong.</tDescription>
 		<upgradeOne>Mars</upgradeOne>
 		<targeting>All</targeting>
 	</Row>
@@ -353,7 +353,7 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>20</Dmg>
+		<Dmg>24</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>210</Cost>
 		<Type>fire</Type>
@@ -361,7 +361,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>33</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>60 damage a second to anything in melee range.</tDescription>
+		<tDescription>72 damage a second to anything in melee range.</tDescription>
 		<targeting>All</targeting>
 	</Row>
 	<Row>
@@ -446,13 +446,13 @@
 		<of_Targets>1</of_Targets>
 		<Dmg>22</Dmg>
 		<Atk_Speed>38</Atk_Speed>
-		<Cost>45</Cost>
+		<Cost>40</Cost>
 		<Type>ice</Type>
 		<bulletFrame>3</bulletFrame>
 		<bulletSpeed>24</bulletSpeed>
 		<towerFrame>4</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Icey.  Cold.  Refreshing.  Slows by 22% to small area for 2 seconds.</tDescription>
+		<tDescription>Icey.  Cold.  Refreshing.  Slows by 25% to small area for 2 seconds.</tDescription>
 		<upgradeOne>SnowCannon</upgradeOne>
 		<upgradeTwo>Icicle</upgradeTwo>
 		<upgradeThree>FrozenPond</upgradeThree>
@@ -470,7 +470,7 @@
 		<bulletSpeed>26</bulletSpeed>
 		<towerFrame>16</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Bigger splash, still slows 22%.  Just a nice, little upgrade :)</tDescription>
+		<tDescription>Bigger splash, still slows 25%.  Just a nice, little upgrade :)</tDescription>
 		<upgradeOne>IceMaker</upgradeOne>
 	</Row>
 	<Row>
@@ -532,7 +532,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>15</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Frozen Pond.  Slows in a small AoE around it by 23% and does light damage</tDescription>
+		<tDescription>Frozen Pond.  Slows in a small AoE around it by 28% and does light damage</tDescription>
 		<upgradeOne>Blizzard</upgradeOne>
 		<upgradeTwo>Yeti</upgradeTwo>
 		<targeting>All</targeting>
@@ -603,8 +603,8 @@
 	</Row>
 	<Row>
 		<Name>Artillery</Name>
-		<AoE>50</AoE>
-		<Range>106</Range>
+		<AoE>55</AoE>
+		<Range>112</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>90</Dmg>
 		<Atk_Speed>24</Atk_Speed>
@@ -614,7 +614,7 @@
 		<bulletSpeed>30</bulletSpeed>
 		<towerFrame>38</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Make way for big ar-tillery!!</tDescription>
+		<tDescription>Increased range &amp; splash.  Make way for big ar-tillery!!</tDescription>
 	</Row>
 	<Row>
 		<Name>Gun</Name>
