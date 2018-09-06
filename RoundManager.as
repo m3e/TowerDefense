@@ -132,6 +132,7 @@
 				var maxHp:int = int(myXML.Row[i].maxHp);
 				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);
 				var goldValue:int = int(myXML.Row[i].goldValue);
+				//var numberOfEnemies:int = 1;
 				var numberOfEnemies:int = int(myXML.Row[i].numberOfEnemies);
 				var endBonus:int = int(myXML.Row[i].roundEndBonus);
 				var freq:int = int(myXML.Row[i].freq);

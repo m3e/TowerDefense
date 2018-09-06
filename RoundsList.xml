@@ -5,15 +5,15 @@
 		<maxHp>24</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>3</goldValue>
-		<numberOfEnemies>15</numberOfEnemies>
-		<roundEndBonus>15</roundEndBonus>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>18</roundEndBonus>
 		<freq>14</freq>
 		<armorType>medium</armorType>
 		<maxArmor>0</maxArmor>
 	</Row>
 	<Row>
 		<currentRound>2</currentRound>
-		<maxHp>40</maxHp>
+		<maxHp>35</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>15</numberOfEnemies>
@@ -35,7 +35,7 @@
 	</Row>
 	<Row>
 		<currentRound>4</currentRound>
-		<maxHp>90</maxHp>
+		<maxHp>82</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -46,7 +46,7 @@
 	</Row>
 	<Row>
 		<currentRound>5</currentRound>
-		<maxHp>115</maxHp>
+		<maxHp>110</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>4</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -90,7 +90,7 @@
 	</Row>
 	<Row>
 		<currentRound>9</currentRound>
-		<maxHp>370</maxHp>
+		<maxHp>360</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -101,7 +101,7 @@
 	</Row>
 	<Row>
 		<currentRound>10</currentRound>
-		<maxHp>450</maxHp>
+		<maxHp>420</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -112,7 +112,7 @@
 	</Row>
 	<Row>
 		<currentRound>11</currentRound>
-		<maxHp>420</maxHp>
+		<maxHp>400</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -123,7 +123,7 @@
 	</Row>
 	<Row>
 		<currentRound>12</currentRound>
-		<maxHp>500</maxHp>
+		<maxHp>490</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>7</goldValue>
 		<numberOfEnemies>20</numberOfEnemies>
@@ -134,7 +134,7 @@
 	</Row>
 	<Row>
 		<currentRound>13</currentRound>
-		<maxHp>650</maxHp>
+		<maxHp>630</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>8</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -167,7 +167,7 @@
 	</Row>
 	<Row>
 		<currentRound>16</currentRound>
-		<maxHp>1100</maxHp>
+		<maxHp>1050</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>18</numberOfEnemies>
@@ -178,7 +178,7 @@
 	</Row>
 	<Row>
 		<currentRound>17</currentRound>
-		<maxHp>1400</maxHp>
+		<maxHp>1350</maxHp>
 		<maxMoveSpeed>5</maxMoveSpeed>
 		<goldValue>11</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -189,7 +189,7 @@
 	</Row>
 	<Row>
 		<currentRound>18</currentRound>
-		<maxHp>1600</maxHp>
+		<maxHp>1500</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>12</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -200,7 +200,7 @@
 	</Row>
 	<Row>
 		<currentRound>19</currentRound>
-		<maxHp>1750</maxHp>
+		<maxHp>1900</maxHp>
 		<maxMoveSpeed>3</maxMoveSpeed>
 		<goldValue>13</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
@@ -215,9 +215,339 @@
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>15</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
-		<roundEndBonus>0</roundEndBonus>
+		<roundEndBonus>122</roundEndBonus>
 		<freq>16</freq>
 		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>21</currentRound>
+		<maxHp>2523</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>13</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>124</roundEndBonus>
+		<freq>16</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>22</currentRound>
+		<maxHp>3849</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>18</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>130</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>23</currentRound>
+		<maxHp>2983</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>13</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>132</roundEndBonus>
+		<freq>14</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>24</currentRound>
+		<maxHp>4514</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>19</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>134</roundEndBonus>
+		<freq>16</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>25</currentRound>
+		<maxHp>2704</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>12</goldValue>
+		<numberOfEnemies>18</numberOfEnemies>
+		<roundEndBonus>140</roundEndBonus>
+		<freq>18</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>26</currentRound>
+		<maxHp>3755</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>15</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>142</roundEndBonus>
+		<freq>14</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>27</currentRound>
+		<maxHp>4036</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>14</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>145</roundEndBonus>
+		<freq>16</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>28</currentRound>
+		<maxHp>3356</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>12</goldValue>
+		<numberOfEnemies>18</numberOfEnemies>
+		<roundEndBonus>148</roundEndBonus>
+		<freq>18</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>29</currentRound>
+		<maxHp>6459</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>22</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>150</roundEndBonus>
+		<freq>14</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>30</currentRound>
+		<maxHp>4922</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>17</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>152</roundEndBonus>
+		<freq>16</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>31</currentRound>
+		<maxHp>5251</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>17</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>160</roundEndBonus>
+		<freq>18</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>32</currentRound>
+		<maxHp>7826</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>25</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>162</roundEndBonus>
+		<freq>14</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>33</currentRound>
+		<maxHp>8324</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>27</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>165</roundEndBonus>
+		<freq>16</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>34</currentRound>
+		<maxHp>6324</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>20</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>166</roundEndBonus>
+		<freq>18</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>35</currentRound>
+		<maxHp>9404</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>30</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>168</roundEndBonus>
+		<freq>14</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>36</currentRound>
+		<maxHp>5548</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>17</goldValue>
+		<numberOfEnemies>18</numberOfEnemies>
+		<roundEndBonus>170</roundEndBonus>
+		<freq>16</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>37</currentRound>
+		<maxHp>10585</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>31</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>173</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>38</currentRound>
+		<maxHp>5896</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>17</goldValue>
+		<numberOfEnemies>19</numberOfEnemies>
+		<roundEndBonus>174</roundEndBonus>
+		<freq>14</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>39</currentRound>
+		<maxHp>8459</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>23</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>176</roundEndBonus>
+		<freq>16</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>40</currentRound>
+		<maxHp>8926</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>24</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>188</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>41</currentRound>
+		<maxHp>7757</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>20</goldValue>
+		<numberOfEnemies>17</numberOfEnemies>
+		<roundEndBonus>190</roundEndBonus>
+		<freq>14</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>42</currentRound>
+		<maxHp>9925</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>25</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>192</roundEndBonus>
+		<freq>16</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>43</currentRound>
+		<maxHp>14627</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>36</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>194</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>44</currentRound>
+		<maxHp>15384</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>37</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>198</roundEndBonus>
+		<freq>14</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>45</currentRound>
+		<maxHp>11548</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>28</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>200</roundEndBonus>
+		<freq>16</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>46</currentRound>
+		<maxHp>12136</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>29</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>202</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>47</currentRound>
+		<maxHp>17843</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>43</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>208</roundEndBonus>
+		<freq>14</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>48</currentRound>
+		<maxHp>10413</maxHp>
+		<maxMoveSpeed>5</maxMoveSpeed>
+		<goldValue>24</goldValue>
+		<numberOfEnemies>18</numberOfEnemies>
+		<roundEndBonus>210</roundEndBonus>
+		<freq>16</freq>
+		<armorType>light</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>49</currentRound>
+		<maxHp>14044</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>31</goldValue>
+		<numberOfEnemies>14</numberOfEnemies>
+		<roundEndBonus>212</roundEndBonus>
+		<freq>18</freq>
+		<armorType>medium</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<currentRound>50</currentRound>
+		<maxHp>20597</maxHp>
+		<maxMoveSpeed>3</maxMoveSpeed>
+		<goldValue>44</goldValue>
+		<numberOfEnemies>10</numberOfEnemies>
+		<roundEndBonus>215</roundEndBonus>
+		<freq>16</freq>
+		<armorType>heavy</armorType>
 		<maxArmor>0</maxArmor>
 	</Row>
 </Root>
