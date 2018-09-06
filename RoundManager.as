@@ -46,7 +46,6 @@
 			actualRound = false;
 			if (increaseRound)
 			{
-				trace("Starting wave");
 				actualRound = true;
 				waveArray = roundsList[currentRound - 1];
 				roundEndBonus = waveArray[8];
@@ -55,7 +54,6 @@
 				{
 					currentRound++;
 				}
-
 			}
 
 			if (waveArray[4] < 1)

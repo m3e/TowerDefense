@@ -134,9 +134,14 @@
 						break;
 						
 					case (Keyboard.NUMBER_6) :
-						tower = currentMenuSelected[1][0]
+						tower = currentMenuSelected[1][1]
 						selectTower(tower);
 						break;
+						
+					/*case (Keyboard.NUMBER_7) :
+						tower = currentMenuSelected[1][0]
+						selectTower(tower);
+						break;*/
 
 
 				}
