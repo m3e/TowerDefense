@@ -413,8 +413,8 @@
 		<Atk_Speed>32</Atk_Speed>
 		<Cost>140</Cost>
 		<Type>fire</Type>
-		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>36</bulletSpeed>
+		<bulletFrame>10</bulletFrame>
+		<bulletSpeed>12</bulletSpeed>
 		<towerFrame>13</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Throws large fireballs that explode in an AoE and deal 5 burning damage to all caught for 3 seconds.  Slow attack speed. Might be OP.</tDescription>
@@ -429,8 +429,8 @@
 		<Atk_Speed>36</Atk_Speed>
 		<Cost>220</Cost>
 		<Type>fire</Type>
-		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>36</bulletSpeed>
+		<bulletFrame>10</bulletFrame>
+		<bulletSpeed>12</bulletSpeed>
 		<towerFrame>35</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Bigger fireball, longer range.  Burn deals 15 damage per second for 3 seconds.</tDescription>
@@ -550,7 +550,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>37</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Ice everywhere.  Same range, more slow, more damage.</tDescription>
+		<tDescription>Ice everywhere.  Slows everything in area by 34%.</tDescription>
 		<targeting>All</targeting>
 	</Row>
 	<Row>
@@ -566,7 +566,7 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>36</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Big Yeti who hits hard and does AoE splash.</tDescription>
+		<tDescription>Big Yeti mele hits with 28% slow for 3 seconds.</tDescription>
 	</Row>
 	<Row>
 		<Name>Splash</Name>
