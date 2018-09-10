@@ -132,7 +132,6 @@
 				else
 				{
 					//If Single Target
-					
 					hitTarget(bTarget);
 					//End Single Target
 				}
@@ -146,44 +145,31 @@
 		}
 		internal function hitTarget(dEnemy:Enemy):void
 		{
-			
 			addDebuffs(dEnemy);
 			dEnemy.takeDmg(bDmg,bType);
 		}
-		
 		internal function hitAoe():void
 		{
 			
 			aoeVisual = new Shape();
-			aoeVisual.graphics.beginFill(0xFF0000,.5);
+			aoeVisual.graphics.beginFill(0x000000,.35);
 			aoeVisual.graphics.drawCircle(0,0,bAoe);
 			aoeVisual.graphics.endFill();
 			aoeVisual.x = (bTarget.x + (common.Commons.tileSide *.5))
 			aoeVisual.y = (bTarget.y + (common.Commons.tileSide *.5));   
 			_root.addChild(aoeVisual);
-			TweenMax.to(aoeVisual, .3, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,aoeVisual]})	;
+			TweenMax.to(aoeVisual, .1, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,aoeVisual]})	;
 			var eList:Array = common.Commons.newTheMap(enemyList)
 			for (var i:int=0; i < eList.length; i++)
 			{
-				/*var test1:Shape = new Shape();
-				test1.graphics.beginFill(0xFFFFFF,1);
-				test1.graphics.drawCircle(0,0,16);
-				test1.graphics.endFill();
-				test1.x = (eList[i].x + (common.Commons.tileSide *.5))
-				test1.y = (eList[i].y + (common.Commons.tileSide *.5));   
-				TweenMax.to(test1, .5, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,test1]})	;
-				_root.addChild(test1)
-				trace(bTarget.x,eList[i].x,bTarget.y,eList[i].y,distanceTwoPoints(bTarget.x,eList[i].x,bTarget.y,eList[i].y),bAoe)*/
 				if (distanceTwoPoints(bTarget.x,eList[i].x,bTarget.y,eList[i].y) <= bAoe)
 				{
 					hitTarget(eList[i]);
 				}
-
 			}
 		}
 		private function removeAoeVisual(myP:Object,targetShape:Shape):void
 		{
-			
 			if (myP.contains(targetShape))
 				{
 					myP.removeChild(targetShape);
