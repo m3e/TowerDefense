@@ -5,7 +5,7 @@
 		<AoE>0</AoE>
 		<Range>103</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>12</Dmg>
+		<Dmg>13</Dmg>
 		<Atk_Speed>18</Atk_Speed>
 		<Cost>40</Cost>
 		<Type>pierce</Type>
@@ -70,7 +70,7 @@
 		<AoE>0</AoE>
 		<Range>120</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>56</Dmg>
+		<Dmg>65</Dmg>
 		<Atk_Speed>16</Atk_Speed>
 		<Cost>135</Cost>
 		<Type>pierce</Type>
@@ -117,9 +117,9 @@
 		<AoE>0</AoE>
 		<Range>103</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>56</Dmg>
-		<Atk_Speed>20</Atk_Speed>
-		<Cost>100</Cost>
+		<Dmg>55</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>115</Cost>
 		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -134,9 +134,9 @@
 		<AoE>0</AoE>
 		<Range>103</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>125</Dmg>
-		<Atk_Speed>28</Atk_Speed>
-		<Cost>180</Cost>
+		<Dmg>165</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>240</Cost>
 		<Type>earth</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -150,8 +150,8 @@
 		<Range>103</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>50</Dmg>
-		<Atk_Speed>36</Atk_Speed>
-		<Cost>190</Cost>
+		<Atk_Speed>28</Atk_Speed>
+		<Cost>200</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>
@@ -390,9 +390,9 @@
 		<AoE>0</AoE>
 		<Range>85</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>16</Dmg>
+		<Dmg>21</Dmg>
 		<Atk_Speed>6</Atk_Speed>
-		<Cost>150</Cost>
+		<Cost>240</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
 		<bulletSpeed>8</bulletSpeed>
@@ -425,9 +425,9 @@
 		<AoE>45</AoE>
 		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>140</Dmg>
+		<Dmg>160</Dmg>
 		<Atk_Speed>36</Atk_Speed>
-		<Cost>220</Cost>
+		<Cost>280</Cost>
 		<Type>fire</Type>
 		<bulletFrame>10</bulletFrame>
 		<bulletSpeed>12</bulletSpeed>
@@ -459,12 +459,12 @@
 	</Row>
 	<Row>
 		<Name>Snow Cannon</Name>
-		<AoE>43</AoE>
+		<AoE>45</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>38</Dmg>
-		<Atk_Speed>38</Atk_Speed>
-		<Cost>110</Cost>
+		<Atk_Speed>30</Atk_Speed>
+		<Cost>140</Cost>
 		<Type>ice</Type>
 		<bulletFrame>3</bulletFrame>
 		<bulletSpeed>26</bulletSpeed>
@@ -478,9 +478,9 @@
 		<AoE>50</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>90</Dmg>
-		<Atk_Speed>36</Atk_Speed>
-		<Cost>190</Cost>
+		<Dmg>80</Dmg>
+		<Atk_Speed>26</Atk_Speed>
+		<Cost>280</Cost>
 		<Type>ice</Type>
 		<bulletFrame>3</bulletFrame>
 		<bulletSpeed>28</bulletSpeed>
@@ -491,7 +491,7 @@
 	<Row>
 		<Name>Icicle</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>53</Dmg>
 		<Atk_Speed>22</Atk_Speed>
@@ -507,11 +507,11 @@
 	<Row>
 		<Name>Hail</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>2</of_Targets>
-		<Dmg>75</Dmg>
+		<Dmg>90</Dmg>
 		<Atk_Speed>20</Atk_Speed>
-		<Cost>150</Cost>
+		<Cost>240</Cost>
 		<Type>ice</Type>
 		<bulletFrame>4</bulletFrame>
 		<bulletSpeed>30</bulletSpeed>
@@ -524,7 +524,7 @@
 		<AoE>0</AoE>
 		<Range>66</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>2</Dmg>
+		<Dmg>3</Dmg>
 		<Atk_Speed>4</Atk_Speed>
 		<Cost>120</Cost>
 		<Type>ice</Type>
@@ -544,7 +544,7 @@
 		<of_Targets>1</of_Targets>
 		<Dmg>10</Dmg>
 		<Atk_Speed>4</Atk_Speed>
-		<Cost>260</Cost>
+		<Cost>230</Cost>
 		<Type>ice</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
@@ -555,12 +555,12 @@
 	</Row>
 	<Row>
 		<Name>Yeti</Name>
-		<AoE>50</AoE>
+		<AoE>47</AoE>
 		<Range>66</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>90</Dmg>
 		<Atk_Speed>18</Atk_Speed>
-		<Cost>280</Cost>
+		<Cost>260</Cost>
 		<Type>ice</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
@@ -685,9 +685,9 @@
 		<AoE>0</AoE>
 		<Range>106</Range>
 		<of_Targets>5</of_Targets>
-		<Dmg>14</Dmg>
+		<Dmg>16</Dmg>
 		<Atk_Speed>8</Atk_Speed>
-		<Cost>180</Cost>
+		<Cost>240</Cost>
 		<Type>fire</Type>
 		<bulletFrame>7</bulletFrame>
 		<bulletSpeed>20</bulletSpeed>

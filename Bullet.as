@@ -120,7 +120,8 @@
 			this.y +=  ySpeed;
 
 			//Hit Test
-			if (_root.contains(bTarget) && this.hitTestObject(bTarget))
+			//if (_root.contains(bTarget) && this.hitTestObject(bTarget))
+			if (_root.contains(bTarget) && (this.x == (bTarget.x + (common.Commons.tileSide * .5)) && this.y == (bTarget.y + (common.Commons.tileSide * .5))))
 			{
 
 				if (bAoe > 0)
@@ -138,7 +139,8 @@
 				//Destroy
 				destroyThis();
 			}
-			else if (!(_root.contains(bTarget)) && this.hitTestObject(bTarget))
+			//else if (!(_root.contains(bTarget)) && this.hitTestObject(bTarget))
+			else if (!(_root.contains(bTarget)) && (this.x == (bTarget.x + (common.Commons.tileSide * .5)) && this.y == (bTarget.y + (common.Commons.tileSide * .5))))
 			{
 				destroyThis();
 			}

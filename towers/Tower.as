@@ -296,11 +296,9 @@
 				//add debuff;
 				addDebuffs(newBullet);
 				//Set Bullet location, target, dmg, speed, aoe
-				
 				newBullet.x = this.x + (common.Commons.tileSide * .5);
 				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
-				//trace("Tower.tDmg:",tDmg * (1 + tDmgBuff));
 				newBullet.bDmg = tDmg * (1 + tDmgBuff);
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;
