@@ -19,7 +19,6 @@
 			var debuffType:Array = new Array;
 			
 			debuffType.push("slow",.25,2)
-			
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;

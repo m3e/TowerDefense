@@ -663,6 +663,7 @@
 		<tDescription>I dare you to touch it.  Electricity travels fast and far.  Hey, what's this knob do?</tDescription>
 		<upgradeOne>Multishooter</upgradeOne>
 		<upgradeTwo>Laser</upgradeTwo>
+		<upgradeThree>Chain</upgradeThree>
 	</Row>
 	<Row>
 		<Name>Multishooter</Name>
@@ -725,5 +726,36 @@
 		<towerFrame>41</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Requires a ransom of -1 mIlLiOn DoLlArS- mwuhahaha!</tDescription>
+	</Row>
+	<Row>
+		<Name>Chain</Name>
+		<AoE>0</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>15</Dmg>
+		<Atk_Speed>8</Atk_Speed>
+		<Cost>135</Cost>
+		<Type>fire</Type>
+		<bulletFrame>9</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>44</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Chains 3 additional enemies</tDescription>
+		<upgradeOne>MultiChain</upgradeOne>
+	</Row>
+	<Row>
+		<Name>MultiChain</Name>
+		<AoE>0</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>40</Dmg>
+		<Atk_Speed>8</Atk_Speed>
+		<Cost>280</Cost>
+		<Type>fire</Type>
+		<bulletFrame>9</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>45</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Chains 4 additional enemies.</tDescription>
 	</Row>
 </Root>

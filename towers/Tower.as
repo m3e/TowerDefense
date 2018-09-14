@@ -293,9 +293,7 @@
 			{
 				newBullet = new Bullet(enemyList);
 				newBullet.gotoAndStop(bFrame);
-				//add debuff;
 				addDebuffs(newBullet);
-				//Set Bullet location, target, dmg, speed, aoe
 				newBullet.x = this.x + (common.Commons.tileSide * .5);
 				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
@@ -303,7 +301,6 @@
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;
 				newBullet.bType = tType;
-				//End Set bullet stats
 				_root.addChild(newBullet);
 			}
 		}

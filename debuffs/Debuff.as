@@ -13,7 +13,6 @@
 		private static var poison:Poison;
 		private static var penitence:Penitence;
 		
-		
 		public function Debuff() {
 			// constructor code
 		}

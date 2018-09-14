@@ -7,6 +7,7 @@
 	import common.Commons;
 	import enemies.Enemy;
 	import debuffs.*;
+	import buffs.*;
 	
 	import com.greensock.*;
 	import com.greensock.easing.*;
@@ -45,6 +46,13 @@
 
 			// constructor code
 		}
+		private function beginClass(e:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
+			_root = e.currentTarget.parent;
+
+			fire();
+		}
 		internal function addDebuffs(dEnemy:Enemy):void
 		{
 			for (var i:int=0; i < debuffArray.length; i++)
@@ -71,16 +79,13 @@
 						debuffs.Debuff.addPoison(dEnemy,debuffArray[i][1],debuffArray[i][2],debuffArray[i][3])
 						break;
 						
+					case ("chain") :
+						buffs.Buff.chainLightning(_root, bDmg, debuffArray[i][1], debuffArray[i][2], debuffArray[i][3], debuffArray[i][4], enemyList, dEnemy,bType)
+						break;
 					
+						
 				}
 			}
-		}
-		private function beginClass(e:Event):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE,beginClass);
-			_root = e.currentTarget.parent;
-
-			fire();
 		}
 		private function eFrame(e:Event):void
 		{
@@ -95,8 +100,8 @@
 		private function fire():void
 		{
 			//Set distance
-			var yDist:Number = (bTarget.y + (common.Commons.tileSide * .5)) - this.y;//how far this guy is from the enemy (x)
-			var xDist:Number = (bTarget.x + (common.Commons.tileSide * .5)) - this.x;//how far it is from the enemy (y)
+			var yDist:Number = (bTarget.y + (common.Commons.tileSide * .5)) - this.y;//how far this guy is from the enemy (y)
+			var xDist:Number = (bTarget.x + (common.Commons.tileSide * .5)) - this.x;//how far it is from the enemy (x)
 			//Angle
 			var angle:Number = Math.atan2(yDist,xDist);//the angle that it must move
 			//X speed + y Speed
