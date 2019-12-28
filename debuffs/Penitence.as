@@ -2,9 +2,9 @@
 	
 	import enemies.Enemy;
 	import flash.events.Event;
-	import flash.display.MovieClip
+	import flash.display.Sprite
 	
-	public class Penitence extends MovieClip {
+	public class Penitence extends Sprite {
 		
 		private var enemy:Enemy;
 		private var sAmount:Number;

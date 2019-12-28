@@ -7,6 +7,7 @@
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import towers.TowerManager;
+	import flash.events.MouseEvent
 	
 	public class Main extends MovieClip{
 
@@ -18,9 +19,8 @@
 		
 		
 		public function Main() {
+			startScreen.visible = false;
 			queue = new LoaderMax({name:"mainQueue", onProgress:progressHandler, onComplete: completeHandler});
-			
-			
 			/*
 			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/fkdlcr3e9ge5krb/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/oyfhcudrxqvpil4/shblock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
@@ -47,7 +47,6 @@
 			queue.append(new MP3Loader("sounds/sfx/voices/rogue/hey.mp3", {name:"roguehey", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/voices/rogue/howareyou.mp3", {name:"roguehowareyou", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
-			
 			queue.append(new MP3Loader("sounds/sfx/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
 			queue.append(new MP3Loader("sounds/sfx/fire/fire.mp3", {name:"flame", volume:1, autoPlay:false, estimatedBytes: 2000}));
@@ -56,18 +55,23 @@
 			queue.append(new MP3Loader("sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			queue.append(new MP3Loader("sounds/sfx/arrowShot.mp3", {name:"arrowShot", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			
-			
 			queue.load();
 			// constructor code
 		}
 		private function progressHandler(e:LoaderEvent):void
 		{
-			
+			Preload.PreloadBar.scaleX = e.target.progress
+			Preload.PreloadText.text = (e.target.progress.toFixed(2) * 100) + "%"
+		}
+		private function completeHandler(e:LoaderEvent):void
+		{
+			setupTowerManager()
 		}
 		private function setupTowerManager():void
 		{
 			myLoader = new URLLoader  ;
 			myLoader.addEventListener(Event.COMPLETE,setupTowers);
+			Preload.PreloadText.text = "Loading Towers!"
 			myLoader.load(new URLRequest("towers/TowersList.xml"));
 		}
 		private function setupTowers(e:Event):void
@@ -111,6 +115,10 @@
 				tower.tUpgradeThree = String(myXML.Row[i].upgradeThree)
 				}
 				tower.targeting = String(myXML.Row[i].targeting)
+				tower.tSkillOne = String(myXML.Row[i].skillOne)	
+				tower.tSkillTwo = String(myXML.Row[i].skillTwo)
+				tower.tSkillThree = String(myXML.Row[i].skillThree)
+				tower.tSkillFour = String(myXML.Row[i].skillFour)
 				towerList.push(tower);
 				
 				//var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus];
@@ -118,16 +126,25 @@
 				//roundsList.push(waveData);
 				i++;
 			}
+			Preload.PreloadText.text = "Done!"
 			towerManager = new TowerManager(towerList);
-			startGame();
+			startMenu();
 		}
-		private function completeHandler(e:LoaderEvent):void
-		{
-			setupTowerManager()
-		}
-		private function startGame():void
+		private function startMenu():void
 		{
 			soundManager = new SoundManager(queue);
+			removeChild(Preload);
+			Preload = null;
+			startScreen.visible = true;
+			startScreen.startButton.addEventListener(MouseEvent.CLICK, startGame);
+			startGame(MouseEvent(undefined));
+		}
+		private function startGame(e:Event):void
+		{
+			removeChild(startScreen)
+			startScreen.startButton.removeEventListener(MouseEvent.CLICK, startGame);
+			startScreen = null;
+
 			var map:Map = new Map();
 			addChild(map);
 		}

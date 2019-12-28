@@ -14,7 +14,7 @@
 			super();
 			// constructor code
 		}
-		override internal function addDebuffs(bullet:Bullet):void
+		/*override internal function addDebuffs(bullet:Bullet):void
 		{
 			var debuffsArray:Array = new Array  ;
 
@@ -24,7 +24,7 @@
 			debuffType.push("chain",3,6,.1,75);
 			debuffsArray.push(debuffType);
 			bullet.debuffArray = debuffsArray;
-		}
+		}*/
 	}
 
 }

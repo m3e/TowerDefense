@@ -17,17 +17,17 @@
 	import sounds.SoundManager;
 	import flash.events.MouseEvent;
 	import flash.media.SoundChannel;
-	import towers.skills.Skill;
 	import towers.TowerManager;
 	import common.Commons;
 	import towers.*;
+	import towers.skills.Skill;
 
 	public class Tower extends MovieClip
 	{
 
 		public var tDescription:String;
 		public var cost:int;
-		internal var tName:String;
+		public var tName:String;
 		public var tRange:int;
 		public var tDmg:Number;
 		public var tbSpeed:int;
@@ -37,15 +37,17 @@
 		public var tAoe:Number;
 		public var tCost:int;
 		public var tType:String;
-		
+
 		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
+		public var tActualDmg:Number;
 		public var tAtkSpdBuff:Number;
+		public var tActualAtkSpd:Number;
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
-		
+
 		//these given in Map, "n addTowerToMap"
 		public var enemyList:Array;
 		public var towerArray:Array;
@@ -58,10 +60,14 @@
 		internal var fireSoundString:String;
 		private var fireSoundOn:Boolean;
 		private var fireSoundChannel:SoundChannel;
-		
-		internal var tUpgradeOne:String
-		internal var tUpgradeTwo:String
-		internal var tUpgradeThree:String
+
+		internal var tUpgradeOne:String;
+		internal var tUpgradeTwo:String;
+		internal var tUpgradeThree:String;
+		internal var tSkillOne:Array;
+		internal var tSkillTwo:Array;
+		internal var tSkillThree:Array;
+		internal var tSkillFour:Array;
 
 		internal var bFrame:int;
 
@@ -72,24 +78,29 @@
 		public var uCost:int;
 
 		internal var skillsArray:Array;
-		internal var skill:Skill;
+		internal var hitSkills:Array;
+		internal var timeSkills:Array;
 
 		public function Tower()
 		{
 			skillsArray = [];
+			hitSkills = [];
+			timeSkills = [];
 			clickedOnSounds = new Array  ;
 			buffsArray = new Array  ;
 			rectangle = new Shape  ;
 			tDmgBuff = 0;
+			tActualDmg = 0;
 			tAtkSpdBuff = 0;
+			tActualAtkSpd = 0;
 			tTarget = new Array  ;
 			targeting = "First";
 			loaded = true;
 			loadedTimer = 0;
 			tLevel = 1;
 			bFrame = 1;
-			uCost = 45;			
-			
+			uCost = 45;
+
 			for (var i:int=0; i <TowerManager.towerList.length; i++)
 			{
 				if (TowerManager.towerList[i].tName == tName)
@@ -106,28 +117,57 @@
 					bFrame = TowerManager.towerList[i].bFrame;
 					tFrame = TowerManager.towerList[i].tFrame;
 					fireSoundString = TowerManager.towerList[i].fireSoundString;
-					tDescription = TowerManager.towerList[i].tDescription
-					tUpgradeOne = TowerManager.towerList[i].tUpgradeOne
-					tUpgradeTwo = TowerManager.towerList[i].tUpgradeTwo
-					tUpgradeThree = (TowerManager.towerList[i].tUpgradeThree)
-					targeting = TowerManager.towerList[i].targeting
-					if(targeting != "All")
+					tDescription = TowerManager.towerList[i].tDescription;
+					tUpgradeOne = TowerManager.towerList[i].tUpgradeOne;
+					tUpgradeTwo = TowerManager.towerList[i].tUpgradeTwo;
+					tUpgradeThree = TowerManager.towerList[i].tUpgradeThree;
+					targeting = TowerManager.towerList[i].targeting;
+					var s1:String = TowerManager.towerList[i].tSkillOne;
+					var s2:String = TowerManager.towerList[i].tSkillTwo;
+					var s3:String = TowerManager.towerList[i].tSkillThree;
+					var s4:String = TowerManager.towerList[i].tSkillFour;
+					var skillsList:Array = [s1,s2,s3,s4];
+					for (var p:int=0; p < skillsList.length; p++)
 					{
-						targeting = "First"
+						if (skillsList[p].length > 0)
+						{
+							skillsList[p] = skillsList[p].split(",");
+							skillsArray.push(skillsList[p]);
+						}
+					}
+					if (targeting != "All")
+					{
+						targeting = "First";
 					}
 				}
 			}
-			
+
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code
 		}
 		internal function generateSkills():void
 		{
+			for (var i:int=0; i < skillsArray.length; i++)
+			{
 
+				var newSkill:Skill = new Skill(skillsArray[i],this);
+				switch (skillsArray[i][0])
+				{
+					case ("hit") :
+						hitSkills.push(newSkill);
+						break;
+
+					case ("time") :
+						timeSkills.push(newSkill);
+						break;
+				}
+
+
+			}
 		}
 		public function upgradeMe():void
 		{
-			
+
 		}
 		public function tMenu():Array
 		{
@@ -170,28 +210,38 @@
 			sound.removeEventListener(Event.SOUND_COMPLETE, soundEnd);
 			sound = null;
 		}
+		public function getAtkSpeed():Number
+		{
+			var k:Number = tAtkSpeed - (tAtkSpeed * tAtkSpdBuff);
+			return k;
+		}
+		public function getDmg():Number
+		{
+			var k:Number = tDmg * (1 + tDmgBuff);
+			return k;
+		}
 		internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
-				for (var k:int=0; k < skillsArray.length; k++)
+				for (var k:int=0; k < timeSkills.length; k++)
 				{
-					skillsArray[k].activateSkill();
+						timeSkills[k].activateSkill(this);
 				}
 				tTarget.length = 0;
 				//Reload
 				if (loaded == false)
 				{
 					loadedTimer +=  1;
-					
+
 					//reset red flash from firing
-					if (loadedTimer == 1) 
+					if (loadedTimer == 1)
 					{
 						rectangle.visible = false;
 					}
 					//Reload
 					//trace("Tower.tAtkSpeed:",tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))
-					if (loadedTimer >= (tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))) 
+					if (loadedTimer >= getAtkSpeed())
 					{
 						loaded = true;
 					}
@@ -262,10 +312,6 @@
 
 			}
 		}
-		internal function addDebuffs(bullet:Bullet):void
-		{
-
-		}
 		internal function fireSound():void
 		{
 			if (fireSoundOn == false && fireSoundString != "default")
@@ -284,8 +330,6 @@
 		}
 		internal function fire():void
 		{
-
-
 			fireSound();
 			//Create new Bullet
 			var newBullet:Bullet;
@@ -293,11 +337,11 @@
 			{
 				newBullet = new Bullet(enemyList);
 				newBullet.gotoAndStop(bFrame);
-				addDebuffs(newBullet);
+				newBullet.hitSkills = hitSkills;
 				newBullet.x = this.x + (common.Commons.tileSide * .5);
 				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
-				newBullet.bDmg = tDmg * (1 + tDmgBuff);
+				newBullet.bDmg = getDmg();
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;
 				newBullet.bType = tType;
@@ -306,28 +350,28 @@
 		}
 		public function upgradeOne():Class
 		{
-			var k:Class = null
+			var k:Class = null;
 			if (tUpgradeOne != null)
 			{
-			k = (getDefinitionByName("towers."+tUpgradeOne) as Class)
+				k = (getDefinitionByName("towers."+tUpgradeOne) as Class);
 			}
 			return k;
 		}
 		public function upgradeTwo():Class
 		{
-			var k:Class = null
+			var k:Class = null;
 			if (tUpgradeTwo != null)
 			{
-			k = (getDefinitionByName("towers."+tUpgradeTwo) as Class)
+				k = (getDefinitionByName("towers."+tUpgradeTwo) as Class);
 			}
 			return k;
 		}
 		public function upgradeThree():Class
 		{
-			var k:Class = null
+			var k:Class = null;
 			if (tUpgradeThree != null)
 			{
-			k = (getDefinitionByName("towers."+tUpgradeThree) as Class)
+				k = (getDefinitionByName("towers."+tUpgradeThree) as Class);
 			}
 			return k;
 		}

@@ -27,12 +27,14 @@
 		
 		private var aoeVisual:Shape;
 
+		public var hitSkills:Array;
 		public var debuffArray:Array;
 		internal var _root:MovieClip;
 
 		public function Bullet(EnemyList:Array)
 		{
 			stop();
+			hitSkills = new Array;
 			debuffArray = new Array  ;
 			this.mouseEnabled = false;
 			enemyList = new Array  ;
@@ -55,7 +57,7 @@
 		}
 		internal function addDebuffs(dEnemy:Enemy):void
 		{
-			for (var i:int=0; i < debuffArray.length; i++)
+			/*for (var i:int=0; i < debuffArray.length; i++)
 			{
 				switch (debuffArray[i][0])
 				{
@@ -85,6 +87,10 @@
 					
 						
 				}
+			}*/
+			for (var i:int=0; i < hitSkills.length; i++)
+			{
+				hitSkills[i].activateSkill(dEnemy)
 			}
 		}
 		private function eFrame(e:Event):void

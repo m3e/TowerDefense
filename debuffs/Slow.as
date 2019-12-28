@@ -1,10 +1,10 @@
 ﻿package debuffs {
 	import enemies.Enemy;
 	import flash.events.Event;
-	import flash.display.MovieClip
+	import flash.display.Sprite
 	
 	
-	public class Slow extends Debuff {
+	public class Slow extends Sprite {
 		
 		private var enemy:Enemy;
 		private var sAmount:Number;

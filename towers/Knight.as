@@ -17,7 +17,7 @@
 		{
 			clickedOnSounds = ["knightnofreeman","knightshallicompare"]
 		}		
-		override internal function addDebuffs(bullet:Bullet):void
+		/*override internal function addDebuffs(bullet:Bullet):void
 		{
 			var debuffsArray:Array = new Array  ;
 
@@ -27,7 +27,7 @@
 			debuffType.push("penitence",.1,2);
 			debuffsArray.push(debuffType);
 			bullet.debuffArray = debuffsArray;
-		}
+		}*/
 
 	}
 

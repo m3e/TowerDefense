@@ -79,9 +79,10 @@
 
 		public function Map()
 		{
-			enemyList = new Array  ;
+			enemyList = common.Commons.getEnemyList();
+			trace (enemyList)
 			tileArray = new Array  ;
-			towerArray = new Array  ;
+			towerArray = common.Commons.getTowerArray();
 			tileSide = common.Commons.tileSide;
 			
 
@@ -108,6 +109,7 @@
 		private function added(e:Event):void
 		{
 			_root = this;
+			common.Commons.setRoot(_root);
 
 			
 
@@ -157,12 +159,12 @@
 			menuManager = new MenuManager(_root);
 			menuManager.x = 677;
 			menuManager.y = 423;
-			addChild(menuManager);
+			_root.addChild(menuManager);
 
 			middleInfo = new MiddleInfoContent();
 			middleInfo.x = 318;
 			middleInfo.y = 423;
-			addChild(middleInfo);
+			_root.addChild(middleInfo);
 		}
 		private function setupUser():void
 		{
@@ -270,11 +272,14 @@
 				rangeCircle.visible = true;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
+				
 
 				psuedoTower.visible = true;
 
 				psuedoTower.x = e.currentTarget.x;
 				psuedoTower.y = e.currentTarget.y;
+				setChildIndex(rangeCircle,numChildren-1)
+				setChildIndex(DisplayObject(psuedoTower),numChildren-1)
 			}
 		}
 		private function hoverOverOut(e:MouseEvent):void
@@ -346,7 +351,7 @@
 		{
 			//Upgradeable tower square
 			mouseclickedTowerSquare = new Shape ();
-			mouseclickedTowerSquare.graphics.lineStyle(4,0x665544);
+			mouseclickedTowerSquare.graphics.lineStyle(2,0x665544);
 			mouseclickedTowerSquare.graphics.beginFill(0x665544,0);
 			mouseclickedTowerSquare.graphics.drawRect(0,0,tileSide,tileSide);
 			mouseclickedTowerSquare.graphics.endFill();
@@ -403,7 +408,10 @@
 				//towerBeingBuiltSquare.visible = true;
 				if (psuedoTower.x > 0 && psuedoTower.y > 0 && psuedoTower.x <= (mapArray[0].length * tileSide) - psuedoTower.width && psuedoTower.y <= (mapArray.length * tileSide) - psuedoTower.height)
 				{
+					
 					psuedoTower.visible = true;
+					setChildIndex(rangeCircle,numChildren-1);
+					setChildIndex(DisplayObject(psuedoTower),numChildren-1);
 					rangeCircle.visible = true;
 				}
 			}
@@ -476,13 +484,9 @@
 		}
 		private function tileDown(e:MouseEvent):void
 		{
-			
 			if (mouseclickedTower != null)
 			{
-				mouseclickedTowerSquare.visible = false;
-				rangeCircle.visible = false;
-				mouseclickedTower = null;
-				menuManager.tileMapClicked(e);
+				removeMouseClickedTower();
 			}
 			else if (towerBeingBuilt == null)
 			{
@@ -490,7 +494,6 @@
 				var dirtName:String = "dirt"+i;
 				SoundManager.sfx(dirtName);
 			}
-			
 		}
 		private function tileClicked(e:MouseEvent):void
 		{
@@ -516,7 +519,7 @@
 
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
-				_root.addChild(newTower);
+				_root.addChildAt(newTower,numChildren-2);
 				SoundManager.sfx("buildtower");
 
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
@@ -603,18 +606,25 @@
 			if (mouseclickedTower != e.currentTarget)
 			{
 				mouseclickedTower = e.currentTarget;
-
+				
+				
 				mouseclickedTowerSquare.visible = true;
 				mouseclickedTowerSquare.x = mouseclickedTower.x;
 				mouseclickedTowerSquare.y = mouseclickedTower.y;
-
+				
 				rangeCircle.visible = true;
 				rangeCircle.width = e.currentTarget.tRange * 2;
 				rangeCircle.height = e.currentTarget.tRange * 2;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
+				
+				
+				setChildIndex(rangeCircle,numChildren-1);
+				setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);
+				setChildIndex(mouseclickedTowerSquare,numChildren-1);
+				
 
-				middleInfo.updateText(e);
+				middleInfo.updateText(mouseclickedTower);
 				menuManager.towerMapClicked(e);
 			}
 			else
@@ -625,6 +635,7 @@
 		private function removeMouseClickedTower():void
 		{
 			menuManager.returnToDefaultMenu();
+			middleInfo.updateText(undefined);
 			mouseclickedTower = null;
 			mouseclickedTowerSquare.visible = false;
 			rangeCircle.visible = false;

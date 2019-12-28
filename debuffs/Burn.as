@@ -2,10 +2,11 @@
 {
 
 	import enemies.Enemy;
+	import flash.display.Sprite;
 	import flash.events.*;
 
 
-	public class Burn extends Debuff
+	public class Burn extends Sprite
 	{
 
 		private var enemy:Enemy;

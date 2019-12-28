@@ -11,12 +11,12 @@
 			tName = "Commander";
 			super()
 		}
-		override internal function generateSkills():void
+		/*override internal function generateSkills():void
 		{
-			skill = new Skill(_root,"dmgBuff","ally","instant",.12,2,4,2,towerArray)
+			skill = new Skill(_root,"dmgBuff","ally","time",.12,2,4,2,towerArray)
 			addChild(skill)
 			skillsArray.push(skill);
-		}
+		}*/
 	}
 	
 }

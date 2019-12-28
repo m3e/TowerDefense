@@ -28,7 +28,7 @@
 		public static function chainLightning(_Root:*, bDmg:int, bounces:int, bounceSpeed:int, percentChange:Number, bounceRange:int, enemyList:Array, enemy:Enemy,BType:String)
 		{
 			//Root:*, dmg:int, Bounces:int, bounceSpeed:int, percentChange:Number, dTarget:Enemy, BType:String, EnemyList:Array
-			cs = new ChainLightning(_Root, bDmg, bounces, bounceSpeed, percentChange, bounceRange, enemyList, enemy,BType)
+			//cs = new ChainLightning(_Root, bDmg, bounces, bounceSpeed, percentChange, bounceRange, enemy,BType)
 			//_Root.addChild(cs);
 		}
 	}

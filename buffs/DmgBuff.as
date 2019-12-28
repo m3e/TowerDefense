@@ -5,7 +5,8 @@
 	import towers.Tower;
 	import flash.events.Event;
 	import flash.display.Shape;
-	
+	import common.Commons;
+
 	public class DmgBuff extends Sprite
 	{
 
@@ -36,6 +37,7 @@
 			addEventListener(Event.ENTER_FRAME, buffTick);
 			// constructor code
 		}
+
 		private function buffTick(e:Event):void
 		{
 			if (tTarget != null)
@@ -51,7 +53,7 @@
 				{
 					finishBuff();
 				}
-				
+
 			}
 			else
 			{
@@ -61,28 +63,25 @@
 		}
 		public function finishBuff():void
 		{
-
-			tTarget.tDmgBuff = 0;
-			removeEventListener(Event.ENTER_FRAME, buffTick);
-			if (rectangle != null && this.contains(rectangle))
+			if (tTarget != null)
 			{
-				removeChild(rectangle);
-			}
-			rectangle = null;
-			if (tTarget._root.contains(this))
-			{
-				tTarget._root.removeChild(this);
+				tTarget.tDmgBuff = 0;
 				if (tTarget.buffsArray.indexOf(this) != -1)
 				{
 					tTarget.buffsArray.splice(tTarget.buffsArray.indexOf(this),1);
-					
 				}
-				else
-				{
-					
-				}
+				tTarget = null;
 			}
-			tTarget = null;
+			removeEventListener(Event.ENTER_FRAME, buffTick);
+			if (rectangle != null && this.contains(rectangle))
+			{
+				this.removeChild(rectangle);
+			}
+			rectangle = null;
+			if (parent.contains(this))
+			{
+				parent.removeChild(this);
+			}
 		}
 	}
 

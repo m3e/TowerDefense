@@ -1,10 +1,10 @@
 ﻿package debuffs {
 	
 	import flash.events.*;
-	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import enemies.*
 	
-	public class Brittle extends Debuff {
+	public class Brittle extends Sprite {
 		
 		
 		private var enemy:Enemy;

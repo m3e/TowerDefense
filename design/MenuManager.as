@@ -242,11 +242,6 @@
 
 
 		}
-		public function tileMapClicked(e:Event):void
-		{
-			returnToDefaultMenu();
-
-		}
 		public function hideTowerBeingBuiltSquare():void
 		{
 			towerBeingBuiltSquare.visible = false;

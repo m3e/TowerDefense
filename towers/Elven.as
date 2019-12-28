@@ -11,12 +11,12 @@
 			super()
 			// constructor code
 		}
-		override internal function generateSkills():void
+		/*override internal function generateSkills():void
 		{
-			skill = new Skill(_root,"atkSpdBuff","ally","instant",.10,2,4,2,towerArray)
+			skill = new Skill(_root,"atkSpdBuff","ally","time",.10,2,4,2,towerArray)
 			addChild(skill)
 			skillsArray.push(skill);
-		}
+		}*/
 	}
 	
 }

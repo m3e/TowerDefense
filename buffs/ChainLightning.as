@@ -15,38 +15,38 @@
 	public class ChainLightning extends MovieClip
 	{
 
+		private var _root:Object;
 		private var eList:Array;
 		private var bDmg:int;
 		private var bounces:int;
+		private var bs:int;
 		private var pc:Number;
 		private var frames:int;
-		private var bs:int;
-		private var bTarget:Enemy;
-		private var enemyList:Array;
-		private var _root:MovieClip;
-		private var bType:String;
 		private var br:int;
+		private var enemyList:Array;
+		private var bTarget:Enemy;
+		private var bType:String;
 
 		private var alreadyHit:Array;
 
-		public function ChainLightning(Root:*, dmg:int, Bounces:int, bounceSpeed:int, percentChange:Number, bounceRange:int, EnemyList:Array, dTarget:Enemy, BType:String)
+		public function ChainLightning(dTarget:Enemy, dmg:int, Bounces:int, bounceSpeed:int, percentChange:Number, bounceRange:int, BType:String)
 		{
-			alreadyHit = new Array  ;
-			br = bounceRange;
-			bType = BType;
-			bTarget = dTarget;
-			alreadyHit.push(bTarget);
-			enemyList = EnemyList;
-			updateEnemyList();
-			_root = Root;
-
+			_root = common.Commons.getRoot();
 			bDmg = dmg;
 			bounces = Bounces;
-			pc = percentChange;
 			bs = bounceSpeed;
-			// constructor code
-			frames = 1;
+			pc = percentChange;
+			br = bounceRange;
+			enemyList = common.Commons.getEnemyList();
+			bTarget = dTarget;
+			bType = BType;
 
+			alreadyHit = new Array  ;
+			alreadyHit.push(bTarget);
+
+			updateEnemyList();
+
+			frames = 1;
 			addEventListener(Event.ENTER_FRAME, gameTick);
 		}
 		private function gameTick(e:Event):void
@@ -55,24 +55,19 @@
 			{
 				if (frames % bs == 0)
 				{
-					//trace("my index:",eList.indexOf(bTarget))
 					updateEnemyList();
-					//trace("my index2:",eList.indexOf(bTarget))
 					var bTargetCopy:Enemy = bTarget;
 					for (var i:int=0; i < eList.length; i++)
 					{
-						//trace("Distance:",common.Commons.dist(bTarget.x, bTarget.y, eList[i].x,eList[i].y),"And I:",i)
 						if (common.Commons.dist(bTarget.x,bTarget.y,eList[i].x,eList[i].y) < br)
 						{
 							chainHit(eList[i]);
-							//trace("Under:",br, "And I:",i)
 							break;
 						}
 
 					}
 					if (bTargetCopy == bTarget)
 					{
-						//trace("Copies")
 						finish();
 					}
 					bounces--;
@@ -86,7 +81,7 @@
 		}
 		private function updateEnemyList():void
 		{
-			eList = common.Commons.newTheMap(enemyList);
+			eList = common.Commons.newTheMap(common.Commons.getEnemyList());
 			for (var i:int=0; i < alreadyHit.length; i++)
 			{
 				if (eList.indexOf(alreadyHit[i]) != -1)
@@ -107,8 +102,8 @@
 			chainGfx.rotation = (angle / Math.PI) * 180;
 			chainGfx.x = bTarget.x + (common.Commons.tileSide * .5);
 			chainGfx.y = bTarget.y + (common.Commons.tileSide * .5);
-			
-			
+
+
 			//TweenMax.to(chainGfx, .1, {alpha:0.0, onComplete:removeChainGfx, onCompleteParams:[parent,aoeVisual]});
 			_root.addChild(chainGfx);
 			TweenMax.to(chainGfx, .25, {alpha:0.0, onComplete:removeChainGfx, onCompleteParams:[chainGfx]});
@@ -124,7 +119,7 @@
 		{
 			if (tweenTarget.parent != null)
 			{
-				tweenTarget.parent.removeChild(tweenTarget)
+				tweenTarget.parent.removeChild(tweenTarget);
 			}
 			else
 			{

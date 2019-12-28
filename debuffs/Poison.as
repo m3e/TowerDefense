@@ -3,8 +3,8 @@
 
 	import enemies.Enemy;
 	import flash.events.Event;
-	import flash.display.MovieClip;
-	public class Poison extends Debuff
+	import flash.display.Sprite;
+	public class Poison extends Sprite
 	{
 
 		private var enemy:Enemy;
@@ -15,7 +15,7 @@
 		private var frames:int;
 
 
-		public function Poison(_enemy:Enemy, _sAmount:Number,_sSeconds:Number, _pAmount:Number)
+		public function Poison(_enemy:Enemy, _sAmount:Number,_pAmount:Number, _sSeconds:Number)
 		{
 			sAmount = _sAmount;
 			sSeconds = _sSeconds;

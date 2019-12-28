@@ -12,7 +12,7 @@
 			targeting = "All"
 			// constructor code
 		}
-		override internal function addDebuffs(bullet:Bullet):void
+		/*override internal function addDebuffs(bullet:Bullet):void
 		{
 			var debuffsArray:Array = new Array;
 			
@@ -23,7 +23,7 @@
 			debuffsArray.push(debuffType)
 			
 			bullet.debuffArray = debuffsArray;
-		}
+		}*/
 	}
 	
 }

@@ -78,7 +78,15 @@
 			}
 			else
 			{
-				userInfo.updateLives(1);
+				if (e.currentTarget is dpsTestEnemy)
+				{
+					trace("Hello");
+				}
+				else
+				{
+					userInfo.updateLives(1);
+				}
+				
 			}
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);

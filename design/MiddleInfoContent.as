@@ -8,19 +8,25 @@
 		
 		
 		public function MiddleInfoContent() {
+			gotoAndStop(1);
 			// constructor code
 		}
-		public function updateText(sentObject:Event):void
+		public function updateText(sentObject:Object):void
 		{
 			
 			switch (true)
 			{
-				case sentObject.currentTarget is Tower :
-					NameField.text = String(sentObject.currentTarget);
-					TypeField.text = sentObject.currentTarget.tType
-					DmgField.text = sentObject.currentTarget.tDmg
-					ApsField.text = String(24 / Number(sentObject.currentTarget.tAtkSpeed ))
-					RangeField.text = sentObject.currentTarget.tRange;
+				case sentObject is Tower :
+					gotoAndStop(2);
+					NameField.text = String(sentObject.tName);
+					TypeField.text = sentObject.tType
+					DmgField.text = sentObject.getDmg().toFixed(2);
+					ApsField.text = (24 / sentObject.getAtkSpeed()).toFixed(2);
+					RangeField.text = sentObject.tRange;
+					break;
+					
+				default :
+					gotoAndStop(1);
 					break;
 			}
 		}

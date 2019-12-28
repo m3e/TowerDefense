@@ -156,6 +156,11 @@
 				
 				dmg = dmg * (1 + increasedDmgTaken)
 				
+				if (dmg < 0)
+				{
+					dmg == 0;
+				}
+				
 				eHp -=  dmg
 			}
 			if (eHp <= 0)
