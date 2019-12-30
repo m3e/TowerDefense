@@ -94,7 +94,7 @@
 			towerStatsOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
-			   [Splash,Lightning,,],
+			   [Splash,Lightning,Demonologist,],
 			   [,,,]];
 			menuIsDefault = true;
 			hideTowerBeingBuiltSquare();
@@ -105,43 +105,43 @@
 			if (menuIsDefault == true)
 			{
 				var tower:Object;
-				
+
 				switch (e.keyCode)
 				{
 					case (Keyboard.NUMBER_1) :
-						tower = currentMenuSelected[0][0]
+						tower = currentMenuSelected[0][0];
 						selectTower(tower);
 						break;
 
 					case (Keyboard.NUMBER_2) :
-						tower = currentMenuSelected[0][1]
+						tower = currentMenuSelected[0][1];
 						selectTower(tower);
 						break;
 
 					case (Keyboard.NUMBER_3) :
-						tower = currentMenuSelected[0][2]
+						tower = currentMenuSelected[0][2];
 						selectTower(tower);
 						break;
 
 					case (Keyboard.NUMBER_4) :
-						tower = currentMenuSelected[0][3]
+						tower = currentMenuSelected[0][3];
 						selectTower(tower);
 						break;
 
 					case (Keyboard.NUMBER_5) :
-						tower = currentMenuSelected[1][0]
+						tower = currentMenuSelected[1][0];
 						selectTower(tower);
 						break;
-						
+
 					case (Keyboard.NUMBER_6) :
-						tower = currentMenuSelected[1][1]
+						tower = currentMenuSelected[1][1];
 						selectTower(tower);
 						break;
-						
-					/*case (Keyboard.NUMBER_7) :
-						tower = currentMenuSelected[1][0]
+
+					case (Keyboard.NUMBER_7) :
+						tower = currentMenuSelected[1][2];
 						selectTower(tower);
-						break;*/
+						break;
 
 
 				}
@@ -177,6 +177,43 @@
 
 								break;
 
+							case (ct is Array) :
+								switch (ct[1])
+								{
+									case ("slow") :
+									trace("Slow")
+									break;
+									
+									case ("poison") :
+									trace ("poison")
+									break;
+									
+									case ("brittle") :
+									trace ("brittle")
+									break;
+									
+									case ("penitence") :
+									trace ("penitence")
+									break;
+									
+									case ("burn") :
+									trace ("burn")
+									break;
+									
+									case ("atkSpdBuff") :
+									trace ("atkSpdBuff")
+									break;
+									
+									case ("dmgBuff") :
+									trace ("dmgBuff")
+									break;
+									
+									case ("chain") :
+									trace ("chain")
+									break;
+								}
+								break;
+								
 							case (ct is String) :
 								switch (true)
 								{
@@ -266,6 +303,7 @@
 				towerStatsOver.x -=  c + 3;
 			}
 
+			towerStatsOver.NameBox.text = e.currentTarget.tName;
 			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
 			towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 			towerStatsOver.RngBox.text = e.currentTarget.tRange;

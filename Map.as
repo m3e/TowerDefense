@@ -62,6 +62,7 @@
 
 		//ui
 		private var inputField:InputField;
+		private var roundBar:RoundBar;
 
 		//controls
 		private var _keyDown:Boolean;
@@ -73,6 +74,7 @@
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
 		private var roundManager:RoundManager;
+		public var roundsList:Array;
 
 		//booleans
 		private var healthBarOn:Boolean;
@@ -80,7 +82,6 @@
 		public function Map()
 		{
 			enemyList = common.Commons.getEnemyList();
-			trace (enemyList)
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
 			tileSide = common.Commons.tileSide;
@@ -132,6 +133,8 @@
 			setupBottomBar();
 			//requires initEnemies for buttons
 			
+			setupRoundBar();
+			
 			
 			
 			setupBottomBarContent()
@@ -153,6 +156,12 @@
 			setChildIndex(userInfo,numChildren-1);
 			
 			
+		}
+		private function setupRoundBar():void
+		{
+			roundBar = new RoundBar(roundsList);
+			roundBar.y = 416
+			_root.addChild(roundBar);
 		}
 		private function setupBottomBarContent():void
 		{
@@ -316,6 +325,7 @@
 			if (roundManager.roundInProgress == false)
 			{
 				roundManager.startRound(true);
+				roundBar.updateRoundList();
 			}
 		}
 		private function sendWave(e:MouseEvent)
@@ -331,7 +341,7 @@
 				var freq:int = Number(inputField.freqField.text);
 				var armorType:String = "pure"
 				var eFrame:int = 11;
-				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType];
+				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
 				roundManager.sendWave(waveArray);
 			}
 		}
@@ -451,7 +461,7 @@
 		private function setupEnemies():void
 		{
 			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide);
-			roundManager = new RoundManager(initEnemies);
+			roundManager = new RoundManager(initEnemies,roundsList);
 		}
 		private function setupMap():void
 		{
@@ -553,7 +563,6 @@
 				newTower = null;
 			}
 		}
-
 		public function upgradeTower(tower:PsuedoTower):void
 		{
 			var klasa:Class;

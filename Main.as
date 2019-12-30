@@ -16,7 +16,7 @@
 		private var myLoader:URLLoader;
 		private var towerList:Array;	
 		private var towerManager:TowerManager;
-		
+		private var roundsList:Array;
 		
 		public function Main() {
 			startScreen.visible = false;
@@ -128,6 +128,38 @@
 			}
 			Preload.PreloadText.text = "Done!"
 			towerManager = new TowerManager(towerList);
+			myLoader = null;
+			setupRounds()
+			//startMenu();
+		}
+		private function setupRounds():void
+		{
+			myLoader = new URLLoader  ;
+			myLoader.addEventListener(Event.COMPLETE,compileRoundsList);
+			myLoader.load(new URLRequest("RoundsList.xml"));
+		}
+		private function compileRoundsList(e:Event):void
+		{
+			var myXML = new XML(e.target.data);
+			var i:int = 0;
+			roundsList = new Array;
+			while (i < myXML.Row.length())
+			{
+				var roundNumber:int = int(myXML.Row[i].currentRound);
+				var maxHp:int = int(myXML.Row[i].maxHp);
+				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);
+				var goldValue:int = int(myXML.Row[i].goldValue);
+				//var numberOfEnemies:int = 1;
+				var numberOfEnemies:int = int(myXML.Row[i].numberOfEnemies);
+				var endBonus:int = int(myXML.Row[i].roundEndBonus);
+				var freq:int = int(myXML.Row[i].freq);
+				var armorType:String = String(myXML.Row[i].armorType);
+				var maxArmor:int = int(myXML.Row[i].maxArmor);
+				var eName:String = String(myXML.Row[i].eName);
+				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName];
+				roundsList.push(waveData);
+				i++;
+			}
 			startMenu();
 		}
 		private function startMenu():void
@@ -146,6 +178,7 @@
 			startScreen = null;
 
 			var map:Map = new Map();
+			map.roundsList = roundsList;
 			addChild(map);
 		}
 

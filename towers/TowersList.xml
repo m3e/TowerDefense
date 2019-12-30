@@ -14,9 +14,9 @@
 		<towerFrame>2</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
 		<tDescription>The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't.</tDescription>
-		<upgradeOne>RoyalBowman</upgradeOne>
+		<upgradeOne>Rogue</upgradeOne>
 		<upgradeTwo>Woodsman</upgradeTwo>
-		<upgradeThree>Rogue</upgradeThree>
+		<upgradeThree>RoyalBowman</upgradeThree>
 	</Row>
 	<Row>
 		<Name>Rogue</Name>
@@ -391,7 +391,7 @@
 		<Cost>100</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>8</bulletSpeed>
+		<bulletSpeed>10</bulletSpeed>
 		<towerFrame>12</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Bigger, badder, and hits 2 guys now.  This tower likes fire.</tDescription>
@@ -407,7 +407,7 @@
 		<Cost>240</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>8</bulletSpeed>
+		<bulletSpeed>10</bulletSpeed>
 		<towerFrame>34</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Hits 3 people now.  Wow, what a unique and non-linear upgrade path this tower goes.</tDescription>
@@ -503,7 +503,7 @@
 		<towerFrame>43</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Bigger splash still, 25% slow.</tDescription>
-		<skillOne>slow,.25,2</skillOne>
+		<skillOne>hit,slow,.25,2</skillOne>
 	</Row>
 	<Row>
 		<Name>Icicle</Name>
@@ -756,7 +756,7 @@
 		<AoE>0</AoE>
 		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>15</Dmg>
+		<Dmg>10</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>135</Cost>
 		<Type>fire</Type>
@@ -766,14 +766,14 @@
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Chains 3 additional enemies</tDescription>
 		<upgradeOne>MultiChain</upgradeOne>
-		<skillOne>hit,chain,3,6,.1,75,fire</skillOne>
+		<skillOne>hit,chain,3,6,.2,75,fire</skillOne>
 	</Row>
 	<Row>
 		<Name>MultiChain</Name>
 		<AoE>0</AoE>
 		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>40</Dmg>
+		<Dmg>25</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>280</Cost>
 		<Type>fire</Type>
@@ -782,6 +782,123 @@
 		<towerFrame>45</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Chains 4 additional enemies.</tDescription>
-		<skillOne>hit,chain,4,6,.1,75,fire</skillOne>
+		<skillOne>hit,chain,4,6,.2,75,fire</skillOne>
+	</Row>
+	<Row>
+		<Name>Demonologist</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>10</Dmg>
+		<Atk_Speed>12</Atk_Speed>
+		<Cost>50</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>46</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>The Demonologist.  Carries around a funny looking book.  Really likes dead things.</tDescription>
+		<upgradeOne>Lucifer</upgradeOne>
+		<upgradeTwo>Bloodhound</upgradeTwo>
+		<upgradeThree>Gooey</upgradeThree>
+	</Row>
+	<Row>
+		<Name>Lucifer</Name>
+		<AoE>0</AoE>
+		<Range>55</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>45</Dmg>
+		<Atk_Speed>12</Atk_Speed>
+		<Cost>100</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>47</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Low-range.  Like it's hot.  But not too hot.</tDescription>
+		<upgradeOne>MidnightCeremony</upgradeOne>
+		<skillOne>hit,burn,8,3</skillOne>
+	</Row>
+	<Row>
+		<Name>Bloodhound</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>70</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>115</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>48</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Borks in evil.</tDescription>
+		<upgradeOne>FeralBeast</upgradeOne>
+	</Row>
+	<Row>
+		<Name>Gooey</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>90</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>140</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>49</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Yuckkkkkkkkkkk</tDescription>
+		<upgradeOne>WingedCurse</upgradeOne>
+	</Row>
+	<Row>
+		<Name>Feral Beast</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>180</Dmg>
+		<Atk_Speed>14</Atk_Speed>
+		<Cost>240</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>50</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Hunts down his prey and.. Well, this game is kind of PG for the rest of the details.  Poisons 40dps for 5 seconds.</tDescription>
+		<skillOne>hit,poison,0,40,5</skillOne>
+	</Row>
+	<Row>
+		<Name>Winged Curse</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>45</Dmg>
+		<Atk_Speed>24</Atk_Speed>
+		<Cost>250</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>51</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Applies a 10% dmg taken increase to all enemies it hits.  Hits everyone, does medium damage.</tDescription>
+		<skillOne>hit,penitence,.1,2</skillOne>
+		<targeting>All</targeting>
+	</Row>
+	<Row>
+		<Name>Midnight Ceremony</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>60</Dmg>
+		<Atk_Speed>22</Atk_Speed>
+		<Cost>290</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>52</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>A sweet serenade for those unknowingly willing to death's song.</tDescription>
+		<skillOne>hit,burn,20,3</skillOne>
+		<targeting>All</targeting>
 	</Row>
 </Root>

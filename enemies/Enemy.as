@@ -29,6 +29,7 @@
 		public var eFrame:int;
 		public var increasedDmgTaken:Number;
 		public var armorType:String;
+		public var eName:String;
 		
 		
 
@@ -180,7 +181,7 @@
 		{
 			healthBar.visible = !(healthBar.visible);
 		}
-		private function updateHealth():void
+		public function updateHealth():void
 		{
 			var percentHP:Number = eHp / eMaxHp;
 			if (_root != null && _root.contains(healthBar))

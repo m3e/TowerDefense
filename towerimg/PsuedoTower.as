@@ -14,6 +14,7 @@
 		public var tType:String;
 		public var tDescription:String;
 		public var tCost:int;
+		public var tName:String;
 		private var tId:int;
 		private var tFrame:int;
 		
@@ -27,6 +28,7 @@
 		{
 			removeEventListener(Event.ADDED, imgAdded)
 			var mockTower:Tower = new towerReference();
+			tName = mockTower.tName;
 			tRange = mockTower.tRange;
 			tDmg = mockTower.tDmg;
 			tAtkSpeed = mockTower.tAtkSpeed

@@ -54,11 +54,13 @@
 				enemy.maxArmor = waveArray[3];
 				enemy.eFrame = waveArray[6];
 				enemy.armorType = waveArray[7];
+				enemy.eName = waveArray[9]
 				_root.addChild(enemy);
 				enemy.x = 0;
 				enemy.y = 6 * tileSide;
 				enemy.pt.x = 0;
 				enemy.pt.y = 6;
+				enemy.updateHealth();
 				if (!(healthBarOn))
 				{
 					enemy.healthBarOnOff();
@@ -80,7 +82,7 @@
 			{
 				if (e.currentTarget is dpsTestEnemy)
 				{
-					trace("Hello");
+					//do nothing
 				}
 				else
 				{

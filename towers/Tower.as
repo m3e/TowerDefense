@@ -64,10 +64,6 @@
 		internal var tUpgradeOne:String;
 		internal var tUpgradeTwo:String;
 		internal var tUpgradeThree:String;
-		internal var tSkillOne:Array;
-		internal var tSkillTwo:Array;
-		internal var tSkillThree:Array;
-		internal var tSkillFour:Array;
 
 		internal var bFrame:int;
 
@@ -172,9 +168,9 @@
 		public function tMenu():Array
 		{
 			var e:Array = new Array  ;
-			e = [[,,,],
+			e = [[skillsArray[0],skillsArray[1],skillsArray[2],skillsArray[3]],
 			 ["Targeting",,,"UpgradeMe"],
-			 ["Sell",upgradeThree(),upgradeTwo(),upgradeOne()]];
+			 ["Sell",upgradeOne(),upgradeTwo(),upgradeThree()]];
 
 			return e;
 		}
