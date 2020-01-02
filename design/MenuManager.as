@@ -12,6 +12,9 @@
 	import flash.display.Shape;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import towers.skills.Skill;
+	import com.greensock.easing.Ease;
+	import design.SkillsMouseOver;
 
 
 	public class MenuManager extends MovieClip
@@ -26,6 +29,7 @@
 		private var currentMenuSelected:Array;
 		private var cellsArray:Array;
 		private var towerStatsOver:TowerStatsOver;
+		private var skillsMouseOver:SkillsMouseOver;
 		private var _root:Object;
 		private var selectedTower:Tower;
 
@@ -81,6 +85,10 @@
 			towerStatsOver = new TowerStatsOver  ;
 			addChild(towerStatsOver);
 			towerStatsOver.visible = false;
+
+			skillsMouseOver = new SkillsMouseOver  ;
+			addChild(skillsMouseOver);
+			skillsMouseOver.visible = false;
 
 			returnToDefaultMenu();
 		}
@@ -177,43 +185,14 @@
 
 								break;
 
-							case (ct is Array) :
-								switch (ct[1])
-								{
-									case ("slow") :
-									trace("Slow")
-									break;
-									
-									case ("poison") :
-									trace ("poison")
-									break;
-									
-									case ("brittle") :
-									trace ("brittle")
-									break;
-									
-									case ("penitence") :
-									trace ("penitence")
-									break;
-									
-									case ("burn") :
-									trace ("burn")
-									break;
-									
-									case ("atkSpdBuff") :
-									trace ("atkSpdBuff")
-									break;
-									
-									case ("dmgBuff") :
-									trace ("dmgBuff")
-									break;
-									
-									case ("chain") :
-									trace ("chain")
-									break;
-								}
+							case (getQualifiedClassName(ct) == getQualifiedClassName(Skill)) :
+								ct.x = cellsArray[i][p].x;
+								ct.y = cellsArray[i][p].y;
+								ct.addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
+								ct.addEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
+								addChild(ct);
 								break;
-								
+
 							case (ct is String) :
 								switch (true)
 								{
@@ -285,32 +264,75 @@
 		}
 		private function mouseHoverOut(e:Event):void
 		{
-			towerStatsOver.visible = false;
+			switch (getQualifiedClassName(e.currentTarget))
+			{
+				case ("towerimg::PsuedoTower") :
+					towerStatsOver.visible = false;
+					break;
+
+				case ("towers.skills::Skill") :
+					skillsMouseOver.visible = false;
+					break;
+			}
+
 		}
 		private function mouseHoverOver(e:Event):void
 		{
-			towerStatsOver.visible = true;
-			setChildIndex(towerStatsOver, numChildren -1);
-			_root.setChildIndex(this, _root.numChildren - 1);
-
-			towerStatsOver.x = e.currentTarget.x;
-			towerStatsOver.y = e.currentTarget.y - 110;
-			if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
+			switch (getQualifiedClassName(e.currentTarget))
 			{
-				var a:Number = stage.stageWidth;
-				var b:Number = e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width;
-				var c:Number = b - a;
-				towerStatsOver.x -=  c + 3;
-			}
+				case ("towerimg::PsuedoTower") :
 
-			towerStatsOver.NameBox.text = e.currentTarget.tName;
-			towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-			towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
-			towerStatsOver.RngBox.text = e.currentTarget.tRange;
-			towerStatsOver.TypeBox.text = e.currentTarget.tType;
-			towerStatsOver.DescBox.text = e.currentTarget.tDescription;
-			towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
-			towerStatsOver.CostBox.text = e.currentTarget.tCost;
+					towerStatsOver.visible = true;
+					setChildIndex(towerStatsOver, numChildren -1);
+					_root.setChildIndex(this, _root.numChildren - 1);
+
+					towerStatsOver.x = e.currentTarget.x;
+					towerStatsOver.y = e.currentTarget.y - 110;
+					if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
+					{
+						var a:Number = stage.stageWidth;
+						var b:Number = e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width;
+						var c:Number = b - a;
+						towerStatsOver.x -=  c + 3;
+					}
+
+					towerStatsOver.NameBox.text = e.currentTarget.tName;
+					towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
+					towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
+					towerStatsOver.RngBox.text = e.currentTarget.tRange;
+					towerStatsOver.TypeBox.text = e.currentTarget.tType;
+					towerStatsOver.DescBox.text = e.currentTarget.tDescription;
+					towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
+					towerStatsOver.CostBox.text = e.currentTarget.tCost;
+					break;
+
+				case ("towers.skills::Skill") :
+					skillsMouseOver.visible = true;
+					setChildIndex(skillsMouseOver, numChildren -1);
+					_root.setChildIndex(this, _root.numChildren - 1);
+
+					skillsMouseOver.x = e.currentTarget.x;
+					skillsMouseOver.y = e.currentTarget.y - 110;
+					if (e.currentTarget.parent.x + skillsMouseOver.x + skillsMouseOver.width > stage.stageWidth)
+					{
+						var a2:Number = stage.stageWidth;
+						var b2:Number = e.currentTarget.parent.x + skillsMouseOver.x + skillsMouseOver.width;
+						var c2:Number = b2 - a2;
+						skillsMouseOver.x -=  c2 + 3;
+					}
+					
+					skillsMouseOver.sName.text = e.currentTarget.sName
+					skillsMouseOver.sEffectOneName.text = e.currentTarget.eMenuNameOne
+					skillsMouseOver.sEffectOne.text = e.currentTarget.eMenuStatOne
+					skillsMouseOver.sEffectTwoName.text = e.currentTarget.eMenuNameTwo
+					skillsMouseOver.sEffectTwo.text = e.currentTarget.eMenuStatTwo
+					skillsMouseOver.sEffectThreeName.text = e.currentTarget.eMenuNameThree
+					skillsMouseOver.sEffectThree.text = e.currentTarget.eMenuStatThree
+					skillsMouseOver.sEffectFourName.text = e.currentTarget.eMenuNameFour
+					skillsMouseOver.sEffectFour.text = e.currentTarget.eMenuStatFour
+					
+					break;
+			}
 		}
 		public function towerMapClicked(e:Event):void
 		{
@@ -372,6 +394,11 @@
 								removeChild(ct);
 								break;
 
+							case (ct is Skill) :
+								ct.removeEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
+								ct.removeEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
+								removeChild(ct);
+								break;
 							case (ct is String) :
 								if (ct == "Sell")
 								{

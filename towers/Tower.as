@@ -151,13 +151,14 @@
 				{
 					case ("hit") :
 						hitSkills.push(newSkill);
+						
 						break;
 
 					case ("time") :
 						timeSkills.push(newSkill);
 						break;
 				}
-
+				skillsArray[i] = newSkill;
 
 			}
 		}

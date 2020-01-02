@@ -57,37 +57,6 @@
 		}
 		internal function addDebuffs(dEnemy:Enemy):void
 		{
-			/*for (var i:int=0; i < debuffArray.length; i++)
-			{
-				switch (debuffArray[i][0])
-				{
-					case ("penitence") :
-						debuffs.Debuff.addPenitence(dEnemy,debuffArray[i][1],debuffArray[i][2])
-						break;
-					
-					case ("slow") :
-						debuffs.Debuff.addSlow(dEnemy,debuffArray[i][1],debuffArray[i][2])
-						break;
-						
-					case ("burn") :
-						debuffs.Debuff.addBurn(dEnemy,debuffArray[i][1],debuffArray[i][2])
-						break;
-					
-					case ("brittle") :
-						debuffs.Debuff.addBrittle(dEnemy,debuffArray[i][1],debuffArray[i][2])
-						break;
-						
-					case ("poison") :
-						debuffs.Debuff.addPoison(dEnemy,debuffArray[i][1],debuffArray[i][2],debuffArray[i][3])
-						break;
-						
-					case ("chain") :
-						buffs.Buff.chainLightning(_root, bDmg, debuffArray[i][1], debuffArray[i][2], debuffArray[i][3], debuffArray[i][4], enemyList, dEnemy,bType)
-						break;
-					
-						
-				}
-			}*/
 			for (var i:int=0; i < hitSkills.length; i++)
 			{
 				hitSkills[i].activateSkill(dEnemy)
