@@ -43,6 +43,7 @@
 			sA = SkillsArray;
 			sO = SourceObject;
 			sN = sA[1];
+			trace(sA)
 			
 			eMenuNameOne = ""
 			eMenuNameTwo = ""
@@ -169,21 +170,25 @@
 					
 				case ("stun") :
 					gotoAndStop(9);
+					trace("stun")
 					sName = "Stun"
 					eMenuNameOne = "Chance to stun: "
 					eMenuNameTwo = "Seconds"
 					
 					eMenuStatOne = (sA[2] * 100) + "%"
 					eMenuStatTwo = sA[3]
+					break;
 					
 				case ("crit") :
 					gotoAndStop(10)
+					trace("crit")
 					sName = "Crit"
 					eMenuNameOne = "Chance to crit: "
 					eMenuNameTwo = "Extra damage %: "
 					
 					eMenuStatOne = (sA[2] * 100) + "%"
 					eMenuStatTwo = (sA[3] * 100) + "%"
+					break;
 			}
 		}
 		public function activateSkill(SkillTarget:Object):void
