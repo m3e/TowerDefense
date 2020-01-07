@@ -41,12 +41,12 @@
 		<AoE>0</AoE>
 		<Range>75</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>4</Dmg>
+		<Dmg>5</Dmg>
 		<Atk_Speed>4</Atk_Speed>
 		<Cost>55</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>8</bulletSpeed>
+		<bulletSpeed>12</bulletSpeed>
 		<towerFrame>3</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Takes fire and throws it, like some sort of throwing flame machine.</tDescription>
@@ -59,8 +59,8 @@
 		<AoE>30</AoE>
 		<Range>80</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>22</Dmg>
-		<Atk_Speed>38</Atk_Speed>
+		<Dmg>12</Dmg>
+		<Atk_Speed>30</Atk_Speed>
 		<Cost>40</Cost>
 		<Type>ice</Type>
 		<bulletFrame>3</bulletFrame>
@@ -83,7 +83,7 @@
 		<Cost>60</Cost>
 		<Type>heavy</Type>
 		<bulletFrame>6</bulletFrame>
-		<bulletSpeed>10</bulletSpeed>
+		<bulletSpeed>11</bulletSpeed>
 		<towerFrame>5</towerFrame>
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Big, explodey, splash guy.  Hits more than one unit if they're close.</tDescription>
@@ -111,9 +111,9 @@
 	<Row>
 		<Name>Demonologist</Name>
 		<AoE>0</AoE>
-		<Range>66</Range>
+		<Range>70</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>10</Dmg>
+		<Dmg>11</Dmg>
 		<Atk_Speed>12</Atk_Speed>
 		<Cost>50</Cost>
 		<Type>heavy</Type>
@@ -177,7 +177,7 @@
 		<tDescription>Hits two targets at once.  Applies 5 dmg every second for 3 seconds and slows by 8%.</tDescription>
 		<upgradeOne>Hunter</upgradeOne>
 		<upgradeTwo>Alchemist</upgradeTwo>
-		<skillOne>hit,poison,.8,5,3</skillOne>
+		<skillOne>hit,poison,.08,5,3</skillOne>
 	</Row>
 	<Row>
 		<Name>Swordsman</Name>
@@ -258,7 +258,7 @@
 		<Cost>100</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>10</bulletSpeed>
+		<bulletSpeed>12</bulletSpeed>
 		<towerFrame>12</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Bigger, badder, and hits 2 guys now.  This tower likes fire.</tDescription>
@@ -684,7 +684,7 @@
 		<Cost>240</Cost>
 		<Type>fire</Type>
 		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>10</bulletSpeed>
+		<bulletSpeed>12</bulletSpeed>
 		<towerFrame>34</towerFrame>
 		<fireSoundString>flame</fireSoundString>
 		<tDescription>Hits 3 people now.  Wow, what a unique and non-linear upgrade path this tower goes.</tDescription>

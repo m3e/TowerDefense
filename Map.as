@@ -1,6 +1,8 @@
 ﻿package 
 {
 	import flash.display.MovieClip;
+	import com.greensock.TweenLite;
+	
 	import assets.maptiles.*;
 	import towers.*;
 	import flash.utils.Timer;
@@ -70,6 +72,7 @@
 
 		//user
 		private var userInfo:UserInfo;
+		private var cAfford:CantAfford;
 
 		//initEnemy
 		private var initEnemies:InitiateEnemies;
@@ -111,8 +114,10 @@
 		{
 			_root = this;
 			common.Commons.setRoot(_root);
-
-			
+			cAfford = new CantAfford;
+			addChild(cAfford);
+			cAfford.visible = false;
+			cAfford.mouseEnabled = false;
 
 			setupMap();
 			//Sets: mapArray
@@ -558,10 +563,21 @@
 			else
 			{
 				newTower.destroyTower();
-
-				trace("Can't afford this tower.  Cost: ", newTower.tCost);
+				cAfford.visible = true;
+				setChildIndex(cAfford,_root.numChildren-1);
+				cAfford.alpha = 0;
+				TweenLite.from(cAfford, 1.5, {alpha:1,onStart:startTween,onComplete:endTween})
 				newTower = null;
 			}
+		}
+		private function startTween():void
+		{
+			cAfford.x = mouseX;
+			cAfford.y = mouseY;
+		}
+		private function endTween():void
+		{
+			cAfford.visible = false
 		}
 		public function upgradeTower(tower:PsuedoTower):void
 		{
@@ -626,7 +642,6 @@
 				rangeCircle.height = e.currentTarget.tRange * 2;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
-				
 				
 				setChildIndex(rangeCircle,numChildren-1);
 				setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);

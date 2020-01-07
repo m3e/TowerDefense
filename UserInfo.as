@@ -5,7 +5,7 @@
 	import flash.display.Shape;
 	import flash.text.TextField
 	import flash.events.MouseEvent;
-
+	import com.greensock.TweenLite
 	
 	
 	public class UserInfo extends MovieClip {
@@ -19,6 +19,8 @@
 		//LIVES
 		private var livesBar:LivesBar;
 		public var lives:int;
+		
+		
 		
 		public function UserInfo() {
 			gold = 100;
@@ -38,6 +40,7 @@
 			goldBox.y = 475
 			goldBox.name = "goldBox"
 			goldBox.GoldText.text = gold.toString();
+			goldBox._caBox.alpha = 0
 			addChild(goldBox);
 			
 			//LIVES
@@ -54,6 +57,11 @@
 			if (cost <= gold)
 			{
 				afford = true;
+			}
+			else
+			{
+				goldBox._caBox.alpha = 0
+				TweenLite.from(goldBox._caBox,.2,{alpha:1})
 			}
 			return afford;
 		}

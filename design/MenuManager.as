@@ -100,6 +100,7 @@
 			selectedTower = null;
 			emptyOutMenuSelected();
 			towerStatsOver.visible = false;
+			skillsMouseOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
 			   [Splash,Lightning,Demonologist,],
