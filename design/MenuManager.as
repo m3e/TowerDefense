@@ -103,7 +103,7 @@
 			skillsMouseOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
-			   [Splash,Lightning,Demonologist,],
+			   [Splash,Lightning,Demonologist,Tinkerer],
 			   [,,,]];
 			menuIsDefault = true;
 			hideTowerBeingBuiltSquare();

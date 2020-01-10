@@ -88,6 +88,7 @@
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
 			tileSide = common.Commons.tileSide;
+			common.Commons.tileArray = tileArray
 			
 
 			//1=right 2=down 3=left 4=up

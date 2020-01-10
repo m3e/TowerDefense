@@ -259,7 +259,12 @@
 					break;
 			}
 			distanceTraveled +=  moveSpeed;
+			tileEffects();
 			updateHealth();
+		}
+		internal function tileEffects():void
+		{
+			common.Commons.tileArray[pt.y][pt.x].tileEffects(this)
 		}
 
 		internal function destroyThis():void

@@ -12,6 +12,7 @@
 		public static var enemyList:Array = new Array;
 		public static var _root:Object;
 		public static var towerArray:Array = new Array;
+		public static var tileArray:Array = new Array;
 
 		public function Commons()
 		{

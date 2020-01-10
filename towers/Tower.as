@@ -155,8 +155,10 @@
 						break;
 
 					case ("time") :
+					case ("diagGrid") :
 						timeSkills.push(newSkill);
 						break;
+						
 				}
 				skillsArray[i] = newSkill;
 

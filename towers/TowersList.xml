@@ -3,7 +3,7 @@
 	<Row>
 		<Name>Archer</Name>
 		<AoE>0</AoE>
-		<Range>103</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>13</Dmg>
 		<Atk_Speed>18</Atk_Speed>
@@ -19,117 +19,9 @@
 		<upgradeThree>RoyalBowman</upgradeThree>
 	</Row>
 	<Row>
-		<Name>Warrior</Name>
-		<AoE>0</AoE>
-		<Range>50</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>17</Dmg>
-		<Atk_Speed>22</Atk_Speed>
-		<Cost>30</Cost>
-		<Type>normal</Type>
-		<bulletFrame>8</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>1</towerFrame>
-		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.</tDescription>
-		<upgradeOne>Swordsman</upgradeOne>
-		<upgradeTwo>Knight</upgradeTwo>
-		<upgradeThree>Commander</upgradeThree>
-	</Row>
-	<Row>
-		<Name>Fire Tower</Name>
-		<AoE>0</AoE>
-		<Range>75</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>5</Dmg>
-		<Atk_Speed>4</Atk_Speed>
-		<Cost>55</Cost>
-		<Type>fire</Type>
-		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>12</bulletSpeed>
-		<towerFrame>3</towerFrame>
-		<fireSoundString>flame</fireSoundString>
-		<tDescription>Takes fire and throws it, like some sort of throwing flame machine.</tDescription>
-		<upgradeOne>ScorchedEarth</upgradeOne>
-		<upgradeTwo>FireSpout</upgradeTwo>
-		<upgradeThree>MagmaThrower</upgradeThree>
-	</Row>
-	<Row>
-		<Name>Ice Tower</Name>
-		<AoE>30</AoE>
-		<Range>80</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>12</Dmg>
-		<Atk_Speed>30</Atk_Speed>
-		<Cost>40</Cost>
-		<Type>ice</Type>
-		<bulletFrame>3</bulletFrame>
-		<bulletSpeed>24</bulletSpeed>
-		<towerFrame>4</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Icey.  Cold.  Refreshing.  Slows by 25% to small area for 2 seconds.</tDescription>
-		<upgradeOne>SnowCannon</upgradeOne>
-		<upgradeTwo>Icicle</upgradeTwo>
-		<upgradeThree>FrozenPond</upgradeThree>
-		<skillOne>hit,slow,.25,2</skillOne>
-	</Row>
-	<Row>
-		<Name>Splash</Name>
-		<AoE>40</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>11</Dmg>
-		<Atk_Speed>24</Atk_Speed>
-		<Cost>60</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>6</bulletFrame>
-		<bulletSpeed>11</bulletSpeed>
-		<towerFrame>5</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Big, explodey, splash guy.  Hits more than one unit if they're close.</tDescription>
-		<upgradeOne>Demolitionist</upgradeOne>
-		<upgradeTwo>Gun</upgradeTwo>
-	</Row>
-	<Row>
-		<Name>Lightning</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>10</Dmg>
-		<Atk_Speed>9</Atk_Speed>
-		<Cost>65</Cost>
-		<Type>fire</Type>
-		<bulletFrame>7</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>20</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>I dare you to touch it.  Electricity travels fast and far.  Hey, what's this knob do?</tDescription>
-		<upgradeOne>Multishooter</upgradeOne>
-		<upgradeTwo>Laser</upgradeTwo>
-		<upgradeThree>Chain</upgradeThree>
-	</Row>
-	<Row>
-		<Name>Demonologist</Name>
-		<AoE>0</AoE>
-		<Range>70</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>11</Dmg>
-		<Atk_Speed>12</Atk_Speed>
-		<Cost>50</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>46</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>The Demonologist.  Carries around a funny looking book.  Really likes dead things.</tDescription>
-		<upgradeOne>Lucifer</upgradeOne>
-		<upgradeTwo>Bloodhound</upgradeTwo>
-		<upgradeThree>Gooey</upgradeThree>
-	</Row>
-	<Row>
 		<Name>Rogue</Name>
 		<AoE>0</AoE>
-		<Range>108</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>44</Dmg>
 		<Atk_Speed>17</Atk_Speed>
@@ -145,330 +37,9 @@
 		<skillOne>hit,crit,.2,1</skillOne>
 	</Row>
 	<Row>
-		<Name>Royal Bowman</Name>
-		<AoE>0</AoE>
-		<Range>120</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>60</Dmg>
-		<Atk_Speed>16</Atk_Speed>
-		<Cost>135</Cost>
-		<Type>pierce</Type>
-		<bulletFrame>5</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>10</towerFrame>
-		<fireSoundString>arrowShot</fireSoundString>
-		<tDescription>The Royal Bowman.  A larger range, stronger archer.</tDescription>
-		<upgradeOne>Elven</upgradeOne>
-		<upgradeTwo>Hero</upgradeTwo>
-	</Row>
-	<Row>
-		<Name>Woodsman</Name>
-		<AoE>0</AoE>
-		<Range>108</Range>
-		<of_Targets>2</of_Targets>
-		<Dmg>22</Dmg>
-		<Atk_Speed>20</Atk_Speed>
-		<Cost>80</Cost>
-		<Type>pierce</Type>
-		<bulletFrame>5</bulletFrame>
-		<bulletSpeed>30</bulletSpeed>
-		<towerFrame>11</towerFrame>
-		<fireSoundString>arrowShot</fireSoundString>
-		<tDescription>Hits two targets at once.  Applies 5 dmg every second for 3 seconds and slows by 8%.</tDescription>
-		<upgradeOne>Hunter</upgradeOne>
-		<upgradeTwo>Alchemist</upgradeTwo>
-		<skillOne>hit,poison,.08,5,3</skillOne>
-	</Row>
-	<Row>
-		<Name>Swordsman</Name>
-		<AoE>0</AoE>
-		<Range>50</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>60</Dmg>
-		<Atk_Speed>20</Atk_Speed>
-		<Cost>80</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>8</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>7</towerFrame>
-		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>A warrior on drugs.  Hits hard, and fast, and has a 15% chance to stun for 1 second.</tDescription>
-		<upgradeOne>Samurai</upgradeOne>
-		<upgradeTwo>MasterSwordsman</upgradeTwo>
-		<skillOne>hit,stun,.15,1</skillOne>
-	</Row>
-	<Row>
-		<Name>Knight</Name>
-		<AoE>0</AoE>
-		<Range>50</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>66</Dmg>
-		<Atk_Speed>20</Atk_Speed>
-		<Cost>115</Cost>
-		<Type>normal</Type>
-		<bulletFrame>8</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>6</towerFrame>
-		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds. Tips fedora a lot.</tDescription>
-		<upgradeOne>DeathKnight</upgradeOne>
-		<skillOne>hit,penitence,.1,2</skillOne>
-	</Row>
-	<Row>
-		<Name>Commander</Name>
-		<AoE>0</AoE>
-		<Range>50</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>70</Dmg>
-		<Atk_Speed>18</Atk_Speed>
-		<Cost>160</Cost>
-		<Type>normal</Type>
-		<bulletFrame>8</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>8</towerFrame>
-		<fireSoundString>swordhit</fireSoundString>
-		<tDescription>Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. DmgUp 12% to nearby towers (range 2)</tDescription>
-		<upgradeOne>Warleader</upgradeOne>
-		<skillOne>time,dmgBuff,.12,2,4,2</skillOne>
-	</Row>
-	<Row>
-		<Name>Scorched Earth</Name>
-		<AoE>0</AoE>
-		<Range>50</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>12</Dmg>
-		<Atk_Speed>8</Atk_Speed>
-		<Cost>155</Cost>
-		<Type>fire</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>14</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Burns the ground in a 1 block AoE (melee range) dealing 36 damage a second to anything it can.  Strong.</tDescription>
-		<upgradeOne>Mars</upgradeOne>
-		<targeting>All</targeting>
-	</Row>
-	<Row>
-		<Name>Fire Spout</Name>
-		<AoE>0</AoE>
-		<Range>85</Range>
-		<of_Targets>2</of_Targets>
-		<Dmg>12</Dmg>
-		<Atk_Speed>6</Atk_Speed>
-		<Cost>100</Cost>
-		<Type>fire</Type>
-		<bulletFrame>2</bulletFrame>
-		<bulletSpeed>12</bulletSpeed>
-		<towerFrame>12</towerFrame>
-		<fireSoundString>flame</fireSoundString>
-		<tDescription>Bigger, badder, and hits 2 guys now.  This tower likes fire.</tDescription>
-		<upgradeOne>TripleSpout</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Magma Thrower</Name>
-		<AoE>45</AoE>
-		<Range>95</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>55</Dmg>
-		<Atk_Speed>32</Atk_Speed>
-		<Cost>140</Cost>
-		<Type>fire</Type>
-		<bulletFrame>10</bulletFrame>
-		<bulletSpeed>12</bulletSpeed>
-		<towerFrame>13</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Throws large fireballs that explode in an AoE and deal 5 burning damage to all caught for 3 seconds.  Slow attack speed. Might be OP.</tDescription>
-		<upgradeOne>HotSpot</upgradeOne>
-		<skillOne>hit,burn,5,3</skillOne>
-	</Row>
-	<Row>
-		<Name>Snow Cannon</Name>
-		<AoE>45</AoE>
-		<Range>80</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>38</Dmg>
-		<Atk_Speed>30</Atk_Speed>
-		<Cost>140</Cost>
-		<Type>ice</Type>
-		<bulletFrame>3</bulletFrame>
-		<bulletSpeed>26</bulletSpeed>
-		<towerFrame>16</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Bigger splash &amp; range, still slows 25%.</tDescription>
-		<upgradeOne>IceMaker</upgradeOne>
-		<skillOne>hit,slow,.25,2</skillOne>
-	</Row>
-	<Row>
-		<Name>Icicle</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>53</Dmg>
-		<Atk_Speed>22</Atk_Speed>
-		<Cost>80</Cost>
-		<Type>ice</Type>
-		<bulletFrame>4</bulletFrame>
-		<bulletSpeed>30</bulletSpeed>
-		<towerFrame>17</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Shoots ice spikes.  Long range, single target.  Slows 18% and reduces armor by 1 for 2 seconds.</tDescription>
-		<upgradeOne>Hail</upgradeOne>
-		<skillOne>hit,slow,.18,2</skillOne>
-		<skillTwo>hit,brittle,1,2</skillTwo>
-	</Row>
-	<Row>
-		<Name>Frozen Pond</Name>
-		<AoE>0</AoE>
-		<Range>66</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>3</Dmg>
-		<Atk_Speed>4</Atk_Speed>
-		<Cost>120</Cost>
-		<Type>ice</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>50</bulletSpeed>
-		<towerFrame>15</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Frozen Pond.  Slows in a small AoE around it by 28% and does light damage</tDescription>
-		<upgradeOne>Blizzard</upgradeOne>
-		<upgradeTwo>Yeti</upgradeTwo>
-		<skillOne>hit,slow,.28,.5</skillOne>
-		<targeting>All</targeting>
-	</Row>
-	<Row>
-		<Name>Demo</Name>
-		<AoE>50</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>45</Dmg>
-		<Atk_Speed>28</Atk_Speed>
-		<Cost>160</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>6</bulletFrame>
-		<bulletSpeed>30</bulletSpeed>
-		<towerFrame>18</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Demolitionist.  More damage, more explosions.  What'd you expect?</tDescription>
-		<upgradeOne>Artillery</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Gun</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>12</Dmg>
-		<Atk_Speed>3</Atk_Speed>
-		<Cost>90</Cost>
-		<Type>pierce</Type>
-		<bulletFrame>1</bulletFrame>
-		<bulletSpeed>40</bulletSpeed>
-		<towerFrame>28</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Guns are sort of unfair against the metal armor the creeps wear.  That's why it shoots pellets.  It still hurts tho.</tDescription>
-		<upgradeOne>MachineGun</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Multishooter</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>3</of_Targets>
-		<Dmg>10</Dmg>
-		<Atk_Speed>8</Atk_Speed>
-		<Cost>90</Cost>
-		<Type>fire</Type>
-		<bulletFrame>7</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>21</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Hits 3 people at once.  Great vs groups, weak vs low numbers.</tDescription>
-		<upgradeOne>MegaZap</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Laser</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>13</Dmg>
-		<Atk_Speed>3</Atk_Speed>
-		<Cost>120</Cost>
-		<Type>fire</Type>
-		<bulletFrame>9</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>30</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Goes *Pew* *Pew* *Pew*.  Enemies think it's too hot.  We think it's justtt right.</tDescription>
-		<upgradeOne>DeathRay</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Chain</Name>
-		<AoE>0</AoE>
-		<Range>106</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>10</Dmg>
-		<Atk_Speed>8</Atk_Speed>
-		<Cost>135</Cost>
-		<Type>fire</Type>
-		<bulletFrame>9</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>44</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Chains 3 additional enemies</tDescription>
-		<upgradeOne>MultiChain</upgradeOne>
-		<skillOne>hit,chain,3,6,.2,75,fire</skillOne>
-	</Row>
-	<Row>
-		<Name>Lucifer</Name>
-		<AoE>0</AoE>
-		<Range>55</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>45</Dmg>
-		<Atk_Speed>12</Atk_Speed>
-		<Cost>100</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>47</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Low-range.  Like it's hot.  But not too hot.</tDescription>
-		<upgradeOne>MidnightCeremony</upgradeOne>
-		<skillOne>hit,burn,8,3</skillOne>
-	</Row>
-	<Row>
-		<Name>Bloodhound</Name>
-		<AoE>0</AoE>
-		<Range>72</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>70</Dmg>
-		<Atk_Speed>16</Atk_Speed>
-		<Cost>115</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>48</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Borks in evil.</tDescription>
-		<upgradeOne>FeralBeast</upgradeOne>
-	</Row>
-	<Row>
-		<Name>Gooey</Name>
-		<AoE>0</AoE>
-		<Range>72</Range>
-		<of_Targets>1</of_Targets>
-		<Dmg>90</Dmg>
-		<Atk_Speed>16</Atk_Speed>
-		<Cost>140</Cost>
-		<Type>heavy</Type>
-		<bulletFrame>0</bulletFrame>
-		<bulletSpeed>20</bulletSpeed>
-		<towerFrame>49</towerFrame>
-		<fireSoundString>default</fireSoundString>
-		<tDescription>Yuckkkkkkkkkkk</tDescription>
-		<upgradeOne>WingedCurse</upgradeOne>
-	</Row>
-	<Row>
 		<Name>Shadow</Name>
 		<AoE>0</AoE>
-		<Range>108</Range>
+		<Range>106</Range>
 		<of_Targets>3</of_Targets>
 		<Dmg>47</Dmg>
 		<Atk_Speed>16</Atk_Speed>
@@ -484,7 +55,7 @@
 	<Row>
 		<Name>Assassin</Name>
 		<AoE>0</AoE>
-		<Range>108</Range>
+		<Range>106</Range>
 		<of_Targets>3</of_Targets>
 		<Dmg>70</Dmg>
 		<Atk_Speed>22</Atk_Speed>
@@ -498,9 +69,26 @@
 		<skillOne>hit,crit,.2,2</skillOne>
 	</Row>
 	<Row>
+		<Name>Royal Bowman</Name>
+		<AoE>0</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>60</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>135</Cost>
+		<Type>pierce</Type>
+		<bulletFrame>5</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>10</towerFrame>
+		<fireSoundString>arrowShot</fireSoundString>
+		<tDescription>The Royal Bowman.  A larger range, stronger archer.</tDescription>
+		<upgradeOne>Elven</upgradeOne>
+		<upgradeTwo>Hero</upgradeTwo>
+	</Row>
+	<Row>
 		<Name>Elven</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>110</Dmg>
 		<Atk_Speed>18</Atk_Speed>
@@ -510,13 +98,13 @@
 		<bulletSpeed>30</bulletSpeed>
 		<towerFrame>29</towerFrame>
 		<fireSoundString>arrowShot</fireSoundString>
-		<tDescription>Calls upon Elven spirits to increase nearby towers attack speed by 10%.</tDescription>
-		<skillOne>time,atkSpdBuff,.10,2,4,2</skillOne>
+		<tDescription>Calls upon Elven spirits to increase nearby towers attack speed by 12%.</tDescription>
+		<skillOne>time,atkSpdBuff,.12,2</skillOne>
 	</Row>
 	<Row>
 		<Name>Hero</Name>
 		<AoE>0</AoE>
-		<Range>120</Range>
+		<Range>122</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>120</Dmg>
 		<Atk_Speed>16</Atk_Speed>
@@ -530,9 +118,27 @@
 		<skillOne>hit,brittle,2,3</skillOne>
 	</Row>
 	<Row>
+		<Name>Woodsman</Name>
+		<AoE>0</AoE>
+		<Range>82</Range>
+		<of_Targets>2</of_Targets>
+		<Dmg>22</Dmg>
+		<Atk_Speed>20</Atk_Speed>
+		<Cost>80</Cost>
+		<Type>pierce</Type>
+		<bulletFrame>5</bulletFrame>
+		<bulletSpeed>30</bulletSpeed>
+		<towerFrame>11</towerFrame>
+		<fireSoundString>arrowShot</fireSoundString>
+		<tDescription>Hits two targets at once.  Applies 5 dmg every second for 3 seconds and slows by 8%.</tDescription>
+		<upgradeOne>Hunter</upgradeOne>
+		<upgradeTwo>Alchemist</upgradeTwo>
+		<skillOne>hit,poison,.08,5,3</skillOne>
+	</Row>
+	<Row>
 		<Name>Hunter</Name>
 		<AoE>0</AoE>
-		<Range>103</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>165</Dmg>
 		<Atk_Speed>16</Atk_Speed>
@@ -548,7 +154,7 @@
 	<Row>
 		<Name>Alchemist</Name>
 		<AoE>40</AoE>
-		<Range>103</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>57</Dmg>
 		<Atk_Speed>28</Atk_Speed>
@@ -562,11 +168,47 @@
 		<skillOne>hit,poison,.13,10,2</skillOne>
 	</Row>
 	<Row>
+		<Name>Warrior</Name>
+		<AoE>0</AoE>
+		<Range>50</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>17</Dmg>
+		<Atk_Speed>20</Atk_Speed>
+		<Cost>30</Cost>
+		<Type>normal</Type>
+		<bulletFrame>8</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>1</towerFrame>
+		<fireSoundString>swordhit</fireSoundString>
+		<tDescription>Your basic warrior.  Can be seen in nearly all fantasy tales.  Has a soft side under all that armor.</tDescription>
+		<upgradeOne>Swordsman</upgradeOne>
+		<upgradeTwo>Knight</upgradeTwo>
+		<upgradeThree>Commander</upgradeThree>
+	</Row>
+	<Row>
+		<Name>Swordsman</Name>
+		<AoE>0</AoE>
+		<Range>50</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>50</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>100</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>8</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>7</towerFrame>
+		<fireSoundString>swordhit</fireSoundString>
+		<tDescription>A warrior on drugs.  Hits hard, and fast, and has a 15% chance to stun for 1 second.</tDescription>
+		<upgradeOne>Samurai</upgradeOne>
+		<upgradeTwo>MasterSwordsman</upgradeTwo>
+		<skillOne>hit,stun,.15,1</skillOne>
+	</Row>
+	<Row>
 		<Name>Samurai</Name>
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>120</Dmg>
+		<Dmg>128</Dmg>
 		<Atk_Speed>12</Atk_Speed>
 		<Cost>170</Cost>
 		<Type>heavy</Type>
@@ -581,7 +223,7 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>180</Dmg>
+		<Dmg>190</Dmg>
 		<Atk_Speed>17</Atk_Speed>
 		<Cost>220</Cost>
 		<Type>normal</Type>
@@ -591,6 +233,23 @@
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>This master of swordsmanship has the ability to bash an enemy and stun them for 2 seconds.</tDescription>
 		<skillOne>hit,stun,.15,2</skillOne>
+	</Row>
+	<Row>
+		<Name>Knight</Name>
+		<AoE>0</AoE>
+		<Range>50</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>70</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>115</Cost>
+		<Type>normal</Type>
+		<bulletFrame>8</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>6</towerFrame>
+		<fireSoundString>swordhit</fireSoundString>
+		<tDescription>It's a Knight in shining armor.  Gives a debuff that increases enemy's damage taken by 10% for 2 seconds. Tips fedora a lot.</tDescription>
+		<upgradeOne>DeathKnight</upgradeOne>
+		<skillOne>hit,penitence,.1,2</skillOne>
 	</Row>
 	<Row>
 		<Name>Death Knight</Name>
@@ -614,7 +273,7 @@
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>120</Dmg>
-		<Atk_Speed>16</Atk_Speed>
+		<Atk_Speed>10</Atk_Speed>
 		<Cost>240</Cost>
 		<Type>normal</Type>
 		<bulletFrame>8</bulletFrame>
@@ -622,6 +281,23 @@
 		<towerFrame>1</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>Each strike will provide 5% increased attack speed to adjacent towers for 2 seconds.</tDescription>
+	</Row>
+	<Row>
+		<Name>Commander</Name>
+		<AoE>0</AoE>
+		<Range>50</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>80</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>150</Cost>
+		<Type>normal</Type>
+		<bulletFrame>8</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>8</towerFrame>
+		<fireSoundString>swordhit</fireSoundString>
+		<tDescription>Likes to shout a lot of motivational things.  Nearby towers strangely reply to it. DmgUp 12% to nearby towers (range 2)</tDescription>
+		<upgradeOne>Warleader</upgradeOne>
+		<skillOne>time,dmgBuff,.12,2</skillOne>
 	</Row>
 	<Row>
 		<Name>General</Name>
@@ -642,8 +318,8 @@
 		<AoE>0</AoE>
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>174</Dmg>
-		<Atk_Speed>18</Atk_Speed>
+		<Dmg>180</Dmg>
+		<Atk_Speed>16</Atk_Speed>
 		<Cost>280</Cost>
 		<Type>heavy</Type>
 		<bulletFrame>8</bulletFrame>
@@ -651,7 +327,42 @@
 		<towerFrame>53</towerFrame>
 		<fireSoundString>swordhit</fireSoundString>
 		<tDescription>Let loose the hounds of war with a 20% damage boost on nearby towers (range 2).</tDescription>
-		<skillOne>time,dmgBuff,.20,2,4,2</skillOne>
+		<skillOne>time,dmgBuff,.20,2</skillOne>
+	</Row>
+	<Row>
+		<Name>Fire Tower</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>5</Dmg>
+		<Atk_Speed>4</Atk_Speed>
+		<Cost>55</Cost>
+		<Type>fire</Type>
+		<bulletFrame>2</bulletFrame>
+		<bulletSpeed>12</bulletSpeed>
+		<towerFrame>3</towerFrame>
+		<fireSoundString>flame</fireSoundString>
+		<tDescription>Takes fire and throws it, like some sort of throwing flame machine.</tDescription>
+		<upgradeOne>ScorchedEarth</upgradeOne>
+		<upgradeTwo>FireSpout</upgradeTwo>
+		<upgradeThree>MagmaThrower</upgradeThree>
+	</Row>
+	<Row>
+		<Name>Scorched Earth</Name>
+		<AoE>0</AoE>
+		<Range>50</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>13</Dmg>
+		<Atk_Speed>7</Atk_Speed>
+		<Cost>155</Cost>
+		<Type>fire</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>14</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Burns the ground around it in a hot, fiery, fire flame.</tDescription>
+		<upgradeOne>Mars</upgradeOne>
+		<targeting>All</targeting>
 	</Row>
 	<Row>
 		<Name>Mars</Name>
@@ -659,14 +370,14 @@
 		<Range>50</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>24</Dmg>
-		<Atk_Speed>8</Atk_Speed>
+		<Atk_Speed>5</Atk_Speed>
 		<Cost>210</Cost>
 		<Type>fire</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>33</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>72 damage a second to anything in melee range.</tDescription>
+		<tDescription>Makes your enemies nice and crispy.</tDescription>
 		<targeting>All</targeting>
 	</Row>
 	<Row>
@@ -675,11 +386,27 @@
 		<targeting>All</targeting>
 	</Row>
 	<Row>
+		<Name>Fire Spout</Name>
+		<AoE>0</AoE>
+		<Range>72</Range>
+		<of_Targets>2</of_Targets>
+		<Dmg>14</Dmg>
+		<Atk_Speed>6</Atk_Speed>
+		<Cost>100</Cost>
+		<Type>fire</Type>
+		<bulletFrame>2</bulletFrame>
+		<bulletSpeed>12</bulletSpeed>
+		<towerFrame>12</towerFrame>
+		<fireSoundString>flame</fireSoundString>
+		<tDescription>Bigger, badder, and hits 2 guys now.  This tower likes fire.</tDescription>
+		<upgradeOne>TripleSpout</upgradeOne>
+	</Row>
+	<Row>
 		<Name>Triple Spout</Name>
 		<AoE>0</AoE>
-		<Range>85</Range>
+		<Range>72</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>21</Dmg>
+		<Dmg>28</Dmg>
 		<Atk_Speed>6</Atk_Speed>
 		<Cost>240</Cost>
 		<Type>fire</Type>
@@ -692,6 +419,23 @@
 	<Row>
 		<Name>Incinerator</Name>
 		<Type>fire</Type>
+	</Row>
+	<Row>
+		<Name>Magma Thrower</Name>
+		<AoE>45</AoE>
+		<Range>98</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>55</Dmg>
+		<Atk_Speed>32</Atk_Speed>
+		<Cost>140</Cost>
+		<Type>fire</Type>
+		<bulletFrame>10</bulletFrame>
+		<bulletSpeed>12</bulletSpeed>
+		<towerFrame>13</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Throws large fireballs that explode in an AoE and deal 5 burning damage to all caught for 3 seconds.  Slow attack speed. Might be OP.</tDescription>
+		<upgradeOne>HotSpot</upgradeOne>
+		<skillOne>hit,burn,5,3</skillOne>
 	</Row>
 	<Row>
 		<Name>Hot Spot</Name>
@@ -714,9 +458,45 @@
 		<Type>fire</Type>
 	</Row>
 	<Row>
+		<Name>Ice Tower</Name>
+		<AoE>30</AoE>
+		<Range>82</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>12</Dmg>
+		<Atk_Speed>30</Atk_Speed>
+		<Cost>40</Cost>
+		<Type>ice</Type>
+		<bulletFrame>3</bulletFrame>
+		<bulletSpeed>24</bulletSpeed>
+		<towerFrame>4</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Icey.  Cold.  Refreshing.  Slows by 25% to small area for 2 seconds.</tDescription>
+		<upgradeOne>SnowCannon</upgradeOne>
+		<upgradeTwo>Icicle</upgradeTwo>
+		<upgradeThree>FrozenPond</upgradeThree>
+		<skillOne>hit,slow,.25,2</skillOne>
+	</Row>
+	<Row>
+		<Name>Snow Cannon</Name>
+		<AoE>45</AoE>
+		<Range>82</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>38</Dmg>
+		<Atk_Speed>30</Atk_Speed>
+		<Cost>140</Cost>
+		<Type>ice</Type>
+		<bulletFrame>3</bulletFrame>
+		<bulletSpeed>26</bulletSpeed>
+		<towerFrame>16</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Bigger splash &amp; range, still slows 25%.</tDescription>
+		<upgradeOne>IceMaker</upgradeOne>
+		<skillOne>hit,slow,.25,2</skillOne>
+	</Row>
+	<Row>
 		<Name>Ice Maker</Name>
 		<AoE>50</AoE>
-		<Range>88</Range>
+		<Range>98</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>80</Dmg>
 		<Atk_Speed>26</Atk_Speed>
@@ -728,6 +508,24 @@
 		<fireSoundString>default</fireSoundString>
 		<tDescription>Splash range &amp; range slightly bigger still.</tDescription>
 		<skillOne>hit,slow,.25,2</skillOne>
+	</Row>
+	<Row>
+		<Name>Icicle</Name>
+		<AoE>0</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>53</Dmg>
+		<Atk_Speed>22</Atk_Speed>
+		<Cost>80</Cost>
+		<Type>ice</Type>
+		<bulletFrame>4</bulletFrame>
+		<bulletSpeed>30</bulletSpeed>
+		<towerFrame>17</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Shoots ice spikes.  Long range, single target.  Slows 18% and reduces armor by 1 for 2 seconds.</tDescription>
+		<upgradeOne>Hail</upgradeOne>
+		<skillOne>hit,slow,.18,2</skillOne>
+		<skillTwo>hit,brittle,1,2</skillTwo>
 	</Row>
 	<Row>
 		<Name>Hail</Name>
@@ -747,9 +545,28 @@
 		<skillTwo>hit,brittle,1,2</skillTwo>
 	</Row>
 	<Row>
+		<Name>Frozen Pond</Name>
+		<AoE>0</AoE>
+		<Range>70</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>3</Dmg>
+		<Atk_Speed>4</Atk_Speed>
+		<Cost>120</Cost>
+		<Type>ice</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>15</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Frozen Pond.  Slows in a small AoE around it by 28% and does light damage</tDescription>
+		<upgradeOne>Blizzard</upgradeOne>
+		<upgradeTwo>Yeti</upgradeTwo>
+		<skillOne>hit,slow,.28,.5</skillOne>
+		<targeting>All</targeting>
+	</Row>
+	<Row>
 		<Name>Blizzard</Name>
 		<AoE>0</AoE>
-		<Range>66</Range>
+		<Range>70</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>10</Dmg>
 		<Atk_Speed>4</Atk_Speed>
@@ -766,7 +583,7 @@
 	<Row>
 		<Name>Yeti</Name>
 		<AoE>47</AoE>
-		<Range>66</Range>
+		<Range>70</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>150</Dmg>
 		<Atk_Speed>18</Atk_Speed>
@@ -780,11 +597,44 @@
 		<skillOne>hit,slow,.28,3</skillOne>
 	</Row>
 	<Row>
+		<Name>Splash</Name>
+		<AoE>40</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>20</Dmg>
+		<Atk_Speed>24</Atk_Speed>
+		<Cost>60</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>6</bulletFrame>
+		<bulletSpeed>11</bulletSpeed>
+		<towerFrame>5</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Big, explodey, splash guy.  Hits more than one unit if they're close.</tDescription>
+		<upgradeOne>Demolitionist</upgradeOne>
+		<upgradeTwo>Gun</upgradeTwo>
+	</Row>
+	<Row>
+		<Name>Demo</Name>
+		<AoE>50</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>70</Dmg>
+		<Atk_Speed>28</Atk_Speed>
+		<Cost>160</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>6</bulletFrame>
+		<bulletSpeed>30</bulletSpeed>
+		<towerFrame>18</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Demolitionist.  More damage, more explosions.  What'd you expect?</tDescription>
+		<upgradeOne>Artillery</upgradeOne>
+	</Row>
+	<Row>
 		<Name>Artillery</Name>
 		<AoE>55</AoE>
-		<Range>112</Range>
+		<Range>122</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>90</Dmg>
+		<Dmg>150</Dmg>
 		<Atk_Speed>24</Atk_Speed>
 		<Cost>250</Cost>
 		<Type>heavy</Type>
@@ -795,11 +645,27 @@
 		<tDescription>Increased range &amp; splash.  Make way for big ar-tillery!!</tDescription>
 	</Row>
 	<Row>
+		<Name>Gun</Name>
+		<AoE>0</AoE>
+		<Range>106</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>12</Dmg>
+		<Atk_Speed>3</Atk_Speed>
+		<Cost>90</Cost>
+		<Type>pierce</Type>
+		<bulletFrame>1</bulletFrame>
+		<bulletSpeed>40</bulletSpeed>
+		<towerFrame>28</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Guns are sort of unfair against the metal armor the creeps wear.  That's why it shoots pellets.  It still hurts tho.</tDescription>
+		<upgradeOne>MachineGun</upgradeOne>
+	</Row>
+	<Row>
 		<Name>Machine Gun</Name>
 		<AoE>0</AoE>
 		<Range>106</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>28</Dmg>
+		<Dmg>33</Dmg>
 		<Atk_Speed>3</Atk_Speed>
 		<Cost>180</Cost>
 		<Type>pierce</Type>
@@ -810,11 +676,45 @@
 		<tDescription>Goes BRRRRRRRRRR.</tDescription>
 	</Row>
 	<Row>
+		<Name>Lightning</Name>
+		<AoE>0</AoE>
+		<Range>122</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>11</Dmg>
+		<Atk_Speed>9</Atk_Speed>
+		<Cost>65</Cost>
+		<Type>fire</Type>
+		<bulletFrame>7</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>20</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>I dare you to touch it.  Electricity travels fast and far.  Hey, what's this knob do?</tDescription>
+		<upgradeOne>Multishooter</upgradeOne>
+		<upgradeTwo>Laser</upgradeTwo>
+		<upgradeThree>Chain</upgradeThree>
+	</Row>
+	<Row>
+		<Name>Multishooter</Name>
+		<AoE>0</AoE>
+		<Range>122</Range>
+		<of_Targets>3</of_Targets>
+		<Dmg>12</Dmg>
+		<Atk_Speed>8</Atk_Speed>
+		<Cost>90</Cost>
+		<Type>fire</Type>
+		<bulletFrame>7</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>21</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Hits 3 people at once.  Great vs groups, weak vs low numbers.</tDescription>
+		<upgradeOne>MegaZap</upgradeOne>
+	</Row>
+	<Row>
 		<Name>MegaZap</Name>
 		<AoE>0</AoE>
-		<Range>106</Range>
+		<Range>138</Range>
 		<of_Targets>5</of_Targets>
-		<Dmg>16</Dmg>
+		<Dmg>25</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>240</Cost>
 		<Type>fire</Type>
@@ -825,11 +725,27 @@
 		<tDescription>5 people??  This is madness!  This is an outrage!</tDescription>
 	</Row>
 	<Row>
+		<Name>Laser</Name>
+		<AoE>0</AoE>
+		<Range>122</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>13</Dmg>
+		<Atk_Speed>3</Atk_Speed>
+		<Cost>120</Cost>
+		<Type>fire</Type>
+		<bulletFrame>9</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>30</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Goes *Pew* *Pew* *Pew*.  Enemies think it's too hot.  We think it's justtt right.</tDescription>
+		<upgradeOne>DeathRay</upgradeOne>
+	</Row>
+	<Row>
 		<Name>Death Ray</Name>
 		<AoE>0</AoE>
-		<Range>106</Range>
+		<Range>122</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>28</Dmg>
+		<Dmg>35</Dmg>
 		<Atk_Speed>3</Atk_Speed>
 		<Cost>210</Cost>
 		<Type>fire</Type>
@@ -840,11 +756,28 @@
 		<tDescription>Requires a ransom of 1 million dollars.  Thinks that's a lot.</tDescription>
 	</Row>
 	<Row>
+		<Name>Chain</Name>
+		<AoE>0</AoE>
+		<Range>122</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>14</Dmg>
+		<Atk_Speed>8</Atk_Speed>
+		<Cost>135</Cost>
+		<Type>fire</Type>
+		<bulletFrame>9</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>44</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Chains 2 additional enemies</tDescription>
+		<upgradeOne>MultiChain</upgradeOne>
+		<skillOne>hit,chain,2,6,.15,75,fire</skillOne>
+	</Row>
+	<Row>
 		<Name>MultiChain</Name>
 		<AoE>0</AoE>
-		<Range>106</Range>
+		<Range>122</Range>
 		<of_Targets>1</of_Targets>
-		<Dmg>25</Dmg>
+		<Dmg>30</Dmg>
 		<Atk_Speed>8</Atk_Speed>
 		<Cost>280</Cost>
 		<Type>fire</Type>
@@ -852,13 +785,81 @@
 		<bulletSpeed>20</bulletSpeed>
 		<towerFrame>45</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Chains 4 additional enemies.</tDescription>
-		<skillOne>hit,chain,4,6,.2,75,fire</skillOne>
+		<tDescription>Chains 3 additional enemies.</tDescription>
+		<skillOne>hit,chain,3,6,.15,75,fire</skillOne>
+	</Row>
+	<Row>
+		<Name>Demonologist</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>14</Dmg>
+		<Atk_Speed>12</Atk_Speed>
+		<Cost>50</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>46</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>The Demonologist.  Carries around a funny looking book.  Really likes dead things.</tDescription>
+		<upgradeOne>Lucifer</upgradeOne>
+		<upgradeTwo>Bloodhound</upgradeTwo>
+		<upgradeThree>Gooey</upgradeThree>
+	</Row>
+	<Row>
+		<Name>Lucifer</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>50</Dmg>
+		<Atk_Speed>12</Atk_Speed>
+		<Cost>100</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>47</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Like it's hot.  But not too hot.</tDescription>
+		<upgradeOne>MidnightCeremony</upgradeOne>
+		<skillOne>hit,burn,8,3</skillOne>
+	</Row>
+	<Row>
+		<Name>Bloodhound</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>92</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>115</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>48</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Borks in evil.</tDescription>
+		<upgradeOne>FeralBeast</upgradeOne>
+		<skillOne>hit,crit,.2,1</skillOne>
+	</Row>
+	<Row>
+		<Name>Gooey</Name>
+		<AoE>0</AoE>
+		<Range>82</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>90</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>140</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>49</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Yuckkkkkkkkkkk</tDescription>
+		<upgradeOne>WingedCurse</upgradeOne>
 	</Row>
 	<Row>
 		<Name>Feral Beast</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>20</Dmg>
 		<Atk_Speed>14</Atk_Speed>
@@ -874,11 +875,11 @@
 	<Row>
 		<Name>Winged Curse</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>45</Dmg>
-		<Atk_Speed>24</Atk_Speed>
-		<Cost>250</Cost>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>190</Cost>
 		<Type>heavy</Type>
 		<bulletFrame>0</bulletFrame>
 		<bulletSpeed>50</bulletSpeed>
@@ -891,7 +892,7 @@
 	<Row>
 		<Name>Midnight Ceremony</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>50</Dmg>
 		<Atk_Speed>22</Atk_Speed>
@@ -904,5 +905,22 @@
 		<tDescription>A sweet serenade for those unknowing participants to death's song.</tDescription>
 		<skillOne>hit,burn,20,3</skillOne>
 		<targeting>All</targeting>
+	</Row>
+	<Row>
+		<Name>Tinkerer</Name>
+		<AoE>0</AoE>
+		<Range>66</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>16</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>40</Cost>
+		<Type>heavy</Type>
+		<bulletFrame>0</bulletFrame>
+		<bulletSpeed>50</bulletSpeed>
+		<towerFrame>54</towerFrame>
+		<fireSoundString>default</fireSoundString>
+		<tDescription>Little tinkerer.  Gives adjacent towers 5% attack speed &amp; dmg boosts.</tDescription>
+		<skillOne>time,atkSpdBuff,.05,1</skillOne>
+		<skillTwo>time,dmgBuff,.05,1</skillTwo>
 	</Row>
 </Root>
