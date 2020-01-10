@@ -59,24 +59,19 @@
 				case ("diagGrid") :
 					tAtkSpeed = 4;
 					bSeconds = 2;
+					bAmount = sA[2];
+					tRange = sA[3];
 					loadedTimer = 0;
+					tTarget = [];
 					break;
 			}
 			switch (sN)
 			{
 				case ("atkSpdBuff") :
-					tRange = sA[3];
-					bAmount = sA[2];
+				case ("dmgBuff") :
 					towerArray = common.Commons.getTowerArray();
-					tTarget = [];
 					break;
 
-				case ("dmgBuff") :
-					tRange = sA[3];
-					bAmount = sA[2];
-					towerArray = common.Commons.getTowerArray();
-					tTarget = [];
-					break;
 			}
 			switch (sN)
 			{
@@ -188,6 +183,15 @@
 					;
 					eMenuStatOne = (sA[2] * 100) + "%";
 					eMenuStatTwo = (sA[3] * 100) + "%";
+					break;
+
+				case ("icedRoad") :
+					gotoAndStop(11);
+
+					sName = "Iced Roads";
+					eMenuNameOne = "Road speed slow: ";
+					
+					eMenuStatOne = int(sA[2] * 100) + "%";
 					break;
 			}
 		}
@@ -315,12 +319,17 @@
 								{
 									switch (sA[1])
 									{
-										case ("icedroad") :
+										case ("icedRoad") :
 											if (common.Commons.tileArray[sourceY][sourceX] != null)
 											{
 												if ((getQualifiedClassName(common.Commons.tileArray[sourceY][sourceX])) == "assets.maptiles::Dirt")
 												{
-													//common.Commons.tileArray[sourceY][sourceX]).
+													var tile:Tile = common.Commons.tileArray[sourceY][sourceX];
+													if (tile.isIced == false)
+													{
+														var newIce:Ice = new Ice();
+														tile.addIceLayer(newIce,sA[2]);
+													}
 												}
 											}
 											break;
@@ -351,6 +360,50 @@
 						break;
 				}
 			}
+		}
+		public function deactivateSkill(SkillTarget:Object):void
+		{
+			var sT:Object = SkillTarget;
+			switch (sA[1])
+			{
+				case ("icedRoad") :
+					var sourceX:int;
+					var sourceY:int;
+					for (var b:int = -tRange; b <= tRange; b++)
+					{
+						sourceY = (sT.y/32) + b;
+						for (var n:int = -tRange; n <= tRange; n++)
+						{
+							sourceX = (sT.x/32) + n;
+							if (common.Commons.checkB(sourceX,sourceY))
+							{
+								if (common.Commons.tileArray[sourceY][sourceX] != null)
+								{
+									if ((getQualifiedClassName(common.Commons.tileArray[sourceY][sourceX])) == "assets.maptiles::Dirt")
+									{
+										var tile:Tile = common.Commons.tileArray[sourceY][sourceX];
+										if (tile.isIced == true)
+										{
+											tile.removeIceLayer();
+										}
+										else
+										{
+											trace("Not iced, but this tower ices?  How?");
+										}
+									}
+								}
+
+							}
+						}
+					}
+
+					break;
+			}
+			sA = null;
+			sO = null;
+			towerArray = null;
+			tTarget = null;
+			_root = null;;
 		}
 	}
 }

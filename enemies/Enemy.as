@@ -79,7 +79,19 @@
 			}
 			else
 			{
-				moveSpeed = maxMoveSpeed - (maxMoveSpeed * (iceSlow + poisonSlow));
+				var myX:int = (Math.floor(x + 16) / common.Commons.tileSide)
+				var myY:int = (Math.floor(y + 16) / common.Commons.tileSide)
+				var a:Number = maxMoveSpeed - (maxMoveSpeed * iceSlow)
+				var b:Number = a - (a * poisonSlow)
+				if (common.Commons.checkB(Math.floor(myX),Math.floor(myY)))
+				{
+					var c:Number = b - (b * common.Commons.tileArray[myY][myX].icedSlow)
+					moveSpeed = c
+				}
+				else
+				{
+					moveSpeed = b
+				}
 			}
 		}
 
@@ -259,12 +271,7 @@
 					break;
 			}
 			distanceTraveled +=  moveSpeed;
-			tileEffects();
 			updateHealth();
-		}
-		internal function tileEffects():void
-		{
-			common.Commons.tileArray[pt.y][pt.x].tileEffects(this)
 		}
 
 		internal function destroyThis():void

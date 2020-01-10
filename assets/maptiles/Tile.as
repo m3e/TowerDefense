@@ -3,14 +3,16 @@
 	import flash.display.MovieClip
 	import flash.events.*;
 	import enemies.Enemy;
+	import assets.maptiles.Ice;
 	
 	public class Tile extends MovieClip{
 		
 		public var occupied:Boolean;
 		private var _root:MovieClip;
 		
-		public var iced:Boolean;
-		public var tileEffectsArray:Array = new Array;
+		public var isIced:Boolean;
+		public var icedSlow:Number = 0;
+		private var iceLayer:Ice;
 
 		public function Tile() {
 			occupied = false;
@@ -23,19 +25,20 @@
 			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, beginClass);
 		}
-		public function addEffects(e:Array):void
+		public function addIceLayer(ice:Ice,slow:Number):void
 		{
-			//tea.push(e);
+			iceLayer = ice;
+			icedSlow = slow;
+			isIced = true;
+			addChild(iceLayer)
 		}
-		public function tileEffects(e:Enemy):void
+		public function removeIceLayer():void
 		{
-			var tea:Array = tileEffectsArray;
-			for (var i:int=0; i < tea.length; i++)
-			{
-				
-			}
+			removeChild(iceLayer)
+			icedSlow = 0;
+			isIced = false;
+			iceLayer = null;
 		}
-
 	}
 	
 }

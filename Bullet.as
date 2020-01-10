@@ -133,14 +133,14 @@
 		internal function hitAoe():void
 		{
 			
-			aoeVisual = new Shape();
+			/*aoeVisual = new Shape();
 			aoeVisual.graphics.beginFill(0x000000,.35);
 			aoeVisual.graphics.drawCircle(0,0,bAoe);
 			aoeVisual.graphics.endFill();
 			aoeVisual.x = (bTarget.x + (common.Commons.tileSide *.5))
 			aoeVisual.y = (bTarget.y + (common.Commons.tileSide *.5));   
 			_root.addChild(aoeVisual);
-			TweenMax.to(aoeVisual, .1, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,aoeVisual]})	;
+			TweenMax.to(aoeVisual, .1, {alpha:0.0, onComplete:removeAoeVisual, onCompleteParams:[parent,aoeVisual]})	;*/
 			var eList:Array = common.Commons.newTheMap(enemyList)
 			for (var i:int=0; i < eList.length; i++)
 			{

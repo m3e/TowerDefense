@@ -25,7 +25,7 @@
 		<of_Targets>1</of_Targets>
 		<Dmg>44</Dmg>
 		<Atk_Speed>17</Atk_Speed>
-		<Cost>115</Cost>
+		<Cost>90</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>30</bulletSpeed>
@@ -41,9 +41,9 @@
 		<AoE>0</AoE>
 		<Range>106</Range>
 		<of_Targets>3</of_Targets>
-		<Dmg>47</Dmg>
+		<Dmg>70</Dmg>
 		<Atk_Speed>16</Atk_Speed>
-		<Cost>185</Cost>
+		<Cost>180</Cost>
 		<Type>pierce</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>30</bulletSpeed>
@@ -56,10 +56,10 @@
 		<Name>Assassin</Name>
 		<AoE>0</AoE>
 		<Range>106</Range>
-		<of_Targets>3</of_Targets>
-		<Dmg>70</Dmg>
-		<Atk_Speed>22</Atk_Speed>
-		<Cost>175</Cost>
+		<of_Targets>1</of_Targets>
+		<Dmg>180</Dmg>
+		<Atk_Speed>16</Atk_Speed>
+		<Cost>180</Cost>
 		<Type>normal</Type>
 		<bulletFrame>5</bulletFrame>
 		<bulletSpeed>30</bulletSpeed>
@@ -332,7 +332,7 @@
 	<Row>
 		<Name>Fire Tower</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>5</Dmg>
 		<Atk_Speed>4</Atk_Speed>
@@ -388,7 +388,7 @@
 	<Row>
 		<Name>Fire Spout</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>2</of_Targets>
 		<Dmg>14</Dmg>
 		<Atk_Speed>6</Atk_Speed>
@@ -404,7 +404,7 @@
 	<Row>
 		<Name>Triple Spout</Name>
 		<AoE>0</AoE>
-		<Range>72</Range>
+		<Range>82</Range>
 		<of_Targets>3</of_Targets>
 		<Dmg>28</Dmg>
 		<Atk_Speed>6</Atk_Speed>
@@ -423,7 +423,7 @@
 	<Row>
 		<Name>Magma Thrower</Name>
 		<AoE>45</AoE>
-		<Range>98</Range>
+		<Range>106</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>55</Dmg>
 		<Atk_Speed>32</Atk_Speed>
@@ -547,7 +547,7 @@
 	<Row>
 		<Name>Frozen Pond</Name>
 		<AoE>0</AoE>
-		<Range>70</Range>
+		<Range>50</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>3</Dmg>
 		<Atk_Speed>4</Atk_Speed>
@@ -557,16 +557,16 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>15</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Frozen Pond.  Slows in a small AoE around it by 28% and does light damage</tDescription>
+		<tDescription>Literally freezes the roads surrounding it, slowing enemy movement speed.  Hits every tower in its' range.</tDescription>
 		<upgradeOne>Blizzard</upgradeOne>
 		<upgradeTwo>Yeti</upgradeTwo>
-		<skillOne>hit,slow,.28,.5</skillOne>
+		<skillOne>diagGrid,icedRoad,.28,1</skillOne>
 		<targeting>All</targeting>
 	</Row>
 	<Row>
 		<Name>Blizzard</Name>
 		<AoE>0</AoE>
-		<Range>70</Range>
+		<Range>50</Range>
 		<of_Targets>1</of_Targets>
 		<Dmg>10</Dmg>
 		<Atk_Speed>4</Atk_Speed>
@@ -576,8 +576,8 @@
 		<bulletSpeed>50</bulletSpeed>
 		<towerFrame>37</towerFrame>
 		<fireSoundString>default</fireSoundString>
-		<tDescription>Ice everywhere.  Slows everything in area by 34%.</tDescription>
-		<skillOne>hit,slow,.34,.5</skillOne>
+		<tDescription>Ice everywhere.  Increased slow, same effect.</tDescription>
+		<skillOne>diagGrid,icedRoad,.34,1</skillOne>
 		<targeting>All</targeting>
 	</Row>
 	<Row>

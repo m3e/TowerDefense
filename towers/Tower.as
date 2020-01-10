@@ -131,6 +131,7 @@
 							skillsArray.push(skillsList[p]);
 						}
 					}
+					generateSkills();
 					if (targeting != "All")
 					{
 						targeting = "First";
@@ -190,7 +191,6 @@
 			rectangle.graphics.endFill();
 			addChild(rectangle);// adds the rectangle to the stage
 			rectangle.visible = false;
-			generateSkills();
 		}
 		internal function getSounds():void
 		{
@@ -374,7 +374,6 @@
 			}
 			return k;
 		}
-
 		internal function checkB(xCo:int,yCo:int):Boolean
 		{
 			var inBounds:Boolean;
@@ -392,11 +391,19 @@
 			var dist:int = Math.abs(firstX - secondX) + Math.abs(firstY - secondY);
 			return dist;
 		}
+		internal function deactivateSkills():void
+		{
+			for (var i:int=0 ; i < skillsArray.length; i++)
+			{
+					skillsArray[i].deactivateSkill(this);
+			}
+		}
 		public function destroyTower():void
 		{
 			removeEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
+			deactivateSkills();
 			while (buffsArray.length > 0)
 			{
 				buffsArray[0].finishBuff();
