@@ -13,28 +13,22 @@
 		public static var _root:Object;
 		public static var towerArray:Array = new Array;
 		public static var tileArray:Array = new Array;
+		public static var roundsList:Array = new Array;
 
 		public function Commons()
 		{
 			// constructor code
 		}
+		public static function setMapArray(newMap:Array)
+		{
+			mapArray = newMap;
+		}
+		public static function setRoundsList(newRL:Array)
+		{
+			roundsList = newRL;
+		}
 		public static function getMapArray():Array
 		{
-			mapArray = [  
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[1,1,1,1,1,1,1,1,1,2,0,4,0,0,2,3,1,1,1,1,1,1,1,1,1,1,1,1],
-			[0,0,0,0,0,0,0,0,0,1,1,4,0,0,2,0,4,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,4,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]];
-
 			mapWidth = mapArray[0].length;
 			mapHeight = mapArray.length;
 

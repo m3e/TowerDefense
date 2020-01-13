@@ -8,6 +8,9 @@
 	import flash.net.URLRequest;
 	import towers.TowerManager;
 	import flash.events.MouseEvent
+	import GameScreens.MapSelectScreen;
+	import flash.display.StageScaleMode;
+	import common.Commons;
 	
 	public class Main extends MovieClip{
 
@@ -20,12 +23,11 @@
 		
 		public function Main() {
 			startScreen.visible = false;
+			this.stage.scaleMode = StageScaleMode.SHOW_ALL;
+			this.stage.quality = "16X16";
+			
 			queue = new LoaderMax({name:"mainQueue", onProgress:progressHandler, onComplete: completeHandler});
-			/*
-			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/fkdlcr3e9ge5krb/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/oyfhcudrxqvpil4/shblock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("https://dl.dropboxusercontent.com/s/wykubut91hcocgq/swhit.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			*/
+			
 			queue.append(new MP3Loader("sounds/sfx/building/buildtower.mp3", {name:"buildtower", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/roundstart/roundstart2.mp3", {name:"roundstart2", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
@@ -122,15 +124,12 @@
 				towerList.push(tower);
 				
 				//var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus];
-				
-				//roundsList.push(waveData);
 				i++;
 			}
 			Preload.PreloadText.text = "Done!"
 			towerManager = new TowerManager(towerList);
 			myLoader = null;
 			setupRounds()
-			//startMenu();
 		}
 		private function setupRounds():void
 		{
@@ -160,6 +159,7 @@
 				roundsList.push(waveData);
 				i++;
 			}
+			common.Commons.setRoundsList(roundsList);
 			startMenu();
 		}
 		private function startMenu():void
@@ -169,7 +169,8 @@
 			Preload = null;
 			startScreen.visible = true;
 			startScreen.startButton.addEventListener(MouseEvent.CLICK, startGame);
-			startGame(MouseEvent(undefined));
+			//Skip clicking NewGame:
+			//startGame(MouseEvent(undefined));
 		}
 		private function startGame(e:Event):void
 		{
@@ -177,9 +178,8 @@
 			startScreen.startButton.removeEventListener(MouseEvent.CLICK, startGame);
 			startScreen = null;
 
-			var map:Map = new Map();
-			map.roundsList = roundsList;
-			addChild(map);
+			var mapSelectScreen:MapSelectScreen = new MapSelectScreen()
+			addChild(mapSelectScreen);
 		}
 
 	}

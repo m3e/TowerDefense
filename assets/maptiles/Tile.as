@@ -17,6 +17,7 @@
 		public function Tile() {
 			occupied = false;
 			addEventListener(Event.ADDED_TO_STAGE, beginClass)
+			addEventListener(Event.REMOVED, endClass)
 			// constructor code
 		}
 		
@@ -38,6 +39,13 @@
 			icedSlow = 0;
 			isIced = false;
 			iceLayer = null;
+		}
+		private function endClass(e:Event):void
+		{
+			iceLayer = null;
+			_root = null;
+			removeEventListener(Event.ADDED_TO_STAGE, beginClass);
+			removeEventListener(Event.REMOVED, endClass)
 		}
 	}
 	

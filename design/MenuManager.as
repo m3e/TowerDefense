@@ -24,7 +24,7 @@
 		private var targetingIcon:TargetingIcon;
 		private var upgradeIcon:UpgradeIcon;
 		private var menuIsDefault:Boolean;
-		private var towerBeingBuiltSquare:Shape;
+		public var towerBeingBuiltSquare:Shape;
 
 		private var currentMenuSelected:Array;
 		private var cellsArray:Array;
@@ -236,6 +236,7 @@
 			{
 				case (selectedTower == null) :
 
+					
 					if ((towerBeingBuiltSquare.x != tower.x || towerBeingBuiltSquare.y != tower.y) || towerBeingBuiltSquare.visible == false)
 					{
 						towerBeingBuiltSquare.x = tower.x;
@@ -249,6 +250,7 @@
 					}
 					_root.buildTower(tower);
 					break;
+				
 				case (selectedTower != null) :
 
 					_root.upgradeTower(tower);

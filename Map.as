@@ -205,13 +205,6 @@
 					shiftDown = true;
 					break;
 
-				case Keyboard.ESCAPE :
-					if (towerBeingBuilt != null)
-					{
-						buildTower(towerBeingBuilt);
-					}
-					break;
-
 				case Keyboard.Z :
 					healthBarOn = ! healthBarOn;
 					healthBarToggle();
@@ -225,11 +218,14 @@
 					break;
 
 				case Keyboard.Q :
-					stage.frameRate = 24;
+					if (towerBeingBuilt != null)
+					{
+						buildTower(towerBeingBuilt);
+					}
 					break;
 
 				case Keyboard.W :
-					stage.frameRate = 48;
+					stage.frameRate = 24;
 					break;
 
 				case Keyboard.E :
@@ -381,6 +377,7 @@
 			inputField.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
 			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
 			_root.addChild(inputField);
+			inputField.visible = false;
 		}
 		private function mouseDownAction(e:MouseEvent):void
 		{
@@ -435,6 +432,7 @@
 			{
 				//Tower selected is same as tower in memory
 				towerBeingBuilt = null;
+				menuManager.hideTowerBeingBuiltSquare();
 				_root.removeChild(psuedoTower);
 				psuedoTower = null;
 				rangeCircle.visible = false;
