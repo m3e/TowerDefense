@@ -4,7 +4,7 @@
 		<eName>Slime</eName>
 		<currentRound>1</currentRound>
 		<maxHp>24</maxHp>
-		<maxMoveSpeed>4</maxMoveSpeed>
+		<maxMoveSpeed>2</maxMoveSpeed>
 		<goldValue>3</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
 		<roundEndBonus>18</roundEndBonus>

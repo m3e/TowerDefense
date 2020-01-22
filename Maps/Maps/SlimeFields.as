@@ -1,12 +1,15 @@
 ﻿package Maps.Maps {
 	
 	import flash.display.MovieClip;
+	import flash.utils.getQualifiedClassName
+	import flash.utils.getDefinitionByName
 	
 	public class SlimeFields extends MapSelections {
 		
 		
 		public function SlimeFields() {
 			super()
+			
 			// constructor code
 		}
 		override internal function setMapArray():void

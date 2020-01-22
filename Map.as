@@ -2,7 +2,7 @@
 {
 	import flash.display.MovieClip;
 	import com.greensock.TweenLite;
-	
+
 	import assets.maptiles.*;
 	import towers.*;
 	import flash.utils.Timer;
@@ -15,7 +15,7 @@
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	
+
 	import common.Commons;
 
 	import design.*;
@@ -24,7 +24,7 @@
 	import flash.text.TextField;
 	import flash.display.DisplayObject;
 	import towerimg.PsuedoTower;
-	
+
 	import sounds.SoundManager;
 
 
@@ -57,6 +57,7 @@
 		private var towerBeingBuilt:Object;
 		private var psuedoTower:Object;
 		private var mouseclickedTower:Object;
+		private var shiftBuildEnabled:Boolean;
 
 		//tower ui
 		private var mouseclickedTowerSquare:Shape;
@@ -67,7 +68,7 @@
 		private var roundBar:RoundBar;
 
 		//controls
-		private var _keyDown:Boolean;
+		private var _keyDown:int = 0;
 		private var shiftDown:Boolean;
 
 		//user
@@ -89,25 +90,25 @@
 			towerArray = common.Commons.getTowerArray();
 			tileSide = common.Commons.tileSide;
 			common.Commons.tileArray = tileArray
-			
+			;
 
 			//1=right 2=down 3=left 4=up
-			
+
 			mapArray = common.Commons.getMapArray();
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
-				
+
 				tileArray[row] = [];
 				towerArray[row] = [];
-				
+
 				for (var col:int=0; col < mapArray[0].length; col++)
 				{
 					tileArray[row][col] = undefined;
 					towerArray[row][col] = undefined;
 				}
 			}
-			
+
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			// constructor code;
 		}
@@ -115,7 +116,7 @@
 		{
 			_root = this;
 			common.Commons.setRoot(_root);
-			cAfford = new CantAfford;
+			cAfford = new CantAfford  ;
 			addChild(cAfford);
 			cAfford.visible = false;
 			cAfford.mouseEnabled = false;
@@ -135,21 +136,15 @@
 			setupEnemies();
 			//Creates: EnemySpawner (timer)
 			//Requires: mapArray
-			
+
 			setupBottomBar();
 			//requires initEnemies for buttons
-			
+
 			setupRoundBar();
-			
-			
-			
-			setupBottomBarContent()
 
-			
 
-			
-			
-			
+
+			setupBottomBarContent();
 
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
@@ -157,16 +152,16 @@
 			//Requires: psuedoTowers
 
 			setupTileListeners();
-			
-			
+
+
 			setChildIndex(userInfo,numChildren-1);
-			
-			
+
+
 		}
 		private function setupRoundBar():void
 		{
 			roundBar = new RoundBar(roundsList);
-			roundBar.y = 416
+			roundBar.y = 416;
 			_root.addChild(roundBar);
 		}
 		private function setupBottomBarContent():void
@@ -177,8 +172,8 @@
 			_root.addChild(menuManager);
 
 			middleInfo = new MiddleInfoContent();
-			middleInfo.x = 318;
-			middleInfo.y = 423;
+			middleInfo.x = 333;
+			middleInfo.y = 431;
 			_root.addChild(middleInfo);
 		}
 		private function setupUser():void
@@ -193,66 +188,95 @@
 		}
 		private function keyReleased(e:KeyboardEvent):void
 		{
-			_keyDown = false;
-			shiftDown = false;
+			_keyDown--;
+			if (_keyDown < 0 )
+			{
+				_keyDown = 0;
+			}
+			else if (_keyDown > 1)
+			{
+				_keyDown = 1
+			}
+			if (shiftDown == true)
+			{
+				shiftDown = false;
+				if (shiftBuildEnabled == true)
+				{
+					shiftBuildEnabled = false;
+					if (towerBeingBuilt)
+					{
+						buildTower(towerBeingBuilt);
+						removeMouseClickedTower();
+					}
+				}
+			}
 		}
 		private function keyPressed(e:KeyboardEvent):void
 		{
-			_keyDown = true;
-			switch (e.keyCode)
+			//Tower selection is handled via MenuManager
+			if (_keyDown == 0)
 			{
-				case Keyboard.SHIFT :
-					shiftDown = true;
-					break;
+				_keyDown++;
 
-				case Keyboard.Z :
-					healthBarOn = ! healthBarOn;
-					healthBarToggle();
-					break;
-
-				case Keyboard.X :
-					if (mouseclickedTower != null)
-					{
-						menuManager.sellObjectSelected();
-					}
-					break;
-
-				case Keyboard.Q :
-					if (towerBeingBuilt != null)
-					{
-						buildTower(towerBeingBuilt);
-					}
-					break;
-
-				case Keyboard.W :
-					stage.frameRate = 24;
-					break;
-
-				case Keyboard.E :
-					stage.frameRate = 96;
-					break;
-
-				case Keyboard.R :
-					stage.frameRate = 1;
-					break;
-
-				case Keyboard.U :
-					inputField.visible = !(inputField.visible);
-					break;
-
-				case Keyboard.SPACE :
-					startRoundKeyboard();
-					break;
-
-			}
-			if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
-			{
-				menuManager.keyDownPress(e);
-				/*if (mouseclickedTower != null)
+				switch (e.keyCode)
 				{
-				mouseclickedTowerSquare.visible = false;
-				mouseclickedTower = null;
-				}*/
+					case Keyboard.SHIFT :
+						shiftDown = true;
+						break;
+
+					case Keyboard.Z :
+						healthBarOn = ! healthBarOn;
+						healthBarToggle();
+						break;
+
+					case Keyboard.X :
+						if (mouseclickedTower != null)
+						{
+							menuManager.sellObjectSelected();
+						}
+						break;
+
+					case Keyboard.Q :
+						if (towerBeingBuilt != null)
+						{
+							buildTower(towerBeingBuilt);
+						}
+						break;
+
+					case Keyboard.W :
+						stage.frameRate = 24;
+						break;
+
+					case Keyboard.E :
+						stage.frameRate = 96;
+						break;
+
+					case Keyboard.R :
+						stage.frameRate = 1;
+						break;
+
+					case Keyboard.U :
+						inputField.visible = !(inputField.visible);
+						break;
+
+					case Keyboard.SPACE :
+						startRoundKeyboard();
+						break;
+
+				}
+				if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
+				{
+					menuManager.keyDownHandler(e);
+					/*if (mouseclickedTower != null)
+					{
+					mouseclickedTowerSquare.visible = false;
+					mouseclickedTower = null;
+					}*/
+				}
+				else
+				{
+					trace(e.target);
+				}
 			}
 		}
 		private function healthBarToggle():void
@@ -283,14 +307,14 @@
 				rangeCircle.visible = true;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
-				
+
 
 				psuedoTower.visible = true;
 
 				psuedoTower.x = e.currentTarget.x;
 				psuedoTower.y = e.currentTarget.y;
-				setChildIndex(rangeCircle,numChildren-1)
-				setChildIndex(DisplayObject(psuedoTower),numChildren-1)
+				setChildIndex(rangeCircle,numChildren-1);
+				setChildIndex(DisplayObject(psuedoTower),numChildren-1);
 			}
 		}
 		private function hoverOverOut(e:MouseEvent):void
@@ -341,7 +365,7 @@
 				var armor:int = Number(inputField.armorField.text);
 				var numSend:int = Number(inputField.numField.text);
 				var freq:int = Number(inputField.freqField.text);
-				var armorType:String = "pure"
+				var armorType:String = "pure";
 				var eFrame:int = 11;
 				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
 				roundManager.sendWave(waveArray);
@@ -409,10 +433,10 @@
 
 				psuedoTower.x = Math.floor(mouseX / tileSide) * tileSide;
 				psuedoTower.y = Math.floor(mouseY / tileSide) * tileSide
-				
-				psuedoTower.width = tileSide
+				;
+				psuedoTower.width = tileSide;
 				psuedoTower.height = tileSide
-				
+				;
 				rangeCircle.width = psuedoTower.tRange * 2;
 				rangeCircle.height = psuedoTower.tRange * 2;
 				rangeCircle.x = psuedoTower.x + (tileSide * .5);
@@ -421,7 +445,7 @@
 				//towerBeingBuiltSquare.visible = true;
 				if (psuedoTower.x > 0 && psuedoTower.y > 0 && psuedoTower.x <= (mapArray[0].length * tileSide) - psuedoTower.width && psuedoTower.y <= (mapArray.length * tileSide) - psuedoTower.height)
 				{
-					
+
 					psuedoTower.visible = true;
 					setChildIndex(rangeCircle,numChildren-1);
 					setChildIndex(DisplayObject(psuedoTower),numChildren-1);
@@ -492,7 +516,7 @@
 					_root.addChildAt(tile,0);
 					tile.x = o * tileSide;
 					tile.y = i * tileSide;
-					tileArray[i][o] = tile
+					tileArray[i][o] = tile;
 				}
 			}
 		}
@@ -504,8 +528,8 @@
 			}
 			else if (towerBeingBuilt == null)
 			{
-				var i:int = (Math.random()*5)+1
-				var dirtName:String = "dirt"+i;
+				var i:int = (Math.random()*5)+1;
+				var dirtName:String = "dirt" + i;
 				SoundManager.sfx(dirtName);
 			}
 		}
@@ -528,8 +552,8 @@
 
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
-				newTower.x = towerX
-				newTower.y = towerY
+				newTower.x = towerX;
+				newTower.y = towerY;
 
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
@@ -549,8 +573,9 @@
 				}
 				else
 				{
-					if (_keyDown == true && shiftDown == true)
+					if (_keyDown > 0 && shiftDown == true)
 					{
+						shiftBuildEnabled = true;
 					}
 					else
 					{
@@ -565,7 +590,7 @@
 				cAfford.visible = true;
 				setChildIndex(cAfford,_root.numChildren-1);
 				cAfford.alpha = 0;
-				TweenLite.from(cAfford, 1.5, {alpha:1,onStart:startTween,onComplete:endTween})
+				TweenLite.from(cAfford, 1.5, {alpha:1,onStart:startTween,onComplete:endTween});
 				newTower = null;
 			}
 		}
@@ -576,7 +601,7 @@
 		}
 		private function endTween():void
 		{
-			cAfford.visible = false
+			cAfford.visible = false;
 		}
 		public function upgradeTower(tower:PsuedoTower):void
 		{
@@ -630,22 +655,22 @@
 			if (mouseclickedTower != e.currentTarget)
 			{
 				mouseclickedTower = e.currentTarget;
-				
-				
+
+
 				mouseclickedTowerSquare.visible = true;
 				mouseclickedTowerSquare.x = mouseclickedTower.x;
 				mouseclickedTowerSquare.y = mouseclickedTower.y;
-				
+
 				rangeCircle.visible = true;
 				rangeCircle.width = e.currentTarget.tRange * 2;
 				rangeCircle.height = e.currentTarget.tRange * 2;
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
-				
+
 				setChildIndex(rangeCircle,numChildren-1);
 				setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);
 				setChildIndex(mouseclickedTowerSquare,numChildren-1);
-				
+
 
 				middleInfo.updateText(mouseclickedTower);
 				menuManager.towerMapClicked(e);

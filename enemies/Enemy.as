@@ -170,17 +170,18 @@
 			//calculate reduced dmg
 			if (eHp > 0)
 			{
-				dmg = checkMatchup(dmg,dType)
-				;
-				dmg = determineArmor(dmg);
-
+				trace("Raw: ",dmg)
+				dmg = checkMatchup(dmg,dType);
+				trace("Matchup: ",dmg)
 				dmg = dmg * (1 + increasedDmgTaken)
-				;
+				trace("IncreasedDmgTkn: ",dmg)
+				dmg = determineArmor(dmg);
+				trace("Armored: ",dmg)
 				if (dmg < 0)
 				{
-					dmg == 0;
+					dmg = 0;
 				}
-
+				trace("Lastly: ",dmg)
 				eHp -=  dmg;
 			}
 			if (eHp <= 0)

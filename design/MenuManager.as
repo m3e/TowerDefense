@@ -61,7 +61,7 @@
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			sellObject = new SellObject();
 			addChild(sellObject);
 			sellObject.visible = false;
@@ -109,7 +109,7 @@
 			hideTowerBeingBuiltSquare();
 			updateCurrentMenu();
 		}
-		private function keyDownHandler(e:KeyboardEvent):void
+		public function keyDownHandler(e:KeyboardEvent):void
 		{
 			if (menuIsDefault == true)
 			{
@@ -148,6 +148,11 @@
 						break;
 
 					case (Keyboard.NUMBER_7) :
+						tower = currentMenuSelected[1][2];
+						selectTower(tower);
+						break;
+						
+					case (Keyboard.NUMBER_8) :
 						tower = currentMenuSelected[1][2];
 						selectTower(tower);
 						break;

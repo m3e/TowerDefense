@@ -42,7 +42,6 @@
 			mapLocked = true;
 			lmi.visible = true;
 		}
-		
 		private function removed(e:Event):void
 		{
 			removeEventListener(Event.REMOVED,removed)

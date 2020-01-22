@@ -4,7 +4,7 @@
 	import flash.display.MovieClip;
 
 	import flash.media.SoundChannel;
-	import com.greensock.*;
+	import com.greensock.*
 	import com.greensock.loading.*;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.plugins.*;
@@ -20,18 +20,21 @@
 
 		private static var currentPlay:String;
 
-		public static var musicVolume:Number;
 		public static var sfxVolume:Number;
 		private static var queue:LoaderMax;
 		private static var sfxs:Array;
+		
+		private static var currentlyPlaying:String;
+		private static var bgSound:SoundChannel;
+		private static var musicVolume:Number;
 
 		public function SoundManager(Queue:LoaderMax)
 		{
 			sfxVolume = 1;
+			musicVolume = .2;
 			queue = Queue;
 			TweenPlugin.activate([VolumePlugin]);
 			sfxs = new Array  ;
-
 		}
 		public static function setSfxVolume(SfxVolume:Number):void
 		{
@@ -81,15 +84,20 @@
 			sfx.removeEventListener(Event.SOUND_COMPLETE, removeSfx)
 			sfx = null;			
 		}
-		/*public static function bgfx(fxName:String):void
+		public static function bgfx(fxName:String):void
 		{
-			if (fxName != currentPlay)
+			if (fxName != currentlyPlaying)
 			{
-				if (currentPlay != null)
+				if (currentlyPlaying != null)
 				{
-					endSong(currentPlay);
+					bgSound.stop();
 				}
-				var song:MP3Loader = queue.getLoader(fxName);
+				var song:Sound = queue.getContent(fxName);
+				var trans:SoundTransform = new SoundTransform(musicVolume);
+				var sound:SoundChannel = song.play(0,0,trans)
+				currentlyPlaying = fxName;
+				bgSound = sound;
+				/*var song:MP3Loader = queue.getLoader(fxName);
 				song.volume = musicVolume;
 				currentPlay = fxName;
 				switch (fxName)
@@ -112,19 +120,9 @@
 						TweenLite.from(song,8,{volume:0,ease:Circ.easeIn});
 						break;
 				}
-				song.playSound();
+				song.playSound();*/
 			}
-
 		}
-		private static function endSong(st:String):void
-		{
-			var song:MP3Loader = queue.getLoader(st);
-			TweenLite.to(song,4,{volume:0,onComplete:stopSong, onCompleteParams:[song]});
-		}
-		private static function stopSong(song:MP3Loader):void
-		{
-			song.pauseSound();
-		}*/
 		private static function newTheMap(array:Array):Array
 		{
 			var newArray:Array = new Array  ;

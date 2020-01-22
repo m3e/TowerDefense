@@ -55,7 +55,7 @@
 							tile = new Dirt();
 							break;
 					}
-					addChildAt(tile,0);
+					previewArea.addChildAt(tile,0);
 					tile.x = o * tileSide
 					tile.y = i * tileSide;
 					tile.width = tileSide
@@ -72,7 +72,7 @@
 			{
 				for (var o:int=0; o < previewArray[i].length; o++)
 				{
-					removeChild(previewArray[i][o]);
+					previewArea.removeChild(previewArray[i][o]);
 					previewArray[i][o] = null;
 				}
 			}
