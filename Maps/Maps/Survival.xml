@@ -4,11 +4,11 @@
 		<eName>Slime</eName>
 		<currentRound>1</currentRound>
 		<maxHp>24</maxHp>
-		<maxMoveSpeed>2</maxMoveSpeed>
+		<maxMoveSpeed>2.5</maxMoveSpeed>
 		<goldValue>3</goldValue>
 		<numberOfEnemies>14</numberOfEnemies>
 		<roundEndBonus>18</roundEndBonus>
-		<freq>14</freq>
+		<freq>22</freq>
 		<armorType>medium</armorType>
 		<maxArmor>0</maxArmor>
 	</Row>
@@ -171,7 +171,7 @@
 	<Row>
 		<eName>Hydra</eName>
 		<currentRound>15</currentRound>
-		<maxHp>980</maxHp>
+		<maxHp>940</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>10</goldValue>
 		<numberOfEnemies>16</numberOfEnemies>
@@ -591,12 +591,12 @@
 	<Row>
 		<eName>R. Doom</eName>
 		<currentRound>50</currentRound>
-		<maxHp>20597</maxHp>
-		<maxMoveSpeed>3</maxMoveSpeed>
+		<maxHp>22000</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
 		<goldValue>44</goldValue>
 		<numberOfEnemies>10</numberOfEnemies>
 		<roundEndBonus>215</roundEndBonus>
-		<freq>16</freq>
+		<freq>22</freq>
 		<armorType>heavy</armorType>
 		<maxArmor>0</maxArmor>
 	</Row>

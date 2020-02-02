@@ -408,11 +408,11 @@
 			{
 				buffsArray[0].finishBuff();
 			}
+			buffsArray = [];
 			tTarget = null;
 			enemyList = null;
 			towerArray = null;
-			buffsArray = []
-			;
+			buffsArray = [];
 			if (_root != undefined && _root.contains(this))
 			{
 				removeChild(rectangle);
@@ -420,6 +420,9 @@
 				_root.removeChild(this);
 			}
 			_root = null;
+			skillsArray = []
+			hitSkills = []
+			timeSkills = []
 		}
 	}
 }

@@ -26,6 +26,7 @@
 
 		public function Skill(_Root:*,_effect:String,_allyOrEnemy:String,_trigger:String,_amount:Number,_seconds:Number,_atkSpeed:int,_range:int,_towerArray:Array)
 		{
+			trace("Made in oldSkill");
 			_root = _Root;
 			effect = _effect;
 			bSeconds = _seconds;

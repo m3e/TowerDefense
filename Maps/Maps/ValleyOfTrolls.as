@@ -7,7 +7,8 @@
 		
 		public function ValleyOfTrolls() {
 			super()
-			// constructor code
+			mapID = "ValleyOfTrolls"
+			gameName = "Valley of Trolls"
 		}
 		override internal function setMapArray():void
 		{

@@ -27,6 +27,10 @@
 		{
 			roundsList = newRL;
 		}
+		public static function getRoundsList():Array
+		{
+			return roundsList;
+		}
 		public static function getMapArray():Array
 		{
 			mapWidth = mapArray[0].length;

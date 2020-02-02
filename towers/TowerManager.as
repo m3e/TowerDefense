@@ -1,16 +1,13 @@
 ﻿package towers {
 	
-	import flash.display.MovieClip;
-
-	import towerimg.PsuedoTower;
+	import flash.display.Sprite
 	
-	public class TowerManager extends MovieClip {
+	public class TowerManager extends Sprite {
 		
 		
 		public static var towerList:Array;
 		
-		public function TowerManager(TowerList:Array) {
-			towerList = TowerList;
+		public function TowerManager() {
 			// constructor code
 		}
 	}

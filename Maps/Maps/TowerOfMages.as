@@ -7,7 +7,8 @@
 		
 		public function TowerOfMages() {
 			super()
-			// constructor code
+			mapID = "TowerOfMages"
+			gameName = "Tower of Mages"
 		}
 		override internal function setMapArray():void
 		{

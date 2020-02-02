@@ -161,8 +161,9 @@
 		public function destroyThis():void
 		{
 			//this function will just remove this guy from the stage
+			hitSkills = [];
 			debuffArray = null;
-			this.removeEventListener(Event.ENTER_FRAME, eFrame);
+			this.removeEventListener(Event.ENTER_FRAME,eFrame);
 			enemyList = null;
 			bTarget = null;
 			_root.removeChild(this);

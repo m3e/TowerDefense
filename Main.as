@@ -8,12 +8,17 @@
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	import towers.TowerManager;
 	import flash.events.MouseEvent;
 	import GameScreens.MapSelectScreen;
 	import flash.display.StageScaleMode;
 	import common.Commons;
 	import GameScreens.StartScreen;
+	import design.BottomBar;
+	import towers.TowerManager;
+
+	//Middle
+	//X: 448 - 207.5
+	//Y: 292.5
 
 	public class Main extends MovieClip
 	{
@@ -22,12 +27,11 @@
 		private var queue:LoaderMax;
 		private var myLoader:URLLoader;
 		private var towerList:Array;
-		private var towerManager:TowerManager;
-		private var roundsList:Array;
 		private var startScreen:StartScreen;
-
+		
 		public function Main()
 		{
+			
 			this.stage.scaleMode = StageScaleMode.SHOW_ALL;
 			this.stage.quality = "16X16";
 
@@ -61,13 +65,26 @@
 			queue.append(new MP3Loader("sounds/sfx/shieldBlock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			queue.append(new MP3Loader("sounds/sfx/arrowShot.mp3", {name:"arrowShot", volume:1, autoPlay:false, estimatedBytes: 50000}));
-			
+
 			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			//queue.append(new MP3Loader("sounds/music/BattleMap2.mp3", {name:"BattleMap2", volume:1, autoPlay:false, estimatedBytes: 50000}));
 
+			addEventListener("restart", restartMap)
+			addEventListener("backtomap", backToMap)
 			queue.load();
 			// constructor code
+		}
+		private function restartMap(e:Event):void
+		{
+			trace("restarted")
+			var map:Map = new Map();
+			addChild(map)
+		}
+		private function backToMap(e:Event):void
+		{
+			var mapSelectScreen:MapSelectScreen = new MapSelectScreen(this);
+			addChild(mapSelectScreen);
 		}
 		private function progressHandler(e:LoaderEvent):void
 		{
@@ -136,39 +153,8 @@
 				i++;
 			}
 			Preload.PreloadText.text = "Done!";
-			towerManager = new TowerManager(towerList);
+			TowerManager.towerList = towerList;
 			myLoader = null;
-			setupRounds();
-		}
-		private function setupRounds():void
-		{
-			myLoader = new URLLoader  ;
-			myLoader.addEventListener(Event.COMPLETE,compileRoundsList);
-			myLoader.load(new URLRequest("RoundsList.xml"));
-		}
-		private function compileRoundsList(e:Event):void
-		{
-			var myXML = new XML(e.target.data);
-			var i:int = 0;
-			roundsList = new Array  ;
-			while (i < myXML.Row.length())
-			{
-				var roundNumber:int = int(myXML.Row[i].currentRound);
-				var maxHp:int = int(myXML.Row[i].maxHp);
-				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);
-				var goldValue:int = int(myXML.Row[i].goldValue);
-				//var numberOfEnemies:int = 1;
-				var numberOfEnemies:int = int(myXML.Row[i].numberOfEnemies);
-				var endBonus:int = int(myXML.Row[i].roundEndBonus);
-				var freq:int = int(myXML.Row[i].freq);
-				var armorType:String = String(myXML.Row[i].armorType);
-				var maxArmor:int = int(myXML.Row[i].maxArmor);
-				var eName:String = String(myXML.Row[i].eName);
-				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName];
-				roundsList.push(waveData);
-				i++;
-			}
-			common.Commons.setRoundsList(roundsList);
 			startMenu();
 		}
 		private function startMenu():void
@@ -177,31 +163,30 @@
 			sounds.SoundManager.bgfx("mainTheme");
 			removeChild(Preload);
 			Preload = null;
-			startScreenUI()
+			startScreenUI();
 			//Skip clicking NewGame:;
 			//startGame(MouseEvent(undefined));
 		}
 		private function startScreenUI():void
 		{
 			startScreen = new StartScreen();
-			addChild(startScreen)
+			addChild(startScreen);
 			startScreen.newGame.addEventListener(MouseEvent.CLICK, startGame);
 		}
 		private function startGame(e:Event):void
 		{
 			startScreen.newGame.removeEventListener(MouseEvent.CLICK, startGame);
-			TweenLite.to(startScreen, .5, {alpha:0, onComplete:endThis})
+			TweenLite.to(startScreen, .5, {alpha:0, onComplete:endThis});
 		}
 		private function endThis():void
 		{
 			removeChild(startScreen);
 			startScreen = null;
 
-			var mapSelectScreen:MapSelectScreen = new MapSelectScreen();
+			var mapSelectScreen:MapSelectScreen = new MapSelectScreen(this);
 			addChild(mapSelectScreen);
 			TweenLite.from(mapSelectScreen, .3, {alpha:0});
 		}
-
 	}
 
 }

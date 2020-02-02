@@ -7,7 +7,8 @@
 		
 		public function WizardsAlley() {
 			super()
-			// constructor code
+			mapID = "WizardsAlley"
+			gameName = "Wizard's Alley"
 		}
 		override internal function setMapArray():void
 		{

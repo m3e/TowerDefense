@@ -35,7 +35,8 @@
 
 		public var poisonSlow:Number;
 		public var iceSlow:Number;
-		internal var healthBar:HealthBar;
+		protected var healthBar:HealthBar;
+		public var removeLife:Boolean;
 
 		private var light:Object;
 		private var medium:Object;
@@ -56,7 +57,7 @@
 			mapArray = Map;
 			healthBar = new HealthBar();
 			addEventListener(Event.ADDED_TO_STAGE, added);
-			addEventListener(Event.ENTER_FRAME, startMovement);
+
 			// constructor code
 		}
 		private function added(e:Event):void
@@ -68,6 +69,7 @@
 			_root = e.currentTarget.parent;
 			_root.addChild(healthBar);
 			healthBar.visible = false;
+			addEventListener(Event.ENTER_FRAME, startMovement);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			setupArmor();
 		}
@@ -79,18 +81,23 @@
 			}
 			else
 			{
-				var myX:int = (Math.floor(x + 16) / common.Commons.tileSide)
-				var myY:int = (Math.floor(y + 16) / common.Commons.tileSide)
-				var a:Number = maxMoveSpeed - (maxMoveSpeed * iceSlow)
-				var b:Number = a - (a * poisonSlow)
+				var myX:int = (Math.floor(x + 16) / common.Commons.tileSide);
+				var myY:int = (Math.floor(y + 16) / common.Commons.tileSide);
+				var a:Number = maxMoveSpeed - (maxMoveSpeed * iceSlow);
+				var b:Number = a - (a * poisonSlow);
 				if (common.Commons.checkB(Math.floor(myX),Math.floor(myY)))
 				{
-					var c:Number = b - (b * common.Commons.tileArray[myY][myX].icedSlow)
-					moveSpeed = c
+					var iSlow:Number = 0;
+					if (common.Commons.tileArray[myY][myX] != null)
+					{
+						iSlow = b * common.Commons.tileArray[myY][myX].icedSlow;
+					}
+					var c:Number = b - iSlow;
+					moveSpeed = c;
 				}
 				else
 				{
-					moveSpeed = b
+					moveSpeed = b;
 				}
 			}
 		}
@@ -170,18 +177,18 @@
 			//calculate reduced dmg
 			if (eHp > 0)
 			{
-				trace("Raw: ",dmg)
+
 				dmg = checkMatchup(dmg,dType);
-				trace("Matchup: ",dmg)
+
 				dmg = dmg * (1 + increasedDmgTaken)
-				trace("IncreasedDmgTkn: ",dmg)
+				;
 				dmg = determineArmor(dmg);
-				trace("Armored: ",dmg)
+
 				if (dmg < 0)
 				{
 					dmg = 0;
 				}
-				trace("Lastly: ",dmg)
+
 				eHp -=  dmg;
 			}
 			if (eHp <= 0)
@@ -268,6 +275,7 @@
 					break;
 
 				default :
+					removeLife = true;
 					destroyThis();
 					break;
 			}
@@ -275,7 +283,7 @@
 			updateHealth();
 		}
 
-		internal function destroyThis():void
+		public function destroyThis():void
 		{
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
@@ -283,6 +291,11 @@
 			healthBar = null;
 			_root.removeChild(this);
 			_root = null;
+			light = null;
+			medium = null;
+			heavy = null;
+			fort = null;
+			pure = null;
 		}
 	}
 

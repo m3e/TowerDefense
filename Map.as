@@ -27,13 +27,15 @@
 
 	import sounds.SoundManager;
 
+	import design.UI.OptionsButton;
+	import design.UI.OptionsWindow;
+
 
 	public class Map extends MovieClip
 	{
 
 		private var menuManager:MenuManager;
 		private var middleInfo:MiddleInfoContent;
-		private var towerManager:TowerManager;
 		//root
 		private var _root:Object;
 
@@ -83,18 +85,19 @@
 		//booleans
 		private var healthBarOn:Boolean;
 
+		private var optionsButton:OptionsButton;
+		private var optionsWindow:OptionsWindow;
+
 		public function Map()
 		{
 			enemyList = common.Commons.getEnemyList();
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
 			tileSide = common.Commons.tileSide;
-			common.Commons.tileArray = tileArray
-			;
-
+			common.Commons.tileArray = tileArray;
 			//1=right 2=down 3=left 4=up
-
 			mapArray = common.Commons.getMapArray();
+			roundsList = common.Commons.getRoundsList();
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
@@ -140,10 +143,6 @@
 			setupBottomBar();
 			//requires initEnemies for buttons
 
-			setupRoundBar();
-
-
-
 			setupBottomBarContent();
 
 			setupKeyboard();
@@ -153,20 +152,15 @@
 
 			setupTileListeners();
 
-
 			setChildIndex(userInfo,numChildren-1);
-
-
-		}
-		private function setupRoundBar():void
-		{
-			roundBar = new RoundBar(roundsList);
-			roundBar.y = 416;
-			_root.addChild(roundBar);
 		}
 		private function setupBottomBarContent():void
 		{
-			menuManager = new MenuManager(_root);
+			roundBar = new RoundBar();
+			roundBar.y = 416;
+			_root.addChild(roundBar);
+
+			menuManager = new MenuManager();
 			menuManager.x = 677;
 			menuManager.y = 423;
 			_root.addChild(menuManager);
@@ -175,6 +169,34 @@
 			middleInfo.x = 333;
 			middleInfo.y = 431;
 			_root.addChild(middleInfo);
+
+			optionsButton = new OptionsButton();
+			optionsButton.scaleX = .5;
+			optionsButton.scaleY = .5;
+			optionsButton.x = 298;
+			optionsButton.y = 440;
+			_root.addChild(optionsButton);
+			optionsButton.addEventListener(MouseEvent.CLICK, optionsButtonClick);
+		}
+		private function optionsButtonClick(e:MouseEvent):void
+		{
+			optionsWindow = new OptionsWindow(true);
+			addChild(optionsWindow);
+
+			optionsWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
+			optionsWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
+		}
+		private function restartButtonClicked(e:MouseEvent):void
+		{
+			endClass();
+			dispatchEvent(new Event("restart",true))
+			parent.removeChild(this)
+		}
+		private function backToMapClicked(e:MouseEvent):void
+		{
+			endClass();
+			dispatchEvent(new Event("backtomap",true));
+			parent.removeChild(this)
 		}
 		private function setupUser():void
 		{
@@ -195,7 +217,7 @@
 			}
 			else if (_keyDown > 1)
 			{
-				_keyDown = 1
+				_keyDown = 1;
 			}
 			if (shiftDown == true)
 			{
@@ -262,20 +284,21 @@
 					case Keyboard.SPACE :
 						startRoundKeyboard();
 						break;
-
 				}
-				if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
+				if (inputField != null)
 				{
-					menuManager.keyDownHandler(e);
-					/*if (mouseclickedTower != null)
+					if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 					{
-					mouseclickedTowerSquare.visible = false;
-					mouseclickedTower = null;
-					}*/
-				}
-				else
-				{
-					trace(e.target);
+						if (menuManager != null)
+						{
+							menuManager.keyDownHandler(e);
+						}
+						/*if (mouseclickedTower != null)
+						{
+						mouseclickedTowerSquare.visible = false;
+						mouseclickedTower = null;
+						}*/
+					}
 				}
 			}
 		}
@@ -330,7 +353,7 @@
 		}
 		private function setupBottomBar():void
 		{
-			bottomBar = new BottomBar(this);
+			bottomBar = new BottomBar();
 			bottomBar.y = 416;
 			_root.addChild(bottomBar);
 
@@ -351,7 +374,7 @@
 			if (roundManager.roundInProgress == false)
 			{
 				roundManager.startRound(true);
-				roundBar.updateRoundList();
+				roundBar.updateRoundList(roundManager.getCurrentRound());
 			}
 		}
 		private function sendWave(e:MouseEvent)
@@ -402,6 +425,7 @@
 			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
 			_root.addChild(inputField);
 			inputField.visible = false;
+
 		}
 		private function mouseDownAction(e:MouseEvent):void
 		{
@@ -485,11 +509,12 @@
 			rangeCircle.graphics.endFill();
 			rangeCircle.visible = false;
 			_root.addChild(rangeCircle);
+
 		}
 		private function setupEnemies():void
 		{
-			initEnemies = new InitiateEnemies(mapArray,enemyList,_root,userInfo,tileSide);
-			roundManager = new RoundManager(initEnemies,roundsList);
+			initEnemies = new InitiateEnemies();
+			roundManager = new RoundManager(initEnemies);
 		}
 		private function setupMap():void
 		{
@@ -695,6 +720,103 @@
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE, towerRemoved);
+		}
+		private function removeMap():void
+		{
+			for (var i:int=0; i < tileArray.length; i++)
+			{
+				for (var o:int=0; o < tileArray[i].length; o++)
+				{
+					_root.removeChild(tileArray[i][o]);
+					tileArray[i][o] = null;
+				}
+			}
+			tileArray = [];
+		}
+		private function endClass():void
+		{
+			initEnemies.endClass();
+			roundManager.endClass();
+			roundsList = []
+			;
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
+			stage.removeEventListener(KeyboardEvent.KEY_UP, keyReleased);
+
+			roundBar.endClass();
+			_root.removeChild(roundBar);
+			roundBar = null;
+
+			menuManager.endClass();
+			_root.removeChild(menuManager);
+			menuManager = null;
+
+			_root.removeChild(middleInfo);
+			middleInfo = null;
+
+			_root.removeChild(bottomBar);
+			bottomBar = null;
+
+			optionsButton.removeEventListener(MouseEvent.CLICK, optionsButtonClick);
+			_root.removeChild(optionsButton);
+			optionsButton = null;
+
+			startRoundButton.removeEventListener(MouseEvent.CLICK, startRoundMouse);
+			_root.removeChild(startRoundButton);
+			startRoundButton = null;
+
+			dpsDummyButton.removeEventListener(MouseEvent.CLICK, sendDpsDummy);
+			_root.removeChild(dpsDummyButton);
+			dpsDummyButton = null;
+
+			_root.removeChild(userInfo);
+			userInfo = null;
+
+			_root.removeChild(mouseclickedTowerSquare );
+			mouseclickedTowerSquare = null;
+
+			_root.removeChild(inputField);
+			inputField = null;
+
+			_root.removeChild(rangeCircle);
+			rangeCircle = null
+			;
+			removeChild(cAfford);
+			cAfford = null;
+
+			mouseclickedTower = null;
+			psuedoTower = null;
+			towerBeingBuilt = null;
+
+
+			for (var i:int=0; i<tileArray.length; i++)
+			{
+				for (var o:int=0; o< tileArray[i].length; o++)
+				{
+					tileArray[i][o].removeEventListener(MouseEvent.CLICK, tileClicked);
+					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_DOWN, tileDown);
+					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_OVER, hoverOver);
+					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_OUT, hoverOverOut);
+					/*if (tileArray[i][o].isIced == true)
+					{
+					tileArray[i][o].removeIceLayer();
+					}*/
+					if (towerArray[i][o] != undefined)
+					{
+						towerArray[i][o].destroyTower();
+					}
+				}
+			}
+			removeMap();
+
+			optionsWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
+			optionsWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
+			optionsWindow.restartButton = null;
+			optionsWindow.backToMap = null;
+			optionsWindow = null;
+
+			tileArray = [];
+			enemyList = [];
+			mapArray = [];
 		}
 	}
 }

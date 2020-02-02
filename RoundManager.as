@@ -8,6 +8,7 @@
 	import enemies.Enemy;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import common.Commons;
 
 	public class RoundManager extends Sprite
 	{
@@ -19,16 +20,15 @@
 		private var frameTimer:int;
 		private var waveArray:Array;
 		private var roundEndBonus:int;
-		private var myLoader:URLLoader;
 		public var roundsList:Array;
 		private var enemyWaveTracker:Array;
 		private var enemyAlive:Array;
 		private var actualRound:Boolean;
 
-		public function RoundManager(_initEnemies:InitiateEnemies,rL:Array)
+		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
-			enemyWaveTracker = new Array  ;
-			roundsList = rL;
+			enemyWaveTracker = [];
+			roundsList = common.Commons.roundsList;
 			enemyAlive = new Array  ;
 			enemyTimer = 0;
 			currentRound = 1;
@@ -51,6 +51,14 @@
 				{
 					currentRound++;
 				}
+				else
+				{
+					trace("Last round!")
+				}
+			}
+			else
+			{
+				enemyAlive.push(0)
 			}
 
 			if (waveArray[4] < 1)
@@ -61,6 +69,10 @@
 			roundInProgress = true;
 
 			addEventListener(Event.ENTER_FRAME, spawnTimer);
+		}
+		public function getCurrentRound():int
+		{
+			return currentRound;
 		}
 		private function endWaveSend():void
 		{
@@ -86,15 +98,15 @@
 					}
 				}
 			}
-			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
+			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 		}
 		private function spawnTimer(e:Event):void
 		{
 
 			if (frameTimer % waveArray[5] == 0)
 			{
-				var newEnemy:Enemy = initEnemies.customEnemy(waveArray);
-				newEnemy.addEventListener(Event.REMOVED,enemyDead);
+				var newEnemy:Enemy = initEnemies.customEnemy(waveArray, true);
+				newEnemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 				enemyAlive.push(newEnemy);
 				waveArray[4] = (waveArray[4] - 1);
 			}
@@ -116,6 +128,23 @@
 		{
 			waveArray = WaveArray;
 			startRound(false);
+		}
+		public function endClass():void
+		{
+			endWaveSend()
+			roundsList = []
+			initEnemies = null;
+			var enemyList:Array = common.Commons.getEnemyList();
+			while (enemyList.length > 0)
+			{
+				enemyList[0].destroyThis();
+			}
+			/*while (enemyWaveTracker.length > 0)
+			{
+				trace(enemyWaveTracker[0][1]);
+				enemyWaveTracker[0][1].destroyThis();
+			}*/
+			enemyAlive = [];
 		}
 	}
 

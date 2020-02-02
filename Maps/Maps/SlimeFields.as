@@ -9,7 +9,8 @@
 		
 		public function SlimeFields() {
 			super()
-			
+			mapID = "SlimeFields"
+			gameName = "Slime Fields"
 			// constructor code
 		}
 		override internal function setMapArray():void

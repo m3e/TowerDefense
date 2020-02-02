@@ -7,7 +7,8 @@
 		
 		public function MountMayhem() {
 			super()
-			// constructor code
+			mapID = "MountMayhem"
+			gameName = "Mount Mayhem"
 		}
 		override internal function setMapArray():void
 		{

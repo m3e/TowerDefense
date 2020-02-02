@@ -7,7 +7,8 @@
 		
 		public function BanditsHideout() {
 			super()
-			// constructor code
+			mapID = "BanditsHideout"
+			gameName = "Bandit's Hideout"
 		}
 		override internal function setMapArray():void
 		{

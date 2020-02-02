@@ -12,26 +12,36 @@
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
 	import flash.events.Event;
+	import flash.net.SharedObject;
 
 
 	public class SoundManager extends MovieClip
 	{
 
 
-		private static var currentPlay:String;
-
-		public static var sfxVolume:Number;
+		public static var sfxVolume:Number=1;
 		private static var queue:LoaderMax;
 		private static var sfxs:Array;
 		
 		private static var currentlyPlaying:String;
 		private static var bgSound:SoundChannel;
-		private static var musicVolume:Number;
+		public static var bgVolume:Number=1;
+		private static var sharedData:SharedObject = SharedObject.getLocal("LocalSave")
 
 		public function SoundManager(Queue:LoaderMax)
 		{
-			sfxVolume = 1;
-			musicVolume = .2;
+			
+			sharedData = SharedObject.getLocal("LocalSave")
+			sfxVolume = sharedData.data.fxVolume
+			if (isNaN(sfxVolume))
+			{
+				sfxVolume = 1;
+			}
+			bgVolume = sharedData.data.bgVolume
+			if (isNaN(bgVolume))
+			{
+				bgVolume = 1;
+			}
 			queue = Queue;
 			TweenPlugin.activate([VolumePlugin]);
 			sfxs = new Array  ;
@@ -41,16 +51,19 @@
 			sfxVolume = SfxVolume;
 			changeSfxVolume();
 		}
-		/*public static function setMusicVolume(MusicVolume:Number):void
+		public static function setMusicVolume(MusicVolume:Number):void
 		{
-			musicVolume = MusicVolume;
-			if (currentPlay != null)
+			bgVolume = MusicVolume;
+			
+			if (currentlyPlaying != null)
 			{
-				var song:MP3Loader = queue.getLoader(currentPlay);
-				TweenLite.to(song,.5,{volume:musicVolume});
+				//var song:MP3Loader = queue.getLoader(currentlyPlaying);
+				//TweenLite.to(song,.5,{volume:musicVolume});
+				var s:SoundTransform = new SoundTransform(bgVolume)
+				bgSound.soundTransform = s;
 			}
-		}*/
-		public static function changeSfxVolume():void
+		}
+		private static function changeSfxVolume():void
 		{
 			//Creating local copy in case sfx_complete occurs while changing volumes
 			var copySfx:Array = newTheMap(sfxs);
@@ -62,6 +75,7 @@
 					copySfx[i].soundTransform = trans;
 				}
 			}
+			copySfx=[]
 		}
 
 		public static function sfx(fxName:String):SoundChannel
@@ -93,7 +107,7 @@
 					bgSound.stop();
 				}
 				var song:Sound = queue.getContent(fxName);
-				var trans:SoundTransform = new SoundTransform(musicVolume);
+				var trans:SoundTransform = new SoundTransform(bgVolume);
 				var sound:SoundChannel = song.play(0,0,trans)
 				currentlyPlaying = fxName;
 				bgSound = sound;

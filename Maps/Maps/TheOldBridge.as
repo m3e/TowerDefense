@@ -7,7 +7,8 @@
 		
 		public function TheOldBridge() {
 			super()
-			// constructor code
+			mapID = "TheOldBridge"
+			gameName = "The Old Bridge"
 		}
 		override internal function setMapArray():void
 		{

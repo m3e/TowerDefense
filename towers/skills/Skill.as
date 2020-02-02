@@ -403,7 +403,7 @@
 			sO = null;
 			towerArray = null;
 			tTarget = null;
-			_root = null;;
+			_root = null;
 		}
 	}
 }

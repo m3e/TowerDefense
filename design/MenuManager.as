@@ -15,6 +15,7 @@
 	import towers.skills.Skill;
 	import com.greensock.easing.Ease;
 	import design.SkillsMouseOver;
+	import common.Commons;
 
 
 	public class MenuManager extends MovieClip
@@ -34,12 +35,12 @@
 		private var selectedTower:Tower;
 
 
-		public function MenuManager(e:Object)
+		public function MenuManager()
 		{
 
 			currentMenuSelected = new Array  ;
 			cellsArray = new Array  ;
-			_root = e;
+			_root = common.Commons.getRoot();
 
 			var menuLength:int = 4;
 			var menuHeight:int = 3;
@@ -151,7 +152,7 @@
 						tower = currentMenuSelected[1][2];
 						selectTower(tower);
 						break;
-						
+
 					case (Keyboard.NUMBER_8) :
 						tower = currentMenuSelected[1][2];
 						selectTower(tower);
@@ -241,7 +242,7 @@
 			{
 				case (selectedTower == null) :
 
-					
+
 					if ((towerBeingBuiltSquare.x != tower.x || towerBeingBuiltSquare.y != tower.y) || towerBeingBuiltSquare.visible == false)
 					{
 						towerBeingBuiltSquare.x = tower.x;
@@ -255,7 +256,7 @@
 					}
 					_root.buildTower(tower);
 					break;
-				
+
 				case (selectedTower != null) :
 
 					_root.upgradeTower(tower);
@@ -328,17 +329,17 @@
 						var c2:Number = b2 - a2;
 						skillsMouseOver.x -=  c2 + 3;
 					}
-					
-					skillsMouseOver.sName.text = e.currentTarget.sName
-					skillsMouseOver.sEffectOneName.text = e.currentTarget.eMenuNameOne
-					skillsMouseOver.sEffectOne.text = e.currentTarget.eMenuStatOne
-					skillsMouseOver.sEffectTwoName.text = e.currentTarget.eMenuNameTwo
-					skillsMouseOver.sEffectTwo.text = e.currentTarget.eMenuStatTwo
-					skillsMouseOver.sEffectThreeName.text = e.currentTarget.eMenuNameThree
-					skillsMouseOver.sEffectThree.text = e.currentTarget.eMenuStatThree
-					skillsMouseOver.sEffectFourName.text = e.currentTarget.eMenuNameFour
+
+					skillsMouseOver.sName.text = e.currentTarget.sName;
+					skillsMouseOver.sEffectOneName.text = e.currentTarget.eMenuNameOne;
+					skillsMouseOver.sEffectOne.text = e.currentTarget.eMenuStatOne;
+					skillsMouseOver.sEffectTwoName.text = e.currentTarget.eMenuNameTwo;
+					skillsMouseOver.sEffectTwo.text = e.currentTarget.eMenuStatTwo;
+					skillsMouseOver.sEffectThreeName.text = e.currentTarget.eMenuNameThree;
+					skillsMouseOver.sEffectThree.text = e.currentTarget.eMenuStatThree;
+					skillsMouseOver.sEffectFourName.text = e.currentTarget.eMenuNameFour;
 					skillsMouseOver.sEffectFour.text = e.currentTarget.eMenuStatFour
-					
+					;
 					break;
 			}
 		}
@@ -428,6 +429,28 @@
 					}
 				}
 			}
+		}
+		public function endClass():void
+		{
+			emptyOutMenuSelected();
+			removeChild(sellObject)
+			removeChild(targetingIcon)
+			removeChild(upgradeIcon)
+			removeChild(towerStatsOver)
+			removeChild(skillsMouseOver)
+			removeChild(towerBeingBuiltSquare)
+			towerBeingBuiltSquare = null;
+			sellObject = null;
+			targetingIcon = null;
+			upgradeIcon = null;
+			towerStatsOver = null;
+			skillsMouseOver = null;
+			
+			selectedTower = null;
+			_root = null;
+
+			currentMenuSelected = [];
+			cellsArray = []
 		}
 
 	}

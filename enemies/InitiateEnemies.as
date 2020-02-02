@@ -6,6 +6,7 @@
 	import flash.utils.getDefinitionByName;
 	import flash.events.*;
 	import enemies.*;
+	import common.Commons;
 
 	public class InitiateEnemies extends Sprite
 	{
@@ -13,7 +14,6 @@
 		private var mapArray:Array;
 		private var enemyList:Array;
 		private var _root:Object;
-		private var userInfo:UserInfo;
 		private var tileSide:int;
 
 		private var enemy:Enemy;
@@ -21,14 +21,13 @@
 		public var healthBarOn:Boolean;
 
 
-		public function InitiateEnemies(MapArray:Array, EnemyList:Array,_Root:Object,_userInfo:UserInfo,TileSide:int)
+		public function InitiateEnemies()
 		{
 
-			tileSide = TileSide;
-			userInfo = _userInfo;
-			mapArray = MapArray;
-			enemyList = EnemyList;
-			_root = _Root;
+			tileSide = common.Commons.tileSide;
+			mapArray = common.Commons.getMapArray();
+			enemyList = common.Commons.getEnemyList();
+			_root = common.Commons.getRoot();
 			// constructor code
 		}
 
@@ -43,7 +42,7 @@
 			_root.addChild(enemy);
 			enemyList.push(enemy);
 		}
-		public function customEnemy(waveArray:Array):Enemy
+		public function customEnemy(waveArray:Array, roundBonus:Boolean):Enemy
 		{
 			
 			
@@ -78,24 +77,29 @@
 			{
 				UserInfo.changeGold(e.currentTarget.goldValue);
 			}
+			else if (e.currentTarget.removeLife)
+			{
+				UserInfo.updateLives(1);
+			}
 			else
 			{
 				if (e.currentTarget is dpsTestEnemy)
 				{
 					//do nothing
 				}
-				else
-				{
-					userInfo.updateLives(1);
-				}
-				
 			}
+			//enemyList = common.Commons.getEnemyList();
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
-			e.currentTarget.removeEventListener(Event.REMOVED,enemyDead);
-			if (userInfo.lives <= 0)
+			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+			if (UserInfo.lives <= 0)
 			{
 				trace("Game over");
 			}
+		}
+		public function endClass():void
+		{
+			enemy = null;
+			_root = null;
 		}
 		/*private function getClass(eName:String):Object
 		{

@@ -7,7 +7,8 @@
 		
 		public function SpectersCircle() {
 			super()
-			// constructor code
+			mapID = "SpectersCircle"
+			gameName = "Specter's Circle"
 		}
 		override internal function setMapArray():void
 		{

@@ -8,7 +8,8 @@
 		
 		public function WoodedPath() {
 			super()
-			// constructor code
+			mapID = "WoodedPath"
+			gameName = "Wooded Path"
 		}
 		override internal function setMapArray():void
 		{

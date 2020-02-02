@@ -94,17 +94,13 @@
 		override internal function startMovement(e:Event):void
 		{
 			frames++
-			
 			findDps();
 			if (frames == 25)
 			{
 				//findDps()
 				frames = 1
 			}
-			
-			
 			calculateDpsFrame()
-			
 			moveCharacter();
 		}
 		private function findDps():void
@@ -132,7 +128,7 @@
 			
 			dmgCounter = 0;
 		}
-		override internal function destroyThis():void
+		/*override public function destroyThis():void
 		{
 			trace("DPS @ 100%: " + dmgTotal);
 			trace("DPS vs Light: ",lDmg)
@@ -140,11 +136,11 @@
 			trace("DPS vs Heavy: ",hDmg)
 			trace("DPS vs Fort: ",fDmg)
 			
-			/*var date:Date = new Date();
-			endTime = date.toLocaleTimeString()
-			trace("MS/maxMS: ,",moveSpeed,maxMoveSpeed);
-			trace("Time start: ",startTime);
-			trace("Time ended: ",endTime);*/
+			//var date:Date = new Date();
+			//endTime = date.toLocaleTimeString()
+			//trace("MS/maxMS: ,",moveSpeed,maxMoveSpeed);
+			//trace("Time start: ",startTime);
+			//trace("Time ended: ",endTime);
 			
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
@@ -152,7 +148,7 @@
 			healthBar = null;
 			_root.removeChild(this);
 			_root = null;
-		}
+		}*/
 	}
 	
 }

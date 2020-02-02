@@ -9,16 +9,14 @@
 	
 	
 	public class UserInfo extends MovieClip {
-		
-		private var _root:Object;
 				
 		//GOLD
 		private static var goldBox:GoldBox;
 		public static var gold:int;
 		
 		//LIVES
-		private var livesBar:LivesBar;
-		public var lives:int;
+		private static var livesBar:LivesBar;
+		public static var lives:int;
 		
 		
 		
@@ -31,9 +29,7 @@
 		private function addedToStage(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage)
-			
-			_root = MovieClip(root)
-			
+			addEventListener(Event.REMOVED_FROM_STAGE, removedFromStage)
 			//GOLD
 			goldBox = new GoldBox();
 			goldBox.x = 591
@@ -70,7 +66,7 @@
 			gold += goldChange
 			goldBox.GoldText.text = gold.toString();
 		}
-		public function updateLives(subtractedLives:int):void
+		public static function updateLives(subtractedLives:int):void
 		{
 			lives -= subtractedLives;
 			livesBar.LivesText.text = lives.toString();
@@ -78,6 +74,17 @@
 		public function getGold():int
 		{
 			return gold;
+		}
+		private function removedFromStage(e:Event):void
+		{
+			endClass();
+		}
+		private function endClass():void
+		{
+			removeChild(goldBox)
+			removeChild(livesBar)
+			goldBox = null;
+			livesBar = null;
 		}
 	}
 	
