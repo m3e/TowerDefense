@@ -5,6 +5,7 @@
 	import design.UI.NewGame;
 	import flash.events.MouseEvent;
 	import design.UI.OptionsWindow;
+	import sounds.SoundManager;
 	
 	
 	public class StartScreen extends MovieClip {
@@ -21,6 +22,7 @@
 		{
 			
 			removeEventListener(Event.ADDED_TO_STAGE,added)
+			sounds.SoundManager.bgfx("mainTheme");
 			options.addEventListener(MouseEvent.CLICK, optionsClicked)
 			//newGame = new NewGame();
 			//addChild(newGame);

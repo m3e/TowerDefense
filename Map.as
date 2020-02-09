@@ -15,6 +15,8 @@
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import assets.UI.BattleMap.*;
+	import design.UI.GameOverWindow;
 
 	import common.Commons;
 
@@ -72,6 +74,7 @@
 		//controls
 		private var _keyDown:int = 0;
 		private var shiftDown:Boolean;
+		private var keysEnabled:Boolean;
 
 		//user
 		private var userInfo:UserInfo;
@@ -87,6 +90,10 @@
 
 		private var optionsButton:OptionsButton;
 		private var optionsWindow:OptionsWindow;
+		private var fastForward:FastForward;
+		private var normalSpeed:NormalSpeed;
+		private var pauseBtn:PauseBtn;
+		private var gameOverWindow:GameOverWindow;
 
 		public function Map()
 		{
@@ -123,6 +130,8 @@
 			addChild(cAfford);
 			cAfford.visible = false;
 			cAfford.mouseEnabled = false;
+			common.Commons.fRate = 24;
+			stage.frameRate = 24;
 
 			setupMap();
 			//Sets: mapArray
@@ -177,26 +186,60 @@
 			optionsButton.y = 440;
 			_root.addChild(optionsButton);
 			optionsButton.addEventListener(MouseEvent.CLICK, optionsButtonClick);
+
+			normalSpeed = new NormalSpeed();
+			normalSpeed.x = 298;
+			normalSpeed.y = 485;
+			_root.addChild(normalSpeed);
+
+			fastForward = new FastForward();
+			fastForward.x = 298;
+			fastForward.y = 530;
+			_root.addChild(fastForward);
+
 		}
 		private function optionsButtonClick(e:MouseEvent):void
 		{
 			optionsWindow = new OptionsWindow(true);
+			keysEnabled = false;
+
 			addChild(optionsWindow);
+			pauseGame();
+
+			optionsWindow.addEventListener(Event.REMOVED_FROM_STAGE, optionsWindowClosed);
 
 			optionsWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
 			optionsWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
 		}
-		private function restartButtonClicked(e:MouseEvent):void
+		private function optionsWindowClosed(e:Event):void
 		{
-			endClass();
-			dispatchEvent(new Event("restart",true))
-			parent.removeChild(this)
+			optionsWindow.removeEventListener(Event.REMOVED_FROM_STAGE, optionsWindowClosed);
+
+			optionsWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
+			optionsWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
+			optionsWindow.restartButton = null;
+			optionsWindow.backToMap = null
+			;
+			optionsWindow = null;
+
+			enableKeys();
+			resumeGame();
 		}
-		private function backToMapClicked(e:MouseEvent):void
+		private function pauseGame():void
 		{
-			endClass();
-			dispatchEvent(new Event("backtomap",true));
-			parent.removeChild(this)
+			common.Commons.pauseGame();
+			roundManager.pauseGame();
+			keysEnabled = false;
+		}
+		private function resumeGame():void
+		{
+			common.Commons.resumeGame();
+			roundManager.resumeGame();
+			keysEnabled = true;
+		}
+		private function enableKeys():void
+		{
+			keysEnabled = true;
 		}
 		private function setupUser():void
 		{
@@ -207,9 +250,11 @@
 		{
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 			stage.addEventListener(KeyboardEvent.KEY_UP, keyReleased);
+			keysEnabled = true;
 		}
 		private function keyReleased(e:KeyboardEvent):void
 		{
+
 			_keyDown--;
 			if (_keyDown < 0 )
 			{
@@ -225,10 +270,13 @@
 				if (shiftBuildEnabled == true)
 				{
 					shiftBuildEnabled = false;
-					if (towerBeingBuilt)
+					if (keysEnabled == true)
 					{
-						buildTower(towerBeingBuilt);
-						removeMouseClickedTower();
+						if (towerBeingBuilt)
+						{
+							buildTower(towerBeingBuilt);
+							removeMouseClickedTower();
+						}
 					}
 				}
 			}
@@ -236,7 +284,7 @@
 		private function keyPressed(e:KeyboardEvent):void
 		{
 			//Tower selection is handled via MenuManager
-			if (_keyDown == 0)
+			if (_keyDown == 0 && keysEnabled == true)
 			{
 				_keyDown++;
 
@@ -266,15 +314,22 @@
 						break;
 
 					case Keyboard.W :
-						stage.frameRate = 24;
+						common.Commons.fRate = 24;
+						stage.frameRate = common.Commons.fRate;
+						break;
+
+					case Keyboard.G :
+						UserInfo.changeGold(99999);
 						break;
 
 					case Keyboard.E :
-						stage.frameRate = 96;
+						common.Commons.fRate = 96;
+						stage.frameRate = common.Commons.fRate;
 						break;
 
 					case Keyboard.R :
-						stage.frameRate = 1;
+						common.Commons.fRate = 1;
+						stage.frameRate = common.Commons.fRate;
 						break;
 
 					case Keyboard.U :
@@ -514,7 +569,44 @@
 		private function setupEnemies():void
 		{
 			initEnemies = new InitiateEnemies();
+			initEnemies.addEventListener("gameOver",gameOver);
 			roundManager = new RoundManager(initEnemies);
+		}
+		private function gameOver(e:Event):void
+		{
+			gameOverWindow = new GameOverWindow();
+			keysEnabled = false;
+
+			addChild(gameOverWindow);
+			pauseGame();
+			//gameOverWindow.addEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
+			
+			gameOverWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
+			gameOverWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
+		}
+		private function gameOverWindowClosed(e:Event):void
+		{
+			gameOverWindow.removeEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
+
+			gameOverWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
+			gameOverWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
+			gameOverWindow.restartButton = null;
+			gameOverWindow.backToMap = null;
+
+			gameOverWindow = null;
+			resumeGame();
+		}
+		private function restartButtonClicked(e:MouseEvent):void
+		{
+			endClass();
+			dispatchEvent(new Event("restart",true));
+			parent.removeChild(this);
+		}
+		private function backToMapClicked(e:MouseEvent):void
+		{
+			endClass();
+			dispatchEvent(new Event("backtomap",true));
+			parent.removeChild(this);
 		}
 		private function setupMap():void
 		{
@@ -568,17 +660,18 @@
 		private function addTowerToMap(towerX,towerY,TowerReference:Class):void
 		{
 			var klasa:Class = TowerReference;
-			var newTower:Tower = new klasa();
+			var newTower:Tower = new klasa();//creates new tower
 			klasa = null;
 			if (UserInfo.canAfford(newTower.tCost))
 			{
-
 				UserInfo.changeGold(-newTower.tCost);
 
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
 				newTower.x = towerX;
 				newTower.y = towerY;
+
+				common.Commons.addTowerList(newTower);
 
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
@@ -648,10 +741,6 @@
 
 					removeMouseClickedTower();
 				}
-				else
-				{
-					trace("Cannot afford upgrade.  Cost: ",testTower.tCost);
-				}
 				testTower.destroyTower();
 				klasa = null;
 			}
@@ -716,6 +805,7 @@
 		private function towerRemoved(e:Event):void
 		{
 			towerArray[e.currentTarget.y / tileSide][e.currentTarget.x / tileSide] = undefined;
+			common.Commons.removeTowerList(e.currentTarget);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, towerMapClicked);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			e.currentTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
@@ -808,11 +898,16 @@
 			}
 			removeMap();
 
-			optionsWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
-			optionsWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
-			optionsWindow.restartButton = null;
-			optionsWindow.backToMap = null;
-			optionsWindow = null;
+			//optionsWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
+			//optionsWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
+			//optionsWindow.restartButton = null;
+			//optionsWindow.backToMap = null;
+			//optionsWindow = null;
+
+			_root.removeChild(fastForward);
+			_root.removeChild(normalSpeed);
+			fastForward = null;
+			normalSpeed = null;
 
 			tileArray = [];
 			enemyList = [];

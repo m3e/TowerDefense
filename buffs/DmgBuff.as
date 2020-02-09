@@ -34,10 +34,18 @@
 			this.x = tTarget.x;
 			this.y = tTarget.y;
 			tTarget.buffsArray.push(this);
+			common.Commons.addSkillsList(this);
 			addEventListener(Event.ENTER_FRAME, buffTick);
 			// constructor code
 		}
-
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, buffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, buffTick);
+		}
 		private function buffTick(e:Event):void
 		{
 			if (tTarget != null)
@@ -63,6 +71,7 @@
 		}
 		public function finishBuff():void
 		{
+			common.Commons.removeSkillsList(this);
 			if (tTarget != null)
 			{
 				tTarget.tDmgBuff = 0;

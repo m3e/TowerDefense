@@ -8,6 +8,8 @@
 	import design.HealthBar;
 	import flash.utils.Dictionary;
 	import common.Commons;
+	import debuffs.Slow;
+	import assets.maptiles.Tile;
 
 
 	public class Enemy extends MovieClip
@@ -38,6 +40,8 @@
 		protected var healthBar:HealthBar;
 		public var removeLife:Boolean;
 
+		public var poisoned:Boolean;
+		
 		private var light:Object;
 		private var medium:Object;
 		private var heavy:Object;
@@ -165,7 +169,6 @@
 			}
 			return Number(dmg * d);
 		}
-
 		internal function determineArmor(dmg:Number):Number
 		{
 			var d:Number = dmg;
@@ -199,6 +202,14 @@
 					destroyThis();
 				}
 			}
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, startMovement);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, startMovement);
 		}
 		internal function startMovement(e:Event):void
 		{
@@ -279,12 +290,21 @@
 					destroyThis();
 					break;
 			}
+			if (common.Commons.tileArray[pt.y][pt.x] != null && common.Commons.tileArray[pt.y][pt.x].isOnFire == true)
+			{
+				var thisTile:Tile = common.Commons.tileArray[pt.y][pt.x]
+				takeDmg(thisTile.burnAmount/24,"fire")
+			}
 			distanceTraveled +=  moveSpeed;
 			updateHealth();
 		}
-
+		protected function dpsBuddy():void
+		{
+			
+		}
 		public function destroyThis():void
 		{
+			dpsBuddy()
 			mapArray = null;
 			removeEventListener(Event.ENTER_FRAME, startMovement);
 			_root.removeChild(healthBar);

@@ -9,6 +9,7 @@
 	import flash.geom.Rectangle;
 	import flash.net.SharedObject;
 	import design.UI.MenuButton;
+	import common.Commons;
 
 	public class OptionsWindow extends MovieClip
 	{
@@ -28,7 +29,6 @@
 		{
 			bMap = BattleMap;
 			addEventListener(Event.ADDED_TO_STAGE, added);
-			
 			// constructor code
 		}
 		private function added(e:Event):void

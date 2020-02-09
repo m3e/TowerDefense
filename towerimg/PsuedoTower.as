@@ -39,6 +39,7 @@
 			gotoAndStop(tFrame);
 
 			mockTower.destroyTower();
+			mockTower = null;
 			
 		}
 		private function removed(e:Event):void

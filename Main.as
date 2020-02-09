@@ -17,7 +17,7 @@
 	import towers.TowerManager;
 
 	//Middle
-	//X: 448 - 207.5
+	//X: 448
 	//Y: 292.5
 
 	public class Main extends MovieClip
@@ -28,10 +28,10 @@
 		private var myLoader:URLLoader;
 		private var towerList:Array;
 		private var startScreen:StartScreen;
-		
+
 		public function Main()
 		{
-			
+
 			this.stage.scaleMode = StageScaleMode.SHOW_ALL;
 			this.stage.quality = "16X16";
 
@@ -70,16 +70,16 @@
 			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			//queue.append(new MP3Loader("sounds/music/BattleMap2.mp3", {name:"BattleMap2", volume:1, autoPlay:false, estimatedBytes: 50000}));
 
-			addEventListener("restart", restartMap)
-			addEventListener("backtomap", backToMap)
+			addEventListener("restart", restartMap);
+			addEventListener("backtomap", backToMap);
 			queue.load();
 			// constructor code
 		}
 		private function restartMap(e:Event):void
 		{
-			trace("restarted")
+			trace("restarted");
 			var map:Map = new Map();
-			addChild(map)
+			addChild(map);
 		}
 		private function backToMap(e:Event):void
 		{
@@ -123,7 +123,7 @@
 				tower.tCost = int(myXML.Row[i].Cost);
 				tower.tType = String(myXML.Row[i].Type);
 				tower.tbSpeed = int(myXML.Row[i].bulletSpeed);
-				tower.bFrame = int(myXML.Row[i].bulletFrame);
+				tower.bFrame = String(myXML.Row[i].bulletFrame);
 				tower.tFrame = int(myXML.Row[i].towerFrame);
 				tower.fireSoundString = String(myXML.Row[i].fireSoundString);
 				tower.tDescription = String(myXML.Row[i].tDescription);
@@ -160,12 +160,10 @@
 		private function startMenu():void
 		{
 			soundManager = new SoundManager(queue);
-			sounds.SoundManager.bgfx("mainTheme");
 			removeChild(Preload);
 			Preload = null;
-			startScreenUI();
-			//Skip clicking NewGame:;
-			//startGame(MouseEvent(undefined));
+			startScreenUI(); //Game Starts Here
+			endThis() //skip to mapSelectScreen
 		}
 		private function startScreenUI():void
 		{

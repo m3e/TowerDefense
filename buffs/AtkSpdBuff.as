@@ -34,19 +34,27 @@
 			this.x = tTarget.x;
 			this.y = tTarget.y;
 			tTarget.buffsArray.push(this);
+			common.Commons.addSkillsList(this)
 			addEventListener(Event.ENTER_FRAME, buffTick);
 			// constructor code
 		}
-
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, buffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, buffTick);
+		}
 		private function buffTick(e:Event):void
 		{
 			if (tTarget != null)
 			{
 				if (frames < sSeconds * 24)
 				{
-					if (sAmount > tTarget.tAtkSpdBuff)
+					if (sAmount > tTarget.tBaseAtkSpdBuff)
 					{
-						tTarget.tAtkSpdBuff = sAmount;
+						tTarget.tBaseAtkSpdBuff = sAmount;
 					}
 				}
 				else
@@ -63,9 +71,10 @@
 		}
 		public function finishBuff():void
 		{
+			common.Commons.removeSkillsList(this)
 			if (tTarget != null)
 			{
-				tTarget.tAtkSpdBuff = 0;
+				tTarget.tBaseAtkSpdBuff = 0;
 				if (tTarget.buffsArray.indexOf(this) != -1)
 				{
 					tTarget.buffsArray.splice(tTarget.buffsArray.indexOf(this),1);

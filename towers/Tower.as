@@ -21,6 +21,7 @@
 	import common.Commons;
 	import towers.*;
 	import towers.skills.Skill;
+	import towers.Projectiles.Bullet;
 
 	public class Tower extends MovieClip
 	{
@@ -38,12 +39,15 @@
 		public var tCost:int;
 		public var tType:String;
 
+		private var addedToStage:Boolean;
+
 		public var tFrame:int;
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
 		public var tActualDmg:Number;
-		public var tAtkSpdBuff:Number;
-		public var tActualAtkSpd:Number;
+		public var tBaseAtkSpdBuff:Number=0;
+		public var tAtkSpdBuff:Number=0;
+		//private var tActualAtkSpd:Number;
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
@@ -65,7 +69,7 @@
 		internal var tUpgradeTwo:String;
 		internal var tUpgradeThree:String;
 
-		internal var bFrame:int;
+		internal var bFrame:String;
 
 		internal var tLevel:int;
 
@@ -88,13 +92,13 @@
 			tDmgBuff = 0;
 			tActualDmg = 0;
 			tAtkSpdBuff = 0;
-			tActualAtkSpd = 0;
+			//tActualAtkSpd = 0;
 			tTarget = new Array  ;
 			targeting = "First";
 			loaded = true;
 			loadedTimer = 0;
 			tLevel = 1;
-			bFrame = 1;
+			bFrame = "RedSlash";
 			uCost = 45;
 
 			for (var i:int=0; i <TowerManager.towerList.length; i++)
@@ -131,7 +135,7 @@
 							skillsArray.push(skillsList[p]);
 						}
 					}
-					generateSkills();
+
 					if (targeting != "All")
 					{
 						targeting = "First";
@@ -152,14 +156,13 @@
 				{
 					case ("hit") :
 						hitSkills.push(newSkill);
-						
+
 						break;
 
-					case ("time") :
-					case ("diagGrid") :
+					case ("timer") :
 						timeSkills.push(newSkill);
 						break;
-						
+
 				}
 				skillsArray[i] = newSkill;
 
@@ -171,15 +174,19 @@
 		}
 		public function tMenu():Array
 		{
+			//"UpgradeMe" = upgrades
+
 			var e:Array = new Array  ;
 			e = [[skillsArray[0],skillsArray[1],skillsArray[2],skillsArray[3]],
-			 ["Targeting",,,"UpgradeMe"],
+			 ["Targeting",,,],
 			 ["Sell",upgradeOne(),upgradeTwo(),upgradeThree()]];
 
 			return e;
 		}
 		private function added(e:Event):void
 		{
+			addedToStage = true;
+			generateSkills();
 			_root = parent;
 			gotoAndStop(tFrame);
 			getSounds();
@@ -211,7 +218,9 @@
 		}
 		public function getAtkSpeed():Number
 		{
-			var k:Number = tAtkSpeed - (tAtkSpeed * tAtkSpdBuff);
+			//var k = Math.floor(Math.pow(.5,tAtkSpdBuff) * tAtkSpeed)
+			var k:Number = Math.pow(.5,(tAtkSpdBuff+tBaseAtkSpdBuff)) * tAtkSpeed
+			//var k:Number = tAtkSpeed - (tAtkSpeed * tAtkSpdBuff);
 			return k;
 		}
 		public function getDmg():Number
@@ -219,13 +228,21 @@
 			var k:Number = tDmg * (1 + tDmgBuff);
 			return k;
 		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, eFrame);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, eFrame);
+		}
 		internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
 				for (var k:int=0; k < timeSkills.length; k++)
 				{
-						timeSkills[k].activateSkill(this);
+					timeSkills[k].activateSkill(this);
 				}
 				tTarget.length = 0;
 				//Reload
@@ -334,12 +351,33 @@
 			var newBullet:Bullet;
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				newBullet = new Bullet(enemyList);
-				newBullet.gotoAndStop(bFrame);
+				var bShot:String = bFrame
+				var bString:String = "towers.Projectiles."+bShot
+				var ClassReference:Class = getDefinitionByName(bString) as Class;
+				newBullet = new ClassReference();
+				//newBullet = new Bullet(enemyList);
+				//newBullet.gotoAndStop(bFrame);
+				newBullet.tSource = this;
 				newBullet.hitSkills = hitSkills;
-				newBullet.x = this.x + (common.Commons.tileSide * .5);
-				newBullet.y = this.y + (common.Commons.tileSide * .5);
 				newBullet.bTarget = tTarget[i];
+				newBullet.tX = this.x
+				newBullet.tY = this.y
+				for (var p:int=0; p < hitSkills.length; p++)
+				{
+					hitSkills[p].bullets.push(newBullet);
+				}
+				if (tRange <= 50 || bShot == "BulletShot")
+				{
+					newBullet.instant = true;
+					newBullet.x = tTarget[i].x + (common.Commons.tileSide * .5);
+					newBullet.y = tTarget[i].y + (common.Commons.tileSide * .5);
+				}
+				else
+				{
+					newBullet.x = this.x + (common.Commons.tileSide * .5);
+					newBullet.y = this.y + (common.Commons.tileSide * .5);
+				}
+
 				newBullet.bDmg = getDmg();
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;
@@ -393,9 +431,9 @@
 		}
 		internal function deactivateSkills():void
 		{
-			for (var i:int=0 ; i < skillsArray.length; i++)
+			for (var i:int=0; i < skillsArray.length; i++)
 			{
-					skillsArray[i].deactivateSkill(this);
+				skillsArray[i].deactivateSkill(this);
 			}
 		}
 		public function destroyTower():void
@@ -403,7 +441,10 @@
 			removeEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
-			deactivateSkills();
+			if (addedToStage)
+			{
+				deactivateSkills();
+			}
 			while (buffsArray.length > 0)
 			{
 				buffsArray[0].finishBuff();
@@ -420,9 +461,9 @@
 				_root.removeChild(this);
 			}
 			_root = null;
-			skillsArray = []
-			hitSkills = []
-			timeSkills = []
+			skillsArray = [];
+			hitSkills = [];
+			timeSkills = [];
 		}
 	}
 }

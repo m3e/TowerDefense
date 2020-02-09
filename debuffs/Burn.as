@@ -4,6 +4,7 @@
 	import enemies.Enemy;
 	import flash.display.Sprite;
 	import flash.events.*;
+	import common.Commons;
 
 
 	public class Burn extends Sprite
@@ -22,10 +23,18 @@
 			seconds = _seconds;
 			
 			frames = 0;
+			common.Commons.addSkillsList(this)
 			addEventListener(Event.ENTER_FRAME, debuffTick);
 			// constructor code
 		}
-
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, debuffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, debuffTick);
+		}
 		private function debuffTick(e:Event):void
 		{
 			//check if debuff ran out
@@ -36,14 +45,11 @@
 				{
 					newBulletOnTarget();
 					enemy.takeDmg(amount,"fire");
-
-					
 				}
 				else if (enemy._root == null)
 				{
 					finish();
 				}
-
 			}
 			else
 			{
@@ -60,7 +66,7 @@
 		}
 		private function finish():void
 		{
-
+			common.Commons.removeSkillsList(this)
 			removeEventListener(Event.ENTER_FRAME, debuffTick);
 			enemy = null;
 		}

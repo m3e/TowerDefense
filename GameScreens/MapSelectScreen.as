@@ -40,6 +40,7 @@
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
+			sounds.SoundManager.bgfx("mainTheme");
 			options.addEventListener(MouseEvent.CLICK, optionsClicked)
 			levelsArray.push(SFields,WPath,TOldBridge,BHideout,VOfTrolls,MMayhem,WAlley,TOfMages,SCircle);
 

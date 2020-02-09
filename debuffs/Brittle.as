@@ -3,6 +3,7 @@
 	import flash.events.*;
 	import flash.display.Sprite;
 	import enemies.*
+	import common.Commons;
 	
 	public class Brittle extends Sprite {
 		
@@ -19,8 +20,17 @@
 			seconds = _seconds
 			frames = 0;
 			debuffNow()
+			common.Commons.addSkillsList(this)
 			addEventListener(Event.ENTER_FRAME, debuffTick)
 			// constructor code
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, debuffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, debuffTick);
 		}
 		private function debuffNow():void
 		{
@@ -40,6 +50,7 @@
 		}
 		private function finish():void
 		{
+			common.Commons.removeSkillsList(this)
 			enemy.armor = enemy.maxArmor;
 			removeEventListener(Event.ENTER_FRAME, debuffTick)
 			enemy = null;

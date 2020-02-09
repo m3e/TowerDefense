@@ -3,6 +3,7 @@
 	import enemies.Enemy;
 	import flash.events.Event;
 	import flash.display.Sprite
+	import common.Commons;
 	
 	public class Penitence extends Sprite {
 		
@@ -16,9 +17,18 @@
 			sAmount = _amount
 			sSeconds = _seconds
 			frames = 0;
-			
+			common.Commons.addSkillsList(this)
+
 			addEventListener(Event.ENTER_FRAME, debuffTick);
 			// constructor code
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, debuffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, debuffTick);
 		}
 		private function debuffTick(e:Event):void
 		{
@@ -40,9 +50,10 @@
 			}
 			frames++;
 		}
+
 		private function finish():void
 		{
-			
+			common.Commons.removeSkillsList(this)
 			enemy.increasedDmgTaken = 0
 			removeEventListener(Event.ENTER_FRAME, debuffTick)
 			enemy = null;

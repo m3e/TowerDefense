@@ -128,6 +128,10 @@
 			
 			dmgCounter = 0;
 		}
+		override protected function dpsBuddy():void
+		{
+			removeLife = false;
+		}
 		/*override public function destroyThis():void
 		{
 			trace("DPS @ 100%: " + dmgTotal);

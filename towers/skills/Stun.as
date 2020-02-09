@@ -3,6 +3,7 @@
 	import flash.display.Sprite;
 	import enemies.Enemy
 	import flash.events.Event;
+	import common.Commons;
 	
 	public class Stun extends Sprite {
 		
@@ -14,7 +15,16 @@
 			seconds = _s;
 			// constructor code
 			debuffNow()
+			common.Commons.addSkillsList(this)
 			addEventListener(Event.ENTER_FRAME, debuffTick)
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, debuffTick);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, debuffTick);
 		}
 		private function debuffTick(e:Event):void
 		{
@@ -34,6 +44,7 @@
 		}
 		private function finish():void
 		{
+			common.Commons.removeSkillsList(this)
 			enemy.isStunned = false;
 			removeEventListener(Event.ENTER_FRAME, debuffTick)
 			enemy = null;

@@ -20,6 +20,7 @@
 
 		public var healthBarOn:Boolean;
 
+		private var gameOver:Boolean;
 
 		public function InitiateEnemies()
 		{
@@ -91,9 +92,10 @@
 			//enemyList = common.Commons.getEnemyList();
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			if (UserInfo.lives <= 0)
+			if (UserInfo.lives <= 0 && gameOver == false)
 			{
-				trace("Game over");
+				gameOver = true;
+				dispatchEvent(new Event("gameOver"))
 			}
 		}
 		public function endClass():void

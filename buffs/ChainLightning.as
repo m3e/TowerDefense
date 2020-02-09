@@ -47,6 +47,15 @@
 			updateEnemyList();
 
 			frames = 1;
+			common.Commons.addSkillsList(this);
+			addEventListener(Event.ENTER_FRAME, gameTick);
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, gameTick);
+		}
+		public function resumedGame():void
+		{
 			addEventListener(Event.ENTER_FRAME, gameTick);
 		}
 		private function gameTick(e:Event):void
@@ -128,6 +137,7 @@
 		}
 		private function finish():void
 		{
+			common.Commons.removeSkillsList(this);
 			alreadyHit = null;
 			removeEventListener(Event.ENTER_FRAME, gameTick);
 			_root = null;

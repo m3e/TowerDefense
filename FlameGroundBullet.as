@@ -2,6 +2,7 @@
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import common.Commons;
 	
 	
 	public class FlameGroundBullet extends Sprite {
@@ -19,6 +20,15 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added)
 			addEventListener(Event.ENTER_FRAME, eFrame)
+			common.Commons.addSkillsList(this)
+		}
+		public function pausedGame():void
+		{
+			removeEventListener(Event.ENTER_FRAME, eFrame);
+		}
+		public function resumedGame():void
+		{
+			addEventListener(Event.ENTER_FRAME, eFrame);
 		}
 		private function eFrame(e:Event):void
 		{
@@ -30,6 +40,7 @@
 		}
 		private function destroyThis():void
 		{
+			common.Commons.removeSkillsList(this)
 			bTarget = null;
 			removeEventListener(Event.ENTER_FRAME, eFrame)
 			parent.removeChild(this)

@@ -24,6 +24,7 @@
 		private var enemyWaveTracker:Array;
 		private var enemyAlive:Array;
 		private var actualRound:Boolean;
+		private var spawnCount:int;
 
 		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
@@ -53,18 +54,19 @@
 				}
 				else
 				{
-					trace("Last round!")
+					trace("Last round!");
 				}
 			}
 			else
 			{
-				enemyAlive.push(0)
+				enemyAlive.push(0);
 			}
 
 			if (waveArray[4] < 1)
 			{
 				waveArray[4] = 10;
 			}
+			spawnCount = waveArray[4];
 			frameTimer = 0;
 			roundInProgress = true;
 
@@ -82,6 +84,20 @@
 
 			enemyAlive = new Array  ;
 			removeEventListener(Event.ENTER_FRAME, spawnTimer);
+		}
+		public function pauseGame():void
+		{
+			if (roundInProgress == true)
+			{
+				removeEventListener(Event.ENTER_FRAME, spawnTimer);
+			}
+		}
+		public function resumeGame():void
+		{
+			if (roundInProgress == true)
+			{
+				addEventListener(Event.ENTER_FRAME, spawnTimer);
+			}
 		}
 		private function enemyDead(e:Event):void
 		{
@@ -105,16 +121,16 @@
 
 			if (frameTimer % waveArray[5] == 0)
 			{
-				var newEnemy:Enemy = initEnemies.customEnemy(waveArray, true);
+				var newEnemy:Enemy = initEnemies.customEnemy(waveArray,true);
 				newEnemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 				enemyAlive.push(newEnemy);
-				waveArray[4] = (waveArray[4] - 1);
+				spawnCount--;
 			}
-			if (waveArray[4] == 0)
+			if (spawnCount == 0)
 			{
 				endWaveSend();
 			}
-			else if (waveArray[4] < 0)
+			else if (spawnCount < 0)
 			{
 				trace("RoundManager.numberToSend < 0?");
 				frameTimer++;
@@ -131,8 +147,8 @@
 		}
 		public function endClass():void
 		{
-			endWaveSend()
-			roundsList = []
+			endWaveSend();
+			roundsList = [];
 			initEnemies = null;
 			var enemyList:Array = common.Commons.getEnemyList();
 			while (enemyList.length > 0)
@@ -141,8 +157,8 @@
 			}
 			/*while (enemyWaveTracker.length > 0)
 			{
-				trace(enemyWaveTracker[0][1]);
-				enemyWaveTracker[0][1].destroyThis();
+			trace(enemyWaveTracker[0][1]);
+			enemyWaveTracker[0][1].destroyThis();
 			}*/
 			enemyAlive = [];
 		}
