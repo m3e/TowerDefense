@@ -2,16 +2,16 @@
 {
 
 	import flash.display.MovieClip;
-
+	import towers.skills.TowerSkillManager
 
 	public class MultiChain extends Tower
 	{
 
 
-		public function MultiChain()
+		public function MultiChain(SkillManager:TowerSkillManager)
 		{
 			tName = "MultiChain";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

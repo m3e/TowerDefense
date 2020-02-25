@@ -1,13 +1,13 @@
 ﻿package towers {
 	
 	import flash.events.MouseEvent;
-	
+	import towers.skills.TowerSkillManager
 	public class Rogue extends Tower {
 		
-		public function Rogue() {
+		public function Rogue(SkillManager:TowerSkillManager) {
 			
 			tName = "Rogue";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		override internal function getSounds():void

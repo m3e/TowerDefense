@@ -2,13 +2,13 @@
 	
 	import flash.display.MovieClip;
 	
-	
+	import towers.skills.TowerSkillManager
 	public class DeathRay extends Tower {
 		
 		
-		public function DeathRay() {
+		public function DeathRay(SkillManager:TowerSkillManager) {
 			tName = "Death Ray"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 	}

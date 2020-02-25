@@ -2,16 +2,16 @@
 {
 
 	import flash.display.MovieClip;
-
+import towers.skills.TowerSkillManager
 
 	public class Hail extends Tower
 	{
 
 
-		public function Hail()
+		public function Hail(SkillManager:TowerSkillManager)
 		{
 			tName = "Hail";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

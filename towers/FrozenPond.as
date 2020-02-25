@@ -2,18 +2,15 @@
 {
 
 	import flash.events.Event;
-	import buffs.*;
-	import towers.skills.Skill;
+	import towers.skills.TowerSkillManager
 
 	public class FrozenPond extends Tower
 	{
-		
-		private var tBuff:DmgBuff;
 
-		public function FrozenPond()
+		public function FrozenPond(SkillManager:TowerSkillManager)
 		{
 			tName = "Frozen Pond";
-			super();
+			super(SkillManager);
 			
 			// constructor code
 		}

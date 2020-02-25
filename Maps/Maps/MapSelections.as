@@ -54,7 +54,8 @@
 			switch (gMode)
 			{
 				case (0):
-				xmlName = mapID + ".xml"
+				xmlName = "Survival.xml"
+				//xmlName = mapID + ".xml"
 				break;
 				
 				case (1):
@@ -88,7 +89,12 @@
 				var armorType:String = String(myXML.Row[i].armorType);
 				var maxArmor:int = int(myXML.Row[i].maxArmor);
 				var eName:String = String(myXML.Row[i].eName);
-				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName];
+				
+				var s1:String = myXML.Row[i].eSkillOne;
+				var s2:String = myXML.Row[i].eSkillTwo;
+				var s3:String = myXML.Row[i].eSkillThree;
+				
+				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3];
 				roundsList.push(waveData);
 				i++;
 			}

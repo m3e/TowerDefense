@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Icicle extends Tower {
 		
 		
-		public function Icicle() {
+		public function Icicle(SkillManager:TowerSkillManager) {
 			tName = "Icicle"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

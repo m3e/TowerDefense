@@ -7,6 +7,7 @@
 	import flash.events.*;
 	import enemies.*;
 	import common.Commons;
+	import enemies.skills.EnemySkillManager;
 
 	public class InitiateEnemies extends Sprite
 	{
@@ -21,6 +22,8 @@
 		public var healthBarOn:Boolean;
 
 		private var gameOver:Boolean;
+		
+		private var enemySkillManager:EnemySkillManager;
 
 		public function InitiateEnemies()
 		{
@@ -28,6 +31,9 @@
 			tileSide = common.Commons.tileSide;
 			mapArray = common.Commons.getMapArray();
 			enemyList = common.Commons.getEnemyList();
+			
+			enemySkillManager = new EnemySkillManager();
+			
 			_root = common.Commons.getRoot();
 			// constructor code
 		}
@@ -55,6 +61,16 @@
 				enemy.eFrame = waveArray[6];
 				enemy.armorType = waveArray[7];
 				enemy.eName = waveArray[9]
+				
+				for (var i:int=10; i < waveArray.length; i++)
+				{
+					if (waveArray[i] != "")
+					{
+					enemySkillManager.addSkillToEnemy(enemy,waveArray[i])
+					}
+				}
+				
+				
 				_root.addChild(enemy);
 				enemy.x = 0;
 				enemy.y = 6 * tileSide;
@@ -102,6 +118,9 @@
 		{
 			enemy = null;
 			_root = null;
+			
+			enemySkillManager.endClass()
+			enemySkillManager = null;
 		}
 		/*private function getClass(eName:String):Object
 		{

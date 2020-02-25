@@ -1,0 +1,1 @@
+[@[T.Cost]]/[@maxHits]/(24/[@[Atk Speed]])/[@[Gold/MaxDPS]]

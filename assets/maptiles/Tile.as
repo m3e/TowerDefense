@@ -4,7 +4,6 @@
 	import flash.events.*;
 	import enemies.Enemy;
 	import assets.maptiles.*;
-	import towers.skills.Skill;
 	
 	public class Tile extends MovieClip{
 		
@@ -18,7 +17,7 @@
 		public var icedSlow:Number = 0;
 		
 		private var iceLayer:Ice;
-		private var fireLayer:FireRoad;
+		private var fireLayer:FireTile;
 		
 		private var skillsList:Array = new Array;
 
@@ -31,7 +30,7 @@
 		
 		private function beginClass(e:Event):void
 		{
-			fireLayer = new FireRoad();
+			fireLayer = new FireTile();
 			addChild(fireLayer)
 			fireLayer.visible = false;
 			
@@ -64,7 +63,7 @@
 			isOnFire = false;
 			}
 		}
-		public function addIceLayer(sourceSkill:Skill,slow:Number):void
+		public function addIceLayer(sourceSkill:Object,slow:Number):void
 		{
 			if (skillsList.indexOf(sourceSkill) == -1)
 			{
@@ -85,9 +84,11 @@
 		{
 			//trace("index of: ",skillsList.indexOf(sourceSkill))
 			skillsList.splice(skillsList.indexOf(sourceSkill),1)
-			var icedCheck:Boolean;
 			icedSlow = 0;
-			for (var i:int=0; i <skillsList.length;i++)
+			iceLayer.visible = false;
+			isIced = false;
+			//var icedCheck:Boolean;
+			/*for (var i:int=0; i <skillsList.length;i++)
 			{
 				if (skillsList[i].sName == sourceSkill.sName)
 				{
@@ -105,7 +106,7 @@
 				//trace("No other ice")
 				iceLayer.visible = false;
 				isIced = false;
-			}
+			}*/
 			//trace("SkillsList length: ",skillsList.length)
 			
 		}

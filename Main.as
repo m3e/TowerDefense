@@ -59,12 +59,18 @@
 			queue.append(new MP3Loader("sounds/sfx/voices/rogue/howareyou.mp3", {name:"roguehowareyou", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
 			queue.append(new MP3Loader("sounds/sfx/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
-
-			queue.append(new MP3Loader("sounds/sfx/fire/fire.mp3", {name:"flame", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			
+			queue.append(new MP3Loader("sounds/sfx/fire/flame.mp3", {name:"flame", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/bullet/bulletshot.mp3", {name:"bulletshot", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/zap/zap.mp3", {name:"zapsound", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/lavasplash/lavasplash.mp3", {name:"lavasplash", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/stab/stab.mp3", {name:"stab", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/shieldBlock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 50000}));
-			queue.append(new MP3Loader("sounds/sfx/arrowShot.mp3", {name:"arrowShot", volume:1, autoPlay:false, estimatedBytes: 50000}));
+			queue.append(new MP3Loader("sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/arrowShot.mp3", {name:"arrowShot", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/icecrash/icehit.mp3", {name:"icehit", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("sounds/sfx/cannonfire/cannonfire.mp3", {name:"cannonfire", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			
 
 			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
@@ -77,7 +83,7 @@
 		}
 		private function restartMap(e:Event):void
 		{
-			trace("restarted");
+			
 			var map:Map = new Map();
 			addChild(map);
 		}
@@ -114,7 +120,6 @@
 
 				var tower:Object = new Object();
 				tower.tName = String(myXML.Row[i].Name);
-				tower.tId = int(myXML.Row[i].ID);
 				tower.tAoe = int(myXML.Row[i].AoE);
 				tower.tRange = int(myXML.Row[i].Range);
 				tower.tNumberOfTargets = int(myXML.Row[i].of_Targets);
@@ -122,11 +127,12 @@
 				tower.tAtkSpeed = int(myXML.Row[i].Atk_Speed);
 				tower.tCost = int(myXML.Row[i].Cost);
 				tower.tType = String(myXML.Row[i].Type);
-				tower.tbSpeed = int(myXML.Row[i].bulletSpeed);
 				tower.bFrame = String(myXML.Row[i].bulletFrame);
+				tower.bHitFrame = String(myXML.Row[i].bulletHit);
+				tower.tbSpeed = int(myXML.Row[i].bulletSpeed);
 				tower.tFrame = int(myXML.Row[i].towerFrame);
 				tower.fireSoundString = String(myXML.Row[i].fireSoundString);
-				tower.tDescription = String(myXML.Row[i].tDescription);
+				tower.hitSound = String(myXML.Row[i].hitSoundString);
 				tower.tUpgradeOne = null;
 				tower.tUpgradeTwo = null;
 				tower.tUpgradeThree = null;
@@ -147,6 +153,7 @@
 				tower.tSkillTwo = String(myXML.Row[i].skillTwo);
 				tower.tSkillThree = String(myXML.Row[i].skillThree);
 				tower.tSkillFour = String(myXML.Row[i].skillFour);
+				tower.tDescription = String(myXML.Row[i].tDescription);
 				towerList.push(tower);
 
 				//var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus];

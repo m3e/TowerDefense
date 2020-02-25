@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Row>
+		<Name>Archer</Name>
+		<AoE>0</AoE>
+		<Range>82</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>13</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>40</Cost>
+		<Type>pierce</Type>
+		<bulletFrame>ArrowShot</bulletFrame>
+<bulletHit>t</bulletHit>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>2</towerFrame>
+		<fireSoundString>arrowShot</fireSoundString>
+		<hitSoundString>default</hitSoundString>
+		<upgradeOne>Rogue</upgradeOne>
+		<upgradeTwo>Woodsman</upgradeTwo>
+		<upgradeThree>RoyalBowman</upgradeThree>
+		<targeting>All</targeting>
+<skillOne>t</skillOne>
+<skillTwo>t</skillTwo>
+<skillThree>t</skillThree>
+<skillFour>t</skillFour>
+		<tDescription>The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't, so it doesn't.</tDescription>
+	</Row>
+<Row>
+		<Name>Archer</Name>
+		<AoE>0</AoE>
+		<Range>82</Range>
+		<of_Targets>1</of_Targets>
+		<Dmg>13</Dmg>
+		<Atk_Speed>18</Atk_Speed>
+		<Cost>40</Cost>
+		<Type>pierce</Type>
+		<bulletFrame>ArrowShot</bulletFrame>
+<bulletHit>t</bulletHit>
+		<bulletSpeed>20</bulletSpeed>
+		<towerFrame>2</towerFrame>
+		<fireSoundString>arrowShot</fireSoundString>
+		<hitSoundString>default</hitSoundString>
+		<upgradeOne>Rogue</upgradeOne>
+		<upgradeTwo>Woodsman</upgradeTwo>
+		<upgradeThree>RoyalBowman</upgradeThree>
+		<targeting>All</targeting>
+<skillOne>t</skillOne>
+<skillTwo>t</skillTwo>
+<skillThree>t</skillThree>
+<skillFour>t</skillFour>
+		<tDescription>The Archer.  Everyone's favorite starting class.  If this tower could crouch and be stealth, it might crit, but it can't, so it doesn't.</tDescription>
+	</Row>	
+	</Root>

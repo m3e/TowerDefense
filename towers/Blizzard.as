@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Blizzard extends Tower {
 		
 		
-		public function Blizzard() {
+		public function Blizzard(SkillManager:TowerSkillManager) {
 			tName = "Blizzard"
-			super()
+			super(SkillManager)
 			targeting = "All"
 			// constructor code
 		}

@@ -2,14 +2,14 @@
 	
 	import flash.display.MovieClip;
 	import towers.Multishooter;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Lightning extends Tower {
 		
 		
-		public function Lightning() {
+		public function Lightning(SkillManager:TowerSkillManager) {
 			tName = "Lightning";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 

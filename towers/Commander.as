@@ -1,15 +1,13 @@
-﻿package towers {
-	import towers.skills.Skill;
+﻿package towers {	
 	
-	
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Commander extends Tower {
 		
 		
-		public function Commander() {
+		public function Commander(SkillManager:TowerSkillManager) {
 			tName = "Commander";
-			super()
+			super(SkillManager)
 		}
 		/*override internal function generateSkills():void
 		{

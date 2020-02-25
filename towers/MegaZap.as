@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class MegaZap extends Tower {
 		
 		
-		public function MegaZap() {
+		public function MegaZap(SkillManager:TowerSkillManager) {
 			tName = "MegaZap"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 	}

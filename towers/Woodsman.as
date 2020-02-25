@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	
-	
+	import towers.skills.TowerSkillManager
 	import sounds.SoundManager;
 	public class Woodsman extends Tower {
 		
 		
-		public function Woodsman() {
+		public function Woodsman(SkillManager:TowerSkillManager) {
 			tName = "Woodsman";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

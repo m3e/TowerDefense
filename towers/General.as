@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class General extends Tower {
 		
 		
-		public function General() {
+		public function General(SkillManager:TowerSkillManager) {
 			tName = "General"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 	}

@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Yeti extends Tower {
 		
 		
-		public function Yeti() {
+		public function Yeti(SkillManager:TowerSkillManager) {
 			tName = "Yeti"
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

@@ -34,6 +34,7 @@
 			enemyTimer = 0;
 			currentRound = 1;
 			initEnemies = _initEnemies;
+			
 			// constructor code
 		}
 		public function startRound(increaseRound:Boolean):void

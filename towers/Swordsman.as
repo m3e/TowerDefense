@@ -1,13 +1,13 @@
 ﻿package towers
 {
-
+	import towers.skills.TowerSkillManager
 	public class Swordsman extends Tower
 	{
 
-		public function Swordsman()
+		public function Swordsman(SkillManager:TowerSkillManager)
 		{
 			tName = "Swordsman"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 

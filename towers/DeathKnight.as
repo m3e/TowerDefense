@@ -2,13 +2,13 @@
 	
 	import flash.display.MovieClip;
 	
-	
+	import towers.skills.TowerSkillManager
 	public class DeathKnight extends Tower {
 		
 		
-		public function DeathKnight() {
+		public function DeathKnight(SkillManager:TowerSkillManager) {
 			tName = "Death Knight"
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

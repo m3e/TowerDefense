@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class WingedCurse extends Tower {
 		
 		
-		public function WingedCurse() {
+		public function WingedCurse(SkillManager:TowerSkillManager) {
 			tName = "Winged Curse"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 	}

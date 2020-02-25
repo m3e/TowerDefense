@@ -1,21 +1,21 @@
 ﻿package towers
 {
-
+	import towers.skills.TowerSkillManager
 	import sounds.SoundManager;
 	import flash.events.MouseEvent;
 	import flash.media.SoundChannel;
 	import flash.events.Event;
-	import towers.skills.Skill;
+
 
 	public class Warrior extends Tower
 	{
 
 		
 		
-		public function Warrior()
+		public function Warrior(SkillManager:TowerSkillManager)
 		{
 			tName = "Warrior";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		override public function upgradeMe():void

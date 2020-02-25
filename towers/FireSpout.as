@@ -2,16 +2,16 @@
 {
 
 
-
+import towers.skills.TowerSkillManager
 
 	public class FireSpout extends Tower
 	{
 
 
-		public function FireSpout()
+		public function FireSpout(SkillManager:TowerSkillManager)
 		{
 			tName = "Fire Spout";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		

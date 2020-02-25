@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	
-	
+	import towers.skills.TowerSkillManager
 	
 	public class MagmaThrower extends Tower {
 		
 		
-		public function MagmaThrower() {
+		public function MagmaThrower(SkillManager:TowerSkillManager) {
 			tName = "Magma Thrower";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

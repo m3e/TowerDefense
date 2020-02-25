@@ -2,14 +2,14 @@
 	
 	
 	import flash.events.MouseEvent;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Shadow extends Tower {
 		
 		
-		public function Shadow() {
+		public function Shadow(SkillManager:TowerSkillManager) {
 			tName = "Shadow";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

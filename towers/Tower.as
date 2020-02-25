@@ -20,12 +20,14 @@
 	import towers.TowerManager;
 	import common.Commons;
 	import towers.*;
-	import towers.skills.Skill;
 	import towers.Projectiles.Bullet;
+	import towers.skills.TowerSkillManager;
+	import towers.Projectiles.ProjectileHits.*;
 
 	public class Tower extends MovieClip
 	{
 
+		private var hitSound:String;
 		public var tDescription:String;
 		public var cost:int;
 		public var tName:String;
@@ -45,9 +47,8 @@
 		public var buffsArray:Array;
 		public var tDmgBuff:Number;
 		public var tActualDmg:Number;
-		public var tBaseAtkSpdBuff:Number=0;
-		public var tAtkSpdBuff:Number=0;
-		//private var tActualAtkSpd:Number;
+		public var tBaseAtkSpdBuff:Number = 0;
+		public var tAtkSpdBuff:Number = 0;
 
 		public var loaded = Boolean;
 		public var loadedTimer:Number;
@@ -59,17 +60,19 @@
 		public var targeting:String;
 		public var _root:*;
 
-		private var sound:SoundChannel;
+		protected var sound:SoundChannel;
+		protected var fsReload:int;
+		private var fireSoundReload:int;
 		internal var clickedOnSounds:Array;
 		internal var fireSoundString:String;
 		private var fireSoundOn:Boolean;
-		private var fireSoundChannel:SoundChannel;
 
 		internal var tUpgradeOne:String;
 		internal var tUpgradeTwo:String;
 		internal var tUpgradeThree:String;
 
 		internal var bFrame:String;
+		protected var bHitFrame:String;
 
 		internal var tLevel:int;
 
@@ -78,11 +81,15 @@
 		public var uCost:int;
 
 		internal var skillsArray:Array;
-		internal var hitSkills:Array;
-		internal var timeSkills:Array;
+		public var hitSkills:Array;
+		public var timeSkills:Array;
+		public var allSkills:Array = new Array  ;
 
-		public function Tower()
+		protected var towerSkillManager:TowerSkillManager;
+
+		public function Tower(SkillManager:TowerSkillManager)
 		{
+			towerSkillManager = SkillManager;
 			skillsArray = [];
 			hitSkills = [];
 			timeSkills = [];
@@ -115,6 +122,7 @@
 					tType = TowerManager.towerList[i].tType;
 					tbSpeed = TowerManager.towerList[i].tbSpeed;
 					bFrame = TowerManager.towerList[i].bFrame;
+					bHitFrame = TowerManager.towerList[i].bHitFrame;
 					tFrame = TowerManager.towerList[i].tFrame;
 					fireSoundString = TowerManager.towerList[i].fireSoundString;
 					tDescription = TowerManager.towerList[i].tDescription;
@@ -122,6 +130,7 @@
 					tUpgradeTwo = TowerManager.towerList[i].tUpgradeTwo;
 					tUpgradeThree = TowerManager.towerList[i].tUpgradeThree;
 					targeting = TowerManager.towerList[i].targeting;
+					hitSound = TowerManager.towerList[i].hitSound;
 					var s1:String = TowerManager.towerList[i].tSkillOne;
 					var s2:String = TowerManager.towerList[i].tSkillTwo;
 					var s3:String = TowerManager.towerList[i].tSkillThree;
@@ -150,22 +159,7 @@
 		{
 			for (var i:int=0; i < skillsArray.length; i++)
 			{
-
-				var newSkill:Skill = new Skill(skillsArray[i],this);
-				switch (skillsArray[i][0])
-				{
-					case ("hit") :
-						hitSkills.push(newSkill);
-
-						break;
-
-					case ("timer") :
-						timeSkills.push(newSkill);
-						break;
-
-				}
-				skillsArray[i] = newSkill;
-
+				towerSkillManager.addSkillToTower(this,skillsArray[i]);
 			}
 		}
 		public function upgradeMe():void
@@ -175,9 +169,18 @@
 		public function tMenu():Array
 		{
 			//"UpgradeMe" = upgrades
-
+			var sArray:Array = new Array  ;
+			for (var i:int=0; i < allSkills.length; i++)
+			{
+				sArray.push(allSkills[i]);
+			}
+			while (sArray.length < 4)
+			{
+				sArray.push(null);
+			}
 			var e:Array = new Array  ;
-			e = [[skillsArray[0],skillsArray[1],skillsArray[2],skillsArray[3]],
+			//e = [[sArray[0],sArray[1],sArray[2],sArray[3]],
+			 e = [sArray,
 			 ["Targeting",,,],
 			 ["Sell",upgradeOne(),upgradeTwo(),upgradeThree()]];
 
@@ -219,7 +222,7 @@
 		public function getAtkSpeed():Number
 		{
 			//var k = Math.floor(Math.pow(.5,tAtkSpdBuff) * tAtkSpeed)
-			var k:Number = Math.pow(.5,(tAtkSpdBuff+tBaseAtkSpdBuff)) * tAtkSpeed
+			var k:Number = Math.pow(.5,(tAtkSpdBuff + tBaseAtkSpdBuff)) * tAtkSpeed;
 			//var k:Number = tAtkSpeed - (tAtkSpeed * tAtkSpdBuff);
 			return k;
 		}
@@ -240,9 +243,9 @@
 		{
 			if (_root != undefined)
 			{
-				for (var k:int=0; k < timeSkills.length; k++)
+				if (fireSoundReload > 0)
 				{
-					timeSkills[k].activateSkill(this);
+				fireSoundReload--;
 				}
 				tTarget.length = 0;
 				//Reload
@@ -330,19 +333,15 @@
 		}
 		internal function fireSound():void
 		{
-			if (fireSoundOn == false && fireSoundString != "default")
+			if (fireSoundReload == 0 && fireSoundString != "default")
 			{
-				fireSoundOn = true;
-				fireSoundChannel = SoundManager.sfx(fireSoundString);
-				fireSoundChannel.addEventListener(Event.SOUND_COMPLETE,fireSoundEnd);
+				fireSoundReload = tAtkSpeed
+				if (fireSoundReload < 4)
+				{
+					fireSoundReload = 4;
+				}
+				var fireSoundChannel:SoundChannel = SoundManager.sfx(fireSoundString);
 			}
-		}
-		private function fireSoundEnd(e:Event):void
-		{
-
-			fireSoundOn = false;
-			e.currentTarget.removeEventListener(Event.SOUND_COMPLETE,fireSoundEnd);
-			fireSoundChannel = null;
 		}
 		internal function fire():void
 		{
@@ -351,22 +350,34 @@
 			var newBullet:Bullet;
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				var bShot:String = bFrame
-				var bString:String = "towers.Projectiles."+bShot
+				
+				var bShot:String = bFrame;
+				var bString:String = "towers.Projectiles." + bShot;
 				var ClassReference:Class = getDefinitionByName(bString) as Class;
 				newBullet = new ClassReference();
-				//newBullet = new Bullet(enemyList);
-				//newBullet.gotoAndStop(bFrame);
+				
+				var bHit:String = bHitFrame;
+				if (bHit != "BlankHit")
+				{
+				var bHitString:String = "towers.Projectiles.ProjectileHits." + bHit;
+				var bHitClass:Class = getDefinitionByName(bHitString) as Class;
+				newBullet.bHitClass = bHitClass;
+				}
+				else
+				{
+					newBullet.bHitClass = null;
+				}
+				newBullet.hitSound = hitSound;
 				newBullet.tSource = this;
-				newBullet.hitSkills = hitSkills;
+				newBullet.hitSkills = common.Commons.newTheMap(hitSkills);
 				newBullet.bTarget = tTarget[i];
-				newBullet.tX = this.x
-				newBullet.tY = this.y
+				newBullet.tX = this.x;
+				newBullet.tY = this.y;
 				for (var p:int=0; p < hitSkills.length; p++)
 				{
-					hitSkills[p].bullets.push(newBullet);
+					hitSkills[p].addBullet(newBullet);
 				}
-				if (tRange <= 50 || bShot == "BulletShot")
+				if (tbSpeed == tRange)
 				{
 					newBullet.instant = true;
 					newBullet.x = tTarget[i].x + (common.Commons.tileSide * .5);
@@ -431,9 +442,13 @@
 		}
 		internal function deactivateSkills():void
 		{
-			for (var i:int=0; i < skillsArray.length; i++)
+			while (timeSkills.length > 0)
 			{
-				skillsArray[i].deactivateSkill(this);
+				timeSkills[0].endClass();
+			}
+			while (hitSkills.length > 0)
+			{
+				hitSkills[0].endClass();
 			}
 		}
 		public function destroyTower():void
@@ -450,6 +465,7 @@
 				buffsArray[0].finishBuff();
 			}
 			buffsArray = [];
+			towerSkillManager = null;
 			tTarget = null;
 			enemyList = null;
 			towerArray = null;

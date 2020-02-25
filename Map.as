@@ -31,6 +31,7 @@
 
 	import design.UI.OptionsButton;
 	import design.UI.OptionsWindow;
+	import towers.skills.TowerSkillManager;
 
 
 	public class Map extends MovieClip
@@ -94,6 +95,8 @@
 		private var normalSpeed:NormalSpeed;
 		private var pauseBtn:PauseBtn;
 		private var gameOverWindow:GameOverWindow;
+		
+		private var towerSkillManager:TowerSkillManager;
 
 		public function Map()
 		{
@@ -136,6 +139,8 @@
 			setupMap();
 			//Sets: mapArray
 			//Sets: tileArray
+			
+			setupTowerSkillManager();
 
 			setupRangeCircle();
 			//Creates: rangeCircle shape
@@ -162,6 +167,10 @@
 			setupTileListeners();
 
 			setChildIndex(userInfo,numChildren-1);
+		}
+		private function setupTowerSkillManager():void
+		{
+			towerSkillManager = new TowerSkillManager();
 		}
 		private function setupBottomBarContent():void
 		{
@@ -660,7 +669,7 @@
 		private function addTowerToMap(towerX,towerY,TowerReference:Class):void
 		{
 			var klasa:Class = TowerReference;
-			var newTower:Tower = new klasa();//creates new tower
+			var newTower:Tower = new klasa(towerSkillManager);//creates new tower
 			klasa = null;
 			if (UserInfo.canAfford(newTower.tCost))
 			{
@@ -732,7 +741,7 @@
 			}
 			if (klasa is Class)
 			{
-				testTower = new klasa();
+				testTower = new klasa(towerSkillManager);
 				if (UserInfo.canAfford(testTower.tCost))
 				{
 					mouseclickedTower.destroyTower();

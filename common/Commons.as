@@ -97,6 +97,12 @@
 				bulletList[b].resumedGame();
 			}
 		}
+		public static function enemyAlive(eTarget:Object):Boolean
+		{
+			var eAlive:Boolean;
+			eAlive = (enemyList.indexOf(eTarget) != -1)
+			return eAlive
+		}
 		public static function setMapArray(newMap:Array)
 		{
 			mapArray = newMap;

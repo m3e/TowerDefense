@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class IceMaker extends Tower {
 		
 		
-		public function IceMaker() {
+		public function IceMaker(SkillManager:TowerSkillManager) {
 			tName = "Ice Maker"
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

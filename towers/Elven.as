@@ -1,14 +1,13 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	import towers.skills.Skill;
-	
+	import towers.skills.TowerSkillManager
 	public class Elven extends Tower {
 		
 		
-		public function Elven() {
+		public function Elven(SkillManager:TowerSkillManager) {
 			tName = "Elven"
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 		/*override internal function generateSkills():void

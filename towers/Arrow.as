@@ -2,15 +2,15 @@
 {
 
 	import sounds.SoundManager;
-
+import towers.skills.TowerSkillManager
 	public class Arrow extends Tower
 	{
 
 
-		public function Arrow()
+		public function Arrow(SkillManager:TowerSkillManager)
 		{
 			tName = "Archer";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		override internal function getSounds():void

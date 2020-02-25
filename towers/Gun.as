@@ -2,13 +2,13 @@
 	
 	
 	
-	
+	import towers.skills.TowerSkillManager
 	public class Gun extends Tower{
 
 
-		public function Gun() {
+		public function Gun(SkillManager:TowerSkillManager) {
 			tName = "Gun"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 

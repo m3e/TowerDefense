@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class MidnightCeremony extends Tower {
 		
 		
-		public function MidnightCeremony() {
+		public function MidnightCeremony(SkillManager:TowerSkillManager) {
 			tName = "Midnight Ceremony"
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 	}

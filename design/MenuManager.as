@@ -12,7 +12,7 @@
 	import flash.display.Shape;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-	import towers.skills.Skill;
+	import towers.skills.TowerSkill;
 	import com.greensock.easing.Ease;
 	import design.SkillsMouseOver;
 	import common.Commons;
@@ -154,7 +154,7 @@
 						break;
 
 					case (Keyboard.NUMBER_8) :
-						tower = currentMenuSelected[1][2];
+						tower = currentMenuSelected[1][3];
 						selectTower(tower);
 						break;
 
@@ -192,7 +192,7 @@
 
 								break;
 
-							case (getQualifiedClassName(ct) == getQualifiedClassName(Skill)) :
+							case (getQualifiedSuperclassName(ct) == getQualifiedClassName(TowerSkill)) :
 								ct.x = cellsArray[i][p].x;
 								ct.y = cellsArray[i][p].y;
 								ct.addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
@@ -273,13 +273,13 @@
 		}
 		private function mouseHoverOut(e:Event):void
 		{
-			switch (getQualifiedClassName(e.currentTarget))
+			switch (true)
 			{
-				case ("towerimg::PsuedoTower") :
+				case (getQualifiedClassName(e.currentTarget) == getQualifiedClassName(PsuedoTower)) :
 					towerStatsOver.visible = false;
 					break;
 
-				case ("towers.skills::Skill") :
+				case (getQualifiedSuperclassName(e.currentTarget)==getQualifiedClassName(TowerSkill)) :
 					skillsMouseOver.visible = false;
 					break;
 			}
@@ -287,9 +287,9 @@
 		}
 		private function mouseHoverOver(e:Event):void
 		{
-			switch (getQualifiedClassName(e.currentTarget))
+			switch (true)
 			{
-				case ("towerimg::PsuedoTower") :
+				case (getQualifiedClassName(e.currentTarget) == getQualifiedClassName(PsuedoTower)) :
 
 					towerStatsOver.visible = true;
 					setChildIndex(towerStatsOver, numChildren -1);
@@ -315,7 +315,7 @@
 					towerStatsOver.CostBox.text = e.currentTarget.tCost;
 					break;
 
-				case ("towers.skills::Skill") :
+				case (getQualifiedSuperclassName(e.currentTarget) == getQualifiedClassName(TowerSkill)) :
 					skillsMouseOver.visible = true;
 					setChildIndex(skillsMouseOver, numChildren -1);
 					_root.setChildIndex(this, _root.numChildren - 1);
@@ -329,7 +329,6 @@
 						var c2:Number = b2 - a2;
 						skillsMouseOver.x -=  c2 + 3;
 					}
-
 					skillsMouseOver.sName.text = e.currentTarget.sName;
 					skillsMouseOver.sEffectOneName.text = e.currentTarget.eMenuNameOne;
 					skillsMouseOver.sEffectOne.text = e.currentTarget.eMenuStatOne;
@@ -403,7 +402,7 @@
 								removeChild(ct);
 								break;
 
-							case (ct is Skill) :
+							case (ct is TowerSkill) :
 								ct.removeEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver);
 								ct.removeEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut);
 								removeChild(ct);
@@ -433,24 +432,24 @@
 		public function endClass():void
 		{
 			emptyOutMenuSelected();
-			removeChild(sellObject)
-			removeChild(targetingIcon)
-			removeChild(upgradeIcon)
-			removeChild(towerStatsOver)
-			removeChild(skillsMouseOver)
-			removeChild(towerBeingBuiltSquare)
+			removeChild(sellObject);
+			removeChild(targetingIcon);
+			removeChild(upgradeIcon);
+			removeChild(towerStatsOver);
+			removeChild(skillsMouseOver);
+			removeChild(towerBeingBuiltSquare);
 			towerBeingBuiltSquare = null;
 			sellObject = null;
 			targetingIcon = null;
 			upgradeIcon = null;
 			towerStatsOver = null;
 			skillsMouseOver = null;
-			
+
 			selectedTower = null;
 			_root = null;
 
 			currentMenuSelected = [];
-			cellsArray = []
+			cellsArray = [];
 		}
 
 	}

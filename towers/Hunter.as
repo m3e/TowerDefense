@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Hunter extends Tower {
 		
 		
-		public function Hunter() {
+		public function Hunter(SkillManager:TowerSkillManager) {
 			tName = "Hunter";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

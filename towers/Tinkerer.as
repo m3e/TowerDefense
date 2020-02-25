@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Tinkerer extends Tower {
 		
 		
-		public function Tinkerer() {
+		public function Tinkerer(SkillManager:TowerSkillManager) {
 			tName = "Tinkerer"
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 	}

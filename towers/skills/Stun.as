@@ -1,54 +1,38 @@
-﻿package towers.skills {
-	
-	import flash.display.Sprite;
-	import enemies.Enemy
-	import flash.events.Event;
-	import common.Commons;
-	
-	public class Stun extends Sprite {
-		
-		private var enemy:Enemy
-		private var seconds:int
-		private var frames:int = 0
-		public function Stun(_e:Enemy,_s:int) {
-			enemy = _e;
-			seconds = _s;
-			// constructor code
-			debuffNow()
-			common.Commons.addSkillsList(this)
-			addEventListener(Event.ENTER_FRAME, debuffTick)
-		}
-		public function pausedGame():void
+﻿package towers.skills
+{
+
+	import towers.Tower;
+
+	public class Stun extends TowerSkill
+	{
+
+		public function Stun(SourceObject:Tower,SA:Array)
 		{
-			removeEventListener(Event.ENTER_FRAME, debuffTick);
+			super(SourceObject,SA);
+			sName = "Stun";
+			sChance = sA[2];
+			cooldownSeconds = sA[3];
+			eMenuNameOne = "Chance to stun: ";
+			eMenuNameTwo = "Seconds";
+			eMenuStatOne = (sA[2] * 100) + "%";
+			eMenuStatTwo = sA[3];
 		}
-		public function resumedGame():void
+		override protected function newHitTarget(dEnemy:Object):Array
 		{
-			addEventListener(Event.ENTER_FRAME, debuffTick);
+			var a:Array = [dEnemy,int(cooldownSeconds*24)];
+			return a;
 		}
-		private function debuffTick(e:Event):void
+		override protected function chanceVariable(dEnemy:Object):Boolean
 		{
-			debuffNow();
+			return (dEnemy.isStunned == false);
 		}
-		private function debuffNow():void
+		override protected function initialEffect(tsa:Array):void
 		{
-			if (enemy != null && frames < seconds * 24)
-			{
-				enemy.isStunned = true;
-			}
-			else
-			{
-				finish()
-			}
-			frames++
+			tsa[0].isStunned = true;
 		}
-		private function finish():void
+		override protected function removeEffect(tsa:Array):void
 		{
-			common.Commons.removeSkillsList(this)
-			enemy.isStunned = false;
-			removeEventListener(Event.ENTER_FRAME, debuffTick)
-			enemy = null;
+			tsa[0].isStunned = false;
 		}
 	}
-	
 }

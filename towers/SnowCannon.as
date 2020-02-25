@@ -1,6 +1,6 @@
 ﻿package towers
 {
-
+	import towers.skills.TowerSkillManager
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import debuffs.*;
@@ -8,10 +8,10 @@
 	public class SnowCannon extends Tower
 	{
 
-		public function SnowCannon()
+		public function SnowCannon(SkillManager:TowerSkillManager)
 		{
 			tName = "Snow Cannon";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

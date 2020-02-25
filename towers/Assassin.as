@@ -1,14 +1,14 @@
 ﻿package towers {
 	
 	import flash.display.MovieClip;
-	
+	import towers.skills.TowerSkillManager
 	
 	public class Assassin extends Tower {
 		
 		
-		public function Assassin() {
+		public function Assassin(SkillManager:TowerSkillManager) {
 			tName = "Assassin";
-			super()
+			super(SkillManager)
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void

@@ -2,13 +2,13 @@
 	
 	
 	import sounds.SoundManager;
-	
+	import towers.skills.TowerSkillManager
 	public class RoyalBowman extends Tower {
 		
 		
-		public function RoyalBowman() {
+		public function RoyalBowman(SkillManager:TowerSkillManager) {
 			tName = "Royal Bowman";
-			super();
+			super(SkillManager);
 			// constructor code
 		}
 		/*override internal function addDebuffs(bullet:Bullet):void
