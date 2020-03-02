@@ -8,7 +8,7 @@
 		public var gameMode:int=0;
 		
 		public function CampaignButton() {
-			gotoAndStop(2)
+			stop()
 			// constructor code
 		}
 

@@ -40,6 +40,9 @@
 		public function startRound(increaseRound:Boolean):void
 		{
 			//SoundManager.sfx("roundstart2");
+			
+			//Find wavearray detail at MapSelections:
+			//var waveData:Array = 
 			enemyAlive = new Array  ;
 			enemyWaveTracker.push(enemyAlive);
 			actualRound = false;
@@ -81,9 +84,6 @@
 		{
 			waveArray = [];
 			frameTimer = 0;
-			roundInProgress = false;
-
-			enemyAlive = new Array  ;
 			removeEventListener(Event.ENTER_FRAME, spawnTimer);
 		}
 		public function pauseGame():void
@@ -102,7 +102,7 @@
 		}
 		private function enemyDead(e:Event):void
 		{
-
+			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			for (var i:int=0; i < enemyWaveTracker.length; i++)
 			{
 				if (enemyWaveTracker[i].indexOf(e.currentTarget) != -1)
@@ -115,7 +115,11 @@
 					}
 				}
 			}
-			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+			if (enemyAlive.length == 1)
+			{
+				roundInProgress = false;
+			}
+			
 		}
 		private function spawnTimer(e:Event):void
 		{
@@ -123,7 +127,7 @@
 			if (frameTimer % waveArray[5] == 0)
 			{
 				var newEnemy:Enemy = initEnemies.customEnemy(waveArray,true);
-				newEnemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
+				newEnemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead,false,0,true);
 				enemyAlive.push(newEnemy);
 				spawnCount--;
 			}
@@ -149,19 +153,10 @@
 		public function endClass():void
 		{
 			endWaveSend();
-			roundsList = [];
+			enemyWaveTracker = null;
+			roundsList = null;
 			initEnemies = null;
-			var enemyList:Array = common.Commons.getEnemyList();
-			while (enemyList.length > 0)
-			{
-				enemyList[0].destroyThis();
-			}
-			/*while (enemyWaveTracker.length > 0)
-			{
-			trace(enemyWaveTracker[0][1]);
-			enemyWaveTracker[0][1].destroyThis();
-			}*/
-			enemyAlive = [];
+			enemyAlive = null;
 		}
 	}
 

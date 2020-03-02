@@ -23,6 +23,8 @@
 	import towers.Projectiles.Bullet;
 	import towers.skills.TowerSkillManager;
 	import towers.Projectiles.ProjectileHits.*;
+	import towers.skills.animations.DMGBuffMC;
+	import towers.skills.animations.SPDBuffMC;
 
 	public class Tower extends MovieClip
 	{
@@ -84,6 +86,12 @@
 		public var hitSkills:Array;
 		public var timeSkills:Array;
 		public var allSkills:Array = new Array  ;
+		protected var dmgBuffMC:DMGBuffMC = new DMGBuffMC();
+		protected var spdBuffMC:SPDBuffMC = new SPDBuffMC();
+		
+		protected var bmpData:BitmapData;
+		protected var bmp:Bitmap;
+		public var bmpData45:BitmapData;
 
 		protected var towerSkillManager:TowerSkillManager;
 
@@ -108,33 +116,46 @@
 			bFrame = "RedSlash";
 			uCost = 45;
 
+			dmgBuffMC.stop();
+			addChild(dmgBuffMC)
+			dmgBuffMC.visible = false;
+			
+			spdBuffMC.stop();
+			spdBuffMC.x = this.width - spdBuffMC.width
+			addChild(spdBuffMC)
+			spdBuffMC.visible = false;
+			
 			for (var i:int=0; i <TowerManager.towerList.length; i++)
 			{
 				if (TowerManager.towerList[i].tName == tName)
 				{
-					tName = TowerManager.towerList[i].tName;
-					tAoe = TowerManager.towerList[i].tAoe;
-					tRange = TowerManager.towerList[i].tRange;
-					tNumberOfTargets = TowerManager.towerList[i].tNumberOfTargets;
-					tDmg = TowerManager.towerList[i].tDmg;
-					tAtkSpeed = TowerManager.towerList[i].tAtkSpeed;
-					tCost = TowerManager.towerList[i].tCost;
-					tType = TowerManager.towerList[i].tType;
-					tbSpeed = TowerManager.towerList[i].tbSpeed;
-					bFrame = TowerManager.towerList[i].bFrame;
-					bHitFrame = TowerManager.towerList[i].bHitFrame;
-					tFrame = TowerManager.towerList[i].tFrame;
-					fireSoundString = TowerManager.towerList[i].fireSoundString;
-					tDescription = TowerManager.towerList[i].tDescription;
-					tUpgradeOne = TowerManager.towerList[i].tUpgradeOne;
-					tUpgradeTwo = TowerManager.towerList[i].tUpgradeTwo;
-					tUpgradeThree = TowerManager.towerList[i].tUpgradeThree;
-					targeting = TowerManager.towerList[i].targeting;
-					hitSound = TowerManager.towerList[i].hitSound;
-					var s1:String = TowerManager.towerList[i].tSkillOne;
-					var s2:String = TowerManager.towerList[i].tSkillTwo;
-					var s3:String = TowerManager.towerList[i].tSkillThree;
-					var s4:String = TowerManager.towerList[i].tSkillFour;
+					var td:Object = TowerManager.towerList[i];
+					
+					tName = td.tName;
+					tAoe = td.tAoe;
+					tRange = td.tRange;
+					tNumberOfTargets = td.tNumberOfTargets;
+					tDmg = td.tDmg;
+					tAtkSpeed = td.tAtkSpeed;
+					tCost = td.tCost;
+					tType = td.tType;
+					tbSpeed = td.tbSpeed;
+					bFrame = td.bFrame;
+					bHitFrame = td.bHitFrame;
+					tFrame = td.tFrame;
+					bmpData = td.bmpData
+					bmpData45 = td.bmpData45
+					fireSoundString = td.fireSoundString;
+					tDescription = td.tDescription;
+					tUpgradeOne = td.tUpgradeOne;
+					tUpgradeTwo = td.tUpgradeTwo;
+					tUpgradeThree = td.tUpgradeThree;
+					targeting = td.targeting;
+					hitSound = td.hitSound;
+					var s1:String = td.tSkillOne;
+					var s2:String = td.tSkillTwo;
+					var s3:String = td.tSkillThree;
+					var s4:String = td.tSkillFour;
 					var skillsList:Array = [s1,s2,s3,s4];
 					for (var p:int=0; p < skillsList.length; p++)
 					{
@@ -149,6 +170,7 @@
 					{
 						targeting = "First";
 					}
+					break;
 				}
 			}
 
@@ -180,7 +202,7 @@
 			}
 			var e:Array = new Array  ;
 			//e = [[sArray[0],sArray[1],sArray[2],sArray[3]],
-			 e = [sArray,
+			e = [sArray,
 			 ["Targeting",,,],
 			 ["Sell",upgradeOne(),upgradeTwo(),upgradeThree()]];
 
@@ -189,6 +211,8 @@
 		private function added(e:Event):void
 		{
 			addedToStage = true;
+			bmp = new Bitmap(bmpData);
+			addChild(bmp);
 			generateSkills();
 			_root = parent;
 			gotoAndStop(tFrame);
@@ -239,13 +263,59 @@
 		{
 			addEventListener(Event.ENTER_FRAME, eFrame);
 		}
+		protected function applyEffects():void
+		{
+			if (tDmgBuff > 0)
+			{
+				dmgBuffMC.visible = true
+				if (tDmgBuff <= .15)
+				{
+					dmgBuffMC.gotoAndStop(1);
+				}
+				else if (tDmgBuff > .15 && tDmgBuff <= .25)
+				{
+					dmgBuffMC.gotoAndStop(2);
+				}
+				else
+				{
+					dmgBuffMC.gotoAndStop(3);
+				}
+			}
+			else
+			{
+				dmgBuffMC.visible = false;
+			}
+			var newAtkSpd:Number = Math.pow(.5,(tAtkSpdBuff + tBaseAtkSpdBuff))
+			if (newAtkSpd < 1)
+			{
+				spdBuffMC.visible = true
+				if (newAtkSpd >= .9)
+				{
+					spdBuffMC.gotoAndStop(1);
+				}
+				else if (newAtkSpd >= .8 && newAtkSpd < .9)
+				{
+					spdBuffMC.gotoAndStop(2);
+				}
+				else
+				{
+					spdBuffMC.gotoAndStop(3);
+				}
+				
+			}
+			else
+			{
+				spdBuffMC.visible = false;
+			}
+		}
 		internal function eFrame(e:Event):void
 		{
 			if (_root != undefined)
 			{
+				applyEffects();
 				if (fireSoundReload > 0)
 				{
-				fireSoundReload--;
+					fireSoundReload--;
 				}
 				tTarget.length = 0;
 				//Reload
@@ -335,7 +405,7 @@
 		{
 			if (fireSoundReload == 0 && fireSoundString != "default")
 			{
-				fireSoundReload = tAtkSpeed
+				fireSoundReload = tAtkSpeed;
 				if (fireSoundReload < 4)
 				{
 					fireSoundReload = 4;
@@ -350,18 +420,18 @@
 			var newBullet:Bullet;
 			for (var i:int=0; i < tTarget.length; i++)
 			{
-				
+
 				var bShot:String = bFrame;
 				var bString:String = "towers.Projectiles." + bShot;
 				var ClassReference:Class = getDefinitionByName(bString) as Class;
 				newBullet = new ClassReference();
-				
+
 				var bHit:String = bHitFrame;
 				if (bHit != "BlankHit")
 				{
-				var bHitString:String = "towers.Projectiles.ProjectileHits." + bHit;
-				var bHitClass:Class = getDefinitionByName(bHitString) as Class;
-				newBullet.bHitClass = bHitClass;
+					var bHitString:String = "towers.Projectiles.ProjectileHits." + bHit;
+					var bHitClass:Class = getDefinitionByName(bHitString) as Class;
+					newBullet.bHitClass = bHitClass;
 				}
 				else
 				{
@@ -456,8 +526,12 @@
 			removeEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
+			removeChild(spdBuffMC)
+			removeChild(dmgBuffMC);
+			
 			if (addedToStage)
 			{
+				removeChild(bmp);
 				deactivateSkills();
 			}
 			while (buffsArray.length > 0)

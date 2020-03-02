@@ -15,6 +15,9 @@
 	import GameScreens.StartScreen;
 	import design.BottomBar;
 	import towers.TowerManager;
+	import flash.geom.Rectangle;
+	import flash.geom.Point;
+	import flash.display.BitmapData;
 
 	//Middle
 	//X: 448
@@ -71,10 +74,13 @@
 			queue.append(new MP3Loader("sounds/sfx/icecrash/icehit.mp3", {name:"icehit", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/cannonfire/cannonfire.mp3", {name:"cannonfire", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
-
 			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			//queue.append(new MP3Loader("sounds/music/BattleMap2.mp3", {name:"BattleMap2", volume:1, autoPlay:false, estimatedBytes: 50000}));
+			
+			queue.append(new ImageLoader("assets/icons/Towers32SpriteSheet.png", {name:"towers32"}));
+			queue.append(new ImageLoader("assets/icons/Towers45SpriteSheet.png", {name:"towers45"}));
+			
 
 			addEventListener("restart", restartMap);
 			addEventListener("backtomap", backToMap);
@@ -114,7 +120,11 @@
 
 			var myXML = new XML(e.target.data);
 			var i:int = 0;
-
+			
+			var rect:Rectangle = new Rectangle(0,0,common.Commons.tileSide,common.Commons.tileSide);
+			var rect45:Rectangle = new Rectangle(0,0,45,45);
+			var pt:Point = new Point(0,0);
+			var bmpData:BitmapData
 			while (i < myXML.Row.length())
 			{
 
@@ -131,6 +141,17 @@
 				tower.bHitFrame = String(myXML.Row[i].bulletHit);
 				tower.tbSpeed = int(myXML.Row[i].bulletSpeed);
 				tower.tFrame = int(myXML.Row[i].towerFrame);
+				
+				rect.y = (tower.tFrame * common.Commons.tileSide) - common.Commons.tileSide
+				bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
+				bmpData.copyPixels(queue.getContent("towers32").rawContent.bitmapData,rect,pt);
+				tower.bmpData = BitmapData(bmpData);
+				
+				rect45.y = (tower.tFrame * 45) - 45
+				bmpData = new BitmapData(45,45)
+				bmpData.copyPixels(queue.getContent("towers45").rawContent.bitmapData,rect45,pt);
+				tower.bmpData45 = BitmapData(bmpData);
+				
 				tower.fireSoundString = String(myXML.Row[i].fireSoundString);
 				tower.hitSound = String(myXML.Row[i].hitSoundString);
 				tower.tUpgradeOne = null;
@@ -170,7 +191,7 @@
 			removeChild(Preload);
 			Preload = null;
 			startScreenUI(); //Game Starts Here
-			endThis() //skip to mapSelectScreen
+			//endThis() //skip to mapSelectScreen
 		}
 		private function startScreenUI():void
 		{

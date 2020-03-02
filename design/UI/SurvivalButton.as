@@ -8,7 +8,7 @@
 		public var gameMode:int=1;
 		
 		public function SurvivalButton() {
-			gotoAndStop(1);
+			stop();
 			// constructor code
 		}
 	}

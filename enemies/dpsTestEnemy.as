@@ -45,6 +45,25 @@
 
 			// constructor code
 		}
+		override protected function makeImage():void
+		{
+			//mouseEnabled = true;
+			//mouseChildren = true;
+			//addEventListener(MouseEvent.CLICK,dpsClicked)
+			this.gotoAndStop(eFrame);
+		}
+		override protected function destroyImage():void
+		{
+
+		}
+		private function dpsClicked(e:MouseEvent):void
+		{
+			trace("IDd: ",id,this.x,this.y,pt.x,pt.y);
+			for (var i:int=0; i < mLog.length; i++)
+			{
+				trace(mLog[i]);
+			}
+		}
 		override public function takeDmg(dmg:Number,dType:String):void
 		{
 

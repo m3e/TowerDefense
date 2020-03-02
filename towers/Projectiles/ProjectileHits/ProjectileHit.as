@@ -29,10 +29,32 @@
 		protected function added(e:Event):void
 		{
 			play();
+			common.Commons.addHitList(this)
 			removeEventListener(Event.ADDED_TO_STAGE,added);
 			_root = common.Commons.getRoot();
-			addEventListener(Event.ENTER_FRAME,eFrame)
+			stage.addEventListener(Event.ENTER_FRAME,eFrame,false,8);
+			if (followT == false)
+			{
+				this.rotation = (angleT / Math.PI) * 180;
+				this.x = bTarget.x + (common.Commons.tileSide * .5);
+				this.y = bTarget.y + (common.Commons.tileSide * .5);
+			}
+			else
+			{
 			eFrame(Event(undefined));
+			}
+
+		}
+		public function pausedGame():void
+		{
+			stage.removeEventListener(Event.ENTER_FRAME,eFrame);
+			trace("stoped");
+			stop();
+		}
+		public function resumedGame():void
+		{
+			stage.addEventListener(Event.ENTER_FRAME,eFrame,false,8);
+			play()
 		}
 		public function eFrame(e:Event):void
 		{
@@ -55,10 +77,11 @@
 		public function endClass():void
 		{
 			ended = true;
-			if (_root.contains(this))
-			{
-				_root.removeChild(this);
-			}
+			stage.removeEventListener(Event.ENTER_FRAME,eFrame);
+			_root.removeChild(this);
+			bTarget = null;
+			_root = null;
+			common.Commons.removeHitList(this);
 
 		}
 	}

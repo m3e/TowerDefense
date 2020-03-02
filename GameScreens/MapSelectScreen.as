@@ -17,6 +17,8 @@
 	import flash.net.URLLoader;
 	import design.UI.OptionsWindow;
 
+	import flash.filters.GlowFilter;
+
 
 	public class MapSelectScreen extends MovieClip
 	{
@@ -30,22 +32,24 @@
 
 		public function MapSelectScreen(r:Main)
 		{
-			
+
 			_r = r;
 			addEventListener(Event.ADDED_TO_STAGE, added);
 			addEventListener(Event.REMOVED_FROM_STAGE, removedFromStage);
-			gameMode = 0;
+			gameMode = 1;
 			// constructor code
 		}
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			sounds.SoundManager.bgfx("mainTheme");
-			options.addEventListener(MouseEvent.CLICK, optionsClicked)
+			options.addEventListener(MouseEvent.CLICK, optionsClicked);
 			levelsArray.push(SFields,WPath,TOldBridge,BHideout,VOfTrolls,MMayhem,WAlley,TOfMages,SCircle);
 
 			survivalButton.addEventListener(MouseEvent.MOUSE_DOWN, selectMode);
 			campaignButton.addEventListener(MouseEvent.MOUSE_DOWN, selectMode);
+			campaignButton.visible = false;
+			survivalButton.gotoAndStop(2);
 
 			for (var i:int=0; i < levelsArray.length; i++)
 			{
@@ -61,14 +65,16 @@
 					levelsArray[i].lockMap();
 				}
 			}
-
+			levelsArray[0].dispatchEvent(new MouseEvent("click"));
 			StartMapButton.addEventListener(MouseEvent.CLICK, startMap);
+			var glow:GlowFilter = new GlowFilter(0xff3300,1,6,6,10)
+			StartMapButton.filters = [glow]
 		}
 		private function optionsClicked(e:MouseEvent):void
 		{
-			optionsWindow = new OptionsWindow(false)
-			optionsWindow.x = (stage.width / 2) - (optionsWindow.width / 2)
-			optionsWindow.y = (stage.height / 2) - (optionsWindow.height / 2)
+			optionsWindow = new OptionsWindow(false);
+			optionsWindow.x = (stage.width / 2) - (optionsWindow.width / 2);
+			optionsWindow.y = (stage.height / 2) - (optionsWindow.height / 2);
 			addChild(optionsWindow);
 		}
 		private function selectMode(e:MouseEvent):void
@@ -88,7 +94,13 @@
 				}
 				else
 				{
+					var glow:GlowFilter = new GlowFilter(uint(0xffff00));
+					if (lastLoaded != null)
+					{
+						lastLoaded.filters = [];
+					}
 					lastLoaded = e.target;
+					lastLoaded.filters = [glow];
 					mapPreview.loadMapPreview(e.target.mapArray);
 				}
 			}
@@ -103,29 +115,28 @@
 		}
 		private function loadMap():void
 		{
-			loadingText = new LoadingText()
-			loadingText.x = (stage.width / 2) - (loadingText.width / 2)
+			loadingText = new LoadingText();
+			loadingText.x = (stage.width / 2) - (loadingText.width / 2);
 			loadingText.y = (stage.height /2) - (loadingText.height / 2);
 			_r.addChild(loadingText);
-			
-			
+
+
 			lastLoaded.startGame(gameMode);
 			lastLoaded.addEventListener(Event.COMPLETE, mapLoaded);
 		}
 		private function mapLoaded(e:Event):void
 		{
-			_r.removeChild(loadingText)
+			_r.removeChild(loadingText);
 			loadingText = null;
 			lastLoaded.removeEventListener(Event.COMPLETE, mapLoaded);
 			removeMapPreview();
-			
+
 			SoundManager.bgfx("BattleMap1");
 
 			var map:Map = new Map();
 			_r.addChild(map);
 
-			endClass()
-			
+			endClass();
 		}
 		private function removeMapPreview():void
 		{
@@ -135,7 +146,7 @@
 		}
 		private function removedFromStage(e:Event):void
 		{
-			options.removeEventListener(MouseEvent.CLICK, optionsClicked)
+			options.removeEventListener(MouseEvent.CLICK, optionsClicked);
 			optionsWindow = null;
 			lastLoaded = null;
 			removeEventListener(Event.REMOVED_FROM_STAGE, removedFromStage);

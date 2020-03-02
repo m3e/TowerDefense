@@ -31,8 +31,8 @@
 		private function optionsClicked(e:MouseEvent):void
 		{
 			optionsWindow = new OptionsWindow(false)
-			optionsWindow.x = (stage.width / 2) - (optionsWindow.width / 2)
-			optionsWindow.y = (stage.height / 2) - (optionsWindow.height / 2)
+			optionsWindow.x = 0
+			optionsWindow.y = 0
 			addChild(optionsWindow);
 		}
 		private function removed(e:Event):void

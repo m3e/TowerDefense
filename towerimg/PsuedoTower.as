@@ -4,6 +4,8 @@
 	import towers.*
 	import flash.events.Event;
 	import towers.skills.TowerSkillManager;
+	import flash.display.BitmapData;
+	import flash.display.Bitmap;
 	
 	public class PsuedoTower extends MovieClip{
 
@@ -16,7 +18,8 @@
 		public var tCost:int;
 		public var tName:String;
 		private var tId:int;
-		private var tFrame:int;
+		private var bmpData:BitmapData;
+		private var bmp:Bitmap;
 		
 		public function PsuedoTower(TowerReference:Object) {
 			
@@ -29,7 +32,6 @@
 		{
 			removeEventListener(Event.ADDED, imgAdded)
 			
-			//var tsm:TowerSkillManager = new TowerSkillManager;
 			var mockTower:Tower = new towerReference(undefined)//tsm);
 			tName = mockTower.tName;
 			tRange = mockTower.tRange;
@@ -38,8 +40,10 @@
 			tType = mockTower.tType
 			tDescription = mockTower.tDescription
 			tCost = mockTower.tCost;
-			tFrame = mockTower.tFrame;
-			gotoAndStop(tFrame);
+			
+			bmpData = mockTower.bmpData45;
+			bmp = new Bitmap(bmpData);
+			addChild(bmp);
 
 			mockTower.destroyTower();
 			mockTower = null;
@@ -48,6 +52,9 @@
 		private function removed(e:Event):void
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE, removed)
+			removeChild(bmp)
+			bmp=null;
+			bmpData = null;
 			towerReference = null;
 		}
 

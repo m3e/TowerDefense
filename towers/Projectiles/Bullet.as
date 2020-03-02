@@ -36,7 +36,7 @@
 		public var tSource:Tower;
 		public var hitSound:String;
 
-		protected var aoeVisual:Shape;
+		//protected var aoeVisual:Shape;
 
 		public var hitSkills:Array;
 		public var debuffArray:Array;
@@ -81,15 +81,8 @@
 			}
 			else
 			{
-				/*yDist = (bTarget.y + (common.Commons.tileSide * .5)) - (tY + (common.Commons.tileSide * .5));
-				xDist = (bTarget.x + (common.Commons.tileSide * .5)) - (tX + (common.Commons.tileSide * .5));
-				angle = Math.atan2(yDist,xDist);//the angle that it must move
-				rotationB = (angle / Math.PI) * 180;
-				this.rotation = rotationB;*/
 				targetStrike();
-				//addEventListener(Event.ENTER_FRAME, instantFrame);
 			}
-
 		}
 		public function pausedGame():void
 		{
@@ -101,13 +94,7 @@
 			{
 				removeEventListener(Event.ENTER_FRAME, eFrame);
 			}
-			else
-			{
-
-				//removeEventListener(Event.ENTER_FRAME, instantFrame);
-			}
 			stop();
-
 		}
 		public function resumedGame():void
 		{
@@ -117,44 +104,16 @@
 			}
 			if (instant == false)
 			{
-
 				addEventListener(Event.ENTER_FRAME, eFrame);
-			}
-			else
-			{
-
-				//addEventListener(Event.ENTER_FRAME, instantFrame);
 			}
 			play();
 		}
-		protected function addDebuffs(dEnemy:Enemy):void
-		{
-			for (var i:int=0; i < hitSkills.length; i++)
-			{
-				hitSkills[i].hitTarget(dEnemy);
-			}
-		}
+
 		protected function eFrame(e:Event):void
 		{
 			this.mouseEnabled = false;
 			this.mouseChildren = false;
 			fire();
-		}
-		protected function instantFrame(e:Event):void
-		{
-			/*x = bTarget.x + (common.Commons.tileSide * .5);
-			y = bTarget.y + (common.Commons.tileSide * .5);
-			//var yDist:Number = (bTarget.y + (common.Commons.tileSide * .5)) - tY;
-			//var xDist:Number = (bTarget.x + (common.Commons.tileSide * .5)) - tX;
-			//var angle:Number = Math.atan2(yDist,xDist);//the angle that it must move
-			//this.rotation = (angle / Math.PI) * 180;
-			this.mouseEnabled = false;
-			this.mouseChildren = false;
-			this.rotation = rotationB;
-			if (!(_root.contains(bTarget)) || currentFrame == totalFrames)
-			{
-				destroyThis();
-			}*/
 		}
 		protected function distanceTwoPoints(x1:Number, x2:Number,  y1:Number, y2:Number):Number
 		{
@@ -171,7 +130,7 @@
 				xDist = (bTarget.x + (common.Commons.tileSide * .5)) - this.x;//how far it is from the enemy (x)
 				angle = Math.atan2(yDist,xDist);//the angle that it must move
 				this.rotation = (angle / Math.PI) * 180;
-				//this.rotation = rotationB;
+
 				ySpeed = Math.sin(angle) * bSpeed;//calculate how much it should move the enemy vertically
 				xSpeed = Math.cos(angle) * bSpeed;//calculate how much it should move the enemy horizontally
 
@@ -186,31 +145,26 @@
 				this.x +=  xSpeed;
 				this.y +=  ySpeed;
 			}
-			//Hit Test
-			//if (_root.contains(bTarget) && (this.x == (bTarget.x + (common.Commons.tileSide * .5)) && this.y == (bTarget.y + (common.Commons.tileSide * .5))))
 			if (this.x == (bTarget.x + (common.Commons.tileSide * .5)) && this.y == (bTarget.y + (common.Commons.tileSide * .5)))
 			{
 				targetStrike();
 			}
-			/*else if (!(_root.contains(bTarget)) && (this.x == (bTarget.x + (common.Commons.tileSide * .5)) && this.y == (bTarget.y + (common.Commons.tileSide * .5))))
-			{
-			destroyThis();
-			}*/
 		}
 		protected function targetStrike():void
 		{
 			SoundManager.sfx(hitSound);
 			if (bAoe > 0)
 			{
-				//If AOE
 				hitAoe();
-				//End AOE
 			}
 			else
 			{
-				//If Single Target
 				hitTarget(bTarget);
-				//End Single Target
+			}
+			if (bHitClass != null)
+			{
+				var pHit:ProjectileHit = new bHitClass(bTarget,angle);
+				_root.addChild(pHit);
 			}
 			destroyThis();
 		}
@@ -220,6 +174,13 @@
 			{
 				addDebuffs(dEnemy);
 				dEnemy.takeDmg(bDmg,bType);
+			}
+		}
+		protected function addDebuffs(dEnemy:Enemy):void
+		{
+			for (var i:int=0; i < hitSkills.length; i++)
+			{
+				hitSkills[i].hitTarget(dEnemy);
 			}
 		}
 		protected function hitAoe():void
@@ -233,26 +194,15 @@
 				}
 			}
 		}
-		protected function removeAoeVisual(myP:Object,targetShape:Shape):void
-		{
-			if (myP.contains(targetShape))
-			{
-				myP.removeChild(targetShape);
-				aoeVisual = null;
-			}
-		}
+
+
+
 		protected function endBlitMask():void
 		{
 
 		}
 		public function destroyThis():void
 		{
-
-			if (bHitClass != null)
-			{
-				var pHit:ProjectileHit = new bHitClass(bTarget,angle);
-				_root.addChild(pHit);
-			}
 			//this function will just remove this guy from the stage
 			endBlitMask();
 			tweenArray[i] = [];
@@ -266,10 +216,6 @@
 			if (instant == false)
 			{
 				removeEventListener(Event.ENTER_FRAME,eFrame);
-			}
-			else
-			{
-				//removeEventListener(Event.ENTER_FRAME, instantFrame);
 			}
 			enemyList = null;
 			bTarget = null;

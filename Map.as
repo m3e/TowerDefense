@@ -95,7 +95,7 @@
 		private var normalSpeed:NormalSpeed;
 		private var pauseBtn:PauseBtn;
 		private var gameOverWindow:GameOverWindow;
-		
+
 		private var towerSkillManager:TowerSkillManager;
 
 		public function Map()
@@ -139,7 +139,7 @@
 			setupMap();
 			//Sets: mapArray
 			//Sets: tileArray
-			
+
 			setupTowerSkillManager();
 
 			setupRangeCircle();
@@ -455,6 +455,7 @@
 				var armorType:String = "pure";
 				var eFrame:int = 11;
 				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
+				//maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3,bmpData];
 				roundManager.sendWave(waveArray);
 			}
 		}
@@ -468,7 +469,10 @@
 		}
 		private function sendDpsDummy(e:Event):void
 		{
-			initEnemies.createDmgDummy();
+			if (roundManager.roundInProgress == false)
+			{
+				initEnemies.createDmgDummy();
+			}
 		}
 		private function setupTowerSquares():void
 		{
@@ -589,7 +593,7 @@
 			addChild(gameOverWindow);
 			pauseGame();
 			//gameOverWindow.addEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
-			
+
 			gameOverWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
 			gameOverWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
 		}
@@ -834,10 +838,12 @@
 		}
 		private function endClass():void
 		{
+			common.Commons.endGame();
+
 			initEnemies.endClass();
 			roundManager.endClass();
-			roundsList = []
-			;
+			roundsList = [];
+
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 			stage.removeEventListener(KeyboardEvent.KEY_UP, keyReleased);
 
@@ -887,6 +893,7 @@
 			towerBeingBuilt = null;
 
 
+
 			for (var i:int=0; i<tileArray.length; i++)
 			{
 				for (var o:int=0; o< tileArray[i].length; o++)
@@ -895,23 +902,9 @@
 					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_DOWN, tileDown);
 					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_OVER, hoverOver);
 					tileArray[i][o].removeEventListener(MouseEvent.MOUSE_OUT, hoverOverOut);
-					/*if (tileArray[i][o].isIced == true)
-					{
-					tileArray[i][o].removeIceLayer();
-					}*/
-					if (towerArray[i][o] != undefined)
-					{
-						towerArray[i][o].destroyTower();
-					}
 				}
 			}
 			removeMap();
-
-			//optionsWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
-			//optionsWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
-			//optionsWindow.restartButton = null;
-			//optionsWindow.backToMap = null;
-			//optionsWindow = null;
 
 			_root.removeChild(fastForward);
 			_root.removeChild(normalSpeed);

@@ -18,7 +18,7 @@
 		}
 		override protected function newHitTarget(dEnemy:Object):Array
 		{
-			var a:Array = [dEnemy]
+			var a:Array = [dEnemy,0]
 			return a;
 		}
 		override protected function initialEffect(tsa:Array):void

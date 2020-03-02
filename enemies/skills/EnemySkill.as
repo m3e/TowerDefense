@@ -35,7 +35,7 @@
 			{
 				timerSkill = true;
 			}
-			common.Commons.addSkillsList(this);
+			common.Commons.addEnemySkillsList(this);
 		}
 		// constructor code;
 		public function pausedGame():void
@@ -178,9 +178,15 @@
 			{
 				e.removeChild(this)
 			}
+			while (currentlyActive.length > 0)
+			{
+				currentlyActive[0].deactivateSkill()
+				currentlyActive.splice(0,1);
+			}
+			currentlyActive = null;
 			e = null;
 			sArray = null;
-			common.Commons.removeSkillsList(this)
+			common.Commons.removeEnemySkillsList(this)
 		}
 	}
 

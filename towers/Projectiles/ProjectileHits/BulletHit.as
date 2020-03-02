@@ -13,9 +13,8 @@
 		}
 		override protected function specialFrame():void
 		{
-			//this.x += (4 - (Math.random()*8))
-			//this.y += (4 - (Math.random()*8))
-			//this.rotation = (angleT / Math.PI) * 180;
+			this.x += (4 - (Math.random()*8))
+			this.y += (3 - (Math.random()*6))
 		}
 	}
 	

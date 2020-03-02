@@ -104,7 +104,7 @@
 			skillsMouseOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
-			   [Splash,Lightning,Demonologist,Tinkerer],
+			   [Splash,Lightning,Demonologist,],
 			   [,,,]];
 			menuIsDefault = true;
 			hideTowerBeingBuiltSquare();
@@ -154,8 +154,8 @@
 						break;
 
 					case (Keyboard.NUMBER_8) :
-						tower = currentMenuSelected[1][3];
-						selectTower(tower);
+						//tower = currentMenuSelected[1][3];
+						//selectTower(tower);
 						break;
 
 
@@ -295,8 +295,8 @@
 					setChildIndex(towerStatsOver, numChildren -1);
 					_root.setChildIndex(this, _root.numChildren - 1);
 
-					towerStatsOver.x = e.currentTarget.x;
-					towerStatsOver.y = e.currentTarget.y - 110;
+					towerStatsOver.x = e.currentTarget.x
+					towerStatsOver.y = e.currentTarget.y - towerStatsOver.height-10;
 					if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
 					{
 						var a:Number = stage.stageWidth;
@@ -306,8 +306,8 @@
 					}
 
 					towerStatsOver.NameBox.text = e.currentTarget.tName;
-					towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-					towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
+					//towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
+					//towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
 					towerStatsOver.RngBox.text = e.currentTarget.tRange;
 					towerStatsOver.TypeBox.text = e.currentTarget.tType;
 					towerStatsOver.DescBox.text = e.currentTarget.tDescription;

@@ -5,7 +5,7 @@
 	
 	public class UserProfile extends Sprite {
 		
-		public static var levelsUnlocked:int = 6;
+		public static var levelsUnlocked:int = 9;
 		
 		public function UserProfile() {
 			// constructor code

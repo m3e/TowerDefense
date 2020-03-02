@@ -6,6 +6,12 @@
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import common.Commons;
+	import flash.geom.Rectangle;
+	import flash.display.BitmapData;
+	import flash.geom.Point;
+	import com.greensock.loading.ImageLoader;
+	import com.greensock.events.LoaderEvent;
+	import flash.display.Bitmap;
 	
 	public class MapSelections extends MovieClip {
 		
@@ -15,6 +21,11 @@
 		protected var mapID:String;
 		protected var gameName:String;
 		private var roundsList:Array;
+		public var startX:int = 0;
+		public var startY:int = 6;
+		
+		private var loaderURL:String;
+		private var imgLoader:ImageLoader;
 		
 		public function MapSelections() {
 			mapArray = new Array;
@@ -49,6 +60,7 @@
 		public function startGame(gMode:int):void
 		{
 			common.Commons.setMapArray(mapArray);
+			common.Commons.setStartPoints(startX,startY);
 			var xmlName:String
 			
 			switch (gMode)
@@ -62,7 +74,20 @@
 				xmlName = "Survival.xml"
 				break;
 			}
-			var loaderURL:String = "Maps/Maps/"+xmlName
+			loaderURL = "Maps/Maps/"+xmlName
+			setupEnemyImages();
+			
+		}
+		private function setupEnemyImages():void
+		{
+			imgLoader = new ImageLoader("enemies/EnemySpriteSheet.png", {name:"enemySS"});
+			imgLoader.addEventListener(Event.COMPLETE,compileEnemyImages);
+			imgLoader.load();
+			
+		}
+		private function compileEnemyImages(e:Event):void
+		{
+			
 			setupRoundsList(loaderURL);
 		}
 		private function setupRoundsList(loaderURL:String):void
@@ -76,9 +101,23 @@
 			var myXML = new XML(e.target.data);
 			var i:int = 0;
 			roundsList = new Array  ;
+			
+			var rect:Rectangle = new Rectangle(0,0,common.Commons.tileSide,common.Commons.tileSide);
+			var pt:Point = new Point();
+			var bmp:Bitmap = imgLoader.rawContent;
+			var bmpData:BitmapData;
+			
+			var bmpWidth:int = bmp.width / common.Commons.tileSide
+			var bmpHeight:int = bmp.height / common.Commons.tileSide
+			
 			while (i < myXML.Row.length())
 			{
 				var roundNumber:int = int(myXML.Row[i].currentRound);
+				rect.x = (i % bmpWidth) * common.Commons.tileSide
+				rect.y = Math.floor(i / bmpWidth) * common.Commons.tileSide
+				bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
+				bmpData.copyPixels(bmp.bitmapData,rect,pt);
+				
 				var maxHp:int = int(myXML.Row[i].maxHp);
 				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);
 				var goldValue:int = int(myXML.Row[i].goldValue);
@@ -94,7 +133,7 @@
 				var s2:String = myXML.Row[i].eSkillTwo;
 				var s3:String = myXML.Row[i].eSkillThree;
 				
-				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3];
+				var waveData:Array = [maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3,bmpData];
 				roundsList.push(waveData);
 				i++;
 			}
