@@ -19,7 +19,7 @@
 		}
 		public function upgradeTower():void
 		{
-			if(UserInfo.canAfford(selectedTower.uCost))
+			/*if(UserInfo.canAfford(selectedTower.uCost))
 			{
 				//UserInfo.changeGold(-(selectedTower.uCost))
 				selectedTower.upgradeMe();
@@ -28,7 +28,7 @@
 			{
 				trace("You can't afford to upgrade.  Cost:",selectedTower.uCost);
 			}
-			
+			*/
 		}
 	}
 	

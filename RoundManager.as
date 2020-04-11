@@ -25,9 +25,11 @@
 		private var enemyAlive:Array;
 		private var actualRound:Boolean;
 		private var spawnCount:int;
+		private var _root:Object;
 
 		public function RoundManager(_initEnemies:InitiateEnemies)
 		{
+			_root = common.Commons.getRoot();
 			enemyWaveTracker = [];
 			roundsList = common.Commons.roundsList;
 			enemyAlive = new Array  ;
@@ -108,18 +110,17 @@
 				if (enemyWaveTracker[i].indexOf(e.currentTarget) != -1)
 				{
 					enemyWaveTracker[i].splice(enemyWaveTracker[i].indexOf(e.currentTarget),1);
-					if (enemyWaveTracker[i].length == 1)
+					if (enemyWaveTracker[i].length == 1 && spawnCount == 0)
 					{
-						UserInfo.changeGold(enemyWaveTracker[i][0]);
+						_root.changeGold(enemyWaveTracker[i][0])
 						enemyWaveTracker.splice(i,1);
 					}
 				}
 			}
-			if (enemyAlive.length == 1)
+			if (enemyAlive.length == 1 && spawnCount == 0)
 			{
 				roundInProgress = false;
 			}
-			
 		}
 		private function spawnTimer(e:Event):void
 		{
@@ -153,6 +154,7 @@
 		public function endClass():void
 		{
 			endWaveSend();
+			_root = null;
 			enemyWaveTracker = null;
 			roundsList = null;
 			initEnemies = null;

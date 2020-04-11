@@ -177,7 +177,7 @@
 						{
 							case (getQualifiedSuperclassName(ct) == getQualifiedClassName(Tower)) :
 
-								var psuedoTower:PsuedoTower = new PsuedoTower(ct);
+								var psuedoTower:PsuedoTower = new PsuedoTower(ct,false);
 								psuedoTower.x = cellsArray[i][p].x;
 								psuedoTower.y = cellsArray[i][p].y;
 								addChild(psuedoTower);
@@ -293,7 +293,7 @@
 
 					towerStatsOver.visible = true;
 					setChildIndex(towerStatsOver, numChildren -1);
-					_root.setChildIndex(this, _root.numChildren - 1);
+					parent.setChildIndex(this, parent.numChildren - 1);
 
 					towerStatsOver.x = e.currentTarget.x
 					towerStatsOver.y = e.currentTarget.y - towerStatsOver.height-10;
@@ -318,7 +318,7 @@
 				case (getQualifiedSuperclassName(e.currentTarget) == getQualifiedClassName(TowerSkill)) :
 					skillsMouseOver.visible = true;
 					setChildIndex(skillsMouseOver, numChildren -1);
-					_root.setChildIndex(this, _root.numChildren - 1);
+					parent.setChildIndex(this, parent.numChildren - 1);
 
 					skillsMouseOver.x = e.currentTarget.x;
 					skillsMouseOver.y = e.currentTarget.y - 110;

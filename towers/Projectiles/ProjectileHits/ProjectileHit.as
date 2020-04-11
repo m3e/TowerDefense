@@ -78,7 +78,7 @@
 		{
 			ended = true;
 			stage.removeEventListener(Event.ENTER_FRAME,eFrame);
-			_root.removeChild(this);
+			_root.bmAboveTowers.removeChild(this);
 			bTarget = null;
 			_root = null;
 			common.Commons.removeHitList(this);

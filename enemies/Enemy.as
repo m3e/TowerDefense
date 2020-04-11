@@ -26,7 +26,7 @@
 		public var moveSpeed:Number;
 		protected var mapArray:Array;
 		//root used on Debuffs to place image
-		public var _root:MovieClip;
+		public var _root:Object;
 		public var goldValue:int;
 		public var id:int;
 		public var maxArmor:int;
@@ -54,7 +54,7 @@
 		protected var light:Object;
 		protected var medium:Object;
 		protected var heavy:Object;
-		protected var fort:Object;
+		protected var siege:Object;
 		protected var pure:Object;
 
 		protected var enemySkillOnHit:Array = new Array  ;
@@ -106,8 +106,8 @@
 			armor = maxArmor;
 			makeImage();
 			//this.gotoAndStop(eFrame);
-			_root = e.currentTarget.parent;
-			_root.addChild(healthBar);
+			_root = common.Commons.getRoot();
+			_root.bmEnemy.addChild(healthBar);
 			healthBar.visible = false;
 			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
@@ -209,7 +209,7 @@
 			light = new Object();
 			medium = new Object();
 			heavy = new Object();
-			fort = new Object();
+			siege = new Object();
 			pure = new Object();
 
 			light["pierce"] = 1.5;
@@ -224,9 +224,9 @@
 			heavy["normal"] = .85;
 			heavy["heavy"] = 1.3
 			;
-			fort["pierce"] = .70;
-			fort["normal"] = .75;
-			fort["heavy"] = .9
+			siege["pierce"] = .70;
+			siege["normal"] = .75;
+			siege["heavy"] = .9
 			;
 			pure["pierce"] = 1;
 			pure["normal"] = 1;
@@ -256,8 +256,8 @@
 						d = heavy[dType];
 						break;
 
-					case ("fort") :
-						d = fort[dType];
+					case ("siege") :
+						d = siege[dType];
 						break;
 
 					case ("pure") :
@@ -303,7 +303,7 @@
 			if (eHp <= 0)
 			{
 				killed = true;
-				if (_root != null && _root.contains(this))
+				if (_root != null && _root.bmEnemy.contains(this))
 				{
 					destroyThis();
 				}
@@ -331,7 +331,7 @@
 		public function updateHealth():void
 		{
 			var percentHP:Number = eHp / eMaxHp;
-			if (_root != null && _root.contains(healthBar))
+			if (_root != null && _root.bmEnemy.contains(healthBar))
 			{
 				healthBar.hpBar.scaleX = percentHP;
 				healthBar.x = this.x;
@@ -556,14 +556,14 @@
 
 			mapArray = null;
 			stage.removeEventListener(Event.ENTER_FRAME, startMovement);
-			_root.removeChild(healthBar);
+			_root.bmEnemy.removeChild(healthBar);
 			healthBar = null;
-			_root.removeChild(this);
+			_root.bmEnemy.removeChild(this);
 			_root = null;
 			light = null;
 			medium = null;
 			heavy = null;
-			fort = null;
+			siege = null;
 			pure = null;
 		}
 	}

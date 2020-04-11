@@ -11,29 +11,29 @@
 	public class UserInfo extends MovieClip {
 				
 		//GOLD
-		private static var goldBox:GoldBox;
-		public static var gold:int;
+		//private static var goldBox:GoldBox;
+		//public static var gold:int;
 		
 		//LIVES
-		private static var livesBar:LivesBar;
-		public static var lives:int;
+		//private static var livesBar:LivesBar;
+		//public static var lives:int;
 		
 		
 		
 		public function UserInfo() {
-			gold = 100;
-			lives = 20;
-			addEventListener(Event.ADDED_TO_STAGE, addedToStage)
+			//gold = 100;
+			//lives = 20;
+			//addEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			// constructor code
 		}
-		private function addedToStage(e:Event):void
+		/*private function addedToStage(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage)
 			addEventListener(Event.REMOVED_FROM_STAGE, removedFromStage)
 			//GOLD
 			goldBox = new GoldBox();
-			goldBox.x = 591
-			goldBox.y = 475
+			goldBox.x = 593
+			goldBox.y = 480
 			goldBox.name = "goldBox"
 			goldBox.GoldText.text = gold.toString();
 			goldBox._caBox.alpha = 0
@@ -41,13 +41,13 @@
 			
 			//LIVES
 			livesBar = new LivesBar();
-			livesBar.x = 585
-			livesBar.y = 500
+			livesBar.x = 590
+			livesBar.y = 507
 			livesBar.name = "livesBar"
 			livesBar.LivesText.text = lives.toString();
 			addChild(livesBar);
 		}		
-		public static function canAfford(cost:int):Boolean
+		/*public static function can1Afford(cost:int):Boolean
 		{
 			var afford:Boolean;
 			if (cost <= gold)
@@ -61,12 +61,12 @@
 			}
 			return afford;
 		}
-		public static function changeGold(goldChange:int):void
+		public static function change1Gold(goldChange:int):void
 		{
 			gold += goldChange
 			goldBox.GoldText.text = gold.toString();
 		}
-		public static function updateLives(subtractedLives:int):void
+		public static function update1Lives(subtractedLives:int):void
 		{
 			lives -= subtractedLives;
 			livesBar.LivesText.text = lives.toString();
@@ -78,14 +78,14 @@
 		private function removedFromStage(e:Event):void
 		{
 			endClass();
-		}
-		private function endClass():void
+		}*/
+		/*private function endClass():void
 		{
 			removeChild(goldBox)
 			removeChild(livesBar)
 			goldBox = null;
 			livesBar = null;
-		}
+		}*/
 	}
 	
 }

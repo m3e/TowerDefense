@@ -83,7 +83,6 @@
 			imgLoader = new ImageLoader("enemies/EnemySpriteSheet.png", {name:"enemySS"});
 			imgLoader.addEventListener(Event.COMPLETE,compileEnemyImages);
 			imgLoader.load();
-			
 		}
 		private function compileEnemyImages(e:Event):void
 		{
@@ -104,19 +103,21 @@
 			
 			var rect:Rectangle = new Rectangle(0,0,common.Commons.tileSide,common.Commons.tileSide);
 			var pt:Point = new Point();
-			var bmp:Bitmap = imgLoader.rawContent;
 			var bmpData:BitmapData;
-			
-			var bmpWidth:int = bmp.width / common.Commons.tileSide
-			var bmpHeight:int = bmp.height / common.Commons.tileSide
+			//var bmp:Bitmap = imgLoader.rawContent;
+			//var bmpWidth:int = bmp.width / common.Commons.tileSide
+			//var bmpHeight:int = bmp.height / common.Commons.tileSide
 			
 			while (i < myXML.Row.length())
 			{
 				var roundNumber:int = int(myXML.Row[i].currentRound);
-				rect.x = (i % bmpWidth) * common.Commons.tileSide
-				rect.y = Math.floor(i / bmpWidth) * common.Commons.tileSide
-				bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
-				bmpData.copyPixels(bmp.bitmapData,rect,pt);
+				//rect.x = (i % bmpWidth) * common.Commons.tileSide
+				//rect.y = Math.floor(i / bmpWidth) * common.Commons.tileSide
+				//bmpData = common.Commons.getSprite("enemySS",rect,pt,)
+				//bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
+				//bmpData.copyPixels(bmp.bitmapData,rect,pt);
+				bmpData = common.Commons.getSprite("enemySS",i);
+				
 				
 				var maxHp:int = int(myXML.Row[i].maxHp);
 				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);

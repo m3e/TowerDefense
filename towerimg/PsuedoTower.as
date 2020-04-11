@@ -20,9 +20,12 @@
 		private var tId:int;
 		private var bmpData:BitmapData;
 		private var bmp:Bitmap;
+		private var small:Boolean;
 		
-		public function PsuedoTower(TowerReference:Object) {
+		public function PsuedoTower(TowerReference:Object,Small:Boolean) {
 			
+			small = Small;
+			stop();
 			towerReference = TowerReference;
 			addEventListener(Event.ADDED, imgAdded)
 			addEventListener(Event.REMOVED_FROM_STAGE, removed)
@@ -41,7 +44,14 @@
 			tDescription = mockTower.tDescription
 			tCost = mockTower.tCost;
 			
-			bmpData = mockTower.bmpData45;
+			if (small == true)
+			{
+				bmpData = mockTower.bmpData;
+			}
+			else
+			{
+				bmpData = mockTower.bmpData45;
+			}
 			bmp = new Bitmap(bmpData);
 			addChild(bmp);
 

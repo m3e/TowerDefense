@@ -17,6 +17,7 @@
 	import flash.events.MouseEvent;
 	import assets.UI.BattleMap.*;
 	import design.UI.GameOverWindow;
+	import flash.display.Graphics;
 
 	import common.Commons;
 
@@ -29,17 +30,12 @@
 
 	import sounds.SoundManager;
 
-	import design.UI.OptionsButton;
 	import design.UI.OptionsWindow;
 	import towers.skills.TowerSkillManager;
-
+	import flash.filters.GlowFilter;
 
 	public class Map extends MovieClip
 	{
-
-		private var menuManager:MenuManager;
-		private var middleInfo:MiddleInfoContent;
-		//root
 		private var _root:Object;
 
 		//constants
@@ -55,12 +51,10 @@
 
 		//shapes
 		private var bottomBar:BottomBar;
-		private var startRoundButton:StartRoundButton;
-		private var dpsDummyButton:DpsDummyButton;
 
 		//tower related
 		private var towerBeingBuilt:Object;
-		private var psuedoTower:Object;
+		private var psuedoTower:PsuedoTower;
 		private var mouseclickedTower:Object;
 		private var shiftBuildEnabled:Boolean;
 
@@ -70,7 +64,6 @@
 
 		//ui
 		private var inputField:InputField;
-		private var roundBar:RoundBar;
 
 		//controls
 		private var _keyDown:int = 0;
@@ -78,7 +71,6 @@
 		private var keysEnabled:Boolean;
 
 		//user
-		private var userInfo:UserInfo;
 		private var cAfford:CantAfford;
 
 		//initEnemy
@@ -89,17 +81,25 @@
 		//booleans
 		private var healthBarOn:Boolean;
 
-		private var optionsButton:OptionsButton;
 		private var optionsWindow:OptionsWindow;
-		private var fastForward:FastForward;
-		private var normalSpeed:NormalSpeed;
 		private var pauseBtn:PauseBtn;
 		private var gameOverWindow:GameOverWindow;
 
 		private var towerSkillManager:TowerSkillManager;
+		
+		public var gold:int;
+		public var lives:int
+		
+		private var bmTiles:Sprite = new Sprite;
+		public var bmTowers:Sprite = new Sprite;
+		public var bmEnemy:Sprite = new Sprite;
+		public var bmAboveTowers:Sprite = new Sprite;
+		private var gameUI:Sprite = new Sprite;
+		private var highPriority:Sprite = new Sprite;
 
 		public function Map()
 		{
+			
 			enemyList = common.Commons.getEnemyList();
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
@@ -108,6 +108,8 @@
 			//1=right 2=down 3=left 4=up
 			mapArray = common.Commons.getMapArray();
 			roundsList = common.Commons.getRoundsList();
+			gold = 100;
+			lives = 20;
 
 			for (var row:int=0; row < mapArray.length; row++)
 			{
@@ -128,9 +130,27 @@
 		private function added(e:Event):void
 		{
 			_root = this;
+			
+			
+			addChild(bmTiles);
+			bmTiles.mouseEnabled = false;
+			addChild(bmTowers)
+			bmTowers.mouseEnabled = false;
+			addChild(bmEnemy);
+			bmEnemy.mouseEnabled = false;
+			addChild(bmAboveTowers);
+			bmAboveTowers.mouseEnabled = false;
+			//bmAboveTowers.mouseChildren = false;
+			addChild(gameUI);
+			gameUI.mouseEnabled = false;
+			addChild(highPriority);
+			highPriority.mouseEnabled = false;
+			
+			
+			
 			common.Commons.setRoot(_root);
 			cAfford = new CantAfford  ;
-			addChild(cAfford);
+			gameUI.addChild(cAfford);
 			cAfford.visible = false;
 			cAfford.mouseEnabled = false;
 			common.Commons.fRate = 24;
@@ -147,17 +167,12 @@
 
 			setupTowerSquares();
 
-			setupUser();
-			//Creates: userInfo
-
 			setupEnemies();
-			//Creates: EnemySpawner (timer)
+			//Creates: EnemySpawner (timer), roundManager
 			//Requires: mapArray
 
 			setupBottomBar();
-			//requires initEnemies for buttons
-
-			setupBottomBarContent();
+			//requires initEnemies for buttons;
 
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
@@ -165,54 +180,17 @@
 			//Requires: psuedoTowers
 
 			setupTileListeners();
-
-			setChildIndex(userInfo,numChildren-1);
 		}
 		private function setupTowerSkillManager():void
 		{
 			towerSkillManager = new TowerSkillManager();
-		}
-		private function setupBottomBarContent():void
-		{
-			roundBar = new RoundBar();
-			roundBar.y = 416;
-			_root.addChild(roundBar);
-
-			menuManager = new MenuManager();
-			menuManager.x = 677;
-			menuManager.y = 423;
-			_root.addChild(menuManager);
-
-			middleInfo = new MiddleInfoContent();
-			middleInfo.x = 333;
-			middleInfo.y = 431;
-			_root.addChild(middleInfo);
-
-			optionsButton = new OptionsButton();
-			optionsButton.scaleX = .5;
-			optionsButton.scaleY = .5;
-			optionsButton.x = 298;
-			optionsButton.y = 440;
-			_root.addChild(optionsButton);
-			optionsButton.addEventListener(MouseEvent.CLICK, optionsButtonClick);
-
-			normalSpeed = new NormalSpeed();
-			normalSpeed.x = 298;
-			normalSpeed.y = 485;
-			_root.addChild(normalSpeed);
-
-			fastForward = new FastForward();
-			fastForward.x = 298;
-			fastForward.y = 530;
-			_root.addChild(fastForward);
-
 		}
 		private function optionsButtonClick(e:MouseEvent):void
 		{
 			optionsWindow = new OptionsWindow(true);
 			keysEnabled = false;
 
-			addChild(optionsWindow);
+			highPriority.addChild(optionsWindow);
 			pauseGame();
 
 			optionsWindow.addEventListener(Event.REMOVED_FROM_STAGE, optionsWindowClosed);
@@ -249,11 +227,6 @@
 		private function enableKeys():void
 		{
 			keysEnabled = true;
-		}
-		private function setupUser():void
-		{
-			userInfo = new UserInfo();
-			_root.addChild(userInfo);
 		}
 		private function setupKeyboard():void
 		{
@@ -311,7 +284,7 @@
 					case Keyboard.X :
 						if (mouseclickedTower != null)
 						{
-							menuManager.sellObjectSelected();
+							bottomBar.menuManager.sellObjectSelected();
 						}
 						break;
 
@@ -328,7 +301,8 @@
 						break;
 
 					case Keyboard.G :
-						UserInfo.changeGold(99999);
+						
+						changeGold(99999);
 						break;
 
 					case Keyboard.E :
@@ -353,9 +327,9 @@
 				{
 					if (!(inputField.contains(e.target as DisplayObject)) ||  !(e.target is TextField))
 					{
-						if (menuManager != null)
+						if (bottomBar.menuManager != null)
 						{
-							menuManager.keyDownHandler(e);
+							bottomBar.menuManager.keyDownHandler(e);
 						}
 						/*if (mouseclickedTower != null)
 						{
@@ -365,6 +339,34 @@
 					}
 				}
 			}
+		}
+		public function canAfford(cost:int):Boolean
+		{
+			var afford:Boolean;
+			if (cost <= gold)
+			{
+				afford = true;
+			}
+			else
+			{
+				bottomBar.goldBox._caBox.alpha = 0
+				TweenLite.from(bottomBar.goldBox._caBox,.2,{alpha:1})
+			}
+			return afford;
+		}
+		public function changeGold(goldChange:int):void
+		{
+			gold += goldChange
+			bottomBar.goldBox.GoldText.text = gold.toString();
+		}
+		public function updateLives(subtractedLives:int):void
+		{
+			lives -= subtractedLives;
+			bottomBar.livesBar.LivesText.text = lives.toString();
+		}
+		public function getGold():int
+		{
+			return gold;
 		}
 		private function healthBarToggle():void
 		{
@@ -400,8 +402,6 @@
 
 				psuedoTower.x = e.currentTarget.x;
 				psuedoTower.y = e.currentTarget.y;
-				setChildIndex(rangeCircle,numChildren-1);
-				setChildIndex(DisplayObject(psuedoTower),numChildren-1);
 			}
 		}
 		private function hoverOverOut(e:MouseEvent):void
@@ -419,26 +419,20 @@
 		{
 			bottomBar = new BottomBar();
 			bottomBar.y = 416;
-			_root.addChild(bottomBar);
-
-			startRoundButton = new StartRoundButton();
-			startRoundButton.x = 593;
-			startRoundButton.y = 426;
-			_root.addChild(startRoundButton);
-			startRoundButton.addEventListener(MouseEvent.CLICK, startRoundMouse);
-
-			dpsDummyButton = new DpsDummyButton();
-			dpsDummyButton.x = 593;
-			dpsDummyButton.y = 450;
-			_root.addChild(dpsDummyButton);
-			dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
+			bottomBar.startRoundButton.addEventListener(MouseEvent.CLICK, startRoundMouse);
+			bottomBar.dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
+			bottomBar.optionsButton.addEventListener(MouseEvent.CLICK, optionsButtonClick);
+			bottomBar.goldBox.GoldText.text = gold.toString();
+			bottomBar.goldBox._caBox.alpha = 0
+			bottomBar.livesBar.LivesText.text = lives.toString();
+			gameUI.addChild(bottomBar);
 		}
 		private function startRound():void
 		{
 			if (roundManager.roundInProgress == false)
 			{
 				roundManager.startRound(true);
-				roundBar.updateRoundList(roundManager.getCurrentRound());
+				bottomBar.roundBar.updateRoundList(roundManager.getCurrentRound());
 			}
 		}
 		private function sendWave(e:MouseEvent)
@@ -448,13 +442,13 @@
 				var waveArray:Array = new Array  ;
 				var hp:int = Number(inputField.hpField.text);
 				var ms:int = Number(inputField.msField.text);
-				var gold:int = Number(inputField.goldField.text);
+				var goldA:int = Number(inputField.goldField.text);
 				var armor:int = Number(inputField.armorField.text);
 				var numSend:int = Number(inputField.numField.text);
 				var freq:int = Number(inputField.freqField.text);
 				var armorType:String = "pure";
 				var eFrame:int = 11;
-				waveArray = [hp,ms,gold,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
+				waveArray = [hp,ms,goldA,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
 				//maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3,bmpData];
 				roundManager.sendWave(waveArray);
 			}
@@ -483,7 +477,7 @@
 			mouseclickedTowerSquare.graphics.drawRect(0,0,tileSide,tileSide);
 			mouseclickedTowerSquare.graphics.endFill();
 			mouseclickedTowerSquare.visible = false;
-			_root.addChild(mouseclickedTowerSquare );
+			bmAboveTowers.addChild(mouseclickedTowerSquare );
 
 			inputField = new InputField();
 			inputField.x = 692;
@@ -491,7 +485,7 @@
 			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave);
 			inputField.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
 			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
-			_root.addChild(inputField);
+			gameUI.addChild(inputField);
 			inputField.visible = false;
 
 		}
@@ -511,15 +505,14 @@
 				//towerBeingBuilt = tower sent via constructor
 				towerBeingBuilt = tower;
 
-				if (psuedoTower != null && _root.contains(psuedoTower))
+				if (psuedoTower != null && bmTowers.contains(psuedoTower))
 				{
-					_root.removeChild(psuedoTower);
+					bmTowers.removeChild(psuedoTower);
 					psuedoTower = null;
 				}
-
-				psuedoTower = new PsuedoTower(tower.towerReference);
+				psuedoTower = new PsuedoTower(tower.towerReference,true);
 				psuedoTower.mouseEnabled = false;
-				_root.addChild(psuedoTower);
+				bmTowers.addChild(psuedoTower);
 				psuedoTower.visible = false;
 				rangeCircle.visible = false;
 
@@ -539,8 +532,6 @@
 				{
 
 					psuedoTower.visible = true;
-					setChildIndex(rangeCircle,numChildren-1);
-					setChildIndex(DisplayObject(psuedoTower),numChildren-1);
 					rangeCircle.visible = true;
 				}
 			}
@@ -548,8 +539,8 @@
 			{
 				//Tower selected is same as tower in memory
 				towerBeingBuilt = null;
-				menuManager.hideTowerBeingBuiltSquare();
-				_root.removeChild(psuedoTower);
+				bottomBar.menuManager.hideTowerBeingBuiltSquare();
+				bmTowers.removeChild(psuedoTower);
 				psuedoTower = null;
 				rangeCircle.visible = false;
 			}
@@ -558,7 +549,7 @@
 		{
 			if (mouseclickedTower != null)
 			{
-				UserInfo.changeGold(mouseclickedTower.tCost);
+				changeGold(mouseclickedTower.tCost);
 
 				mouseclickedTower.destroyTower();
 
@@ -566,18 +557,20 @@
 
 				tileArray[tower.y / tileSide][tower.x / tileSide].occupied = false;
 
-				menuManager.returnToDefaultMenu();
+				bottomBar.menuManager.returnToDefaultMenu();
 			}
 		}
 		private function setupRangeCircle():void
 		{
+			var glow:GlowFilter = new GlowFilter(0x00CCFF,1,12,12,3);
 			rangeCircle = new Shape();
-			rangeCircle.graphics.beginFill(0xFF0000,.5);
+			rangeCircle.graphics.lineStyle(1,0xFFFFFF,.5,false,"none");
+			//rangeCircle.graphics.beginFill(0xFF0000,.3);
 			rangeCircle.graphics.drawCircle(0,0,100);
-			rangeCircle.graphics.endFill();
+			//rangeCircle.graphics.endFill();
 			rangeCircle.visible = false;
-			_root.addChild(rangeCircle);
-
+			rangeCircle.filters = [glow]
+			bmAboveTowers.addChild(rangeCircle);
 		}
 		private function setupEnemies():void
 		{
@@ -590,7 +583,7 @@
 			gameOverWindow = new GameOverWindow();
 			keysEnabled = false;
 
-			addChild(gameOverWindow);
+			highPriority.addChild(gameOverWindow);
 			pauseGame();
 			//gameOverWindow.addEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
 
@@ -643,7 +636,7 @@
 							tile.occupied = true;
 							break;
 					}
-					_root.addChildAt(tile,0);
+					bmTiles.addChild(tile);
 					tile.x = o * tileSide;
 					tile.y = i * tileSide;
 					tileArray[i][o] = tile;
@@ -667,7 +660,7 @@
 		{
 			if (e.currentTarget.occupied == false && psuedoTower != null)
 			{
-				addTowerToMap(e.currentTarget.x,e.currentTarget.y,psuedoTower.towerReference);
+				addTowerToMap(e.currentTarget.x,e.currentTarget.y,Class(psuedoTower.towerReference));
 			}
 		}
 		private function addTowerToMap(towerX,towerY,TowerReference:Class):void
@@ -675,9 +668,9 @@
 			var klasa:Class = TowerReference;
 			var newTower:Tower = new klasa(towerSkillManager);//creates new tower
 			klasa = null;
-			if (UserInfo.canAfford(newTower.tCost))
+			if (canAfford(newTower.tCost))
 			{
-				UserInfo.changeGold(-newTower.tCost);
+				changeGold(-newTower.tCost);
 
 				newTower.enemyList = enemyList;
 				newTower.towerArray = towerArray;
@@ -688,7 +681,7 @@
 
 				towerArray[newTower.y / tileSide][newTower.x / tileSide] = newTower;
 
-				_root.addChildAt(newTower,numChildren-2);
+				bmTowers.addChild(newTower);
 				SoundManager.sfx("buildtower");
 
 				newTower.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
@@ -719,7 +712,6 @@
 			{
 				newTower.destroyTower();
 				cAfford.visible = true;
-				setChildIndex(cAfford,_root.numChildren-1);
 				cAfford.alpha = 0;
 				TweenLite.from(cAfford, 1.5, {alpha:1,onStart:startTween,onComplete:endTween});
 				newTower = null;
@@ -746,7 +738,7 @@
 			if (klasa is Class)
 			{
 				testTower = new klasa(towerSkillManager);
-				if (UserInfo.canAfford(testTower.tCost))
+				if (canAfford(testTower.tCost))
 				{
 					mouseclickedTower.destroyTower();
 
@@ -794,13 +786,13 @@
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
 
-				setChildIndex(rangeCircle,numChildren-1);
-				setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);
-				setChildIndex(mouseclickedTowerSquare,numChildren-1);
+				//setChildIndex(rangeCircle,numChildren-1);
+				//setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);
+				//setChildIndex(mouseclickedTowerSquare,numChildren-1);
 
 
-				middleInfo.updateText(mouseclickedTower);
-				menuManager.towerMapClicked(e);
+				bottomBar.middleInfo.updateText(mouseclickedTower);
+				bottomBar.menuManager.towerMapClicked(e);
 			}
 			else
 			{
@@ -809,8 +801,8 @@
 		}
 		private function removeMouseClickedTower():void
 		{
-			menuManager.returnToDefaultMenu();
-			middleInfo.updateText(undefined);
+			bottomBar.menuManager.returnToDefaultMenu();
+			bottomBar.middleInfo.updateText(undefined);
 			mouseclickedTower = null;
 			mouseclickedTowerSquare.visible = false;
 			rangeCircle.visible = false;
@@ -830,7 +822,7 @@
 			{
 				for (var o:int=0; o < tileArray[i].length; o++)
 				{
-					_root.removeChild(tileArray[i][o]);
+					bmTiles.removeChild(tileArray[i][o]);
 					tileArray[i][o] = null;
 				}
 			}
@@ -847,45 +839,24 @@
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 			stage.removeEventListener(KeyboardEvent.KEY_UP, keyReleased);
 
-			roundBar.endClass();
-			_root.removeChild(roundBar);
-			roundBar = null;
-
-			menuManager.endClass();
-			_root.removeChild(menuManager);
-			menuManager = null;
-
-			_root.removeChild(middleInfo);
-			middleInfo = null;
-
-			_root.removeChild(bottomBar);
+			bottomBar.menuManager.endClass();
+			bottomBar.startRoundButton.removeEventListener(MouseEvent.CLICK, startRoundMouse);
+			bottomBar.dpsDummyButton.removeEventListener(MouseEvent.CLICK, sendDpsDummy);
+			bottomBar.optionsButton.removeEventListener(MouseEvent.CLICK, optionsButtonClick);
+			bottomBar.roundBar.endClass();
+			gameUI.removeChild(bottomBar);
 			bottomBar = null;
 
-			optionsButton.removeEventListener(MouseEvent.CLICK, optionsButtonClick);
-			_root.removeChild(optionsButton);
-			optionsButton = null;
-
-			startRoundButton.removeEventListener(MouseEvent.CLICK, startRoundMouse);
-			_root.removeChild(startRoundButton);
-			startRoundButton = null;
-
-			dpsDummyButton.removeEventListener(MouseEvent.CLICK, sendDpsDummy);
-			_root.removeChild(dpsDummyButton);
-			dpsDummyButton = null;
-
-			_root.removeChild(userInfo);
-			userInfo = null;
-
-			_root.removeChild(mouseclickedTowerSquare );
+			bmAboveTowers.removeChild(mouseclickedTowerSquare );
 			mouseclickedTowerSquare = null;
 
-			_root.removeChild(inputField);
+			gameUI.removeChild(inputField);
 			inputField = null;
 
-			_root.removeChild(rangeCircle);
-			rangeCircle = null
-			;
-			removeChild(cAfford);
+			bmAboveTowers.removeChild(rangeCircle);
+			rangeCircle = null;
+			
+			gameUI.removeChild(cAfford);
 			cAfford = null;
 
 			mouseclickedTower = null;
@@ -905,11 +876,6 @@
 				}
 			}
 			removeMap();
-
-			_root.removeChild(fastForward);
-			_root.removeChild(normalSpeed);
-			fastForward = null;
-			normalSpeed = null;
 
 			tileArray = [];
 			enemyList = [];

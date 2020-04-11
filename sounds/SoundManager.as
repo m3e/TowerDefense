@@ -136,6 +136,7 @@
 				var sound:SoundChannel = song.play(0,0,trans);
 				sfxs.push([sound,fxName]);
 				sound.addEventListener(Event.SOUND_COMPLETE, removeSfx);
+				
 			}
 			return sound;
 		}
@@ -156,43 +157,35 @@
 			}
 			sfx = null;
 		}
+		private static function removeBgfx(e:Event):void
+		{
+			endBgfx();
+		}
+		private static function endBgfx():void
+		{
+			bgSound.stop();
+			bgSound.removeEventListener(Event.SOUND_COMPLETE, removeBgfx)
+			if (currentlyPlaying == "mainTheme")
+			{
+				currentlyPlaying == null;
+				bgfx("mainTheme");
+			}
+		}
 		public static function bgfx(fxName:String):void
 		{
 			if (fxName != currentlyPlaying)
 			{
 				if (currentlyPlaying != null)
 				{
-					bgSound.stop();
+					endBgfx()
 				}
 				var song:Sound = queue.getContent(fxName);
-				var trans:SoundTransform = new SoundTransform(bgVolume);
+				var trans:SoundTransform = new SoundTransform(bgVolume)
 				var sound:SoundChannel = song.play(0,0,trans);
+				sound.addEventListener(Event.SOUND_COMPLETE, removeBgfx)
 				currentlyPlaying = fxName;
 				bgSound = sound;
-				/*var song:MP3Loader = queue.getLoader(fxName);
-				song.volume = musicVolume;
-				currentPlay = fxName;
-				switch (fxName)
-				{
-				case "intro" :
-				song.gotoSoundTime(1.5);
-				
-				TweenLite.from(song,3,{volume:0,ease:Circ.easeIn});
-				break;
-				
-				case "gameMap" :
-				song.gotoSoundTime(5);
-				
-				TweenLite.from(song,5,{volume:0});
-				break;
-				
-				case "battle" :
-				song.gotoSoundTime(3);
-				
-				TweenLite.from(song,8,{volume:0,ease:Circ.easeIn});
-				break;
-				}
-				song.playSound();*/
+
 			}
 		}
 	}

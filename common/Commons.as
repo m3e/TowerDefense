@@ -1,7 +1,12 @@
 ﻿package common
 {
-	import flash.display.MovieClip
+	import flash.display.MovieClip;
 	import towers.Tower;
+	import flash.geom.Rectangle;
+	import flash.display.BitmapData;
+	import flash.geom.Point;
+	import com.greensock.loading.LoaderMax;
+	import flash.display.Bitmap;
 
 	public class Commons extends MovieClip
 	{
@@ -24,10 +29,35 @@
 		public static var hitList:Array = new Array  ;
 		public static var startX:int = 0;
 		public static var startY:int = 6;
+		public static var queue:LoaderMax;
 
 		public function Commons()
 		{
 			// constructor code
+		}
+		public static function getSprite(category:String,position:int,rect:Rectangle = null,pt:Point = null):BitmapData
+		{
+			if (rect == null)
+			{
+				rect = new Rectangle(0,0,tileSide,tileSide);
+			}
+			if (pt == null)
+			{
+				pt = new Point(0,0);
+			}
+			var bmpData:BitmapData;
+			
+			var bmp:Bitmap = queue.getContent(category).rawContent;
+			var bmpWidth:int = bmp.width / tileSide
+			var bmpHeight:int = bmp.height / tileSide
+			
+			rect.x = (position % bmpWidth) * tileSide
+			rect.y = Math.floor(position / bmpWidth) * tileSide
+			
+			bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
+			bmpData.copyPixels(bmp.bitmapData,rect,pt);
+			
+			return bmpData;
 		}
 		public static function addSkillsList(s:Object):void
 		{
@@ -72,9 +102,9 @@
 		{
 			towerList.splice(towerList.indexOf(t),1);
 		}
-
 		public static function pauseGame():void
 		{
+
 			gamePaused = true;
 			for (var s:int=0; s < skillsList.length; s++)
 			{
@@ -153,7 +183,7 @@
 		{
 			return roundsList;
 		}
-		
+
 		public static function getMapArray():Array
 		{
 			mapWidth = mapArray[0].length;
@@ -228,7 +258,7 @@
 			towerList = new Array  ;
 			skillsList = new Array  ;
 			enemyList = new Array  ;
-			enemySkillsList = new Array;
+			enemySkillsList = new Array  ;
 		}
 		public static function newTheMap(array:Array):Array
 		{

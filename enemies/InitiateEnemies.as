@@ -49,7 +49,7 @@
 			enemy.pt.x = startX;
 			enemy.pt.y = startY;
 			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			_root.addChild(enemy);
+			_root.bmEnemy.addChild(enemy);
 			enemyList.push(enemy);
 		}
 		public function customEnemy(waveArray:Array, roundBonus:Boolean):Enemy
@@ -65,6 +65,7 @@
 			enemy.armorType = waveArray[7];
 			enemy.eName = waveArray[9]
 			enemy.bmpData = waveArray[13];
+			
 			for (var i:int=10; i < waveArray.length; i++)
 			{
 				if (waveArray[i] != "")
@@ -82,7 +83,7 @@
 			enemy.pt.x = startX;
 			enemy.pt.y = startY;
 			enemy.updateHealth();
-			_root.addChild(enemy);
+			_root.bmEnemy.addChild(enemy);
 			if (!(healthBarOn))
 			{
 				enemy.healthBarOnOff();
@@ -98,11 +99,11 @@
 		{
 			if (e.currentTarget.killed)
 			{
-				UserInfo.changeGold(e.currentTarget.goldValue);
+				_root.changeGold(e.currentTarget.goldValue);
 			}
 			else if (e.currentTarget.removeLife)
 			{
-				UserInfo.updateLives(1);
+				_root.updateLives(1);
 			}
 			else
 			{
@@ -114,7 +115,7 @@
 			//enemyList = common.Commons.getEnemyList();
 			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
 			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			if (UserInfo.lives <= 0 && gameOver == false)
+			if (_root.lives <= 0 && gameOver == false)
 			{
 				gameOver = true;
 				dispatchEvent(new Event("gameOver"));

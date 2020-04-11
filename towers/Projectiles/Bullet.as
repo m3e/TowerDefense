@@ -164,7 +164,7 @@
 			if (bHitClass != null)
 			{
 				var pHit:ProjectileHit = new bHitClass(bTarget,angle);
-				_root.addChild(pHit);
+				_root.bmAboveTowers.addChild(pHit);
 			}
 			destroyThis();
 		}
@@ -220,7 +220,7 @@
 			enemyList = null;
 			bTarget = null;
 			tSource = null;
-			_root.removeChild(this);
+			_root.bmAboveTowers.removeChild(this);
 			_root = null;
 		}
 

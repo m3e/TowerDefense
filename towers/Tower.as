@@ -60,7 +60,7 @@
 		public var towerArray:Array;
 
 		public var targeting:String;
-		public var _root:*;
+		public var _root:Object;
 
 		protected var sound:SoundChannel;
 		protected var fsReload:int;
@@ -89,7 +89,7 @@
 		protected var dmgBuffMC:DMGBuffMC = new DMGBuffMC();
 		protected var spdBuffMC:SPDBuffMC = new SPDBuffMC();
 		
-		protected var bmpData:BitmapData;
+		public var bmpData:BitmapData;
 		protected var bmp:Bitmap;
 		public var bmpData45:BitmapData;
 
@@ -214,7 +214,7 @@
 			bmp = new Bitmap(bmpData);
 			addChild(bmp);
 			generateSkills();
-			_root = parent;
+			_root = common.Commons.getRoot();
 			gotoAndStop(tFrame);
 			getSounds();
 			addEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
@@ -310,7 +310,7 @@
 		}
 		internal function eFrame(e:Event):void
 		{
-			if (_root != undefined)
+			if (_root != null)
 			{
 				applyEffects();
 				if (fireSoundReload > 0)
@@ -463,7 +463,7 @@
 				newBullet.bSpeed = tbSpeed;
 				newBullet.bAoe = tAoe;
 				newBullet.bType = tType;
-				_root.addChild(newBullet);
+				_root.bmAboveTowers.addChild(newBullet);
 			}
 		}
 		public function upgradeOne():Class
@@ -544,11 +544,11 @@
 			enemyList = null;
 			towerArray = null;
 			buffsArray = [];
-			if (_root != undefined && _root.contains(this))
+			if (_root != null && _root.bmTowers.contains(this))
 			{
 				removeChild(rectangle);
 				rectangle = null;
-				_root.removeChild(this);
+				_root.bmTowers.removeChild(this);
 			}
 			_root = null;
 			skillsArray = [];

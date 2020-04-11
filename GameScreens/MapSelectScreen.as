@@ -49,6 +49,7 @@
 			survivalButton.addEventListener(MouseEvent.MOUSE_DOWN, selectMode);
 			campaignButton.addEventListener(MouseEvent.MOUSE_DOWN, selectMode);
 			campaignButton.visible = false;
+			survivalButton.visible = false;
 			survivalButton.gotoAndStop(2);
 
 			for (var i:int=0; i < levelsArray.length; i++)

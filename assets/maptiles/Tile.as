@@ -8,7 +8,6 @@
 	public class Tile extends MovieClip{
 		
 		public var occupied:Boolean;
-		private var _root:MovieClip;
 		
 		public var isIced:Boolean;
 		public var isOnFire:Boolean;
@@ -37,7 +36,6 @@
 			iceLayer = new Ice();
 			addChild(iceLayer)
 			iceLayer.visible = false;
-			_root = MovieClip(root);
 			removeEventListener(Event.ADDED_TO_STAGE, beginClass);
 		}
 		public function addFireLayer(sourceSkill:Object,BurnAmount:Number):void
@@ -118,7 +116,6 @@
 			}
 			iceLayer = null;
 			fireLayer = null;
-			_root = null;
 			removeEventListener(Event.ADDED_TO_STAGE, beginClass);
 			removeEventListener(Event.REMOVED, endClass)
 		}

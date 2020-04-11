@@ -11,13 +11,13 @@
 	import flash.events.MouseEvent;
 	import GameScreens.MapSelectScreen;
 	import flash.display.StageScaleMode;
-	import common.Commons;
 	import GameScreens.StartScreen;
 	import design.BottomBar;
 	import towers.TowerManager;
 	import flash.geom.Rectangle;
 	import flash.geom.Point;
 	import flash.display.BitmapData;
+	import common.Commons;
 
 	//Middle
 	//X: 448
@@ -34,7 +34,6 @@
 
 		public function Main()
 		{
-
 			this.stage.scaleMode = StageScaleMode.SHOW_ALL;
 			this.stage.quality = "16X16";
 
@@ -74,13 +73,14 @@
 			queue.append(new MP3Loader("sounds/sfx/icecrash/icehit.mp3", {name:"icehit", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			queue.append(new MP3Loader("sounds/sfx/cannonfire/cannonfire.mp3", {name:"cannonfire", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
-			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, autoPlay:false, estimatedBytes: 50000}));
+			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, repeat:-1, autoPlay:false}));
 			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			//queue.append(new MP3Loader("sounds/music/BattleMap2.mp3", {name:"BattleMap2", volume:1, autoPlay:false, estimatedBytes: 50000}));
 			
 			queue.append(new ImageLoader("assets/icons/Towers32SpriteSheet.png", {name:"towers32"}));
 			queue.append(new ImageLoader("assets/icons/Towers45SpriteSheet.png", {name:"towers45"}));
 			
+			queue.append(new ImageLoader("enemies/EnemySpriteSheet.png", {name:"enemySS"}));
 
 			addEventListener("restart", restartMap);
 			addEventListener("backtomap", backToMap);
@@ -101,10 +101,11 @@
 		private function progressHandler(e:LoaderEvent):void
 		{
 			Preload.PreloadBar.scaleX = e.target.progress;
-			Preload.PreloadText.text = (e.target.progress.toFixed(2) * 100) + "%";
+			Preload.PreloadText.text = int(e.target.progress*100) + "%";
 		}
 		private function completeHandler(e:LoaderEvent):void
 		{
+			common.Commons.queue = queue;
 			setupTowerManager();
 		}
 		private function setupTowerManager():void
@@ -120,7 +121,6 @@
 
 			var myXML = new XML(e.target.data);
 			var i:int = 0;
-			
 			var rect:Rectangle = new Rectangle(0,0,common.Commons.tileSide,common.Commons.tileSide);
 			var rect45:Rectangle = new Rectangle(0,0,45,45);
 			var pt:Point = new Point(0,0);
@@ -146,6 +146,7 @@
 				bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
 				bmpData.copyPixels(queue.getContent("towers32").rawContent.bitmapData,rect,pt);
 				tower.bmpData = BitmapData(bmpData);
+				
 				
 				rect45.y = (tower.tFrame * 45) - 45
 				bmpData = new BitmapData(45,45)
