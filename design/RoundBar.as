@@ -6,6 +6,7 @@
 	import flash.display.BitmapData;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import design.UI.ToolTip;
 	
 	public class RoundBar extends MovieClip {
 		
@@ -13,6 +14,7 @@
 		private var crImage:Bitmap;
 		private var nrImage:Bitmap;
 		private var round:int;
+		private var toolTip:ToolTip;
 		
 		private var roundContainer:Sprite = new Sprite;
 		
@@ -28,9 +30,11 @@
 			round = 0;
 			
 			addChildAt(roundContainer,1)
+			toolTip = new ToolTip();
 			toolTip.visible = false;
 			toolTip.mouseEnabled = false;
 			toolTip.mouseChildren = false;
+			addChild(toolTip);
 			
 			crImage = new Bitmap(common.Commons.getSprite("enemySS",0));
 			crImage.x = phA.x

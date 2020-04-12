@@ -16,6 +16,8 @@
 	import com.greensock.easing.Ease;
 	import design.SkillsMouseOver;
 	import common.Commons;
+	import flash.filters.GlowFilter;
+	import flash.geom.Point;
 
 
 	public class MenuManager extends MovieClip
@@ -34,6 +36,8 @@
 		private var _root:Object;
 		private var selectedTower:Tower;
 
+		public var upgradeCircle:Shape;
+
 
 		public function MenuManager()
 		{
@@ -41,6 +45,14 @@
 			currentMenuSelected = new Array  ;
 			cellsArray = new Array  ;
 			_root = common.Commons.getRoot();
+
+			var glow2:GlowFilter = new GlowFilter(0xFF0000,1,6,6,2);
+			upgradeCircle = new Shape();
+			upgradeCircle.graphics.lineStyle(1,0xFFFFFF,1,false,"none");
+			upgradeCircle.graphics.drawCircle(0,0,100);
+			upgradeCircle.visible = false;
+			upgradeCircle.filters = [glow2];
+			addChild(upgradeCircle);
 
 			var menuLength:int = 4;
 			var menuHeight:int = 3;
@@ -63,6 +75,7 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+
 			sellObject = new SellObject();
 			addChild(sellObject);
 			sellObject.visible = false;
@@ -101,6 +114,7 @@
 			selectedTower = null;
 			emptyOutMenuSelected();
 			towerStatsOver.visible = false;
+			upgradeCircle.visible = false;
 			skillsMouseOver.visible = false;
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
@@ -277,6 +291,7 @@
 			{
 				case (getQualifiedClassName(e.currentTarget) == getQualifiedClassName(PsuedoTower)) :
 					towerStatsOver.visible = false;
+					upgradeCircle.visible = false;
 					break;
 
 				case (getQualifiedSuperclassName(e.currentTarget)==getQualifiedClassName(TowerSkill)) :
@@ -295,8 +310,8 @@
 					setChildIndex(towerStatsOver, numChildren -1);
 					parent.setChildIndex(this, parent.numChildren - 1);
 
-					towerStatsOver.x = e.currentTarget.x
-					towerStatsOver.y = e.currentTarget.y - towerStatsOver.height-10;
+					towerStatsOver.x = e.currentTarget.x;
+					towerStatsOver.y = e.currentTarget.y - towerStatsOver.height - 10;
 					if (e.currentTarget.parent.x + towerStatsOver.x + towerStatsOver.width > stage.stageWidth)
 					{
 						var a:Number = stage.stageWidth;
@@ -306,12 +321,29 @@
 					}
 
 					towerStatsOver.NameBox.text = e.currentTarget.tName;
-					//towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
-					//towerStatsOver.SpdBox.text = e.currentTarget.tAtkSpeed;//(24 / (e.currentTarget.tAtkSpeed)).toFixed(2);
+					towerStatsOver.DmgBox.text = e.currentTarget.tDmg;
+					towerStatsOver.SpdBox.text = String((24 / e.currentTarget.tAtkSpeed).toFixed(2));
 					towerStatsOver.RngBox.text = e.currentTarget.tRange;
 					towerStatsOver.TypeBox.text = e.currentTarget.tType;
 					towerStatsOver.DescBox.text = e.currentTarget.tDescription;
-					towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
+					if (selectedTower != null)
+					{
+						upgradeCircle.visible = true;
+						upgradeCircle.width = e.currentTarget.tRange * 2;
+						upgradeCircle.height = e.currentTarget.tRange * 2;
+
+						var topLeftStage:Point = this.localToGlobal(new Point());
+						var nextX:int = topLeftStage.x;
+						var nextY:int = topLeftStage.y;
+						
+						//trace("MCT.x: ", _root.mouseclickedTower.x, "nextX: ", nextX, "MCT.y: ", _root.mouseclickedTower.y, "nextY: ", nextY);
+						
+						upgradeCircle.x = _root.mouseclickedTower.x + (common.Commons.tileSide * .5) - nextX
+						upgradeCircle.y = _root.mouseclickedTower.y + (common.Commons.tileSide * .5) - nextY;
+
+
+					}
+					//towerStatsOver.DpsBox.text = String(int((Number(e.currentTarget.tDmg) * Number(24 / Number(e.currentTarget.tAtkSpeed)))*100)/100);
 					towerStatsOver.CostBox.text = e.currentTarget.tCost;
 					break;
 
@@ -431,7 +463,9 @@
 		}
 		public function endClass():void
 		{
+
 			emptyOutMenuSelected();
+			removeChild(upgradeCircle);
 			removeChild(sellObject);
 			removeChild(targetingIcon);
 			removeChild(upgradeIcon);

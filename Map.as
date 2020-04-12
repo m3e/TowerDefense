@@ -55,12 +55,13 @@
 		//tower related
 		private var towerBeingBuilt:Object;
 		private var psuedoTower:PsuedoTower;
-		private var mouseclickedTower:Object;
+		public var mouseclickedTower:Object;
 		private var shiftBuildEnabled:Boolean;
 
 		//tower ui
 		private var mouseclickedTowerSquare:Shape;
 		private var rangeCircle:Shape;
+		
 
 		//ui
 		private var inputField:InputField;
@@ -86,20 +87,19 @@
 		private var gameOverWindow:GameOverWindow;
 
 		private var towerSkillManager:TowerSkillManager;
-		
+
 		public var gold:int;
-		public var lives:int
-		
-		private var bmTiles:Sprite = new Sprite;
-		public var bmTowers:Sprite = new Sprite;
-		public var bmEnemy:Sprite = new Sprite;
-		public var bmAboveTowers:Sprite = new Sprite;
-		private var gameUI:Sprite = new Sprite;
-		private var highPriority:Sprite = new Sprite;
+		public var lives:int;
+		private var bmTiles:Sprite = new Sprite  ;
+		public var bmTowers:Sprite = new Sprite  ;
+		public var bmEnemy:Sprite = new Sprite  ;
+		public var bmAboveTowers:Sprite = new Sprite  ;
+		private var gameUI:Sprite = new Sprite  ;
+		private var highPriority:Sprite = new Sprite  ;
 
 		public function Map()
 		{
-			
+
 			enemyList = common.Commons.getEnemyList();
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
@@ -130,11 +130,11 @@
 		private function added(e:Event):void
 		{
 			_root = this;
-			
-			
+
+
 			addChild(bmTiles);
 			bmTiles.mouseEnabled = false;
-			addChild(bmTowers)
+			addChild(bmTowers);
 			bmTowers.mouseEnabled = false;
 			addChild(bmEnemy);
 			bmEnemy.mouseEnabled = false;
@@ -145,9 +145,9 @@
 			gameUI.mouseEnabled = false;
 			addChild(highPriority);
 			highPriority.mouseEnabled = false;
-			
-			
-			
+
+
+
 			common.Commons.setRoot(_root);
 			cAfford = new CantAfford  ;
 			gameUI.addChild(cAfford);
@@ -301,7 +301,7 @@
 						break;
 
 					case Keyboard.G :
-						
+
 						changeGold(99999);
 						break;
 
@@ -349,19 +349,19 @@
 			}
 			else
 			{
-				bottomBar.goldBox._caBox.alpha = 0
-				TweenLite.from(bottomBar.goldBox._caBox,.2,{alpha:1})
+				bottomBar.goldBox._caBox.alpha = 0;
+				TweenLite.from(bottomBar.goldBox._caBox,.2,{alpha:1});
 			}
 			return afford;
 		}
 		public function changeGold(goldChange:int):void
 		{
-			gold += goldChange
+			gold +=  goldChange;
 			bottomBar.goldBox.GoldText.text = gold.toString();
 		}
 		public function updateLives(subtractedLives:int):void
 		{
-			lives -= subtractedLives;
+			lives -=  subtractedLives;
 			bottomBar.livesBar.LivesText.text = lives.toString();
 		}
 		public function getGold():int
@@ -423,7 +423,7 @@
 			bottomBar.dpsDummyButton.addEventListener(MouseEvent.CLICK, sendDpsDummy);
 			bottomBar.optionsButton.addEventListener(MouseEvent.CLICK, optionsButtonClick);
 			bottomBar.goldBox.GoldText.text = gold.toString();
-			bottomBar.goldBox._caBox.alpha = 0
+			bottomBar.goldBox._caBox.alpha = 0;
 			bottomBar.livesBar.LivesText.text = lives.toString();
 			gameUI.addChild(bottomBar);
 		}
@@ -562,15 +562,16 @@
 		}
 		private function setupRangeCircle():void
 		{
-			var glow:GlowFilter = new GlowFilter(0x00CCFF,1,12,12,3);
+			var glow:GlowFilter = new GlowFilter(0x00CCFF,1,6,6,2);
 			rangeCircle = new Shape();
-			rangeCircle.graphics.lineStyle(1,0xFFFFFF,.5,false,"none");
-			//rangeCircle.graphics.beginFill(0xFF0000,.3);
+			rangeCircle.graphics.lineStyle(1,0xFFFFFF,1,false,"none");
 			rangeCircle.graphics.drawCircle(0,0,100);
-			//rangeCircle.graphics.endFill();
 			rangeCircle.visible = false;
-			rangeCircle.filters = [glow]
+			rangeCircle.filters = [glow];
 			bmAboveTowers.addChild(rangeCircle);
+
+			
+			
 		}
 		private function setupEnemies():void
 		{
@@ -786,11 +787,6 @@
 				rangeCircle.x = e.currentTarget.x + (tileSide * .5);
 				rangeCircle.y = e.currentTarget.y + (tileSide * .5);
 
-				//setChildIndex(rangeCircle,numChildren-1);
-				//setChildIndex(DisplayObject(mouseclickedTower),numChildren-1);
-				//setChildIndex(mouseclickedTowerSquare,numChildren-1);
-
-
 				bottomBar.middleInfo.updateText(mouseclickedTower);
 				bottomBar.menuManager.towerMapClicked(e);
 			}
@@ -855,7 +851,7 @@
 
 			bmAboveTowers.removeChild(rangeCircle);
 			rangeCircle = null;
-			
+
 			gameUI.removeChild(cAfford);
 			cAfford = null;
 
@@ -876,6 +872,14 @@
 				}
 			}
 			removeMap();
+
+			trace("bmTiles: ", bmTiles.numChildren, "bmTowers: ", bmTowers.numChildren, "bmEnemy: ", bmEnemy.numChildren, "bmAboveTowers: ", bmAboveTowers.numChildren, "gameUI: ", gameUI.numChildren, "highPriority: ", highPriority.numChildren);
+			bmTiles = null;
+			bmTowers = null;
+			bmEnemy = null;
+			bmAboveTowers = null;
+			gameUI = null;
+			highPriority = null;
 
 			tileArray = [];
 			enemyList = [];
