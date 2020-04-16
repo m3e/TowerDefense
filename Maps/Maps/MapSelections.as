@@ -25,7 +25,6 @@
 		public var startY:int = 6;
 		
 		private var loaderURL:String;
-		private var imgLoader:ImageLoader;
 		
 		public function MapSelections() {
 			mapArray = new Array;
@@ -74,21 +73,10 @@
 				xmlName = "Survival.xml"
 				break;
 			}
-			loaderURL = "Maps/Maps/"+xmlName
-			setupEnemyImages();
-			
-		}
-		private function setupEnemyImages():void
-		{
-			imgLoader = new ImageLoader("enemies/EnemySpriteSheet.png", {name:"enemySS"});
-			imgLoader.addEventListener(Event.COMPLETE,compileEnemyImages);
-			imgLoader.load();
-		}
-		private function compileEnemyImages(e:Event):void
-		{
-			
+			loaderURL = "externalFiles/maps/"+xmlName
 			setupRoundsList(loaderURL);
 		}
+			
 		private function setupRoundsList(loaderURL:String):void
 		{
 			var mLoader:URLLoader = new URLLoader();
@@ -104,20 +92,11 @@
 			var rect:Rectangle = new Rectangle(0,0,common.Commons.tileSide,common.Commons.tileSide);
 			var pt:Point = new Point();
 			var bmpData:BitmapData;
-			//var bmp:Bitmap = imgLoader.rawContent;
-			//var bmpWidth:int = bmp.width / common.Commons.tileSide
-			//var bmpHeight:int = bmp.height / common.Commons.tileSide
 			
 			while (i < myXML.Row.length())
 			{
 				var roundNumber:int = int(myXML.Row[i].currentRound);
-				//rect.x = (i % bmpWidth) * common.Commons.tileSide
-				//rect.y = Math.floor(i / bmpWidth) * common.Commons.tileSide
-				//bmpData = common.Commons.getSprite("enemySS",rect,pt,)
-				//bmpData = new BitmapData(common.Commons.tileSide,common.Commons.tileSide);
-				//bmpData.copyPixels(bmp.bitmapData,rect,pt);
 				bmpData = common.Commons.getSprite("enemySS",i);
-				
 				
 				var maxHp:int = int(myXML.Row[i].maxHp);
 				var maxMoveSpeed:Number = Number(myXML.Row[i].maxMoveSpeed);

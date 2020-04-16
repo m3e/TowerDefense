@@ -39,48 +39,54 @@
 
 			queue = new LoaderMax({name:"mainQueue",onProgress:progressHandler,onComplete:completeHandler});
 
-			queue.append(new MP3Loader("sounds/sfx/building/buildtower.mp3", {name:"buildtower", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/roundstart/roundstart2.mp3", {name:"roundstart2", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/building/buildtower.mp3", {name:"buildtower", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/roundstart/roundstart2.mp3", {name:"roundstart2", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/voices/archer/hellothere.mp3", {name:"archerhellothere", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/voices/archer/whatdoyouneed.mp3", {name:"archerwhatdoyouneed", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/archer/hellothere.mp3", {name:"archerhellothere", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/archer/whatdoyouneed.mp3", {name:"archerwhatdoyouneed", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/dirt/dirt1.mp3", {name:"dirt1", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/dirt/dirt2.mp3", {name:"dirt2", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/dirt/dirt3.mp3", {name:"dirt3", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/dirt/dirt4.mp3", {name:"dirt4", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/dirt/dirt5.mp3", {name:"dirt5", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/dirt/dirt1.mp3", {name:"dirt1", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/dirt/dirt2.mp3", {name:"dirt2", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/dirt/dirt3.mp3", {name:"dirt3", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/dirt/dirt4.mp3", {name:"dirt4", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/dirt/dirt5.mp3", {name:"dirt5", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/voices/knight/shallicompare.mp3", {name:"knightshallicompare", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/voices/knight/nofreeman.mp3", {name:"knightnofreeman", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/knight/shallicompare.mp3", {name:"knightshallicompare", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/knight/nofreeman.mp3", {name:"knightnofreeman", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/voices/warrior/greetings.mp3", {name:"warriorgreetings", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/voices/warrior/howcanihelp.mp3", {name:"warriorhowcanihelp", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/warrior/greetings.mp3", {name:"warriorgreetings", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/warrior/howcanihelp.mp3", {name:"warriorhowcanihelp", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/voices/rogue/hey.mp3", {name:"roguehey", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/voices/rogue/howareyou.mp3", {name:"roguehowareyou", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/rogue/hey.mp3", {name:"roguehey", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/voices/rogue/howareyou.mp3", {name:"roguehowareyou", volume:1, autoPlay:false, estimatedBytes: 2000}));
 
-			queue.append(new MP3Loader("sounds/sfx/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/buttonclick.mp3", {name:"clickbutton", volume:1, autoPlay:false, estimatedBytes: 2000}));
 			
-			queue.append(new MP3Loader("sounds/sfx/fire/flame.mp3", {name:"flame", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/bullet/bulletshot.mp3", {name:"bulletshot", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/zap/zap.mp3", {name:"zapsound", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/lavasplash/lavasplash.mp3", {name:"lavasplash", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/stab/stab.mp3", {name:"stab", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/shieldBlock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/arrowShot.mp3", {name:"arrowShot", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/icecrash/icehit.mp3", {name:"icehit", volume:1, autoPlay:false, estimatedBytes: 2000}));
-			queue.append(new MP3Loader("sounds/sfx/cannonfire/cannonfire.mp3", {name:"cannonfire", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/fire/flame.mp3", {name:"flame", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/bullet/bulletshot.mp3", {name:"bulletshot", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/zap/zap.mp3", {name:"zapsound", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/lavasplash/lavasplash.mp3", {name:"lavasplash", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/stab/stab.mp3", {name:"stab", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/shieldBlock.mp3", {name:"shieldblock", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/swordStrike.mp3", {name:"swordhit", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/arrowShot.mp3", {name:"arrowshot", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/icecrash/icehit.mp3", {name:"icehit", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/cannonfire/cannonfire.mp3", {name:"cannonfire", volume:1, autoPlay:false, estimatedBytes: 2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/torch/torch.mp3", {name:"torchSfx", volume:1, autoPlay:false, estimatedBytes:2000}));
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/victoryscreen/hooray.mp3", {name:"hooraySfx", volume:1, autoPlay:false, estimatedBytes:2000}))
+			queue.append(new MP3Loader("externalFiles/sounds/sfx/victoryscreen/balloonpop.mp3", {name:"confettiSfx", volume:1, autoPlay:false, estimatedBytes:2000}))
 			
-			queue.append(new MP3Loader("sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, repeat:-1, autoPlay:false}));
-			queue.append(new MP3Loader("sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
-			//queue.append(new MP3Loader("sounds/music/BattleMap2.mp3", {name:"BattleMap2", volume:1, autoPlay:false, estimatedBytes: 50000}));
+			queue.append(new MP3Loader("externalFiles/sounds/music/MainTheme.mp3", {name:"mainTheme", volume:1, repeat:-1, autoPlay:false}));
+			queue.append(new MP3Loader("externalFiles/sounds/music/VictoryScreen.mp3", {name:"victoryMusic", volume:1, repeat:-1, autoPlay:false}));
+			queue.append(new MP3Loader("externalFiles/sounds/music/BattleMap1.mp3", {name:"BattleMap1", volume:1, autoPlay:false, estimatedBytes: 50000}));
+			queue.append(new MP3Loader("externalFiles/sounds/music/GameOverTheme.mp3", {name:"GameOverTheme", volume:1, repeat:-1, autoPlay:false}));
+			queue.append(new MP3Loader("externalFiles/sounds/music/round51.mp3", {name:"round51", volume:1, repeat:-1, autoPlay:false}));
 			
-			queue.append(new ImageLoader("assets/icons/Towers32SpriteSheet.png", {name:"towers32"}));
-			queue.append(new ImageLoader("assets/icons/Towers45SpriteSheet.png", {name:"towers45"}));
-			
-			queue.append(new ImageLoader("enemies/EnemySpriteSheet.png", {name:"enemySS"}));
+			queue.append(new ImageLoader("externalFiles/spritesheets/Towers32SpriteSheet.png", {name:"towers32"}));
+			queue.append(new ImageLoader("externalFiles/spritesheets/Towers45SpriteSheet.png", {name:"towers45"}));
+			queue.append(new ImageLoader("externalFiles/spritesheets/EnemySpriteSheet.png", {name:"enemySS"}));
+			queue.append(new ImageLoader("externalFiles/spritesheets/ConfettiSpriteSheet.png", {name:"confettiSS"}));
+			queue.append(new ImageLoader("externalFiles/spritesheets/torch.png", {name:"torchSS"}));
 
 			addEventListener("restart", restartMap);
 			addEventListener("backtomap", backToMap);
@@ -113,7 +119,7 @@
 			myLoader = new URLLoader  ;
 			myLoader.addEventListener(Event.COMPLETE,setupTowers);
 			Preload.PreloadText.text = "Loading Towers!";
-			myLoader.load(new URLRequest("towers/TowersList.xml"));
+			myLoader.load(new URLRequest("externalFiles/TowersList.xml"));
 		}
 		private function setupTowers(e:Event):void
 		{
@@ -196,6 +202,7 @@
 		}
 		private function startScreenUI():void
 		{
+			common.Commons.loadGame();
 			startScreen = new StartScreen();
 			addChild(startScreen);
 			startScreen.newGame.addEventListener(MouseEvent.CLICK, startGame);

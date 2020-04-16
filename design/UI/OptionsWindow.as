@@ -21,7 +21,6 @@
 		private var b1y:int = 273;
 		private var b1w:int = 250;
 		private var bMap:Boolean;
-		private var sharedObject:SharedObject = SharedObject.getLocal("LocalSave")
 		public var restartButton:MenuButton;
 		public var backToMap:MenuButton;
 		
@@ -103,10 +102,11 @@
 		}
 		private function closeOptions(e:MouseEvent):void
 		{
-			sharedObject.data.bgVolume = SoundManager.bgVolume;
-			sharedObject.data.fxVolume = SoundManager.sfxVolume;
-			sharedObject.flush();
-			sharedObject = null;
+			var save:SharedObject = common.Commons.getSave();
+			save.data.bgVolume = SoundManager.bgVolume;
+			save.data.fxVolume = SoundManager.sfxVolume;
+			save.flush();
+			save = null;
 			optionsBG.removeEventListener(MouseEvent.MOUSE_DOWN,closeOptions);
 			if (bMap == true)
 			{

@@ -21,10 +21,6 @@
 
 		private var enemy:Enemy;
 
-		public var healthBarOn:Boolean;
-
-		private var gameOver:Boolean;
-
 		private var enemySkillManager:EnemySkillManager;
 
 		public function InitiateEnemies()
@@ -38,24 +34,22 @@
 			_root = common.Commons.getRoot();
 			// constructor code
 		}
-
-		public function createDmgDummy():void
+		public function createDmgDummy():dpsTestEnemy
 		{
-			var enemy:Enemy = new dpsTestEnemy(mapArray);
+			var enemy:dpsTestEnemy = new dpsTestEnemy(mapArray);
 			var startX:int = common.Commons.startX;
 			var startY:int = common.Commons.startY;
 			enemy.x = startX * tileSide;
 			enemy.y = startY * tileSide;
 			enemy.pt.x = startX;
 			enemy.pt.y = startY;
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			_root.bmEnemy.addChild(enemy);
 			enemyList.push(enemy);
+			
+			return enemy;
 		}
 		public function customEnemy(waveArray:Array, roundBonus:Boolean):Enemy
 		{
-
-
 			var enemy:Enemy = new Enemy(mapArray);
 			enemy.eMaxHp = waveArray[0];
 			enemy.maxMoveSpeed = waveArray[1];
@@ -66,15 +60,13 @@
 			enemy.eName = waveArray[9]
 			enemy.bmpData = waveArray[13];
 			
-			for (var i:int=10; i < waveArray.length; i++)
+			for (var i:int=0 ; i < 3; i++)
 			{
-				if (waveArray[i] != "")
+				if (waveArray[(10 + i)] != "")
 				{
 					enemySkillManager.addSkillToEnemy(enemy,waveArray[i]);
 				}
 			}
-
-
 			
 			var startX:int = common.Commons.startX;
 			var startY:int = common.Commons.startY;
@@ -84,42 +76,15 @@
 			enemy.pt.y = startY;
 			enemy.updateHealth();
 			_root.bmEnemy.addChild(enemy);
-			if (!(healthBarOn))
+			if (!(_root.healthBarOn))
 			{
 				enemy.healthBarOnOff();
 			}
-			enemy.addEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
 			enemyList.push(enemy);
 
 			return enemy;
 
 
-		}
-		private function enemyDead(e:Event):void
-		{
-			if (e.currentTarget.killed)
-			{
-				_root.changeGold(e.currentTarget.goldValue);
-			}
-			else if (e.currentTarget.removeLife)
-			{
-				_root.updateLives(1);
-			}
-			else
-			{
-				if (e.currentTarget is dpsTestEnemy)
-				{
-					//do nothing
-				}
-			}
-			//enemyList = common.Commons.getEnemyList();
-			enemyList.splice(enemyList.indexOf(e.currentTarget),1);
-			e.currentTarget.removeEventListener(Event.REMOVED_FROM_STAGE,enemyDead);
-			if (_root.lives <= 0 && gameOver == false)
-			{
-				gameOver = true;
-				dispatchEvent(new Event("gameOver"));
-			}
 		}
 		public function endClass():void
 		{

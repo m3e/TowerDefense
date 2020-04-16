@@ -13,7 +13,6 @@
 		private var roundsList:Array;
 		private var crImage:Bitmap;
 		private var nrImage:Bitmap;
-		private var round:int;
 		private var toolTip:ToolTip;
 		
 		private var roundContainer:Sprite = new Sprite;
@@ -26,8 +25,6 @@
 		private function added(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, added)
-			
-			round = 0;
 			
 			addChildAt(roundContainer,1)
 			toolTip = new ToolTip();
@@ -42,7 +39,7 @@
 			roundContainer.addChild(crImage)
 			eRound.text = String(1);
 			eName.text = roundsList[0][9]
-			currentArmor.gotoAndStop(armorIndex(roundsList[round][7]));
+			currentArmor.gotoAndStop(armorIndex(roundsList[common.Commons.currentRound][7]));
 			currentArmor.addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver)
 			currentArmor.addEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut)
 			
@@ -52,7 +49,7 @@
 			roundContainer.addChild(nrImage)
 			neName.text = roundsList[1][9]
 			neRound.text = String(2);
-			nextArmor.gotoAndStop(armorIndex(roundsList[round+1][7]));
+			nextArmor.gotoAndStop(armorIndex(roundsList[common.Commons.currentRound+1][7]));
 			nextArmor.addEventListener(MouseEvent.MOUSE_OVER, mouseHoverOver)
 			nextArmor.addEventListener(MouseEvent.MOUSE_OUT, mouseHoverOut)
 		}
@@ -64,11 +61,11 @@
 		{
 			if (e.currentTarget == currentArmor)
 			{
-				toolTip.gotoAndStop(armorIndex(roundsList[round][7]))
+				toolTip.gotoAndStop(armorIndex(roundsList[common.Commons.currentRound][7]))
 			}
 			else if (e.currentTarget == nextArmor)
 			{
-				toolTip.gotoAndStop(armorIndex(roundsList[round+1][7]))
+				toolTip.gotoAndStop(armorIndex(roundsList[common.Commons.currentRound+1][7]))
 			}
 			toolTip.visible = true;
 			toolTip.x = e.currentTarget.x - toolTip.width + 12
@@ -97,11 +94,10 @@
 			}
 			return i;
 		}
-		public function updateRoundList(r:int):void
+		public function updateRoundList():void
 		{
-			trace(r)
+			var r:int = common.Commons.currentRound;
 			r--;
-			round = r;
 			if (r > 1)
 			{
 			roundContainer.removeChild(crImage);

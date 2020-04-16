@@ -14,6 +14,7 @@
 			armorField.restrict = "0-9"
 			numField.restrict = "0-9"
 			freqField.restrict = "0-9"
+			roundField.restrict = "0-9"
 			
 			goldField.text = String(99999)
 			hpField.text = String(1)
@@ -21,6 +22,7 @@
 			armorField.text = String(0)
 			numField.text = String(1)
 			freqField.text = String(1)
+			roundField.text = String(1)
 			
 			// constructor code
 		}

@@ -7,6 +7,8 @@
 	import flash.geom.Point;
 	import com.greensock.loading.LoaderMax;
 	import flash.display.Bitmap;
+	import flash.net.SharedObject;
+	import User.UserProfile;
 
 	public class Commons extends MovieClip
 	{
@@ -30,13 +32,34 @@
 		public static var startX:int = 0;
 		public static var startY:int = 6;
 		public static var queue:LoaderMax;
+		public static var localSave:SharedObject = SharedObject.getLocal("LocalSave");
+		public static var currentRound:int = 1;
 
 		public function Commons()
 		{
 			// constructor code
 		}
+		public static function loadGame():void
+		{
+			var save:SharedObject = getSave()
+			User.UserProfile.fiftyOneKills = save.data.fiftyOneKills;
+			User.UserProfile.round50BeatenCount = save.data.round50BeatenCount;
+		}
+		public static function saveGame():void
+		{
+			var save:SharedObject = getSave();
+			save.data.round50BeatenCount = User.UserProfile.round50BeatenCount;
+			save.data.fiftyOneKills = User.UserProfile.fiftyOneKills;
+			
+			save.flush();
+		}
+		public static function getSave():SharedObject
+		{
+			return localSave;
+		}
 		public static function getSprite(category:String,position:int,rect:Rectangle = null,pt:Point = null):BitmapData
 		{
+			//category comes from name in Main.as MaxLoader class.
 			if (rect == null)
 			{
 				rect = new Rectangle(0,0,tileSide,tileSide);

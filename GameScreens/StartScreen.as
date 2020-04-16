@@ -10,7 +10,6 @@
 	
 	public class StartScreen extends MovieClip {
 		
-		//private var newGame:NewGame;
 		private var optionsWindow:OptionsWindow;
 		
 		public function StartScreen() {
@@ -24,9 +23,21 @@
 			removeEventListener(Event.ADDED_TO_STAGE,added)
 			sounds.SoundManager.bgfx("mainTheme");
 			options.addEventListener(MouseEvent.CLICK, optionsClicked)
-			//newGame = new NewGame();
-			//addChild(newGame);
-			//newGame.menuName.text = "New Game"
+			
+			
+			var scaleBy:int = 4
+			torch1.scaleX = scaleBy
+			torch1.scaleY = scaleBy
+
+			torch2.scaleX = scaleBy
+			torch2.scaleY = scaleBy
+			
+			var torchY:int = 265
+			var separation:int = 60
+			torch1.x = (stage.width / 2) - (torch1.spriteSize * scaleBy) - separation;
+			torch1.y = torchY
+			torch2.x = (stage.width / 2) + separation
+			torch2.y = torchY
 		}
 		private function optionsClicked(e:MouseEvent):void
 		{
@@ -38,6 +49,8 @@
 		private function removed(e:Event):void
 		{
 			options.removeEventListener(MouseEvent.CLICK, optionsClicked)
+			torch1 = null;
+			torch2 = null;
 			optionsWindow = null;
 			newGame = null;
 			removeEventListener(Event.REMOVED_FROM_STAGE,removed)

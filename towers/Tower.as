@@ -88,7 +88,7 @@
 		public var allSkills:Array = new Array  ;
 		protected var dmgBuffMC:DMGBuffMC = new DMGBuffMC();
 		protected var spdBuffMC:SPDBuffMC = new SPDBuffMC();
-		
+
 		public var bmpData:BitmapData;
 		protected var bmp:Bitmap;
 		public var bmpData45:BitmapData;
@@ -117,20 +117,17 @@
 			uCost = 45;
 
 			dmgBuffMC.stop();
-			addChild(dmgBuffMC)
 			dmgBuffMC.visible = false;
-			
+
 			spdBuffMC.stop();
-			spdBuffMC.x = this.width - spdBuffMC.width
-			addChild(spdBuffMC)
 			spdBuffMC.visible = false;
-			
+
 			for (var i:int=0; i <TowerManager.towerList.length; i++)
 			{
 				if (TowerManager.towerList[i].tName == tName)
 				{
 					var td:Object = TowerManager.towerList[i];
-					
+
 					tName = td.tName;
 					tAoe = td.tAoe;
 					tRange = td.tRange;
@@ -143,8 +140,8 @@
 					bFrame = td.bFrame;
 					bHitFrame = td.bHitFrame;
 					tFrame = td.tFrame;
-					bmpData = td.bmpData
-					bmpData45 = td.bmpData45
+					bmpData = td.bmpData;
+					bmpData45 = td.bmpData45;
 					fireSoundString = td.fireSoundString;
 					tDescription = td.tDescription;
 					tUpgradeOne = td.tUpgradeOne;
@@ -213,6 +210,8 @@
 			addedToStage = true;
 			bmp = new Bitmap(bmpData);
 			addChild(bmp);
+			addChild(dmgBuffMC);
+			addChild(spdBuffMC);
 			generateSkills();
 			_root = common.Commons.getRoot();
 			gotoAndStop(tFrame);
@@ -267,7 +266,8 @@
 		{
 			if (tDmgBuff > 0)
 			{
-				dmgBuffMC.visible = true
+				dmgBuffMC.visible = true;
+				
 				if (tDmgBuff <= .15)
 				{
 					dmgBuffMC.gotoAndStop(1);
@@ -284,11 +284,12 @@
 			else
 			{
 				dmgBuffMC.visible = false;
+				
 			}
-			var newAtkSpd:Number = Math.pow(.5,(tAtkSpdBuff + tBaseAtkSpdBuff))
+			var newAtkSpd:Number = Math.pow(.5,(tAtkSpdBuff + tBaseAtkSpdBuff));
 			if (newAtkSpd < 1)
 			{
-				spdBuffMC.visible = true
+				spdBuffMC.visible = true;
 				if (newAtkSpd >= .9)
 				{
 					spdBuffMC.gotoAndStop(1);
@@ -301,7 +302,7 @@
 				{
 					spdBuffMC.gotoAndStop(3);
 				}
-				
+
 			}
 			else
 			{
@@ -526,11 +527,12 @@
 			removeEventListener(Event.ENTER_FRAME, eFrame);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			removeEventListener(MouseEvent.MOUSE_DOWN, clickedOn);
-			removeChild(spdBuffMC)
-			removeChild(dmgBuffMC);
-			
+
+
 			if (addedToStage)
 			{
+				removeChild(spdBuffMC);
+				removeChild(dmgBuffMC);
 				removeChild(bmp);
 				deactivateSkills();
 			}

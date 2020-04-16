@@ -69,18 +69,17 @@
 		//controls
 		private var _keyDown:int = 0;
 		private var shiftDown:Boolean;
-		private var keysEnabled:Boolean;
+		public var keysEnabled:Boolean;
 
 		//user
 		private var cAfford:CantAfford;
 
 		//initEnemy
-		private var initEnemies:InitiateEnemies;
 		private var roundManager:RoundManager;
 		public var roundsList:Array;
 
 		//booleans
-		private var healthBarOn:Boolean;
+		public var healthBarOn:Boolean;
 
 		private var optionsWindow:OptionsWindow;
 		private var pauseBtn:PauseBtn;
@@ -95,11 +94,11 @@
 		public var bmEnemy:Sprite = new Sprite  ;
 		public var bmAboveTowers:Sprite = new Sprite  ;
 		private var gameUI:Sprite = new Sprite  ;
-		private var highPriority:Sprite = new Sprite  ;
+		public var highPriority:Sprite = new Sprite  ;
 
 		public function Map()
 		{
-
+			
 			enemyList = common.Commons.getEnemyList();
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
@@ -130,7 +129,7 @@
 		private function added(e:Event):void
 		{
 			_root = this;
-
+			stage.focus = this;
 
 			addChild(bmTiles);
 			bmTiles.mouseEnabled = false;
@@ -172,7 +171,6 @@
 			//Requires: mapArray
 
 			setupBottomBar();
-			//requires initEnemies for buttons;
 
 			setupKeyboard();
 			//Requires: towerBeingBuiltSquare
@@ -277,7 +275,6 @@
 						break;
 
 					case Keyboard.Z :
-						healthBarOn = ! healthBarOn;
 						healthBarToggle();
 						break;
 
@@ -370,7 +367,7 @@
 		}
 		private function healthBarToggle():void
 		{
-			initEnemies.healthBarOn = healthBarOn;
+			healthBarOn = !healthBarOn;
 			for (var i:int=0; i <enemyList.length; i++)
 			{
 				enemyList[i].healthBarOnOff();
@@ -432,10 +429,10 @@
 			if (roundManager.roundInProgress == false)
 			{
 				roundManager.startRound(true);
-				bottomBar.roundBar.updateRoundList(roundManager.getCurrentRound());
+				bottomBar.roundBar.updateRoundList();
 			}
 		}
-		private function sendWave(e:MouseEvent)
+		private function sendCustomWave(e:MouseEvent)
 		{
 			if (roundManager.roundInProgress == false)
 			{
@@ -446,11 +443,12 @@
 				var armor:int = Number(inputField.armorField.text);
 				var numSend:int = Number(inputField.numField.text);
 				var freq:int = Number(inputField.freqField.text);
+				var roundNumber:int = Number(inputField.roundField.text);
 				var armorType:String = "pure";
 				var eFrame:int = 11;
-				waveArray = [hp,ms,goldA,armor,numSend,freq,eFrame,armorType,0,"Mikel"];
+				waveArray = [hp,ms,goldA,armor,numSend,freq,roundNumber,armorType,0,"Mikel"];
 				//maxHp,maxMoveSpeed,goldValue,maxArmor,numberOfEnemies,freq,roundNumber,armorType,endBonus,eName,s1,s2,s3,bmpData];
-				roundManager.sendWave(waveArray);
+				roundManager.customWave(waveArray);
 			}
 		}
 		private function startRoundKeyboard():void
@@ -465,7 +463,7 @@
 		{
 			if (roundManager.roundInProgress == false)
 			{
-				initEnemies.createDmgDummy();
+				roundManager.createDmgDummy();
 			}
 		}
 		private function setupTowerSquares():void
@@ -482,7 +480,7 @@
 			inputField = new InputField();
 			inputField.x = 692;
 			inputField.y = 8;
-			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendWave);
+			inputField.sendWave.addEventListener(MouseEvent.CLICK, sendCustomWave);
 			inputField.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownAction);
 			inputField.addEventListener(MouseEvent.MOUSE_UP, mouseUpAction);
 			gameUI.addChild(inputField);
@@ -575,9 +573,8 @@
 		}
 		private function setupEnemies():void
 		{
-			initEnemies = new InitiateEnemies();
-			initEnemies.addEventListener("gameOver",gameOver);
-			roundManager = new RoundManager(initEnemies);
+			roundManager = new RoundManager();
+			roundManager.addEventListener("gameOver",gameOver);
 		}
 		private function gameOver(e:Event):void
 		{
@@ -593,12 +590,12 @@
 		}
 		private function gameOverWindowClosed(e:Event):void
 		{
-			gameOverWindow.removeEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
+			//gameOverWindow.removeEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
 
 			gameOverWindow.restartButton.removeEventListener(MouseEvent.CLICK, restartButtonClicked);
 			gameOverWindow.backToMap.removeEventListener(MouseEvent.CLICK, backToMapClicked);
-			gameOverWindow.restartButton = null;
-			gameOverWindow.backToMap = null;
+			//gameOverWindow.restartButton = null;
+			//gameOverWindow.backToMap = null;
 
 			gameOverWindow = null;
 			resumeGame();
@@ -828,7 +825,6 @@
 		{
 			common.Commons.endGame();
 
-			initEnemies.endClass();
 			roundManager.endClass();
 			roundsList = [];
 

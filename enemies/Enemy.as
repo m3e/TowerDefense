@@ -109,7 +109,7 @@
 			_root = common.Commons.getRoot();
 			_root.bmEnemy.addChild(healthBar);
 			healthBar.visible = false;
-			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10);
+			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10,true);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			setupSkillsMC();
 			setupArmor();

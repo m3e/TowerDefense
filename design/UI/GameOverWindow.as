@@ -4,6 +4,7 @@
 	import flash.events.Event;
 	import design.UI.MenuButton;
 	import flash.events.MouseEvent;
+	import sounds.SoundManager;
 	
 	public class GameOverWindow extends MovieClip {
 		
@@ -16,22 +17,26 @@
 		}
 		private function added(e:Event):void
 		{
+				SoundManager.bgfx("GameOverTheme");
 				removeEventListener(Event.ADDED_TO_STAGE, added);
 				
+				var sameY:int = 350
+				var scaleBy:Number = .4
+				var separation:int = 50
 				restartButton = new MenuButton();
 				restartButton.btnText.text = "Restart Map"
-				restartButton.scaleX = .4
-				restartButton.scaleY = .4
-				restartButton.x = 300
-				restartButton.y = 350
+				restartButton.scaleX = scaleBy
+				restartButton.scaleY = scaleBy
+				restartButton.x = (this.width / 2) - restartButton.width - separation
+				restartButton.y = sameY
 				addChild(restartButton)
 				restartButton.addEventListener(MouseEvent.CLICK, closeWindow)
 				
 				backToMap = new MenuButton();
-				backToMap.scaleX = .4
-				backToMap.scaleY = .4
-				backToMap.x = 480
-				backToMap.y = 350
+				backToMap.scaleX = scaleBy
+				backToMap.scaleY = scaleBy
+				backToMap.x = (this.width / 2) + separation
+				backToMap.y = sameY;
 				backToMap.btnText.text = "Return to Map"
 				backToMap.addEventListener(MouseEvent.CLICK, closeWindow)
 				addChild(backToMap);
