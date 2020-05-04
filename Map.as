@@ -33,10 +33,13 @@
 	import design.UI.OptionsWindow;
 	import towers.skills.TowerSkillManager;
 	import flash.filters.GlowFilter;
+	import GameScreens.FiftyOneVictoryScreen;
+	import User.UserProfile;
 
 	public class Map extends MovieClip
 	{
 		private var _root:Object;
+		private var devMode:Boolean = Commons.devMode;
 
 		//constants
 		private var tileSide:int;
@@ -80,10 +83,12 @@
 
 		//booleans
 		public var healthBarOn:Boolean;
+		private var finalRoundMode:Boolean;
 
 		private var optionsWindow:OptionsWindow;
 		private var pauseBtn:PauseBtn;
 		private var gameOverWindow:GameOverWindow;
+		private var fiftyoneWins:FiftyOneVictoryScreen;
 
 		private var towerSkillManager:TowerSkillManager;
 
@@ -93,12 +98,11 @@
 		public var bmTowers:Sprite = new Sprite  ;
 		public var bmEnemy:Sprite = new Sprite  ;
 		public var bmAboveTowers:Sprite = new Sprite  ;
-		private var gameUI:Sprite = new Sprite  ;
+		public var gameUI:Sprite = new Sprite  ;
 		public var highPriority:Sprite = new Sprite  ;
 
 		public function Map()
 		{
-			
 			enemyList = common.Commons.getEnemyList();
 			tileArray = new Array  ;
 			towerArray = common.Commons.getTowerArray();
@@ -129,7 +133,12 @@
 		private function added(e:Event):void
 		{
 			_root = this;
+			stage.stageFocusRect = false
 			stage.focus = this;
+			removeEventListener(Event.ADDED_TO_STAGE, added);
+			
+			SoundManager.setPlaylistIndex("battleMap")
+			SoundManager.playNextSongInPlaylist();
 
 			addChild(bmTiles);
 			bmTiles.mouseEnabled = false;
@@ -178,6 +187,12 @@
 			//Requires: psuedoTowers
 
 			setupTileListeners();
+			
+			if (UserProfile.returnUser == false)
+			{
+				trace(UserProfile.returnUser);
+				bottomBar.helpIcon.openTutorial();
+			}
 		}
 		private function setupTowerSkillManager():void
 		{
@@ -186,15 +201,14 @@
 		private function optionsButtonClick(e:MouseEvent):void
 		{
 			optionsWindow = new OptionsWindow(true);
-			keysEnabled = false;
 
 			highPriority.addChild(optionsWindow);
 			pauseGame();
 
 			optionsWindow.addEventListener(Event.REMOVED_FROM_STAGE, optionsWindowClosed);
 
-			optionsWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
-			optionsWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
+			optionsWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked,false,0,true);
+			optionsWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked,false,0,true);
 		}
 		private function optionsWindowClosed(e:Event):void
 		{
@@ -281,7 +295,7 @@
 					case Keyboard.X :
 						if (mouseclickedTower != null)
 						{
-							bottomBar.menuManager.sellObjectSelected();
+							sellTower(bottomBar.menuManager.selectedTower);
 						}
 						break;
 
@@ -298,22 +312,30 @@
 						break;
 
 					case Keyboard.G :
-
-						changeGold(99999);
+						if (devMode)
+						{
+						changeGold(9999);
+						}
 						break;
 
 					case Keyboard.E :
-						common.Commons.fRate = 96;
+						common.Commons.fRate = 72;
 						stage.frameRate = common.Commons.fRate;
 						break;
 
 					case Keyboard.R :
-						common.Commons.fRate = 1;
-						stage.frameRate = common.Commons.fRate;
+						if (devMode)
+						{
+							common.Commons.fRate = 1;
+							stage.frameRate = common.Commons.fRate;	
+						}
 						break;
 
 					case Keyboard.U :
+						if (devMode)
+						{
 						inputField.visible = !(inputField.visible);
+						}
 						break;
 
 					case Keyboard.SPACE :
@@ -426,7 +448,7 @@
 		}
 		private function startRound():void
 		{
-			if (roundManager.roundInProgress == false)
+			if (Commons.roundInProgress == false)
 			{
 				roundManager.startRound(true);
 				bottomBar.roundBar.updateRoundList();
@@ -434,7 +456,7 @@
 		}
 		private function sendCustomWave(e:MouseEvent)
 		{
-			if (roundManager.roundInProgress == false)
+			if (Commons.roundInProgress == false)
 			{
 				var waveArray:Array = new Array  ;
 				var hp:int = Number(inputField.hpField.text);
@@ -461,7 +483,7 @@
 		}
 		private function sendDpsDummy(e:Event):void
 		{
-			if (roundManager.roundInProgress == false)
+			if (Commons.roundInProgress == false)
 			{
 				roundManager.createDmgDummy();
 			}
@@ -547,7 +569,10 @@
 		{
 			if (mouseclickedTower != null)
 			{
-				changeGold(mouseclickedTower.tCost);
+				
+				var g:int = tower.totalCost
+				g = g * .75
+				changeGold(g);
 
 				mouseclickedTower.destroyTower();
 
@@ -575,6 +600,20 @@
 		{
 			roundManager = new RoundManager();
 			roundManager.addEventListener("gameOver",gameOver);
+			roundManager.addEventListener("fiftyoneWin",fiftyoneWin);
+		}
+		private function fiftyoneWin(e:Event):void
+		{
+			fiftyoneWins = new FiftyOneVictoryScreen(roundManager.fiftyOneKills);
+			fiftyoneWins.x = (stage.width / 2) - (fiftyoneWins.width / 2)
+			fiftyoneWins.y = 50
+			finalRoundMode = true;
+			
+			highPriority.addChild(fiftyoneWins);
+			pauseGame();
+			
+			fiftyoneWins.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked,false,0,true);
+			fiftyoneWins.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked,false,0,true);
 		}
 		private function gameOver(e:Event):void
 		{
@@ -585,8 +624,8 @@
 			pauseGame();
 			//gameOverWindow.addEventListener(Event.REMOVED_FROM_STAGE, gameOverWindowClosed);
 
-			gameOverWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked);
-			gameOverWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked);
+			gameOverWindow.restartButton.addEventListener(MouseEvent.CLICK, restartButtonClicked,false,0,true);
+			gameOverWindow.backToMap.addEventListener(MouseEvent.CLICK, backToMapClicked,false,0,true);
 		}
 		private function gameOverWindowClosed(e:Event):void
 		{

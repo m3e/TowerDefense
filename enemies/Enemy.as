@@ -107,7 +107,7 @@
 			makeImage();
 			//this.gotoAndStop(eFrame);
 			_root = common.Commons.getRoot();
-			_root.bmEnemy.addChild(healthBar);
+			_root.bmAboveTowers.addChild(healthBar);
 			healthBar.visible = false;
 			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10,true);
 			removeEventListener(Event.ADDED_TO_STAGE, added);
@@ -135,27 +135,11 @@
 			{
 				stunMC.stop();
 				stunMC.visible = false;
-
-				var myX:int = (Math.floor(x + 16) / common.Commons.tileSide);
-				var myY:int = (Math.floor(y + 16) / common.Commons.tileSide);
-
-
 				var a:Number = maxMoveSpeed - (maxMoveSpeed * iceSlow);
 				var b:Number = a - (a * poisonSlow);
-				if (common.Commons.checkB(Math.floor(myX),Math.floor(myY)))
-				{
-					var iSlow:Number = 0;
-					if (common.Commons.tileArray[myY][myX] != null)
-					{
-						iSlow = b * common.Commons.tileArray[myY][myX].icedSlow;
-					}
-					var c:Number = b - iSlow;
-					moveSpeed = c;
-				}
-				else
-				{
-					moveSpeed = b;
-				}
+				var c:Number = b - (b * common.Commons.tileArray[pt.y][pt.x].icedSlow)
+				moveSpeed += c;
+
 			}
 			var iceRGB:int = 0;
 			var poisonRGB:int = 0;
@@ -318,7 +302,7 @@
 		}
 		public function resumedGame():void
 		{
-			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10);
+			stage.addEventListener(Event.ENTER_FRAME, startMovement,false,10,true);
 		}
 		protected function startMovement(e:Event):void
 		{
@@ -331,7 +315,7 @@
 		public function updateHealth():void
 		{
 			var percentHP:Number = eHp / eMaxHp;
-			if (_root != null && _root.bmEnemy.contains(healthBar))
+			if (_root != null && _root.bmAboveTowers.contains(healthBar))
 			{
 				healthBar.hpBar.scaleX = percentHP;
 				healthBar.x = this.x;
@@ -345,123 +329,66 @@
 				enemySkillOnTimer[i].activateSkill();
 			}
 		}
-		protected function moveDirection(mDir:int,mSpeed:Number):void
+		protected function moveDirection():void
 		{
-			var dir:String;
-			switch (mDir)
-			{
-				case (1) :
-					dir = "Right";
-					break;
-				case (2) :
-					dir = "South";
-					break;
-				case (3) :
-					dir = "Left";
-					break;
-				case (4) :
-					dir = "North";
-					break;
-			}
-			//mLog.push([this.x,pt.x,this.y,pt.y,"mSpd:"+mSpeed,dir]);
+			/*case (1) :
+			"Right"
 			
-			var modSpd:Number = 0;
-			switch (mDir)
+			case (2) :
+			"South"
+			
+			case (3) :
+			"Left"
+			
+			case (4) :
+			"North"
+			*/
+			while (moveSpeed >= 1)
 			{
-				case 1 :
-					
-					if (Math.floor((x + mSpeed)/common.Commons.tileSide) != pt.x)
-					{
-						modSpd = (x + mSpeed) % common.Commons.tileSide
-						x += (mSpeed - modSpd)
-						pt.x++;
-					}
-					else
-					{
-						x += mSpeed
-					}
-					break;
+				switch (mapArray[pt.y][pt.x])
+				{
+					case 1 :
+						x++;
+						break;
+					case 2 :
+						y++;
+						break;
 
-				case 2 :
+					case 3 :
+						x--;
+						break;
 
-					
-					if (Math.floor((y + mSpeed)/common.Commons.tileSide) != pt.y)
-					{
-						modSpd = (y + mSpeed) % common.Commons.tileSide
-						y +=  (mSpeed - modSpd);
-						pt.y++;
-					}
-					else
-					{
-						y +=  mSpeed;
-					}
-					break;
+					case 4 :
+						y--;
 
-				case 3 :
-
-					
-					if (Math.ceil((x - mSpeed)/common.Commons.tileSide) != pt.x)
-					{
-						
-						modSpd = common.Commons.tileSide - ((x - mSpeed) % common.Commons.tileSide)
-						if (modSpd == 32)
-						{
-							modSpd = 0
-						}
-						x -= mSpeed - modSpd
-						pt.x--;
-						
-					}
-					else
-					{
-						x -=  mSpeed;
-					}
-					break;
-
-				case 4 :
-					
-					if (Math.ceil((y - mSpeed)/common.Commons.tileSide) != pt.y)
-					{
-						modSpd = common.Commons.tileSide - ((y - mSpeed) % common.Commons.tileSide)
-						if (modSpd == 32)
-						{
-							modSpd = 0
-						}
-						y -= mSpeed - modSpd;
-						pt.y--;
-					}
-					else
-					{
-						y -=  mSpeed;
-					}
-					break;
-			}
-			distanceTraveled +=  mSpeed;
-			if (modSpd == 32)
-			{
-				modSpd = 0;
-			}
-			if (modSpd != 0)
-			{
-			moveDirection(mapArray[pt.y][pt.x],modSpd)
+				}
+				moveSpeed--;
+				distanceTraveled++;
+				if (x % Commons.tileSide == 0)
+				{
+					pt.x = Math.floor(x / Commons.tileSide);
+				}
+				if (y % Commons.tileSide == 0)
+				{
+					pt.y = Math.floor(y / Commons.tileSide);
+				}
+				if (!(Commons.checkB(pt.x,pt.y)))
+				{
+					moveSpeed = 0;
+				}
 			}
 		}
 		protected function moveCharacter():void
 		{
+			if (!(common.Commons.checkB(pt.x,pt.y)))
+			{
+				removeLife = true;
+				destroyThis();
+			}
 			useTimerSkills();
 			determineMoveSpeed();
-			moveDirection(mapArray[pt.y][pt.x],moveSpeed);
-			
-			/*}
-			else
-			{
-				var moveB:Number = (moveSpeed - move32);
-				moveDirection(mapArray[pt.y][pt.x],move32);
-				if (common.Commons.checkB(pt.x,pt.y))
-				{
-					moveDirection(mapArray[pt.y][pt.x],moveB);
-				}
-			}*/
+			moveDirection();
+
 			if (common.Commons.checkB(pt.x,pt.y))
 			{
 				applyEffects();
@@ -556,7 +483,7 @@
 
 			mapArray = null;
 			stage.removeEventListener(Event.ENTER_FRAME, startMovement);
-			_root.bmEnemy.removeChild(healthBar);
+			_root.bmAboveTowers.removeChild(healthBar);
 			healthBar = null;
 			_root.bmEnemy.removeChild(this);
 			_root = null;

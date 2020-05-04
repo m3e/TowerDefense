@@ -34,22 +34,38 @@
 		public static var queue:LoaderMax;
 		public static var localSave:SharedObject = SharedObject.getLocal("LocalSave");
 		public static var currentRound:int = 1;
+		public static var devMode:Boolean = false
+		public static var roundInProgress:Boolean = false;
+		
+		public static var kongregate:*;
 
 		public function Commons()
 		{
 			// constructor code
 		}
+		public static function wipeGame():void
+		{
+			var save:SharedObject = getSave();
+			save.clear();
+		}
 		public static function loadGame():void
 		{
 			var save:SharedObject = getSave()
-			User.UserProfile.fiftyOneKills = save.data.fiftyOneKills;
-			User.UserProfile.round50BeatenCount = save.data.round50BeatenCount;
+
+			UserProfile.round50BeatenCount = save.data.round50BeatenCount;
+			UserProfile.topJesterKills = save.data.topJesterKills;
+			UserProfile.totalJesterKills = save.data.totalJesterKills;
+			UserProfile.returnUser = save.data.returnUser;
+			
 		}
 		public static function saveGame():void
 		{
 			var save:SharedObject = getSave();
-			save.data.round50BeatenCount = User.UserProfile.round50BeatenCount;
-			save.data.fiftyOneKills = User.UserProfile.fiftyOneKills;
+			
+			save.data.round50BeatenCount = UserProfile.round50BeatenCount;
+			save.data.topJesterKills = UserProfile.topJesterKills;
+			save.data.totalJesterKills = UserProfile.totalJesterKills;
+			save.data.returnUser = UserProfile.returnUser
 			
 			save.flush();
 		}

@@ -17,12 +17,12 @@
 		}
 		private function added(e:Event):void
 		{
-				SoundManager.bgfx("GameOverTheme");
+				SoundManager.playSong("GameOverTheme");
 				removeEventListener(Event.ADDED_TO_STAGE, added);
 				
-				var sameY:int = 350
-				var scaleBy:Number = .4
-				var separation:int = 50
+				var sameY:int = 280
+				var scaleBy:Number = .5
+				var separation:int = 20
 				restartButton = new MenuButton();
 				restartButton.btnText.text = "Restart Map"
 				restartButton.scaleX = scaleBy
@@ -37,7 +37,7 @@
 				backToMap.scaleY = scaleBy
 				backToMap.x = (this.width / 2) + separation
 				backToMap.y = sameY;
-				backToMap.btnText.text = "Return to Map"
+				backToMap.btnText.text = "Change Map"
 				backToMap.addEventListener(MouseEvent.CLICK, closeWindow)
 				addChild(backToMap);
 		}

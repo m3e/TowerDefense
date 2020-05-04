@@ -17,7 +17,7 @@
 		<currentRound>2</currentRound>
 		<maxHp>38</maxHp>
 		<maxMoveSpeed>4</maxMoveSpeed>
-		<goldValue>4</goldValue>
+		<goldValue>3</goldValue>
 		<numberOfEnemies>15</numberOfEnemies>
 		<roundEndBonus>18</roundEndBonus>
 		<freq>18</freq>
@@ -596,6 +596,18 @@
 		<goldValue>44</goldValue>
 		<numberOfEnemies>10</numberOfEnemies>
 		<roundEndBonus>215</roundEndBonus>
+		<freq>22</freq>
+		<armorType>heavy</armorType>
+		<maxArmor>0</maxArmor>
+	</Row>
+	<Row>
+		<eName>Jester</eName>
+		<currentRound>51</currentRound>
+		<maxHp>22000</maxHp>
+		<maxMoveSpeed>4</maxMoveSpeed>
+		<goldValue>0</goldValue>
+		<numberOfEnemies>999999</numberOfEnemies>
+		<roundEndBonus>0</roundEndBonus>
 		<freq>22</freq>
 		<armorType>heavy</armorType>
 		<maxArmor>0</maxArmor>

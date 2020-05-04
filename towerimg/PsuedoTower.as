@@ -43,7 +43,6 @@
 			tType = mockTower.tType
 			tDescription = mockTower.tDescription
 			tCost = mockTower.tCost;
-			
 			if (small == true)
 			{
 				bmpData = mockTower.bmpData;

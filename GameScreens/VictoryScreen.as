@@ -25,10 +25,13 @@
 		{
 			TweenPlugin.activate([GlowFilterPlugin]);
 			TweenPlugin.activate([ColorMatrixFilterPlugin]);
-			User.UserProfile.round50BeatenCount++;
-			r50TextBox.text = String(User.UserProfile.round50BeatenCount);
-			common.Commons.saveGame();
-			SoundManager.bgfx("victoryMusic");
+			UserProfile.round50BeatenCount++;
+			r50TextBox.text = String(UserProfile.round50BeatenCount);
+			Commons.saveGame();
+			Commons.kongregate.stats.submit("beatTheGame",1);
+			Commons.kongregate.stats.submit("round50Wins",UserProfile.round50BeatenCount);
+			SoundManager.setPlaylistIndex("victoryMusic")
+			SoundManager.playNextSongInPlaylist()
 			//SoundManager.sfx("hooraySfx");
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 /*			var scaleBy:Number = .6;

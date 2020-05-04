@@ -11,6 +11,7 @@
 	import design.UI.MenuButton;
 	import common.Commons;
 
+
 	public class OptionsWindow extends MovieClip
 	{
 
@@ -23,6 +24,7 @@
 		private var bMap:Boolean;
 		public var restartButton:MenuButton;
 		public var backToMap:MenuButton;
+
 		
 		public function OptionsWindow(BattleMap:Boolean)
 		{
@@ -32,6 +34,7 @@
 		}
 		private function added(e:Event):void
 		{
+			
 			bound1 = new Rectangle(b1x,b1y,b1w,0);
 			bgVolume.x = b1x + (SoundManager.bgVolume * b1w);
 			bgVolume.y = b1y;
@@ -56,7 +59,7 @@
 				backToMap.scaleY = .4
 				backToMap.x = 480
 				backToMap.y = 350
-				backToMap.btnText.text = "Return to Map"
+				backToMap.btnText.text = "Change Map"
 				backToMap.addEventListener(MouseEvent.CLICK, closeOptions)
 				addChild(backToMap);
 			}
@@ -66,6 +69,7 @@
 			addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
 			optionsBG.addEventListener(MouseEvent.MOUSE_DOWN,closeOptions);
 		}
+
 		private function mouseDownHandler(e:MouseEvent):void
 		{
 			if (cTarget != null)

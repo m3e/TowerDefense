@@ -6,7 +6,6 @@
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 	import fl.motion.Color;
-	import debuffs.*;
 	import flash.geom.*;
 	import flash.display.*;
 	import flash.utils.getDefinitionByName;
@@ -25,6 +24,7 @@
 	import towers.Projectiles.ProjectileHits.*;
 	import towers.skills.animations.DMGBuffMC;
 	import towers.skills.animations.SPDBuffMC;
+	import enemies.dpsTestEnemy;
 
 	public class Tower extends MovieClip
 	{
@@ -81,6 +81,7 @@
 		internal var rectangle:Shape;
 
 		public var uCost:int;
+		public var totalCost:int;
 
 		internal var skillsArray:Array;
 		public var hitSkills:Array;
@@ -92,6 +93,7 @@
 		public var bmpData:BitmapData;
 		protected var bmp:Bitmap;
 		public var bmpData45:BitmapData;
+		
 
 		protected var towerSkillManager:TowerSkillManager;
 
@@ -149,6 +151,7 @@
 					tUpgradeThree = td.tUpgradeThree;
 					targeting = td.targeting;
 					hitSound = td.hitSound;
+					totalCost = td.totalCost;
 					var s1:String = td.tSkillOne;
 					var s2:String = td.tSkillTwo;
 					var s3:String = td.tSkillThree;
@@ -245,7 +248,17 @@
 		public function getAtkSpeed():Number
 		{
 			//var k = Math.floor(Math.pow(.5,tAtkSpdBuff) * tAtkSpeed)
-			var k:Number = Math.pow(.5,(tAtkSpdBuff + tBaseAtkSpdBuff)) * tAtkSpeed;
+			var maxAtkSpd:Number;
+			if (tAtkSpdBuff > .75)
+			{
+				maxAtkSpd = .75
+			}
+			else
+			{
+				maxAtkSpd = tAtkSpdBuff
+			}
+			var k:Number = Math.pow(.5,(maxAtkSpd + tBaseAtkSpdBuff)) * tAtkSpeed;
+			
 			//var k:Number = tAtkSpeed - (tAtkSpeed * tAtkSpdBuff);
 			return k;
 		}
@@ -325,7 +338,7 @@
 					loadedTimer +=  1;
 
 					//reset red flash from firing
-					if (loadedTimer == 1)
+					if (loadedTimer >= 1)
 					{
 						rectangle.visible = false;
 					}
@@ -333,6 +346,7 @@
 					//trace("Tower.tAtkSpeed:",tAtkSpeed - (tAtkSpeed * tAtkSpdBuff))
 					if (loadedTimer >= getAtkSpeed())
 					{
+						loadedTimer -= getAtkSpeed();
 						loaded = true;
 					}
 				}
@@ -343,8 +357,7 @@
 					for (var i:int=0; i < enemyList.length && (tTarget.length < tNumberOfTargets || targeting == "All"); i++)
 					{
 						//Set Target
-
-						if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange)
+						if (Math.sqrt(Math.pow(enemyList[i].y - y,2) + Math.pow(enemyList[i].x - x,2)) < tRange && (!(enemyList[i] is dpsTestEnemy) || Commons.roundInProgress == false))
 						{
 							//if the selected enemy is close enough, then set it as the target
 							tTarget.push(enemyList[i]);
@@ -359,15 +372,9 @@
 					{
 						//Flash and Fire
 						loaded = false;
-						loadedTimer = 0;
-
 						rectangle.visible = true;
-
 						fire();
-
-
 						//End Flash and Fire
-
 					}
 				}
 			}

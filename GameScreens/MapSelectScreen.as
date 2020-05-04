@@ -7,7 +7,6 @@
 	import Maps.*;
 	import flash.display.StageScaleMode;
 	import flash.display.Stage;
-	import common.Commons;
 	import User.UserProfile;
 	import design.LockedMapIcon;
 	import sounds.SoundManager;
@@ -18,6 +17,7 @@
 	import design.UI.OptionsWindow;
 
 	import flash.filters.GlowFilter;
+	import design.UI.MenuButton;
 
 
 	public class MapSelectScreen extends MovieClip
@@ -29,6 +29,7 @@
 		private var gameMode:int;
 		private var _r:Main;
 		private var loadingText:LoadingText;
+		private var startMapButton:MenuButton = new MenuButton;
 
 		public function MapSelectScreen(r:Main)
 		{
@@ -41,8 +42,14 @@
 		}
 		private function added(e:Event):void
 		{
+			stage.stageFocusRect = false
+			stage.focus = this;
 			removeEventListener(Event.ADDED_TO_STAGE, added);
-			sounds.SoundManager.bgfx("mainTheme");
+			if (SoundManager.getCurrentPlaylistName() != "mainTheme")
+			{
+			SoundManager.setPlaylistIndex("mainTheme");
+			SoundManager.playNextSongInPlaylist();
+			}
 			options.addEventListener(MouseEvent.CLICK, optionsClicked);
 			levelsArray.push(SFields,WPath,TOldBridge,BHideout,VOfTrolls,MMayhem,WAlley,TOfMages,SCircle);
 
@@ -68,8 +75,6 @@
 			}
 			levelsArray[0].dispatchEvent(new MouseEvent("click"));
 			StartMapButton.addEventListener(MouseEvent.CLICK, startMap);
-			var glow:GlowFilter = new GlowFilter(0xff3300,1,6,6,10)
-			StartMapButton.filters = [glow]
 		}
 		private function optionsClicked(e:MouseEvent):void
 		{
@@ -109,6 +114,7 @@
 		}
 		private function startMap(e:MouseEvent):void
 		{
+			StartMapButton.removeEventListener(MouseEvent.CLICK, startMap);
 			if (lastLoaded != null)
 			{
 				TweenLite.to(this, .5, {alpha:0, onComplete:loadMap});
@@ -121,18 +127,14 @@
 			loadingText.y = (stage.height /2) - (loadingText.height / 2);
 			_r.addChild(loadingText);
 
-
-			lastLoaded.startGame(gameMode);
-			lastLoaded.addEventListener(Event.COMPLETE, mapLoaded);
+			lastLoaded.startGame();
+			mapLoaded()
 		}
-		private function mapLoaded(e:Event):void
+		private function mapLoaded():void
 		{
 			_r.removeChild(loadingText);
 			loadingText = null;
-			lastLoaded.removeEventListener(Event.COMPLETE, mapLoaded);
 			removeMapPreview();
-
-			SoundManager.bgfx("BattleMap1");
 
 			var map:Map = new Map();
 			_r.addChild(map);
@@ -162,6 +164,7 @@
 				levelsArray[i].removeEventListener(MouseEvent.CLICK, mapNameClicked);
 			}
 			StartMapButton.removeEventListener(MouseEvent.CLICK, startMap);
+			lastLoaded = null;			
 			_r.removeChild(this);
 			_r = null;
 		}

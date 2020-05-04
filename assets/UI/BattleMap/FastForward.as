@@ -21,7 +21,7 @@
 		}
 		private function fastForward(e:MouseEvent):void
 		{
-			common.Commons.fRate = 96
+			common.Commons.fRate = 72
 			stage.frameRate = common.Commons.fRate
 		}
 		private function removed(e:Event):void

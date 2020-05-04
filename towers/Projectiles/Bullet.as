@@ -6,8 +6,6 @@
 	import flash.display.Shape;
 	import common.Commons;
 	import enemies.Enemy;
-	import debuffs.*;
-	import buffs.*;
 
 	import com.greensock.*;
 	import com.greensock.easing.*;

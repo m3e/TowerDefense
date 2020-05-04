@@ -18,6 +18,8 @@
 	import common.Commons;
 	import flash.filters.GlowFilter;
 	import flash.geom.Point;
+	import design.UI.SellIconToolTip;
+	import design.UI.TargetToolTip;
 
 
 	public class MenuManager extends MovieClip
@@ -34,7 +36,9 @@
 		private var towerStatsOver:TowerStatsOver;
 		private var skillsMouseOver:SkillsMouseOver;
 		private var _root:Object;
-		private var selectedTower:Tower;
+		public var selectedTower:Tower;
+		private var sellToolTip:SellIconToolTip;
+		private var targetToolTip:TargetToolTip;
 
 		public var upgradeCircle:Shape;
 
@@ -79,10 +83,18 @@
 			sellObject = new SellObject();
 			addChild(sellObject);
 			sellObject.visible = false;
+			
+			sellToolTip = new SellIconToolTip();
+			addChild(sellToolTip);
+			sellToolTip.visible = false;
 
 			targetingIcon = new TargetingIcon();
 			addChild(targetingIcon);
 			targetingIcon.visible = false;
+			
+			targetToolTip = new TargetToolTip();
+			addChild(targetToolTip)
+			targetToolTip.visible = false;
 
 			upgradeIcon = new UpgradeIcon();
 			addChild(upgradeIcon);
@@ -116,10 +128,16 @@
 			towerStatsOver.visible = false;
 			upgradeCircle.visible = false;
 			skillsMouseOver.visible = false;
+			sellToolTip.visible = false;
+			targetToolTip.visible = false
 
 			currentMenuSelected = [[Warrior,Arrow,FireTower,IceTower],
-			   [Splash,Lightning,Demonologist,Tinkerer],
+			   [Splash,Lightning,Demonologist,],
 			   [,,,]];
+			if (Commons.devMode == true)
+			{
+				currentMenuSelected[1][3] = Tinkerer
+			}
 			menuIsDefault = true;
 			hideTowerBeingBuiltSquare();
 			updateCurrentMenu();
@@ -168,8 +186,11 @@
 						break;
 
 					case (Keyboard.NUMBER_8) :
-						//tower = currentMenuSelected[1][3];
-						//selectTower(tower);
+						if (Commons.devMode == true)
+						{
+						tower = currentMenuSelected[1][3];
+						selectTower(tower);
+						}
 						break;
 
 
@@ -222,6 +243,8 @@
 										sellObject.y = cellsArray[2][0].y;
 										sellObject.visible = true;
 										sellObject.addEventListener(MouseEvent.CLICK, sellObjectClicked);
+										sellObject.addEventListener(MouseEvent.MOUSE_OVER, sellHoverOver);
+										sellObject.addEventListener(MouseEvent.MOUSE_OUT, sellHoverOut);
 										break;
 
 									case (ct == "Targeting") :
@@ -229,6 +252,8 @@
 										targetingIcon.y = cellsArray[1][0].y;
 										targetingIcon.visible = true;
 										targetingIcon.addEventListener(MouseEvent.CLICK, targetingIconClicked);
+										targetingIcon.addEventListener(MouseEvent.MOUSE_OVER, targetHoverOver);
+										targetingIcon.addEventListener(MouseEvent.MOUSE_OUT, targetHoverOut);
 										break;
 
 									case (ct == "UpgradeMe") :
@@ -243,6 +268,26 @@
 					}
 				}
 			}
+		}
+		private function targetHoverOver(e:Event):void
+		{
+			targetToolTip.visible = true;
+			targetToolTip.x = targetingIcon.x
+			targetToolTip.y = targetingIcon.y;
+		}
+		private function targetHoverOut(e:Event):void
+		{
+			targetToolTip.visible = false;
+		}
+		private function sellHoverOver(e:Event):void
+		{
+			sellToolTip.visible = true;
+			sellToolTip.x = sellObject.x
+			sellToolTip.y = sellObject.y;
+		}
+		private function sellHoverOut(e:Event):void
+		{
+			sellToolTip.visible = false;
 		}
 		private function selectTowerMouse(e:MouseEvent):void
 		{
@@ -378,7 +423,6 @@
 		{
 			updateMenu(e);
 			selectedTower = e.currentTarget as Tower;
-			sellObject.importTowerToSell(selectedTower);
 			targetingIcon.importTower(selectedTower);
 			upgradeIcon.importTower(selectedTower);
 		}
@@ -402,15 +446,11 @@
 		}
 		private function sellObjectClicked(e:MouseEvent):void
 		{
-			sellObject.sellTower();
+			_root.sellTower(selectedTower);
 		}
 		private function targetingIconClicked(e:MouseEvent):void
 		{
 			targetingIcon.changeTargeting();
-		}
-		public function sellObjectSelected():void
-		{
-			sellObject.sellTower();
 		}
 		private function emptyOutMenuSelected():void
 		{
@@ -444,11 +484,15 @@
 								{
 									sellObject.visible = false;
 									sellObject.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
+									sellObject.removeEventListener(MouseEvent.MOUSE_OVER, sellHoverOver);
+									sellObject.removeEventListener(MouseEvent.MOUSE_OUT, sellHoverOut);
 								}
 								else if (ct == "Targeting")
 								{
 									targetingIcon.visible = false;
-									targetingIcon.removeEventListener(MouseEvent.CLICK, sellObjectClicked);
+									targetingIcon.removeEventListener(MouseEvent.CLICK, targetingIconClicked);
+									targetingIcon.removeEventListener(MouseEvent.MOUSE_OVER, targetHoverOver);
+									targetingIcon.removeEventListener(MouseEvent.MOUSE_OUT, targetHoverOut);
 								}
 								else if (ct == "UpgradeMe")
 								{
@@ -465,6 +509,8 @@
 		{
 
 			emptyOutMenuSelected();
+			removeChild(sellToolTip);
+			removeChild(targetToolTip);
 			removeChild(upgradeCircle);
 			removeChild(sellObject);
 			removeChild(targetingIcon);
@@ -474,6 +520,7 @@
 			removeChild(towerBeingBuiltSquare);
 			towerBeingBuiltSquare = null;
 			sellObject = null;
+			sellToolTip = null;
 			targetingIcon = null;
 			upgradeIcon = null;
 			towerStatsOver = null;

@@ -6,6 +6,7 @@
 	import flash.events.MouseEvent;
 	import design.UI.OptionsWindow;
 	import sounds.SoundManager;
+	import common.Commons;
 	
 	
 	public class StartScreen extends MovieClip {
@@ -19,9 +20,16 @@
 		}
 		private function added(e:Event):void
 		{
-			
+			stage.stageFocusRect = false
+			stage.focus = this;
 			removeEventListener(Event.ADDED_TO_STAGE,added)
-			sounds.SoundManager.bgfx("mainTheme");
+			
+			if(Commons.devMode == false)
+			{
+				devModeTxt.visible = false;
+			}
+			
+			SoundManager.playSong("mainTheme0");
 			options.addEventListener(MouseEvent.CLICK, optionsClicked)
 			
 			

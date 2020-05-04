@@ -8,6 +8,7 @@
 		
 		public function StartMapButton() {
 			super();
+			disableClickAfterClick = true;
 			// constructor code
 		}
 	}

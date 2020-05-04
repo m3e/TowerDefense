@@ -153,7 +153,7 @@
 		}
 		override protected function dpsReport():void
 		{
-			//trace("DPS @ 100%: " + dmgTotal);
+			trace("DPS @ 100%: " + dmgTotal);
 			/*trace("DPS vs Light: ",lDmg)
 			trace("DPS vs Medium: ",mDmg)
 			trace("DPS vs Heavy: ",hDmg)

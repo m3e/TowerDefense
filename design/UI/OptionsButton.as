@@ -8,6 +8,7 @@
 		
 		public function OptionsButton() {
 			super();
+			disableSoundAfterClick = false;
 			// constructor code
 		}
 		override protected function hoverOn(e:MouseEvent):void
